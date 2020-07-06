@@ -5,17 +5,21 @@
 1º Criar um ambiente de cadastro de 1º Proteina que vou utilizar como Referência
 
 1.1 - Criar um banco de dados para cadastrar essa proteina.
+
 1.2 - Listar as proteinas cadastradas.
+
 1.3 - Criar uma tela para exibir as informações dessa proteina ao clicar na mesma.
 
 2º Tela de apresentação da Proteina será responsável por gerar o modelo através do pipeline
 
 2.1 - Trazer as informações básicas dessa Proteina a tela.
+
 2.2 - Criar um botão de ação (javaScript || Jquery), responsável por disparar a rotina de execução.
 
 3º Rotina de execução (Desenvolvimento das Chamadas do Pipeline)
 
 3.1 - Ao clicar no botão de ação preciso vincular o ID da proteina selecionada e puxar as informações do seu respectivo registro no meu banco de dados.
+
 3.2 - Ao conseguir as informações preciso dividir as etapas de execução do pipeline (preparar todo o fluxo de evento) 
 
 Fluxo de Eventos para a modelagem:
