@@ -1,9 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Modelagem</title>
-</head>
-<body>
-    <h1>Teste</h1>
-</body>
-</html>
+{% extends "modelagem/base.html" %}
+
+{% block body %}
+<div class="action">
+    <a href="{% url 'Lista' %}"><button class="btn-action"><span>(Imagem DNA) - Lista</span></button></a>
+    <button class="btn-action" onclick = "alert('Em Desenvolvimento!');"> <span>(Imagem Comparar Sequências) - Comparar</span></button>
+    <button class="btn-action" onclick = "alert('Em Desenvolvimento!');"> <span>(Imagem Tela de Controle) - Dados</span></button>
+</div>
+{% endblock %}

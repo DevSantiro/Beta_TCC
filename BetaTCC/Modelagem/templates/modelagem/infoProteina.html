@@ -1,0 +1,12 @@
+{% extends "modelagem/base.html" %}
+
+{% block body %}
+    <div class="info-prot">
+        <button class="btn-voltar" onclick='window.location.href = "/listaProteina" ';>Voltar</button>
+        <h1>ID: <span class="title-prot">{{prot.id}}</span> - Proteina: <span class="title-prot">{{prot.titulo}} </span> </h1> 
+        <span><b>{{prot.cabecalho}}</b></span>
+        <br>
+        <span><b>{{prot.sequencia}}</b></span>
+    </div>
+
+{% endblock %}

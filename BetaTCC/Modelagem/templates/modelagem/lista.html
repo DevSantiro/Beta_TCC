@@ -1,0 +1,20 @@
+{% extends "modelagem/base.html" %}
+
+{% block body %}
+    <div class="offset-1 col-10 list-div"> 
+        <h1>Lista de Proteinas</h1>
+        <ul class="prot-list"> 
+            {% for proteina in proteinas %}
+                <li class="prot-item">
+                    <span><a href="{% url 'infoProteina' proteina.id %}">{{proteina.titulo}}</a></span>
+                    
+                    <a href=""><span><i class="fas fa-trash"></i></span></a> 
+                    
+                    <a href=""><span><i class="fas fa-edit"></i> </span> </a> 
+                </li>
+                {% empty %}
+                    <li class="prot-item"> Lista Vazia</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
