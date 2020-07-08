@@ -72,7 +72,13 @@ footer p{
 /* Página InfoProteina */
 
 .info-prot{
+    padding-top: 20px;
     padding-left: 30px;
+}
+
+.info-prot p{
+    color:red;
+    padding-top: 35px;
 }
 
 .title-prot{
@@ -86,4 +92,16 @@ footer p{
     position: absolute;
     margin-left: 90%;
     margin-top: 10px;
+}
+
+.grafic-info{
+    width:100px; 
+    border:1px solid #111; 
+    color:#fff;
+    height:100px; 
+    float:left; 
+}
+.grafico{
+    padding-top: 20px;
+    max-width: 65%;
 }
