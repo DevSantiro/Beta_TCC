@@ -70,3 +70,10 @@ def infoProteina(request, id):
     })
 
     #return HttpResponse(grafico)
+
+
+
+
+
+    # Processo de Modelagem da Proteina a partir de um Pipeline 
+
