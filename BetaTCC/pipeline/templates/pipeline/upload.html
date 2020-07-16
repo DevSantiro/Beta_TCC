@@ -6,7 +6,13 @@
 
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        <input type="file" name="document">
+        <label for="proteina">Proteina para ser analisada:</label>
+        <input type="file" name="proteina">
+
+        <label for="arquivo">Insira o arquivo referência:</label>
+        <input type="file" name="documento">
+
+
     <button type="submit">Upload File</button>
 
     </form>

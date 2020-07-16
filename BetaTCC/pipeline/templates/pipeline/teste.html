@@ -1,0 +1,17 @@
+{% extends "pipeline/base.html" %}
+
+{% block body %}
+
+    <h2>Upload</h2>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="conteudo">Proteina para ser analisada:</label>
+        <textarea name="proteina"> </textarea>
+        <textarea name="arquivo"> </textarea>
+
+    <button type="submit">Send</button>
+
+    </form>
+
+{% endblock %}

@@ -11,6 +11,10 @@ class UploadFileForm(forms.Form):
     file  = forms.FileField()
 
 
+class testeFormulario(forms.Form):
+    proteina   = forms.Textarea()
+    arquivo    = forms.Textarea()
+
 # Create your views here.
 
 def Index(request):
@@ -57,11 +61,16 @@ def upload2(request):
         form = UploadFileForm(request.POST, request.FILES)
 
 
-        file = request.FILES['document']
+        file = request.FILES['proteina']
+        arquivo = request.FILES['documento']
 
         data = file.read()
 
+        data2 = arquivo.read()
+
         print(data)
+
+        print(data2)
 
         # uploaded_file = request.FILES['document']
         # fs = FileSystemStorage()
@@ -72,4 +81,25 @@ def upload2(request):
 
         # print(uploaded)
 
+
+        
+
     return render(request, 'pipeline/upload.html')
+
+
+
+
+def teste(request):
+    if request.method == 'POST':
+        form = testeFormulario(request.POST)
+        if form.is_valid():
+            proteina = request.POST['proteina']
+            arquivo = request.POST['arquivo']
+
+        print(proteina)
+        print(arquivo)
+        proteina = proteina.replace('\n','')
+        print(len(proteina.replace(' ','')))
+    return render(request, 'pipeline/teste.html')
+    
+# Implementar uma Rotina para tentar pegar toda a sequencia inserida e começar a execução do Pipeline
