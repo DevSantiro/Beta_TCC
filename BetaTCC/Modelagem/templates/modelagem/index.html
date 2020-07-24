@@ -3,7 +3,7 @@
 {% block body %}
 <div class="action">
     <a href="{% url 'Lista' %}"><button class="btn-action"><span>(Imagem DNA) - Lista</span></button></a>
-    <button class="btn-action" onclick = "alert('Em Desenvolvimento!');"> <span>(Imagem Comparar Sequências) - Comparar</span></button>
+    <a href="{% url 'upload' %}"><button class="btn-action" onclick = "alert('Em Desenvolvimento!');"> <span>(Imagem Comparar Sequências) - Comparar</span></button></a> 
     <button class="btn-action" onclick = "alert('Em Desenvolvimento!');"> <span>(Imagem Tela de Controle) - Dados</span></button>
 </div>
 {% endblock %}
