@@ -1,0 +1,177 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018.3 (Released July 19, 2018) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>Restraints.pick() &mdash; pick restraints for selected atoms</TITLE>
+<META NAME="description" CONTENT="Restraints.pick() &mdash; pick restraints for selected atoms">
+<META NAME="keywords" CONTENT="manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018.3">
+
+<LINK REL="STYLESHEET" HREF="manual.css">
+<LINK REL="STYLESHEET" HREF="pygments.css">
+
+<LINK REL="next" HREF="node218.html">
+<LINK REL="previous" HREF="node216.html">
+<LINK REL="next" HREF="node218.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node218.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node206.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node216.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html2930"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A> 
+<A ID="tex2html2932"
+  HREF="node513.html">
+<IMG WIDTH="43" HEIGHT="24" ALT="index" SRC="index.png"></A> 
+<BR>
+<B> Next:</B> <A
+ HREF="node218.html">Restraints.unpick_redundant()   unselect</A>
+<B> Up:</B> <A
+ HREF="node206.html">The Restraints class: static</A>
+<B> Previous:</B> <A
+ HREF="node216.html">Restraints.clear()   delete</A>
+ &nbsp; <B>  <A ID="tex2html2931"
+  HREF="node1.html">Contents</A></B> 
+ &nbsp; <B>  <A ID="tex2html2933"
+  HREF="node513.html">Index</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A ID="SECTION0011711000000000000000">
+Restraints.pick() &mdash; pick restraints for selected atoms</A>
+</H2> <A NAME="19370"></A><A ID="CMD:Restraints.pick"></A>
+<A NAME="19373"></A><TT>pick(atmsel, residue_span_range=(0, 99999), restraint_sel_atoms=1, restraints_filter=physical.values(default=-999.000000))</TT>
+<BR>
+<BLOCKQUOTE>
+This command selects some or all of the restraints currently 
+in memory. 
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>The selection is added to any existing selected restraints; if instead you want
+to select only these restraints, call <B><A HREF="node215.html#CMD:Restraints.unpickall">Restraints.unpick_all()</A></B><A NAME="19404"></A> first.
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>This command runs over all restraints in memory, including
+the currently unselected restraints. Be careful about this: If you have
+some unselected restraints in memory, <B><A HREF="#CMD:Restraints.pick">Restraints.pick()</A></B><A NAME="19409"></A> may select them;
+if you wish to prevent this, do <B><A HREF="node219.html#CMD:Restraints.removeunpicked">Restraints.remove_unpicked()</A></B><A NAME="19414"></A> before calling
+<B><A HREF="#CMD:Restraints.pick">Restraints.pick()</A></B><A NAME="19419"></A>.
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>A static restraint is selected if all or at least <I CLASS="sans">restraint_sel_atoms</I><A NAME="19424"></A>
+of its atoms are within the atom selection <I CLASS="sans">atmsel</I><A NAME="19427"></A>, if it is strong enough
+based on its standard 
+deviations or force constants (see the next paragraph), and if it does not 
+span fewer residues than <I CLASS="sans">residue_span_range</I><A NAME="19430"></A>[0], or more than
+<I CLASS="sans">residue_span_range</I><A NAME="19433"></A>[1]. (Restraints which act on only a single atom are not
+subject to this range check.) Note that here <I CLASS="sans">restraint_sel_atoms</I><A NAME="19436"></A> is used
+for <SPAN  CLASS="textit">all</SPAN> restraints, while the <B><A HREF="node213.html#CMD:Restraints.make">Restraints.make()</A></B><A NAME="19439"></A> command and
+optimizers (Section&nbsp;<A HREF="node266.html#SECTION:optimizers">6.11</A>) use it for all restraint types
+<SPAN  CLASS="textit">except</SPAN> non-bonded pairs.
+(<I CLASS="sans"><A HREF="node141.html#MEMB:energydata.nonbondedselatoms">energy_data.nonbonded_sel_atoms</A></I><A NAME="19444"></A> is used for non-bonded pairs by these
+routines.)
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>To decide if a restraint is strong enough, the current standard 
+deviations or force constants are compared with the corresponding 
+<I CLASS="sans">restraints_filter</I><A NAME="19449"></A>[physical_restraint_type]. A harmonic restraint, 
+lower and upper bounds, and multi-modal Gaussian restraints are selected
+if the (smallest) standard deviation is less than the corresponding
+<I CLASS="sans">restraints_filter</I><A NAME="19452"></A>[i]. The cosine energy term is selected if its 
+force constant is larger than the corresponding <I CLASS="sans">restraints_filter</I><A NAME="19455"></A>[i]. 
+Restraints with other mathematical forms (including user-defined forms)
+are always selected, as is any restraint of physical type <SPAN CLASS="MATH"><IMG STYLE="height: 1.61ex; vertical-align: -0.12ex; " SRC="img60.png"
+ ALT="$i$"></SPAN> if
+<I CLASS="sans">restraints_filter</I><A NAME="19458"></A>[i] = <SPAN CLASS="MATH"><IMG STYLE="height: 1.61ex; vertical-align: -0.31ex; " SRC="img34.png"
+ ALT="$-999$"></SPAN>.
+The <I CLASS="sans">restraints_filter</I><A NAME="19461"></A> angles have to be specified in radians.
+
+</BLOCKQUOTE>
+
+<P>
+
+  <DL>
+<DT><STRONG>Example: <A ID="tex2html123"
+  HREF="../examples/commands/pick_restraints.py">examples/commands/pick_restraints.py</A></STRONG></DT>
+<DD> <BR>  <div class="pygments"><pre><span></span><span class="c1"># Example for: restraints.pick(), restraints.condense()</span>
+
+<span class="c1"># This will pick only restraints that include at least one</span>
+<span class="c1"># mainchain (CA, N, C, O) atom and write them to a file.</span>
+
+<span class="kn">from</span> <span class="nn">modeller</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">modeller.scripts</span> <span class="kn">import</span> <span class="n">complete_pdb</span>
+
+<span class="n">log</span><span class="o">.</span><span class="n">verbose</span><span class="p">()</span>
+<span class="n">env</span> <span class="o">=</span> <span class="n">environ</span><span class="p">()</span>
+<span class="n">env</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">atom_files_directory</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;../atom_files&#39;</span><span class="p">]</span>
+<span class="n">env</span><span class="o">.</span><span class="n">libs</span><span class="o">.</span><span class="n">topology</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="nb">file</span><span class="o">=</span><span class="s1">&#39;$(LIB)/top_heav.lib&#39;</span><span class="p">)</span>
+<span class="n">env</span><span class="o">.</span><span class="n">libs</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="nb">file</span><span class="o">=</span><span class="s1">&#39;$(LIB)/par.lib&#39;</span><span class="p">)</span>
+
+<span class="n">mdl</span> <span class="o">=</span> <span class="n">complete_pdb</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="s1">&#39;1fas&#39;</span><span class="p">)</span>
+
+<span class="n">allsel</span> <span class="o">=</span> <span class="n">selection</span><span class="p">(</span><span class="n">mdl</span><span class="p">)</span>
+<span class="n">mdl</span><span class="o">.</span><span class="n">restraints</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">allsel</span><span class="p">,</span> <span class="n">restraint_type</span><span class="o">=</span><span class="s1">&#39;stereo&#39;</span><span class="p">,</span> <span class="n">spline_on_site</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">allsel</span><span class="o">.</span><span class="n">energy</span><span class="p">()</span>
+
+<span class="n">atmsel</span> <span class="o">=</span> <span class="n">allsel</span><span class="o">.</span><span class="n">only_atom_types</span><span class="p">(</span><span class="s1">&#39;CA N C O&#39;</span><span class="p">)</span>
+<span class="n">mdl</span><span class="o">.</span><span class="n">restraints</span><span class="o">.</span><span class="n">pick</span><span class="p">(</span><span class="n">atmsel</span><span class="p">,</span> <span class="n">restraint_sel_atoms</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="c1"># Delete the unselected restraints from memory:</span>
+<span class="n">mdl</span><span class="o">.</span><span class="n">restraints</span><span class="o">.</span><span class="n">condense</span><span class="p">()</span>
+<span class="n">atmsel</span><span class="o">.</span><span class="n">energy</span><span class="p">()</span>
+
+<span class="n">mdl</span><span class="o">.</span><span class="n">restraints</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">file</span><span class="o">=</span><span class="s1">&#39;1fas.rsr&#39;</span><span class="p">)</span>
+</pre></div>
+  
+</DD>
+</DL>  <BR>
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node218.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node206.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node216.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html2930"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A> 
+<A ID="tex2html2932"
+  HREF="node513.html">
+<IMG WIDTH="43" HEIGHT="24" ALT="index" SRC="index.png"></A> 
+<BR>
+<B> Next:</B> <A
+ HREF="node218.html">Restraints.unpick_redundant()   unselect</A>
+<B> Up:</B> <A
+ HREF="node206.html">The Restraints class: static</A>
+<B> Previous:</B> <A
+ HREF="node216.html">Restraints.clear()   delete</A>
+ &nbsp; <B>  <A ID="tex2html2931"
+  HREF="node1.html">Contents</A></B> 
+ &nbsp; <B>  <A ID="tex2html2933"
+  HREF="node513.html">Index</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

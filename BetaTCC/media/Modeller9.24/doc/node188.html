@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018.3 (Released July 19, 2018) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>model.patch_ss() &mdash; guess MODEL disulfides from model structure</TITLE>
+<META NAME="description" CONTENT="model.patch_ss() &mdash; guess MODEL disulfides from model structure">
+<META NAME="keywords" CONTENT="manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018.3">
+
+<LINK REL="STYLESHEET" HREF="manual.css">
+<LINK REL="STYLESHEET" HREF="pygments.css">
+
+<LINK REL="next" HREF="node189.html">
+<LINK REL="previous" HREF="node187.html">
+<LINK REL="next" HREF="node189.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node189.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node164.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node187.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html2794"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A> 
+<A ID="tex2html2796"
+  HREF="node513.html">
+<IMG WIDTH="43" HEIGHT="24" ALT="index" SRC="index.png"></A> 
+<BR>
+<B> Next:</B> <A
+ HREF="node189.html">model.build()   build</A>
+<B> Up:</B> <A
+ HREF="node164.html">The model class: handling</A>
+<B> Previous:</B> <A
+ HREF="node187.html">model.patch_ss_templates()   guess</A>
+ &nbsp; <B>  <A ID="tex2html2795"
+  HREF="node1.html">Contents</A></B> 
+ &nbsp; <B>  <A ID="tex2html2797"
+  HREF="node513.html">Index</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A ID="SECTION0011624000000000000000">
+model.patch_ss() &mdash; guess MODEL disulfides from model structure</A>
+</H2> <A NAME="15434"></A><A ID="CMD:model.patchss"></A>        
+<A NAME="15437"></A><TT>patch_ss()</TT>
+<BR>
+<BLOCKQUOTE>
+This command defines and patches disulfide bonds in MODEL 
+using MODEL's current structure. A disulfide bridge is declared between 
+all pairs of Cys residues whose SG-SG distances are less than 2.5&#197;. 
+The covalent connectivity is patched accordingly.
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>This command should be run after <B><A HREF="node179.html#CMD:model.read">model.read()</A></B><A NAME="15447"></A> and before
+optimization to ensure that the disulfides are fixed properly
+and that no SG-SG non-bonded interactions are applied. 
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><I CLASS="sans"><A HREF="node162.html#MEMB:Topology.submodel">Topology.submodel</A></I><A NAME="15452"></A> is needed to make sure the correct atomic radii
+are used in CYS-CYS patching.
+
+</BLOCKQUOTE>
+
+<P>
+<B>Example:</B> See <B><A HREF="node187.html#CMD:model.patchsstemplates">model.patch_ss_templates()</A></B><A NAME="15460"></A> command.
+
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

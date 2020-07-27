@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018.3 (Released July 19, 2018) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>Multiple comparisons</TITLE>
+<META NAME="description" CONTENT="Multiple comparisons">
+<META NAME="keywords" CONTENT="manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018.3">
+
+<LINK REL="STYLESHEET" HREF="manual.css">
+<LINK REL="STYLESHEET" HREF="pygments.css">
+
+<LINK REL="previous" HREF="node486.html">
+<LINK REL="next" HREF="node488.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node488.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node482.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node486.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html4295"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A> 
+<A ID="tex2html4297"
+  HREF="node513.html">
+<IMG WIDTH="43" HEIGHT="24" ALT="index" SRC="index.png"></A> 
+<BR>
+<B> Next:</B> <A
+ HREF="node488.html">Optimization of the objective</A>
+<B> Up:</B> <A
+ HREF="node482.html">Dynamic programming for sequence</A>
+<B> Previous:</B> <A
+ HREF="node486.html">Similarity versus distance scores</A>
+ &nbsp; <B>  <A ID="tex2html4296"
+  HREF="node1.html">Contents</A></B> 
+ &nbsp; <B>  <A ID="tex2html4298"
+  HREF="node513.html">Index</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A ID="SECTION001315000000000000000"></A>
+   <A ID="sec:multiple"></A>
+<BR>
+Multiple comparisons
+</H2>
+
+<P>
+In the discussion of the previous section, we have assumed that the
+sequences or structures would be compared in a pairwise manner.
+However, such pairwise comparisons of several related proteins may not
+be self consistent, <I>ie</I> the following transitivity rule can be
+broken: If residue <SPAN CLASS="MATH"><IMG STYLE="height: 1.12ex; vertical-align: -0.12ex; " SRC="img22.png"
+ ALT="$a$"></SPAN> from protein <SPAN CLASS="MATH"><IMG STYLE="height: 1.68ex; vertical-align: -0.12ex; " SRC="img185.png"
+ ALT="$A$"></SPAN> is equivalent to residue <SPAN CLASS="MATH"><IMG STYLE="height: 1.68ex; vertical-align: -0.12ex; " SRC="img23.png"
+ ALT="$b$"></SPAN>
+in protein <SPAN CLASS="MATH"><IMG STYLE="height: 1.61ex; vertical-align: -0.12ex; " SRC="img186.png"
+ ALT="$B$"></SPAN> which in turn is equivalent to residue <SPAN CLASS="MATH"><IMG STYLE="height: 1.12ex; vertical-align: -0.12ex; " SRC="img24.png"
+ ALT="$c$"></SPAN> in protein
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.75ex; vertical-align: -0.12ex; " SRC="img187.png"
+ ALT="$C$"></SPAN> then the residue <SPAN CLASS="MATH"><IMG STYLE="height: 1.12ex; vertical-align: -0.12ex; " SRC="img22.png"
+ ALT="$a$"></SPAN> from protein <SPAN CLASS="MATH"><IMG STYLE="height: 1.68ex; vertical-align: -0.12ex; " SRC="img185.png"
+ ALT="$A$"></SPAN> must also be equivalent to
+residue <SPAN CLASS="MATH"><IMG STYLE="height: 1.12ex; vertical-align: -0.12ex; " SRC="img24.png"
+ ALT="$c$"></SPAN> from protein <SPAN CLASS="MATH"><IMG STYLE="height: 1.75ex; vertical-align: -0.12ex; " SRC="img187.png"
+ ALT="$C$"></SPAN>. This property is not always attained in
+the set of usual pairwise comparisons relating a group of similar
+proteins. For this reason we proceed by simultaneously aligning all
+proteins. This is achieved by aligning the second sequence with the
+first one, the third sequence with the alignment of the first two, 
+<EM>etc</EM>. A more general tree-like growth of the multiple alignment is
+not yet implemented.
+
+<P>
+If the number of all proteins is <SPAN CLASS="MATH"><IMG STYLE="height: 1.61ex; vertical-align: -0.12ex; " SRC="img122.png"
+ ALT="$N$"></SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 1.61ex; vertical-align: -0.31ex; " SRC="img121.png"
+ ALT="$N-1$"></SPAN> alignments must be made to
+obtain the final multiple comparison. It is noted that once an
+equivalence or gap is introduced it is not changed in later stages.
+
+<P>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node488.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node482.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node486.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html4295"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A> 
+<A ID="tex2html4297"
+  HREF="node513.html">
+<IMG WIDTH="43" HEIGHT="24" ALT="index" SRC="index.png"></A> 
+<BR>
+<B> Next:</B> <A
+ HREF="node488.html">Optimization of the objective</A>
+<B> Up:</B> <A
+ HREF="node482.html">Dynamic programming for sequence</A>
+<B> Previous:</B> <A
+ HREF="node486.html">Similarity versus distance scores</A>
+ &nbsp; <B>  <A ID="tex2html4296"
+  HREF="node1.html">Contents</A></B> 
+ &nbsp; <B>  <A ID="tex2html4298"
+  HREF="node513.html">Index</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

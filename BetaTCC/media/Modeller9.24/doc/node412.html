@@ -1,0 +1,176 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018.3 (Released July 19, 2018) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>sequence_db.read() &mdash; read a database of sequences</TITLE>
+<META NAME="description" CONTENT="sequence_db.read() &mdash; read a database of sequences">
+<META NAME="keywords" CONTENT="manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018.3">
+
+<LINK REL="STYLESHEET" HREF="manual.css">
+<LINK REL="STYLESHEET" HREF="pygments.css">
+
+<LINK REL="next" HREF="node413.html">
+<LINK REL="previous" HREF="node411.html">
+<LINK REL="next" HREF="node413.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node413.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node410.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node411.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html3897"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A> 
+<A ID="tex2html3899"
+  HREF="node513.html">
+<IMG WIDTH="43" HEIGHT="24" ALT="index" SRC="index.png"></A> 
+<BR>
+<B> Next:</B> <A
+ HREF="node413.html">sequence_db.close()   close</A>
+<B> Up:</B> <A
+ HREF="node410.html">The sequence_db class: using</A>
+<B> Previous:</B> <A
+ HREF="node411.html">sequence_db()   create</A>
+ &nbsp; <B>  <A ID="tex2html3898"
+  HREF="node1.html">Contents</A></B> 
+ &nbsp; <B>  <A ID="tex2html3900"
+  HREF="node513.html">Index</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A ID="SECTION0011272000000000000000">
+sequence_db.read() &mdash; read a database of sequences</A>
+</H2> <A NAME="37810"></A><A ID="CMD:sequencedb.read"></A>
+<A NAME="37813"></A><TT>read(chains_list, seq_database_file, seq_database_format, clean_sequences=True, minmax_db_seq_len=(0, 999999))</TT>
+<BR>
+<BLOCKQUOTE>
+This command will read a database of sequences, either in the 
+<TT>PIR</TT>, <TT>FASTA</TT>, or <TT>BINARY</TT> format. 
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>If the format is <TT>PIR</TT> or <TT>FASTA</TT>: 
+</BLOCKQUOTE>
+<P>
+ 
+<UL>
+<LI>It is possible to clean
+all sequences of non-standard residue types by setting
+<I CLASS="sans">clean_sequences</I><A NAME="37857"></A> to <TT>True</TT>. 
+
+<P>
+</LI>
+<LI>Sequences shorter than <I CLASS="sans">minmax_db_seq_len</I><A NAME="37861"></A>[0] and
+longer than <I CLASS="sans">minmax_db_seq_len</I><A NAME="37864"></A>[1] are eliminated.
+
+<P>
+</LI>
+<LI>Only sequences whose codes are listed in the <I CLASS="sans">chains_list</I><A NAME="37867"></A> 
+file are read from the <I CLASS="sans">seq_database_file</I><A NAME="37870"></A> of sequences.
+If <I CLASS="sans">chains_list</I><A NAME="37873"></A> is <TT>all</TT>, all sequences in the  <I CLASS="sans">seq_database_file</I><A NAME="37877"></A>
+file are read in, and there is no need for the <I CLASS="sans">chains_list</I><A NAME="37880"></A> file.
+</LI>
+</UL>
+<P>
+<BLOCKQUOTE>For the <TT>PIR</TT> and <TT>FASTA</TT> formats, make sure the order
+of sequences in the <I CLASS="sans">chains_list</I><A NAME="37885"></A> and <I CLASS="sans">seq_database_file</I><A NAME="37888"></A> 
+is the same for faster access (there can of course be 
+more sequences in the sequence file than there are sequence
+codes in the codes file).
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>Additionally, if the sequences are in 'PIR' format, then
+the protein type and resolution fields are stored in the
+database format. (see Section&nbsp;<A HREF="node497.html#alignmentformat">B.1</A> for
+description of 'PIR' fields).
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>The protein type field is encoded in a single letter format. 
+'S' for sequence and 'X' for structures of any kind. This 
+information is transferred to the profile arrays when using 
+<B><A HREF="node407.html#CMD:profile.build">profile.build()</A></B><A NAME="37891"></A>. (See also <B><A HREF="node403.html#CMD:profile.read">profile.read()</A></B><A NAME="37896"></A>). 
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>The resolution field is used to pick representatives from the
+clusters in <B><A HREF="node417.html#CMD:sequencedb.filter">sequence_db.filter()</A></B><A NAME="37901"></A>.
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>None of the options above apply to the <TT>BINARY</TT> format, which,
+in return, is very fast. Binary files are standard <A ID="tex2html219"
+  HREF="http://www.hdfgroup.org/HDF5/">HDF5</A> files
+(see Section&nbsp;<A HREF="node505.html#binaryformat">B.4</A>).
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>When using PIR or FASTA files, the entire sequence database is stored in
+memory. Thus, extremely large databases, such as <A ID="tex2html220"
+  HREF="http://www.uniprot.org/">U<SMALL>NI</SMALL>P<SMALL>ROT</SMALL></A>, will require your
+computer to have a large amount of system memory (RAM) available, to store
+the database and to provide working space. In cases where the database
+requires more than 2 gigabytes of memory, you will also need to use a 64-bit
+machine, such as Alpha, Itanium, or x86_64 (Opteron/EM64T). On the other
+hand, when using a binary file, only part of the file is read into memory
+on demand. (Functions which utilize sequence databases have a <I CLASS="sans">window_size</I><A NAME="37912"></A>
+parameter, which determines how much of the file is read in at a time. A
+larger window size will generally result in faster execution, at the expense
+of increased memory use.) Thus, binary files are strongly recommended whenever
+speed or memory is a concern.
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>If you are intending to read in a sequence database simply to write it out
+again in binary format, you should consider using the <B><A HREF="node415.html#CMD:sequencedb.convert">sequence_db.convert()</A></B><A NAME="37915"></A>
+function instead, as this does not need to keep the whole database in memory.
+
+</BLOCKQUOTE>
+
+<P>
+<B>Example:</B> See <B><A HREF="node407.html#CMD:profile.build">profile.build()</A></B><A NAME="37923"></A> command.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node413.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node410.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node411.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html3897"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A> 
+<A ID="tex2html3899"
+  HREF="node513.html">
+<IMG WIDTH="43" HEIGHT="24" ALT="index" SRC="index.png"></A> 
+<BR>
+<B> Next:</B> <A
+ HREF="node413.html">sequence_db.close()   close</A>
+<B> Up:</B> <A
+ HREF="node410.html">The sequence_db class: using</A>
+<B> Previous:</B> <A
+ HREF="node411.html">sequence_db()   create</A>
+ &nbsp; <B>  <A ID="tex2html3898"
+  HREF="node1.html">Contents</A></B> 
+ &nbsp; <B>  <A ID="tex2html3900"
+  HREF="node513.html">Index</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

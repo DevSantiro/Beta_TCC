@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018.3 (Released July 19, 2018) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>strand() &mdash; make a -strand</TITLE>
+<META NAME="description" CONTENT="strand() &mdash; make a -strand">
+<META NAME="keywords" CONTENT="manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018.3">
+
+<LINK REL="STYLESHEET" HREF="manual.css">
+<LINK REL="STYLESHEET" HREF="pygments.css">
+
+<LINK REL="next" HREF="node230.html">
+<LINK REL="previous" HREF="node228.html">
+<LINK REL="next" HREF="node230.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node230.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node227.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node228.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html2981"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A> 
+<A ID="tex2html2983"
+  HREF="node513.html">
+<IMG WIDTH="43" HEIGHT="24" ALT="index" SRC="index.png"></A> 
+<BR>
+<B> Next:</B> <A
+ HREF="node230.html">sheet()   make</A>
+<B> Up:</B> <A
+ HREF="node227.html">The secondary_structure module: secondary</A>
+<B> Previous:</B> <A
+ HREF="node228.html">alpha()   make</A>
+ &nbsp; <B>  <A ID="tex2html2982"
+  HREF="node1.html">Contents</A></B> 
+ &nbsp; <B>  <A ID="tex2html2984"
+  HREF="node513.html">Index</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A ID="SECTION001182000000000000000">
+strand() &mdash; make a <SPAN CLASS="MATH">&beta;</SPAN>-strand</A>
+</H2> <A NAME="21085"></A><A ID="CMD:strand"></A>
+<A NAME="21089"></A><TT>strand(residues)</TT>
+<BR>
+<BLOCKQUOTE>
+This makes restraints enforcing an extended <SPAN CLASS="MATH">&beta;</SPAN>-strand
+conformation for the residue segment specified by <I CLASS="sans">residues</I><A NAME="21111"></A>
+(which can be created using the <B><A HREF="node175.html#CMD:model.residuerange">model.residue_range()</A></B><A NAME="21114"></A> function).
+This is achieved by applying <SPAN CLASS="MATH">&Phi;,&Psi;</SPAN> binormal restraints only. These
+binormal restraints force the mainchain conformation into class &ldquo;B&rdquo;,
+except for the Pro residues which are restrained to class &ldquo;P&rdquo; [<A
+ HREF="node512.html#SalBlu93">&#352;ali &amp; Blundell, 1993</A>].
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>All of the restraints have the <TT>physical.phi_psi_dihedral</TT> physical
+restraint type, so can be strengthened or weakened by creating a
+<B><A HREF="node265.html#CMD:physical.values">physical.values()</A></B><A NAME="21120"></A> object (see also Section&nbsp;<A HREF="node19.html#SECTION:model-changeopt">2.2.2</A>).
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>In many cases (<EM>e.g.</EM>, most comparative modeling runs) you will already have
+binormal restraints active (which will conflict with strand restraints),
+so it is recommended that you first use <B><A HREF="node222.html#CMD:Restraints.unpick">Restraints.unpick()</A></B><A NAME="21126"></A> followed by
+<B><A HREF="node220.html#CMD:Restraints.condense">Restraints.condense()</A></B><A NAME="21131"></A> to remove these.
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>To actually add the restraints, pass the new object to <B><A HREF="node221.html#CMD:Restraints.add">Restraints.add()</A></B><A NAME="21136"></A>.
+See Section&nbsp;<A HREF="node28.html#SECTION:model-addrsr">2.2.11</A> for an example.
+
+</BLOCKQUOTE>
+
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

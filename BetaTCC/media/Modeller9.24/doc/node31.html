@@ -1,0 +1,176 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018.3 (Released July 19, 2018) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>Accessing output data after modeling is complete</TITLE>
+<META NAME="description" CONTENT="Accessing output data after modeling is complete">
+<META NAME="keywords" CONTENT="manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018.3">
+
+<LINK REL="STYLESHEET" HREF="manual.css">
+<LINK REL="STYLESHEET" HREF="pygments.css">
+
+<LINK REL="next" HREF="node32.html">
+<LINK REL="previous" HREF="node30.html">
+<LINK REL="next" HREF="node32.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node32.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node17.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node30.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html1542"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A> 
+<A ID="tex2html1544"
+  HREF="node513.html">
+<IMG WIDTH="43" HEIGHT="24" ALT="index" SRC="index.png"></A> 
+<BR>
+<B> Next:</B> <A
+ HREF="node32.html">Fully automated alignment and</A>
+<B> Up:</B> <A
+ HREF="node17.html">More advanced usage</A>
+<B> Previous:</B> <A
+ HREF="node30.html">Residues and chains in</A>
+ &nbsp; <B>  <A ID="tex2html1543"
+  HREF="node1.html">Contents</A></B> 
+ &nbsp; <B>  <A ID="tex2html1545"
+  HREF="node513.html">Index</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A ID="SECTION007214000000000000000"></A>
+<A ID="SECTION:model-outputs"></A>
+<BR>
+Accessing output data after modeling is complete
+</H2>
+
+<P>
+After <B><A HREF="node70.html#CMD:automodel.make">automodel.make()</A></B><A NAME="3656"></A> finishes building your model(s), the output data
+is accessible to your script as <I CLASS="sans"><A HREF="node47.html#MEMB:automodel.outputs">automodel.outputs</A></I><A NAME="3661"></A>. This variable is an
+ordinary <A ID="tex2html51"
+  HREF="https://www.python.org/">Python</A> list, one element for each model (so <TT>a.outputs[0]</TT> refers
+to the first model, and so on). Each list element is a <A ID="tex2html52"
+  HREF="https://www.python.org/">Python</A> dictionary
+of key:value pairs, the most important of which are:
+
+<UL>
+<LI><TT>'failure'</TT>: the <A ID="tex2html53"
+  HREF="https://www.python.org/">Python</A> value <TT>None</TT> if no failure occurred (<EM>i.e.</EM>,
+the model was built successfully). Otherwise, it is the exception that was
+raised.
+
+<P>
+</LI>
+<LI><TT>'name'</TT>: the name of the output PDB file, if no error occurred.
+
+<P>
+</LI>
+<LI><TT>'molpdf'</TT>: the value of the M<SMALL>ODELLER</SMALL> objective function, if no error
+occurred.
+
+<P>
+</LI>
+<LI><TT>'pdfterms'</TT>: the contributions to the objective function from all
+physical restraint types (see Section&nbsp;<A HREF="node265.html#CLASS:physvalues">6.10.1</A>), if no error
+occurred.
+
+<P>
+</LI>
+<LI><TT>'xxx score'</TT>: the value of the assessment score <TT>'xxx'</TT> (<EM>e.g.</EM>,
+<TT>'GA341 score'</TT>, <TT>'DOPE score'</TT>).
+</LI>
+</UL>
+
+<P>
+If you are also building loop models, information for these is made available
+in <I CLASS="sans"><A HREF="node91.html#MEMB:loopmodel.loop.outputs">loopmodel.loop.outputs</A></I><A NAME="3689"></A>.
+
+<P>
+
+  <DL>
+<DT><STRONG>Example: <A ID="tex2html54"
+  HREF="../examples/automodel/model-outputs.py">examples/automodel/model-outputs.py</A></STRONG></DT>
+<DD> <BR>  <div class="pygments"><pre><span></span><span class="kn">from</span> <span class="nn">modeller</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">modeller.automodel</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="n">log</span><span class="o">.</span><span class="n">verbose</span><span class="p">()</span>
+<span class="n">env</span> <span class="o">=</span> <span class="n">environ</span><span class="p">()</span>
+
+<span class="n">env</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">atom_files_directory</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="s1">&#39;../atom_files&#39;</span><span class="p">]</span>
+
+<span class="c1"># Build 3 models, and assess with both DOPE and GA341</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">automodel</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">alnfile</span> <span class="o">=</span> <span class="s1">&#39;alignment.ali&#39;</span><span class="p">,</span> <span class="n">knowns</span> <span class="o">=</span> <span class="s1">&#39;5fd1&#39;</span><span class="p">,</span>
+              <span class="n">sequence</span> <span class="o">=</span> <span class="s1">&#39;1fdx&#39;</span><span class="p">,</span> <span class="n">assess_methods</span><span class="o">=</span><span class="p">(</span><span class="n">assess</span><span class="o">.</span><span class="n">DOPE</span><span class="p">,</span> <span class="n">assess</span><span class="o">.</span><span class="n">GA341</span><span class="p">))</span>
+<span class="n">a</span><span class="o">.</span><span class="n">starting_model</span><span class="o">=</span> <span class="mi">1</span>
+<span class="n">a</span><span class="o">.</span><span class="n">ending_model</span>  <span class="o">=</span> <span class="mi">3</span>
+<span class="n">a</span><span class="o">.</span><span class="n">make</span><span class="p">()</span>
+
+<span class="c1"># Get a list of all successfully built models from a.outputs</span>
+<span class="n">ok_models</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">a</span><span class="o">.</span><span class="n">outputs</span> <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;failure&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">]</span>
+
+<span class="c1"># Rank the models by DOPE score</span>
+<span class="n">key</span> <span class="o">=</span> <span class="s1">&#39;DOPE score&#39;</span>
+<span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">):</span>
+    <span class="c1"># Python 2.3&#39;s sort doesn&#39;t have a &#39;key&#39; argument</span>
+    <span class="n">ok_models</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">:</span> <span class="nb">cmp</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="n">b</span><span class="p">[</span><span class="n">key</span><span class="p">]))</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">ok_models</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">a</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+
+<span class="c1"># Get top model</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">ok_models</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Top model: </span><span class="si">%s</span><span class="s2"> (DOPE score </span><span class="si">%.3f</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">],</span> <span class="n">m</span><span class="p">[</span><span class="n">key</span><span class="p">]))</span>
+</pre></div>
+  
+</DD>
+</DL>  <BR>
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node32.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node17.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node30.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html1542"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A> 
+<A ID="tex2html1544"
+  HREF="node513.html">
+<IMG WIDTH="43" HEIGHT="24" ALT="index" SRC="index.png"></A> 
+<BR>
+<B> Next:</B> <A
+ HREF="node32.html">Fully automated alignment and</A>
+<B> Up:</B> <A
+ HREF="node17.html">More advanced usage</A>
+<B> Previous:</B> <A
+ HREF="node30.html">Residues and chains in</A>
+ &nbsp; <B>  <A ID="tex2html1543"
+  HREF="node1.html">Contents</A></B> 
+ &nbsp; <B>  <A ID="tex2html1545"
+  HREF="node513.html">Index</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

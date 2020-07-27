@@ -1,0 +1,11 @@
+del *.ini
+del *.rsr
+del *.sch
+del *.D*
+del *.V*
+del 1fdx_*
+del search.prf
+del *.log
+del *.pdb
+del alignment.ali
+del family.mat

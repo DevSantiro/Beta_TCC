@@ -1,0 +1,293 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018.3 (Released July 19, 2018) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>selection.energy() &mdash; evaluate atom selection given restraints</TITLE>
+<META NAME="description" CONTENT="selection.energy() &mdash; evaluate atom selection given restraints">
+<META NAME="keywords" CONTENT="manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018.3">
+
+<LINK REL="STYLESHEET" HREF="manual.css">
+<LINK REL="STYLESHEET" HREF="pygments.css">
+
+<LINK REL="next" HREF="node258.html">
+<LINK REL="previous" HREF="node256.html">
+<LINK REL="next" HREF="node258.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node258.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node231.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node256.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html3125"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A> 
+<A ID="tex2html3127"
+  HREF="node513.html">
+<IMG WIDTH="43" HEIGHT="24" ALT="index" SRC="index.png"></A> 
+<BR>
+<B> Next:</B> <A
+ HREF="node258.html">selection.debug_function()   test</A>
+<B> Up:</B> <A
+ HREF="node231.html">The selection class: handling</A>
+<B> Previous:</B> <A
+ HREF="node256.html">selection.hot_atoms()   atoms</A>
+ &nbsp; <B>  <A ID="tex2html3126"
+  HREF="node1.html">Contents</A></B> 
+ &nbsp; <B>  <A ID="tex2html3128"
+  HREF="node513.html">Index</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A ID="SECTION0011926000000000000000">
+selection.energy() &mdash; evaluate atom selection given restraints</A>
+</H2> <A NAME="22849"></A><A ID="CMD:selection.energy"></A>
+<A NAME="22852"></A><TT>energy(asgl_output=False, normalize_profile=False, residue_span_range=(0, 99999), output='LONG', file='default', viol_report_cut=physical.values(default=4.500000, chi1_dihedral=999.000000, chi2_dihedral=999.000000, chi3_dihedral=999.000000, chi4_dihedral=999.000000, chi5_dihedral=999.000000, phi_psi_dihedral=6.500000, nonbond_spline=999.000000, accessibility=999.000000, density=999.000000, gbsa=999.000000, em_density=999.000000), viol_report_cut2=physical.values(default=2.000000), smoothing_window=3, schedule_scale=None, edat=None)</TT>
+<BR>
+<DL>
+<DT><STRONG>Output:</STRONG></DT>
+<DD>(<I CLASS="sans">molpdf</I><A NAME="22860"></A>, <I CLASS="sans">terms</I><A NAME="22863"></A>)
+                             
+</DD>
+</DL>
+
+<P>
+<DL>
+<DT><STRONG>Requirements:</STRONG></DT>
+<DD>restraints
+                             
+</DD>
+</DL>
+
+<P>
+<BLOCKQUOTE>
+The main purpose of this command is to compare spatial features 
+of the atom selection with the selected restraints in order to
+determine the violations of the molecular pdf. It lists variable
+amounts of information about the values of the basis, feature, and
+molecular pdf's for the current MODEL. All arguments that affect the 
+value of the molecular pdf are also relevant for the <B><A HREF="#CMD:selection.energy">selection.energy()</A></B><A NAME="22904"></A>
+command.
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>The scaling factors for the physical restraint types are given by
+<I CLASS="sans">schedule_scale</I><A NAME="22909"></A>. This allows easy reporting of only a selected
+subset of all restraints.
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>Most of the output goes to the <TT>log</TT> file. The output of the
+<B><A HREF="#CMD:selection.energy">selection.energy()</A></B><A NAME="22913"></A>
+command has to be examined carefully, at least at the end of the
+optimization, when the final model is produced.  
+Additional output files, for the <A ID="tex2html142"
+  HREF="http://salilab.org/asgl/asgl.html">A<SMALL>SGL</SMALL></A> plotting program are created if 
+<I CLASS="sans">asgl_output</I><A NAME="22921"></A> = <TT>True</TT> (undocumented). 
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><I CLASS="sans">output</I><A NAME="22925"></A> selects various kinds of output information:
+</BLOCKQUOTE>
+<UL>
+<LI><TT>'LONG'</TT> writes restraint violations one per line to the <TT>log</TT> file.
+
+<P>
+</LI>
+<LI><TT>'VERY_LONG'</TT> writes the most detailed examination of the selected
+basis and feature pdf's to the <TT>log</TT> file, using several lines of
+output for each restraint.
+
+<P>
+</LI>
+<LI><TT>'NO_REPORT'</TT> suppresses the output of the violated restraints summary
+(unless profiles are also requested) and also that of nonbond clashes.
+
+<P>
+</LI>
+<LI><TT>'GRADIENT'</TT> writes the magnitudes of the &lsquo;force&rsquo; gradients for the
+currently selected restraints to the isotropic temperature
+factors (<I>B<SPAN CLASS="MATH"><sub>iso</sub></SPAN></I><A NAME="22934"></A><A NAME="22935"></A>) for each atom of the current MODEL.  
+
+<P>
+</LI>
+<LI><TT>'ENERGY_PROFILE'</TT> or <TT>'VIOLATIONS_PROFILE'</TT> write out residue energies
+or heavy relative violations to a file and to the <I>B<SPAN CLASS="MATH"><sub>iso</sub></SPAN></I><A NAME="22942"></A><A NAME="22943"></A> column (see below).
+
+<P>
+</LI>
+</UL>
+<P>
+<BLOCKQUOTE><I CLASS="sans">viol_report_cut</I><A NAME="22948"></A> is a vector with one real number for each 
+physical restraint type. A restraint is reported when its `heavy 
+relative violation' (see Section&nbsp;<A HREF="node109.html#SECTION:restraintviol">5.3.1</A>) is larger than
+the corresponding cutoff.
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><I CLASS="sans">viol_report_cut2</I><A NAME="22951"></A> is similar to <I CLASS="sans">viol_report_cut</I><A NAME="22954"></A>, except
+that it contains cutoffs for restraint &lsquo;energies&rsquo;, not heavy
+relative violations.
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>The meaning of various other reported properties of the violated restraints 
+is briefly described in the <TT>log</TT> file.
+For interpreting the seriousness of violations, use the following
+rule of thumb: There should be at most a few small violations 
+(<EM>e.g.</EM>, 4 standard deviations) for all monomodal restraints. In comparative
+modeling, the monomodal restraints include the stereochemical restraints 
+and distance restraints when only one homologous structure is used. 
+For the multimodal restraints, there are usually many violations reported
+because the heaviest violations are used in deciding whether or not to
+report a violation. In comparative modeling, the multimodal restraints
+include the <SPAN CLASS="MATH"><IMG STYLE="height: 1.54ex; vertical-align: -0.57ex; " SRC="img19.png"
+ ALT="$\chi_i$"></SPAN> restraints, (<SPAN CLASS="MATH">&Phi;</SPAN>, <SPAN CLASS="MATH">&Psi;</SPAN>) binormal restraints
+and distance restraints when more than one template is used. See also
+Section&nbsp;<A HREF="node38.html#SECTION:faq">3.1</A>, Question&nbsp;<A HREF="node38.html#FAQ:log">13</A>.
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>For profiles:
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>This command calculates residue energies or heavy relative violations, 
+depending on <I CLASS="sans">output</I><A NAME="22959"></A>, for all physical restraint types (see
+Table&nbsp;<A HREF="node265.html#tab:physrsrtypes">6.1</A>). Relative heavy violations (see
+Section&nbsp;<A HREF="node109.html#SECTION:restraintviol">5.3.1</A>) are used because only <I>relative</I>
+violations of different features are comparable.
+In both cases, the residue sum is the sum over all restraints that have
+at least one atom in a given residue. The contribution of each restraint 
+is counted exactly once for each residue, without any weighting. Restraints 
+spanning more than one residue contribute equally to all of them. Thus, 
+the sum of residue energies is generally larger than
+molecular pdf. The command also calculates the sum over all physical restraint
+types of the contributions for each residue and then writes all the
+contributions, plus this sum, as columns in a a file suitable for plotting by
+a plotting program such as <A ID="tex2html143"
+  HREF="http://salilab.org/asgl/asgl.html">A<SMALL>SGL</SMALL></A> or G<SMALL>NU</SMALL>P<SMALL>LOT</SMALL>. 
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>If <I CLASS="sans">normalize_profile</I><A NAME="22967"></A> is <TT>True</TT> the profile for each
+residue is normalized by the number of terms applying to each residue.
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>All the curves are smoothed by the running window
+averaging method if <I CLASS="sans">smoothing_window</I><A NAME="22971"></A> is larger than 0: The window
+is centered on residue <SPAN CLASS="MATH"><IMG STYLE="height: 1.61ex; vertical-align: -0.12ex; " SRC="img60.png"
+ ALT="$i$"></SPAN> and extends for (<I CLASS="sans">smoothing_window</I><A NAME="22974"></A>/2) - 1
+residues on each side. Thus, <I CLASS="sans">smoothing_window</I><A NAME="22977"></A> has to be an even 
+number (or it is made such by the program automatically).
+The only exceptions are the 
+two termini, where a smaller number of residues are available for
+smoothing. The relative weight of residue <SPAN CLASS="MATH"><IMG STYLE="height: 2.03ex; vertical-align: -0.57ex; " SRC="img66.png"
+ ALT="$j$"></SPAN> when calculating the
+smoothed value at residue <SPAN CLASS="MATH"><IMG STYLE="height: 1.61ex; vertical-align: -0.12ex; " SRC="img60.png"
+ ALT="$i$"></SPAN> is <!-- MATH
+ $({\sf smoothing\_window}/2 - |j-i|)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.38ex; vertical-align: -0.70ex; " SRC="img93.png"
+ ALT="$({\sf smoothing\_window}\index{smoothing\_window@{\sf smoothing\_window}}/2 - \vert j-i\vert)$"></SPAN>.
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>The energy or the violations profile (sum over all restraint types) is also
+written to the <I>B<SPAN CLASS="MATH"><sub>iso</sub></SPAN></I><A NAME="22983"></A><A NAME="22984"></A> field of the model (the temperature factor for PDB
+X-ray structures). Note that all the atoms in one residue get the
+same number. This output is useful for exploring the violations on 
+a graphics terminal. 
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>This function returns the total value of the objective function, <I CLASS="sans">molpdf</I><A NAME="22989"></A>,
+and the contributions from each physical restraint type, <I CLASS="sans">terms</I><A NAME="22992"></A>.
+
+</BLOCKQUOTE>
+
+<P>
+
+  <DL>
+<DT><STRONG>Example: <A ID="tex2html144"
+  HREF="../examples/scoring/energy.py">examples/scoring/energy.py</A></STRONG></DT>
+<DD> <BR>  <div class="pygments"><pre><span></span><span class="c1"># Example for: selection.energy()</span>
+
+<span class="c1"># This will calculate the stereochemical energy (bonds,</span>
+<span class="c1"># angles, dihedrals, impropers) for a given model.</span>
+
+<span class="kn">from</span> <span class="nn">modeller</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">modeller.scripts</span> <span class="kn">import</span> <span class="n">complete_pdb</span>
+
+<span class="n">env</span> <span class="o">=</span> <span class="n">environ</span><span class="p">()</span>
+<span class="n">env</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">atom_files_directory</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;../atom_files&#39;</span><span class="p">]</span>
+<span class="n">env</span><span class="o">.</span><span class="n">libs</span><span class="o">.</span><span class="n">topology</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="nb">file</span><span class="o">=</span><span class="s1">&#39;$(LIB)/top_heav.lib&#39;</span><span class="p">)</span>
+<span class="n">env</span><span class="o">.</span><span class="n">libs</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="nb">file</span><span class="o">=</span><span class="s1">&#39;$(LIB)/par.lib&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">patch_disulfides</span><span class="p">(</span><span class="n">mdl</span><span class="p">):</span>
+    <span class="c1"># Must patch disulfides here to calculate the non-bonded</span>
+    <span class="c1"># energy properly. Also, when you use hydrogens, disulfides</span>
+    <span class="c1"># must always be patched so that sulfhydril hydrogens are</span>
+    <span class="c1"># removed from the model.</span>
+    <span class="k">for</span> <span class="n">ids</span> <span class="ow">in</span> <span class="p">[</span> <span class="p">(</span><span class="s1">&#39;17&#39;</span><span class="p">,</span> <span class="s1">&#39;39&#39;</span><span class="p">),</span>
+                 <span class="p">(</span> <span class="s1">&#39;3&#39;</span><span class="p">,</span> <span class="s1">&#39;22&#39;</span><span class="p">),</span>
+                 <span class="p">(</span><span class="s1">&#39;53&#39;</span><span class="p">,</span> <span class="s1">&#39;59&#39;</span><span class="p">),</span>
+                 <span class="p">(</span><span class="s1">&#39;41&#39;</span><span class="p">,</span> <span class="s1">&#39;52&#39;</span><span class="p">)</span> <span class="p">]:</span>
+        <span class="n">mdl</span><span class="o">.</span><span class="n">patch</span><span class="p">(</span><span class="n">residue_type</span><span class="o">=</span><span class="s1">&#39;DISU&#39;</span><span class="p">,</span> <span class="n">residues</span><span class="o">=</span><span class="p">[</span><span class="n">mdl</span><span class="o">.</span><span class="n">residues</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">ids</span><span class="p">])</span>
+
+<span class="n">mdl</span> <span class="o">=</span> <span class="n">complete_pdb</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="s2">&quot;1fas&quot;</span><span class="p">,</span> <span class="n">special_patches</span><span class="o">=</span><span class="n">patch_disulfides</span><span class="p">)</span>
+
+<span class="c1"># Select all atoms</span>
+<span class="n">atmsel</span> <span class="o">=</span> <span class="n">selection</span><span class="p">(</span><span class="n">mdl</span><span class="p">)</span>
+
+<span class="n">mdl</span><span class="o">.</span><span class="n">restraints</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">atmsel</span><span class="p">,</span> <span class="n">restraint_type</span><span class="o">=</span><span class="s1">&#39;stereo&#39;</span><span class="p">,</span> <span class="n">spline_on_site</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+<span class="c1"># Actually calculate the energy</span>
+<span class="p">(</span><span class="n">molpdf</span><span class="p">,</span> <span class="n">terms</span><span class="p">)</span> <span class="o">=</span> <span class="n">atmsel</span><span class="o">.</span><span class="n">energy</span><span class="p">(</span><span class="n">edat</span><span class="o">=</span><span class="n">energy_data</span><span class="p">(</span><span class="n">dynamic_sphere</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
+
+<span class="c1"># molpdf is the total &#39;energy&#39;, and terms contains the contributions from</span>
+<span class="c1"># each physical type. Here we print out the bond length contribution:</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Bond energy is </span><span class="si">%.3f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">terms</span><span class="p">[</span><span class="n">physical</span><span class="o">.</span><span class="n">bond</span><span class="p">])</span>
+</pre></div>
+  
+</DD>
+</DL>  <BR>
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node258.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node231.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node256.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html3125"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A> 
+<A ID="tex2html3127"
+  HREF="node513.html">
+<IMG WIDTH="43" HEIGHT="24" ALT="index" SRC="index.png"></A> 
+<BR>
+<B> Next:</B> <A
+ HREF="node258.html">selection.debug_function()   test</A>
+<B> Up:</B> <A
+ HREF="node231.html">The selection class: handling</A>
+<B> Previous:</B> <A
+ HREF="node256.html">selection.hot_atoms()   atoms</A>
+ &nbsp; <B>  <A ID="tex2html3126"
+  HREF="node1.html">Contents</A></B> 
+ &nbsp; <B>  <A ID="tex2html3128"
+  HREF="node513.html">Index</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

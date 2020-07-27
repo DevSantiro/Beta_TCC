@@ -1,0 +1,607 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018.3 (Released July 19, 2018) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>Features and their derivatives</TITLE>
+<META NAME="description" CONTENT="Features and their derivatives">
+<META NAME="keywords" CONTENT="manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018.3">
+
+<LINK REL="STYLESHEET" HREF="manual.css">
+<LINK REL="STYLESHEET" HREF="pygments.css">
+
+<LINK REL="next" HREF="node493.html">
+<LINK REL="previous" HREF="node491.html">
+<LINK REL="next" HREF="node493.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node493.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node491.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node491.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html4347"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A> 
+<A ID="tex2html4349"
+  HREF="node513.html">
+<IMG WIDTH="43" HEIGHT="24" ALT="index" SRC="index.png"></A> 
+<BR>
+<B> Next:</B> <A
+ HREF="node493.html">Restraints and their derivatives</A>
+<B> Up:</B> <A
+ HREF="node491.html">Equations used in the</A>
+<B> Previous:</B> <A
+ HREF="node491.html">Equations used in the</A>
+ &nbsp; <B>  <A ID="tex2html4348"
+  HREF="node1.html">Contents</A></B> 
+ &nbsp; <B>  <A ID="tex2html4350"
+  HREF="node513.html">Index</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A ID="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A ID="tex2html4351"
+  HREF="node492.html#SECTION001331100000000000000">Distance</A>
+<LI><A ID="tex2html4352"
+  HREF="node492.html#SECTION001331200000000000000">Angle</A>
+<LI><A ID="tex2html4353"
+  HREF="node492.html#SECTION001331300000000000000">Dihedral angle</A>
+<LI><A ID="tex2html4354"
+  HREF="node492.html#SECTION001331400000000000000">Atomic solvent accessibility</A>
+<LI><A ID="tex2html4355"
+  HREF="node492.html#SECTION001331500000000000000">Atomic density</A>
+<LI><A ID="tex2html4356"
+  HREF="node492.html#SECTION001331600000000000000">Atomic coordinates</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H2><A ID="SECTION001331000000000000000">
+Features and their derivatives</A>
+</H2>
+
+<P>
+
+<H3><A ID="SECTION001331100000000000000">
+Distance</A>
+</H3>
+
+<P>
+Distance is defined by points <SPAN CLASS="MATH"><IMG STYLE="height: 1.61ex; vertical-align: -0.12ex; " SRC="img60.png"
+ ALT="$i$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.03ex; vertical-align: -0.57ex; " SRC="img66.png"
+ ALT="$j$"></SPAN>:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+d = \sqrt{\vec{r}_{ij} \cdot \vec{r}_{ij}} = |\vec{r}_{ij}| = r_{ij}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 2.52ex; vertical-align: -0.88ex; " SRC="img273.png"
+ ALT="$\displaystyle d = \sqrt{\vec{r}_{ij} \cdot \vec{r}_{ij}} = \vert\vec{r}_{ij}\vert = r_{ij}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(A.<SPAN CLASS="arabic">38</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\vec{r}_{ij} = \vec{r}_i - \vec{r}_j \; .
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 1.75ex; vertical-align: -0.78ex; " SRC="img274.png"
+ ALT="$\displaystyle \vec{r}_{ij} = \vec{r}_i - \vec{r}_j \; .$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(A.<SPAN CLASS="arabic">39</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+The first derivatives of <SPAN CLASS="MATH"><IMG STYLE="height: 1.68ex; vertical-align: -0.12ex; " SRC="img14.png"
+ ALT="$d$"></SPAN> with respect to Cartesian coordinates are:
+<BR>
+<DIV ALIGN="CENTER" CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+\frac{\partial d} {\partial \vec{r}_i} & = &
+      \frac{\vec{r}_{ij}}{|\vec{r}_{ij}|} \\[3mm]
+  \frac{\partial d} {\partial \vec{r}_j} & = &  
+     -\frac{\partial d} {\partial \vec{r}_i}
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 5.25ex; vertical-align: -2.06ex; " SRC="img275.png"
+ ALT="$\displaystyle \frac{\partial d} {\partial \vec{r}_i}$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 0.63ex; vertical-align: -0.12ex; " SRC="img202.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 4.90ex; vertical-align: -2.37ex; " SRC="img276.png"
+ ALT="$\displaystyle \frac{\vec{r}_{ij}}{\vert\vec{r}_{ij}\vert}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(A.<SPAN CLASS="arabic">40</SPAN>)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 5.53ex; vertical-align: -2.37ex; " SRC="img277.png"
+ ALT="$\displaystyle \frac{\partial d} {\partial \vec{r}_j}$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 0.63ex; vertical-align: -0.12ex; " SRC="img202.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 5.25ex; vertical-align: -2.06ex; " SRC="img278.png"
+ ALT="$\displaystyle -\frac{\partial d} {\partial \vec{r}_i}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(A.<SPAN CLASS="arabic">41</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+<P>
+
+<H3><A ID="SECTION001331200000000000000">
+Angle</A>
+</H3>
+
+<P>
+Angle is defined by points <SPAN CLASS="MATH"><IMG STYLE="height: 1.61ex; vertical-align: -0.12ex; " SRC="img60.png"
+ ALT="$i$"></SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 2.03ex; vertical-align: -0.57ex; " SRC="img66.png"
+ ALT="$j$"></SPAN>, and <SPAN CLASS="MATH"><IMG STYLE="height: 1.68ex; vertical-align: -0.12ex; " SRC="img166.png"
+ ALT="$k$"></SPAN>, and spanned by vectors 
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.03ex; vertical-align: -0.57ex; " SRC="img279.png"
+ ALT="$ij$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 2.10ex; vertical-align: -0.57ex; " SRC="img280.png"
+ ALT="$kj$"></SPAN>:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\alpha = \arccos \frac{\vec{r}_{ij} \cdot \vec{r}_{kj}}
+                      {|\vec{r}_{ij}| |\vec{r}_{kj}|} \; .
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 4.90ex; vertical-align: -2.37ex; " SRC="img281.png"
+ ALT="$\displaystyle \alpha = \arccos \frac{\vec{r}_{ij} \cdot \vec{r}_{kj}}
+{\vert\vec{r}_{ij}\vert \vert\vec{r}_{kj}\vert} \; .$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(A.<SPAN CLASS="arabic">42</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+It lies in the interval from 0 to 180&deg;. Internal 
+M<SMALL>ODELLER</SMALL> units are radians.
+
+<P>
+The first derivatives of <SPAN CLASS="MATH">&alpha;</SPAN> with respect to Cartesian coordinates are:
+<BR>
+<DIV ALIGN="CENTER" CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+\frac{\partial \alpha}{\partial \vec{r}_i} & = &
+      \frac{\partial \alpha}{\partial \cos \alpha} \; 
+      \frac{\partial \cos \alpha}{\partial \vec{r}_i} = 
+      \frac{1}{\sqrt{1-\cos^2 \alpha}} \;
+      \frac{1}{r_{ij}} \;
+      \left( \frac{\vec{r}_{ij}}{r_{ij}} \cos \alpha -
+             \frac{\vec{r}_{kj}}{r_{kj}} \right) \\[4mm]
+  \frac{\partial \alpha}{\partial \vec{r}_k} & = & 
+      \frac{\partial \alpha}{\partial \cos \alpha} \; 
+      \frac{\partial \cos \alpha}{\partial \vec{r}_k} = 
+      \frac{1}{\sqrt{1-\cos^2 \alpha}} \;
+      \frac{1}{r_{kj}} \;
+      \left( \frac{\vec{r}_{kj}}{r_{kj}} \cos \alpha -
+             \frac{\vec{r}_{ij}}{r_{ij}} \right) \\[4mm]
+  \frac{\partial \alpha} {\partial \vec{r}_j} & = &  
+     -\frac{\partial \alpha} {\partial \vec{r}_i}
+     -\frac{\partial \alpha} {\partial \vec{r}_k}
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 5.25ex; vertical-align: -2.06ex; " SRC="img282.png"
+ ALT="$\displaystyle \frac{\partial \alpha}{\partial \vec{r}_i}$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 0.63ex; vertical-align: -0.12ex; " SRC="img202.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 5.73ex; vertical-align: -2.37ex; " SRC="img283.png"
+ ALT="$\displaystyle \frac{\partial \alpha}{\partial \cos \alpha} \;
+\frac{\partial \c...
+...( \frac{\vec{r}_{ij}}{r_{ij}} \cos \alpha -
+\frac{\vec{r}_{kj}}{r_{kj}} \right)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(A.<SPAN CLASS="arabic">43</SPAN>)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 5.25ex; vertical-align: -2.06ex; " SRC="img284.png"
+ ALT="$\displaystyle \frac{\partial \alpha}{\partial \vec{r}_k}$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 0.63ex; vertical-align: -0.12ex; " SRC="img202.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 5.73ex; vertical-align: -2.37ex; " SRC="img285.png"
+ ALT="$\displaystyle \frac{\partial \alpha}{\partial \cos \alpha} \;
+\frac{\partial \c...
+...( \frac{\vec{r}_{kj}}{r_{kj}} \cos \alpha -
+\frac{\vec{r}_{ij}}{r_{ij}} \right)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(A.<SPAN CLASS="arabic">44</SPAN>)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 5.53ex; vertical-align: -2.37ex; " SRC="img286.png"
+ ALT="$\displaystyle \frac{\partial \alpha} {\partial \vec{r}_j}$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 0.63ex; vertical-align: -0.12ex; " SRC="img202.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 5.25ex; vertical-align: -2.06ex; " SRC="img287.png"
+ ALT="$\displaystyle -\frac{\partial \alpha} {\partial \vec{r}_i}
+-\frac{\partial \alpha} {\partial \vec{r}_k}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(A.<SPAN CLASS="arabic">45</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+<P>
+These equations for the  derivatives have a numerical instability when 
+the angle goes to 0 or to 180&deg;.
+Presently, the problem is &lsquo;solved&rsquo; by testing for the size
+of the angle; if it is too small, the derivatives are set to 0
+in the hope that other restraints will eventually pull the angle
+towards well behaved regions. Thus, angle restraints of 0 or 
+180&deg; should not be used in the conjugate gradients or molecular dynamics
+optimizations.
+
+<P>
+
+<H3><A ID="SECTION001331300000000000000">
+Dihedral angle</A>
+</H3>
+
+<P>
+Dihedral angle is defined by points <SPAN CLASS="MATH"><IMG STYLE="height: 1.61ex; vertical-align: -0.12ex; " SRC="img60.png"
+ ALT="$i$"></SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 2.03ex; vertical-align: -0.57ex; " SRC="img66.png"
+ ALT="$j$"></SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 1.68ex; vertical-align: -0.12ex; " SRC="img166.png"
+ ALT="$k$"></SPAN>, and <SPAN CLASS="MATH"><IMG STYLE="height: 1.68ex; vertical-align: -0.12ex; " SRC="img110.png"
+ ALT="$l$"></SPAN> (<SPAN CLASS="MATH"><IMG STYLE="height: 2.10ex; vertical-align: -0.57ex; " SRC="img288.png"
+ ALT="$ijkl$"></SPAN>):
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\chi = \mbox{sign}(\chi) \arccos\frac{
+                           (\vec{r}_{ij} \times \vec{r}_{kj}) \cdot 
+                           (\vec{r}_{kj} \times \vec{r}_{kl})}
+                          {|\vec{r}_{ij} \times \vec{r}_{kj}|
+                           |\vec{r}_{kj} \times \vec{r}_{kl}|}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 1.54ex; vertical-align: -0.57ex; " SRC="img289.png"
+ ALT="$\displaystyle \chi =$">&nbsp; &nbsp;sign<IMG STYLE="height: 5.60ex; vertical-align: -2.37ex; " SRC="img290.png"
+ ALT="$\displaystyle (\chi) \arccos\frac{
+(\vec{r}_{ij} \times \vec{r}_{kj}) \cdot
+(\v...
+...ec{r}_{ij} \times \vec{r}_{kj}\vert
+\vert\vec{r}_{kj} \times \vec{r}_{kl}\vert}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(A.<SPAN CLASS="arabic">46</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\mbox{sign}(\chi) = \mbox{sign}[\vec{r}_{kj} \cdot
+                        (\vec{r}_{ij} \times \vec{r}_{kj}) \times
+                        (\vec{r}_{kj} \times \vec{r}_{kl})] \; .
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH">sign<IMG STYLE="height: 2.38ex; vertical-align: -0.70ex; " SRC="img291.png"
+ ALT="$\displaystyle (\chi) =$">&nbsp; &nbsp;sign<IMG STYLE="height: 2.45ex; vertical-align: -0.78ex; " SRC="img292.png"
+ ALT="$\displaystyle [\vec{r}_{kj} \cdot
+(\vec{r}_{ij} \times \vec{r}_{kj}) \times
+(\vec{r}_{kj} \times \vec{r}_{kl})] \; .$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(A.<SPAN CLASS="arabic">47</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+The first derivatives of <SPAN CLASS="MATH">&chi;</SPAN> with respect to Cartesian coordinates are:
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\frac{ \; {d}\chi} { \; {d}\vec{r}} =
+    \frac{ \; {d}\chi}{ \; {d}\cos \chi} \frac{ \; {d}\cos \chi}{ \; {d}\vec{r}}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 5.25ex; vertical-align: -2.16ex; " SRC="img293.png"
+ ALT="$\displaystyle \frac{ \; {d}\chi} { \; {d}\vec{r}} =
+\frac{ \; {d}\chi}{ \; {d}\cos \chi} \frac{ \; {d}\cos \chi}{ \; {d}\vec{r}}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(A.<SPAN CLASS="arabic">48</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+where
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\frac{ \; {d}\chi}{ \; {d}\cos \chi} = \left(\frac{ \; {d}\cos \chi}{ \; {d}\chi}\right)^{-1} =
+                                   -\frac{1}{\sin \chi}
+\end{equation}
+ -->
+<TABLE CLASS="equation" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG STYLE="height: 6.08ex; vertical-align: -2.32ex; " SRC="img294.png"
+ ALT="$\displaystyle \frac{ \; {d}\chi}{ \; {d}\cos \chi} = \left(\frac{ \; {d}\cos \chi}{ \; {d}\chi}\right)^{-1} =
+-\frac{1}{\sin \chi}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(A.<SPAN CLASS="arabic">49</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+and
+<BR>
+<DIV ALIGN="CENTER" CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+\frac{\partial \cos \chi}{\partial \vec{r}_i} & = & \vec{r}_{kj} \times \vec{a} \\[3mm]
+  \frac{\partial \cos \chi}{\partial \vec{r}_j} & = & \vec{r}_{ik} \times \vec{a} -
+                                        \vec{r}_{kl} \times \vec{b} \\[3mm]
+  \frac{\partial \cos \chi}{\partial \vec{r}_k} & = & \vec{r}_{jl} \times \vec{b} -
+                                        \vec{r}_{ij} \times \vec{a} \\[3mm]
+  \frac{\partial \cos \chi}{\partial \vec{r}_l} & = & \vec{r}_{ij} \times \vec{b} \\[3mm]
+  \vec{a} & = & \frac{1}{|\vec{r}_{ij} \times \vec{r}_{kj}|} \;
+                     \left(\frac{\vec{r}_{kj} \times \vec{r}_{kl}}
+                     {|\vec{r}_{kj} \times \vec{r}_{kl}|} - 
+                     \cos \chi  \;
+                     \frac{\vec{r}_{ij} \times \vec{r}_{kj}}
+                          {|\vec{r}_{ij} \times \vec{r}_{kj}|}\right) \\[6mm]
+  \vec{b} & = & \frac{1}{|\vec{r}_{kj} \times \vec{r}_{kl}|} \;
+                     \left(\frac{\vec{r}_{ij} \times \vec{r}_{kj}}
+                     {|\vec{r}_{ij} \times \vec{r}_{kj}|} - 
+                     \cos \chi  \;
+                     \frac{\vec{r}_{kj} \times \vec{r}_{kl}}
+                          {|\vec{r}_{kj} \times \vec{r}_{kl}|}\right) \; .
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 5.25ex; vertical-align: -2.06ex; " SRC="img295.png"
+ ALT="$\displaystyle \frac{\partial \cos \chi}{\partial \vec{r}_i}$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 0.63ex; vertical-align: -0.12ex; " SRC="img202.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 1.89ex; vertical-align: -0.78ex; " SRC="img296.png"
+ ALT="$\displaystyle \vec{r}_{kj} \times \vec{a}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(A.<SPAN CLASS="arabic">50</SPAN>)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 5.53ex; vertical-align: -2.37ex; " SRC="img297.png"
+ ALT="$\displaystyle \frac{\partial \cos \chi}{\partial \vec{r}_j}$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 0.63ex; vertical-align: -0.12ex; " SRC="img202.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 2.03ex; vertical-align: -0.46ex; " SRC="img298.png"
+ ALT="$\displaystyle \vec{r}_{ik} \times \vec{a} -
+\vec{r}_{kl} \times \vec{b}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(A.<SPAN CLASS="arabic">51</SPAN>)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 5.25ex; vertical-align: -2.06ex; " SRC="img299.png"
+ ALT="$\displaystyle \frac{\partial \cos \chi}{\partial \vec{r}_k}$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 0.63ex; vertical-align: -0.12ex; " SRC="img202.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 2.31ex; vertical-align: -0.78ex; " SRC="img300.png"
+ ALT="$\displaystyle \vec{r}_{jl} \times \vec{b} -
+\vec{r}_{ij} \times \vec{a}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(A.<SPAN CLASS="arabic">52</SPAN>)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 5.25ex; vertical-align: -2.06ex; " SRC="img301.png"
+ ALT="$\displaystyle \frac{\partial \cos \chi}{\partial \vec{r}_l}$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 0.63ex; vertical-align: -0.12ex; " SRC="img202.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 2.31ex; vertical-align: -0.78ex; " SRC="img302.png"
+ ALT="$\displaystyle \vec{r}_{ij} \times \vec{b}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(A.<SPAN CLASS="arabic">53</SPAN>)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 1.12ex; vertical-align: -0.12ex; " SRC="img303.png"
+ ALT="$\displaystyle \vec{a}$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 0.63ex; vertical-align: -0.12ex; " SRC="img202.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 5.73ex; vertical-align: -2.37ex; " SRC="img304.png"
+ ALT="$\displaystyle \frac{1}{\vert\vec{r}_{ij} \times \vec{r}_{kj}\vert} \;
+\left(\fr...
+...}_{ij} \times \vec{r}_{kj}}
+{\vert\vec{r}_{ij} \times \vec{r}_{kj}\vert}\right)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(A.<SPAN CLASS="arabic">54</SPAN>)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 1.68ex; vertical-align: -0.12ex; " SRC="img305.png"
+ ALT="$\displaystyle \vec{b}$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 0.63ex; vertical-align: -0.12ex; " SRC="img202.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 5.73ex; vertical-align: -2.37ex; " SRC="img306.png"
+ ALT="$\displaystyle \frac{1}{\vert\vec{r}_{kj} \times \vec{r}_{kl}\vert} \;
+\left(\fr...
+...} \times \vec{r}_{kl}}
+{\vert\vec{r}_{kj} \times \vec{r}_{kl}\vert}\right) \; .$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(A.<SPAN CLASS="arabic">55</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+<P>
+These equations for the derivatives have a numerical instability when 
+the angle goes to 0. Thus, the following set of equations is used
+instead [<A
+ HREF="node512.html#Sch93">van Schaik <EM>et&nbsp;al.</EM>, 1993</A>]:
+
+<P>
+<BR>
+<DIV ALIGN="CENTER" CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray}
+\vec{r}_{mj} & = & \vec{r}_{ij} \times \vec{r}_{kj} \\
+\vec{r}_{nk} & = & \vec{r}_{kj} \times \vec{r}_{kl} \\
+\frac{\partial \chi}{\partial \vec{r}_i} & = &
+      \frac{r_{kj}}{r^2_{mj}} \vec{r}_{mj} \\
+\frac{\partial \chi}{\partial \vec{r}_l} & = &
+      -\frac{r_{kj}}{r^2_{nk}} \vec{r}_{nk} \\
+\frac{\partial \chi}{\partial \vec{r}_j} & = &
+      \left(\frac{\vec{r}_{ij} \cdot \vec{r}_{kj}}{r^2_{kj}} - 1 \right) \;
+      \frac{\partial \chi}{\partial \vec{r}_i} - 
+      \frac{\vec{r}_{kl} \cdot \vec{r}_{kj}}{r^2_{kj}}
+      \frac{\partial \chi}{\partial \vec{r}_l} \\
+\frac{\partial \chi}{\partial \vec{r}_k} & = &
+      \left(\frac{\vec{r}_{kl} \cdot \vec{r}_{kj}}{r^2_{kj}} - 1 \right) \;
+      \frac{\partial \chi}{\partial \vec{r}_l} -
+      \frac{\vec{r}_{ij} \cdot \vec{r}_{kj}}{r^2_{kj}}
+      \frac{\partial \chi}{\partial \vec{r}_i}
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 1.75ex; vertical-align: -0.78ex; " SRC="img307.png"
+ ALT="$\displaystyle \vec{r}_{mj}$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 0.63ex; vertical-align: -0.12ex; " SRC="img202.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 1.89ex; vertical-align: -0.78ex; " SRC="img308.png"
+ ALT="$\displaystyle \vec{r}_{ij} \times \vec{r}_{kj}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(A.<SPAN CLASS="arabic">56</SPAN>)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 1.47ex; vertical-align: -0.46ex; " SRC="img309.png"
+ ALT="$\displaystyle \vec{r}_{nk}$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 0.63ex; vertical-align: -0.12ex; " SRC="img202.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 1.89ex; vertical-align: -0.78ex; " SRC="img310.png"
+ ALT="$\displaystyle \vec{r}_{kj} \times \vec{r}_{kl}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(A.<SPAN CLASS="arabic">57</SPAN>)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 5.25ex; vertical-align: -2.06ex; " SRC="img311.png"
+ ALT="$\displaystyle \frac{\partial \chi}{\partial \vec{r}_i}$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 0.63ex; vertical-align: -0.12ex; " SRC="img202.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 5.25ex; vertical-align: -2.67ex; " SRC="img312.png"
+ ALT="$\displaystyle \frac{r_{kj}}{r^2_{mj}} \vec{r}_{mj}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(A.<SPAN CLASS="arabic">58</SPAN>)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 5.25ex; vertical-align: -2.06ex; " SRC="img313.png"
+ ALT="$\displaystyle \frac{\partial \chi}{\partial \vec{r}_l}$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 0.63ex; vertical-align: -0.12ex; " SRC="img202.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 4.97ex; vertical-align: -2.41ex; " SRC="img314.png"
+ ALT="$\displaystyle -\frac{r_{kj}}{r^2_{nk}} \vec{r}_{nk}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(A.<SPAN CLASS="arabic">59</SPAN>)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 5.53ex; vertical-align: -2.37ex; " SRC="img315.png"
+ ALT="$\displaystyle \frac{\partial \chi}{\partial \vec{r}_j}$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 0.63ex; vertical-align: -0.12ex; " SRC="img202.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 6.99ex; vertical-align: -3.02ex; " SRC="img316.png"
+ ALT="$\displaystyle \left(\frac{\vec{r}_{ij} \cdot \vec{r}_{kj}}{r^2_{kj}} - 1 \right...
+...{r}_{kl} \cdot \vec{r}_{kj}}{r^2_{kj}}
+\frac{\partial \chi}{\partial \vec{r}_l}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(A.<SPAN CLASS="arabic">60</SPAN>)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG STYLE="height: 5.25ex; vertical-align: -2.06ex; " SRC="img317.png"
+ ALT="$\displaystyle \frac{\partial \chi}{\partial \vec{r}_k}$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG STYLE="height: 0.63ex; vertical-align: -0.12ex; " SRC="img202.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG STYLE="height: 6.99ex; vertical-align: -3.02ex; " SRC="img318.png"
+ ALT="$\displaystyle \left(\frac{\vec{r}_{kl} \cdot \vec{r}_{kj}}{r^2_{kj}} - 1 \right...
+...{r}_{ij} \cdot \vec{r}_{kj}}{r^2_{kj}}
+\frac{\partial \chi}{\partial \vec{r}_i}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(A.<SPAN CLASS="arabic">61</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+<P>
+The only possible instability in these equations is when the length of
+the central bond of the dihedral, <SPAN CLASS="MATH"><IMG STYLE="height: 1.75ex; vertical-align: -0.78ex; " SRC="img319.png"
+ ALT="$r_{kj}$"></SPAN>, goes to 0. In such a case,
+which should not happen, the derivatives are set to 0. The expressions for
+an improper dihedral angle, as opposed to a dihedral or dihedral angle,
+are the same, except that indices <SPAN CLASS="MATH"><IMG STYLE="height: 2.10ex; vertical-align: -0.57ex; " SRC="img288.png"
+ ALT="$ijkl$"></SPAN> are permuted to <SPAN CLASS="MATH"><IMG STYLE="height: 2.10ex; vertical-align: -0.57ex; " SRC="img320.png"
+ ALT="$ikjl$"></SPAN>.
+In both cases, covalent bonds <SPAN CLASS="MATH"><IMG STYLE="height: 2.03ex; vertical-align: -0.57ex; " SRC="img279.png"
+ ALT="$ij$"></SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 2.10ex; vertical-align: -0.57ex; " SRC="img321.png"
+ ALT="$jk$"></SPAN>, and <SPAN CLASS="MATH"><IMG STYLE="height: 1.68ex; vertical-align: -0.12ex; " SRC="img322.png"
+ ALT="$kl$"></SPAN> are defining
+the angle.
+
+<P>
+
+<H3><A ID="SECTION001331400000000000000">
+Atomic solvent accessibility</A>
+</H3>
+
+<P>
+This is the accessibility value calculated by the PSA algorithm
+(see <B><A HREF="node196.html#CMD:model.writedata">model.write_data()</A></B><A NAME="44637"></A>). This is usually set by the last call to
+<B><A HREF="node213.html#CMD:Restraints.make">Restraints.make()</A></B><A NAME="44642"></A> or <B><A HREF="node214.html#CMD:Restraints.makedistance">Restraints.make_distance()</A></B><A NAME="44647"></A>.
+First derivatives are not calculated, and are always returned as 0.
+
+<P>
+
+<H3><A ID="SECTION001331500000000000000"></A>
+<A ID="SECTION:atdensity"></A>
+<BR>
+Atomic density
+</H3>
+
+<P>
+Atomic density for a given atom is simply calculated as the number of atoms
+within a distance <I CLASS="sans"><A HREF="node128.html#MEMB:energydata.contactshell">energy_data.contact_shell</A></I><A NAME="44652"></A> of that atom. First
+derivatives are not calculated, and are always returned as 0.
+
+<P>
+
+<H3><A ID="SECTION001331600000000000000">
+Atomic coordinates</A>
+</H3>
+
+<P>
+The absolute atomic coordinates <SPAN CLASS="MATH"><IMG STYLE="height: 1.47ex; vertical-align: -0.46ex; " SRC="img323.png"
+ ALT="$x_{i}$"></SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 1.54ex; vertical-align: -0.57ex; " SRC="img324.png"
+ ALT="$y_{i}$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.47ex; vertical-align: -0.46ex; " SRC="img325.png"
+ ALT="$z_{i}$"></SPAN> are available
+for every point <SPAN CLASS="MATH"><IMG STYLE="height: 1.61ex; vertical-align: -0.12ex; " SRC="img60.png"
+ ALT="$i$"></SPAN>, primarily for use in anchoring points to planes, lines
+or points. Their first derivatives with respect to Cartesian coordinates
+are of course simply 0 or 1.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node493.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node491.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node491.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html4347"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A> 
+<A ID="tex2html4349"
+  HREF="node513.html">
+<IMG WIDTH="43" HEIGHT="24" ALT="index" SRC="index.png"></A> 
+<BR>
+<B> Next:</B> <A
+ HREF="node493.html">Restraints and their derivatives</A>
+<B> Up:</B> <A
+ HREF="node491.html">Equations used in the</A>
+<B> Previous:</B> <A
+ HREF="node491.html">Equations used in the</A>
+ &nbsp; <B>  <A ID="tex2html4348"
+  HREF="node1.html">Contents</A></B> 
+ &nbsp; <B>  <A ID="tex2html4350"
+  HREF="node513.html">Index</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

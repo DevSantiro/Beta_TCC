@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018.3 (Released July 19, 2018) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>energy_data.dynamic_sphere &mdash; calculate soft-sphere overlap restraints</TITLE>
+<META NAME="description" CONTENT="energy_data.dynamic_sphere &mdash; calculate soft-sphere overlap restraints">
+<META NAME="keywords" CONTENT="manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018.3">
+
+<LINK REL="STYLESHEET" HREF="manual.css">
+<LINK REL="STYLESHEET" HREF="pygments.css">
+
+<LINK REL="next" HREF="node132.html">
+<LINK REL="previous" HREF="node130.html">
+<LINK REL="next" HREF="node132.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node132.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node126.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node130.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html2508"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A> 
+<A ID="tex2html2510"
+  HREF="node513.html">
+<IMG WIDTH="43" HEIGHT="24" ALT="index" SRC="index.png"></A> 
+<BR>
+<B> Next:</B> <A
+ HREF="node132.html">energy_data.dynamic_lennard   calculate</A>
+<B> Up:</B> <A
+ HREF="node126.html">The energy_data class: objective</A>
+<B> Previous:</B> <A
+ HREF="node130.html">energy_data.sphere_stdv   soft-sphere</A>
+ &nbsp; <B>  <A ID="tex2html2509"
+  HREF="node1.html">Contents</A></B> 
+ &nbsp; <B>  <A ID="tex2html2511"
+  HREF="node513.html">Index</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A ID="SECTION001135000000000000000">
+energy_data.dynamic_sphere &mdash; calculate soft-sphere overlap restraints</A>
+</H2> <A NAME="11778"></A><A ID="MEMB:energydata.dynamicsphere"></A>
+<P>
+<BLOCKQUOTE>
+If set to <TT>True</TT> (the default), the dynamic
+soft-sphere<A NAME="11790"></A> overlap restraints
+are calculated. Note that they are only calculated if the scaled standard
+deviation of the soft-sphere<A NAME="11791"></A> overlap restraints is greater than zero. It is
+simpler not to pre-calculate any soft-sphere<A NAME="11792"></A> overlap restraints and to use the
+dynamically generated restraints alone, although this may be slower. The
+soft-sphere<A NAME="11793"></A> potential is simply a lower bound harmonic restraint
+(see Equation&nbsp;<A HREF="node493.html#eq:lgaussian">A.82</A>), with standard deviation
+<I CLASS="sans"><A HREF="node130.html#MEMB:energydata.spherestdv">energy_data.sphere_stdv</A></I><A NAME="11795"></A>, dropping to zero at the sum of the two atoms'
+van der Waals radii.
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>Soft sphere restraints require the model topology to first be generated with
+<B><A HREF="node183.html#CMD:model.generatetopology">model.generate_topology()</A></B><A NAME="11800"></A>.
+
+</BLOCKQUOTE>
+
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

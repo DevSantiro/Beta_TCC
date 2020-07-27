@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018.3 (Released July 19, 2018) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>Changes since release 9.23</TITLE>
+<META NAME="description" CONTENT="Changes since release 9.23">
+<META NAME="keywords" CONTENT="manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018.3">
+
+<LINK REL="STYLESHEET" HREF="manual.css">
+<LINK REL="STYLESHEET" HREF="pygments.css">
+
+<LINK REL="next" HREF="node41.html">
+<LINK REL="previous" HREF="node39.html">
+<LINK REL="next" HREF="node41.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node41.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node39.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node39.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html1587"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A> 
+<A ID="tex2html1589"
+  HREF="node513.html">
+<IMG WIDTH="43" HEIGHT="24" ALT="index" SRC="index.png"></A> 
+<BR>
+<B> Next:</B> <A
+ HREF="node41.html">Changes since release 9.22</A>
+<B> Up:</B> <A
+ HREF="node39.html">MODELLER updates</A>
+<B> Previous:</B> <A
+ HREF="node39.html">MODELLER updates</A>
+ &nbsp; <B>  <A ID="tex2html1588"
+  HREF="node1.html">Contents</A></B> 
+ &nbsp; <B>  <A ID="tex2html1590"
+  HREF="node513.html">Index</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A ID="SECTION00821000000000000000">
+Changes since release 9.23</A>
+</H2>
+
+<UL>
+<LI>Single-chain models, which are currently assigned a blank chain ID, can
+now instead be labeled 'A' by setting <I CLASS="sans"><A HREF="node63.html#MEMB:automodel.blanksinglechain">automodel.blank_single_chain</A></I><A NAME="5186"></A> to
+<TT>False</TT>, or by setting the same argument to <B><A HREF="node302.html#CMD:alignment.appendsequence">alignment.append_sequence()</A></B><A NAME="5192"></A>,
+<B><A HREF="node183.html#CMD:model.generatetopology">model.generate_topology()</A></B><A NAME="5197"></A>, or <B><A HREF="node180.html#CMD:model.buildsequence">model.build_sequence()</A></B><A NAME="5202"></A>. The default for
+this argument will change to <TT>False</TT> in a future Modeller release.
+
+<P>
+</LI>
+<LI>Bundled version of HDF5 updated to 1.10.5.
+
+<P>
+</LI>
+<LI>The MEX and ABU residue types are no longer automatically converted
+to CYS, regardless of the setting of <I CLASS="sans"><A HREF="node150.html#MEMB:iodata.convertmodres">env.io.convert_modres</A></I><A NAME="5208"></A>; they are
+treated as any other ligand.
+
+<P>
+</LI>
+<LI>Bugfix: <B><A HREF="node294.html#CMD:alignment.append">alignment.append()</A></B><A NAME="5213"></A> no longer fails when given a very long
+file name to read.
+</LI>
+</UL>
+
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

@@ -1,0 +1,177 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018.3 (Released July 19, 2018) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>automodel() &mdash; prepare to build one or more comparative models</TITLE>
+<META NAME="description" CONTENT="automodel() &mdash; prepare to build one or more comparative models">
+<META NAME="keywords" CONTENT="manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018.3">
+
+<LINK REL="STYLESHEET" HREF="manual.css">
+<LINK REL="STYLESHEET" HREF="pygments.css">
+
+<LINK REL="next" HREF="node45.html">
+<LINK REL="previous" HREF="node43.html">
+<LINK REL="next" HREF="node45.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node45.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node43.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node43.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html1696"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A> 
+<A ID="tex2html1698"
+  HREF="node513.html">
+<IMG WIDTH="43" HEIGHT="24" ALT="index" SRC="index.png"></A> 
+<BR>
+<B> Next:</B> <A
+ HREF="node45.html">automodel.library_schedule   select</A>
+<B> Up:</B> <A
+ HREF="node43.html">automodel reference</A>
+<B> Previous:</B> <A
+ HREF="node43.html">automodel reference</A>
+ &nbsp; <B>  <A ID="tex2html1697"
+  HREF="node1.html">Contents</A></B> 
+ &nbsp; <B>  <A ID="tex2html1699"
+  HREF="node513.html">Index</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A ID="SECTION00911000000000000000">
+automodel() &mdash; prepare to build one or more comparative models</A>
+</H2> <A NAME="5893"></A><A ID="CMD:automodel"></A>
+<A NAME="5896"></A><TT>automodel(env, alnfile, knowns, sequence, deviation=None, library_schedule=None, csrfile=None, inifile=None, assess_methods=None)</TT>
+<BR>
+<A ID="SECTION:automodelcon"></A>
+<BLOCKQUOTE>
+<I CLASS="sans">alnfile</I><A NAME="5961"></A> is required, and usually specifies the name of the PIR file which
+contains an alignment between <I CLASS="sans">knowns</I><A NAME="5964"></A> (the templates) and <I CLASS="sans">sequence</I><A NAME="5967"></A>
+(the target sequence).
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><I CLASS="sans">alnfile</I><A NAME="5970"></A> can instead be a readable file handle (see <B><A HREF="node453.html#CMD:modfile.File">modfile.File()</A></B><A NAME="5975"></A>) from which the alignment
+will be read, or an existing <TT>alignment</TT> object containing <I CLASS="sans">knowns</I><A NAME="5982"></A>
+and <I CLASS="sans">sequence</I><A NAME="5985"></A>. (Note that this is only supported with a subset of
+<TT>automodel</TT> functionality; in particular, it does not work with parallel
+jobs, <I CLASS="sans"><A HREF="node53.html#MEMB:automodel.initialmalign3d">automodel.initial_malign3d</A></I><A NAME="5990"></A>, or <I CLASS="sans"><A HREF="node56.html#MEMB:automodel.finalmalign3d">automodel.final_malign3d</A></I><A NAME="5995"></A>.)
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><A ID="MEMB:automodel.deviation"></A>
+<I CLASS="sans">deviation</I><A NAME="6000"></A> controls the amount of randomization done by <TT>randomize.xyz</TT>
+or <TT>randomize.dihedrals</TT>; see also <I CLASS="sans"><A HREF="node48.html#MEMB:automodel.randmethod">automodel.rand_method</A></I><A NAME="6005"></A>. (This can also
+be set after the object is created, by assigning to <TT>'automodel.deviation'</TT>.
+The default is 4&#197;.)
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><I CLASS="sans">library_schedule</I><A NAME="6011"></A>, if given, sets an initial value for
+<I CLASS="sans"><A HREF="node45.html#MEMB:automodel.libraryschedule">automodel.library_schedule</A></I><A NAME="6014"></A>
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>If <I CLASS="sans">csrfile</I><A NAME="6019"></A> is set, restraints are not constructed, but are instead read
+from the user-supplied file of the same name. See
+section&nbsp;<A HREF="node26.html#SECTION:model-myrsr">2.2.9</A> for an example.
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>If <I CLASS="sans">inifile</I><A NAME="6022"></A> is set, an initial model is read from the user-supplied file of
+the same name. See section&nbsp;<A HREF="node27.html#SECTION:model-myini">2.2.10</A> for an example.
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><A ID="MEMB:automodel.assessmethods"></A>
+<I CLASS="sans">assess_methods</I><A NAME="6025"></A> allows you to request assessment of the generated models
+(by default, none is done).
+You can provide a function (or callable), or list of functions, for this
+purpose, including any of the SOAP potentials (<EM>e.g.</EM>, <B><A HREF="node284.html#CMD:soaploop.Scorer">soap_loop.Scorer()</A></B><A NAME="6029"></A>,
+<B><A HREF="node289.html#CMD:soapproteinod.Scorer">soap_protein_od.Scorer()</A></B><A NAME="6034"></A>), or any of the standard functions provided
+in the <TT>assess</TT> module:
+</BLOCKQUOTE>
+
+<UL>
+<LI><TT>assess.GA341</TT>, which uses the GA341 method (see
+<B><A HREF="node203.html#CMD:model.assessga341">model.assess_ga341()</A></B><A NAME="6041"></A>).
+
+<P>
+</LI>
+<LI><TT>assess.DOPE</TT>, which uses the DOPE method (see
+<B><A HREF="node259.html#CMD:selection.assessdope">selection.assess_dope()</A></B><A NAME="6047"></A>).
+
+<P>
+</LI>
+<LI><TT>assess.DOPEHR</TT>, which uses the DOPE-HR method (see
+<B><A HREF="node260.html#CMD:selection.assessdopehr">selection.assess_dopehr()</A></B><A NAME="6053"></A>).
+
+<P>
+</LI>
+<LI><TT>assess.normalized_dope</TT>, which uses the normalized DOPE method
+(see <B><A HREF="node204.html#CMD:model.assessnormalizeddope">model.assess_normalized_dope()</A></B><A NAME="6059"></A>).
+</LI>
+</UL><BLOCKQUOTE>
+(This can also be set after the object is created, by assigning to
+<TT>'automodel.assess_methods'</TT>.) See Section&nbsp;<A HREF="node20.html#SECTION:model-fast">2.2.3</A> for an
+example. Only the region selected by <B><A HREF="node67.html#CMD:automodel.selectatoms">automodel.select_atoms()</A></B><A NAME="6065"></A> is
+assessed, although most assessment functions take the interaction with the
+rest of the system into account.
+Note that only standard models are assessed in this way; if you are
+also building loop models, see <I CLASS="sans"><A HREF="node83.html#MEMB:loopmodel.loop.assessmethods">loopmodel.loop.assess_methods</A></I><A NAME="6070"></A>.
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>By default, models are built using heavy atom-only parameters and topology. If
+you want to use different parameters, read them in before creating the
+<TT>automodel</TT> object with <B><A HREF="node157.html#CMD:Topology.read">Topology.read()</A></B><A NAME="6077"></A> and <B><A HREF="node160.html#CMD:Parameters.read">Parameters.read()</A></B><A NAME="6082"></A>.
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>See section&nbsp;<A HREF="node16.html#SECTION:model-default">2.1</A> for a general example of using this
+class.
+
+</BLOCKQUOTE>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node45.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node43.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node43.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html1696"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A> 
+<A ID="tex2html1698"
+  HREF="node513.html">
+<IMG WIDTH="43" HEIGHT="24" ALT="index" SRC="index.png"></A> 
+<BR>
+<B> Next:</B> <A
+ HREF="node45.html">automodel.library_schedule   select</A>
+<B> Up:</B> <A
+ HREF="node43.html">automodel reference</A>
+<B> Previous:</B> <A
+ HREF="node43.html">automodel reference</A>
+ &nbsp; <B>  <A ID="tex2html1697"
+  HREF="node1.html">Contents</A></B> 
+ &nbsp; <B>  <A ID="tex2html1699"
+  HREF="node513.html">Index</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

@@ -1,0 +1,150 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018.3 (Released July 19, 2018) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>job() &mdash; create a new parallel job</TITLE>
+<META NAME="description" CONTENT="job() &mdash; create a new parallel job">
+<META NAME="keywords" CONTENT="manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018.3">
+
+<LINK REL="STYLESHEET" HREF="manual.css">
+<LINK REL="STYLESHEET" HREF="pygments.css">
+
+<LINK REL="next" HREF="node461.html">
+<LINK REL="previous" HREF="node459.html">
+<LINK REL="next" HREF="node461.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node461.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node459.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node459.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html4138"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A> 
+<A ID="tex2html4140"
+  HREF="node513.html">
+<IMG WIDTH="43" HEIGHT="24" ALT="index" SRC="index.png"></A> 
+<BR>
+<B> Next:</B> <A
+ HREF="node461.html">sge_pe_job()   create</A>
+<B> Up:</B> <A
+ HREF="node459.html">Parallel job support</A>
+<B> Previous:</B> <A
+ HREF="node459.html">Parallel job support</A>
+ &nbsp; <B>  <A ID="tex2html4139"
+  HREF="node1.html">Contents</A></B> 
+ &nbsp; <B>  <A ID="tex2html4141"
+  HREF="node513.html">Index</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A ID="SECTION0011351000000000000000">
+job() &mdash; create a new parallel job</A>
+</H2> <A NAME="41482"></A><A ID="CMD:job"></A>
+<A NAME="41485"></A><TT>job(seq=(), modeller_path=None, host=None)</TT>
+<BR>
+<BLOCKQUOTE>
+This creates a new <TT>job</TT> object, used to keep track of multiple slave
+processes. It is initially empty, but acts just like an ordinary <A ID="tex2html238"
+  HREF="https://www.python.org/">Python</A>
+list, so you can add or remove <TT>slave</TT> objects (see below) using
+ordinary list operations (<EM>e.g.</EM>, append, del). Also, if you provide a list of
+suitable slave objects to job(), they will automatically be added.
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>Each slave runs a M<SMALL>ODELLER</SMALL> process. The system attempts to start this process
+in the same way as the M<SMALL>ODELLER</SMALL> script used for the master. If the master is
+run using your machine's system Python, the slave is started by running
+<TT>'python bin/modslave.py'</TT>, while if the master was started using the
+<TT>'mod9.24'</TT> script, the slave will be too. In some cases, it may get this
+command line wrong, in which case you can specify the command explicitly
+using the <I CLASS="sans">modeller_path</I><A NAME="41536"></A> variable. For example, set it to <TT>'mod9.24'</TT>
+to force it to use the version of Python built in to M<SMALL>ODELLER</SMALL> rather than
+the system Python.
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>Each slave, when started, tries to connect back over the network to the master
+node. By default, they try to use the fully qualified domain name of the machine
+on which you create the <TT>job</TT> object (the master). If this name is
+incorrect (<EM>e.g.</EM>, on multi-homed hosts) then specify the true hostname with
+the <I CLASS="sans">host</I><A NAME="41545"></A> parameter. You can also set <I CLASS="sans">host</I><A NAME="41548"></A> to <TT>'localhost'</TT> if your
+machine does not have network connectivity and/or you are running only local
+slaves.
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>Each slave will run in the same directory as the master, so will probably fail
+if you do not have a shared filesystem on all nodes. The output from each slave
+is written to a logfile called <TT>'${JOB}.slaveN'</TT> where <TT>'${JOB}'</TT> is
+<I CLASS="sans"><A HREF="node442.html#MEMB:info.jobname">info.jobname</A></I><A NAME="41554"></A> and <TT>'N'</TT> is the number of the slave, starting from zero.
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><I CLASS="sans"><A HREF="node463.html#MEMB:job.slavestartupcommands">job.slave_startup_commands</A></I><A NAME="41560"></A> is a Python list, initially empty, of Python
+commands that will be run on each slave when it is started up. You can add
+your own slave initialization by adding to this list.
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>Once you have created the job, to use the task interface, submit one or more
+tasks with <B><A HREF="node464.html#CMD:job.queuetask">job.queue_task()</A></B><A NAME="41565"></A>, and then run the tasks
+with <B><A HREF="node465.html#CMD:job.runalltasks">job.run_all_tasks()</A></B><A NAME="41570"></A> or <B><A HREF="node466.html#CMD:job.yieldtasksunordered">job.yield_tasks_unordered()</A></B><A NAME="41575"></A>.
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>To use the message-passing interface, first start all slaves with
+<B><A HREF="node467.html#CMD:job.start">job.start()</A></B><A NAME="41580"></A>, and then use <B><A HREF="node468.html#CMD:Communicator.senddata">Communicator.send_data()</A></B><A NAME="41585"></A>,
+<B><A HREF="node469.html#CMD:Communicator.getdata">Communicator.get_data()</A></B><A NAME="41590"></A> and <B><A HREF="node470.html#CMD:slave.runcmd">slave.run_cmd()</A></B><A NAME="41595"></A> to pass messages and
+commands.
+
+</BLOCKQUOTE>
+
+<P>
+<B>Example:</B> See <B><A HREF="node467.html#CMD:job.start">job.start()</A></B><A NAME="41605"></A>, <B><A HREF="node465.html#CMD:job.runalltasks">job.run_all_tasks()</A></B><A NAME="41610"></A> command.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node461.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node459.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node459.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html4138"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A> 
+<A ID="tex2html4140"
+  HREF="node513.html">
+<IMG WIDTH="43" HEIGHT="24" ALT="index" SRC="index.png"></A> 
+<BR>
+<B> Next:</B> <A
+ HREF="node461.html">sge_pe_job()   create</A>
+<B> Up:</B> <A
+ HREF="node459.html">Parallel job support</A>
+<B> Previous:</B> <A
+ HREF="node459.html">Parallel job support</A>
+ &nbsp; <B>  <A ID="tex2html4139"
+  HREF="node1.html">Contents</A></B> 
+ &nbsp; <B>  <A ID="tex2html4141"
+  HREF="node513.html">Index</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

@@ -1,0 +1,164 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018.3 (Released July 19, 2018) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>The model class: handling of atomic coordinates, and model building</TITLE>
+<META NAME="description" CONTENT="The model class: handling of atomic coordinates, and model building">
+<META NAME="keywords" CONTENT="manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018.3">
+
+<LINK REL="STYLESHEET" HREF="manual.css">
+<LINK REL="STYLESHEET" HREF="pygments.css">
+
+<LINK REL="next" HREF="node206.html">
+<LINK REL="previous" HREF="node152.html">
+<LINK REL="next" HREF="node165.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node165.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node114.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node163.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html2657"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A> 
+<A ID="tex2html2659"
+  HREF="node513.html">
+<IMG WIDTH="43" HEIGHT="24" ALT="index" SRC="index.png"></A> 
+<BR>
+<B> Next:</B> <A
+ HREF="node165.html">model()   create</A>
+<B> Up:</B> <A
+ HREF="node114.html">MODELLER command reference</A>
+<B> Previous:</B> <A
+ HREF="node163.html">Topology.write()   write</A>
+ &nbsp; <B>  <A ID="tex2html2658"
+  HREF="node1.html">Contents</A></B> 
+ &nbsp; <B>  <A ID="tex2html2660"
+  HREF="node513.html">Index</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION001160000000000000000"></A>
+    <A ID="SECTION:model"></A>
+<BR>
+The <TT>model</TT> class: handling of atomic coordinates, and model building
+</H1>
+    <A ID="CLASS:model"></A><A NAME="13532"></A>
+The <TT>model</TT> class holds all information about a 3D model (such as its
+Cartesian coordinates, topology, and optimization information). It also provides
+methods for reading, writing and transforming the model. Models are also
+sequences, so all methods and attributes of <TT>Sequence</TT> objects (see
+Section&nbsp;<A HREF="node320.html#CLASS:Sequence">6.17</A>) are also available for models (<EM>e.g.</EM>,
+<I CLASS="sans"><A HREF="node329.html#MEMB:Sequence.residues">Sequence.residues</A></I><A NAME="14268"></A>, <I CLASS="sans"><A HREF="node330.html#MEMB:Sequence.chains">Sequence.chains</A></I><A NAME="14273"></A>).
+
+<P>
+<BR><HR>
+<!--Table of Child-Links-->
+<A ID="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A ID="tex2html2661"
+  HREF="node165.html">model() &mdash; create a new 3D model</A>
+<LI><A ID="tex2html2662"
+  HREF="node166.html">model.seq_id &mdash; sequence identity between the model and templates</A>
+<LI><A ID="tex2html2663"
+  HREF="node167.html">model.resolution &mdash; resolution of protein structure</A>
+<LI><A ID="tex2html2664"
+  HREF="node168.html">model.last_energy &mdash; last objective function value</A>
+<LI><A ID="tex2html2665"
+  HREF="node169.html">model.remark &mdash; text remark(s)</A>
+<LI><A ID="tex2html2666"
+  HREF="node170.html">model.restraints &mdash; all static restraints which act on the model</A>
+<LI><A ID="tex2html2667"
+  HREF="node171.html">model.group_restraints &mdash; all restraints which act on atom groups</A>
+<LI><A ID="tex2html2668"
+  HREF="node172.html">model.atoms &mdash; all atoms in the model</A>
+<LI><A ID="tex2html2669"
+  HREF="node173.html">model.point() &mdash; return a point in Cartesian space</A>
+<LI><A ID="tex2html2670"
+  HREF="node174.html">model.atom_range() &mdash; return a subset of all atoms</A>
+<LI><A ID="tex2html2671"
+  HREF="node175.html">model.residue_range() &mdash; return a subset of all residues</A>
+<LI><A ID="tex2html2672"
+  HREF="node176.html">model.get_insertions() &mdash; return a list of all insertions</A>
+<LI><A ID="tex2html2673"
+  HREF="node177.html">model.get_deletions() &mdash; return a list of all deletions</A>
+<LI><A ID="tex2html2674"
+  HREF="node178.html">model.loops() &mdash; return a list of all loops</A>
+<LI><A ID="tex2html2675"
+  HREF="node179.html">model.read() &mdash; read coordinates for MODEL</A>
+<LI><A ID="tex2html2676"
+  HREF="node180.html">model.build_sequence() &mdash; build model from a sequence of one-letter codes</A>
+<LI><A ID="tex2html2677"
+  HREF="node181.html">model.write() &mdash; write MODEL</A>
+<LI><A ID="tex2html2678"
+  HREF="node182.html">model.clear_topology() &mdash; clear model topology</A>
+<LI><A ID="tex2html2679"
+  HREF="node183.html">model.generate_topology() &mdash; generate MODEL topology</A>
+<LI><A ID="tex2html2680"
+  HREF="node184.html">model.make_valid_pdb_coordinates() &mdash; make coordinates fit in PDB format</A>
+<LI><A ID="tex2html2681"
+  HREF="node185.html">model.write_psf() &mdash; write molecular topology to PSF file</A>
+<LI><A ID="tex2html2682"
+  HREF="node186.html">model.patch() &mdash; patch MODEL topology</A>
+<LI><A ID="tex2html2683"
+  HREF="node187.html">model.patch_ss_templates() &mdash; guess MODEL disulfides from templates</A>
+<LI><A ID="tex2html2684"
+  HREF="node188.html">model.patch_ss() &mdash; guess MODEL disulfides from model structure</A>
+<LI><A ID="tex2html2685"
+  HREF="node189.html">model.build() &mdash; build MODEL coordinates from topology</A>
+<LI><A ID="tex2html2686"
+  HREF="node190.html">model.transfer_xyz() &mdash; copy templates' coordinates to MODEL</A>
+<LI><A ID="tex2html2687"
+  HREF="node191.html">model.res_num_from() &mdash; residue numbers from MODEL2 to MODEL</A>
+<LI><A ID="tex2html2688"
+  HREF="node192.html">model.rename_segments() &mdash; rename MODEL segments</A>
+<LI><A ID="tex2html2689"
+  HREF="node193.html">model.to_iupac() &mdash; standardize certain dihedral angles</A>
+<LI><A ID="tex2html2690"
+  HREF="node194.html">model.reorder_atoms() &mdash; standardize order of MODEL atoms</A>
+<LI><A ID="tex2html2691"
+  HREF="node195.html">model.orient() &mdash; center and orient MODEL</A>
+<LI><A ID="tex2html2692"
+  HREF="node196.html">model.write_data() &mdash; write derivative model data</A>
+<LI><A ID="tex2html2693"
+  HREF="node197.html">model.make_region() &mdash; define a random surface patch of atoms</A>
+<LI><A ID="tex2html2694"
+  HREF="node198.html">model.color() &mdash; color MODEL according to alignment</A>
+<LI><A ID="tex2html2695"
+  HREF="node199.html">model.make_chains() &mdash; Fetch sequences from PDB file</A>
+<LI><A ID="tex2html2696"
+  HREF="node200.html">model.saxs_intens() &mdash; Calculate SAXS intensity from model</A>
+<LI><A ID="tex2html2697"
+  HREF="node201.html">model.saxs_pr() &mdash; Calculate <SPAN CLASS="MATH"><IMG STYLE="height: 2.38ex; vertical-align: -0.70ex; " SRC="img1.png"
+ ALT="$P(r)$"></SPAN> of model</A>
+<LI><A ID="tex2html2698"
+  HREF="node202.html">model.saxs_chifun() &mdash; Calculate SAXS score chi from model</A>
+<LI><A ID="tex2html2699"
+  HREF="node203.html">model.assess_ga341() &mdash; assess a model with the GA341 method</A>
+<LI><A ID="tex2html2700"
+  HREF="node204.html">model.assess_normalized_dope() &mdash; assess a model with the normalized DOPE method</A>
+<LI><A ID="tex2html2701"
+  HREF="node205.html">model.get_normalized_dope_profile() &mdash; get per-residue normalized DOPE profile</A>
+</UL>
+<!--End of Table of Child-Links-->
+<BR><HR>
+
+</BODY>
+</HTML>

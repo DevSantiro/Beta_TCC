@@ -1,0 +1,208 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018.3 (Released July 19, 2018) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>Specification of pseudo atoms</TITLE>
+<META NAME="description" CONTENT="Specification of pseudo atoms">
+<META NAME="keywords" CONTENT="manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018.3">
+
+<LINK REL="STYLESHEET" HREF="manual.css">
+<LINK REL="STYLESHEET" HREF="pygments.css">
+
+<LINK REL="next" HREF="node111.html">
+<LINK REL="previous" HREF="node109.html">
+<LINK REL="next" HREF="node111.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node111.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node108.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node109.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html2029"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A> 
+<A ID="tex2html2031"
+  HREF="node513.html">
+<IMG WIDTH="43" HEIGHT="24" ALT="index" SRC="index.png"></A> 
+<BR>
+<B> Next:</B> <A
+ HREF="node111.html">Excluded pairs</A>
+<B> Up:</B> <A
+ HREF="node108.html">Spatial restraints</A>
+<B> Previous:</B> <A
+ HREF="node109.html">Specification of restraints</A>
+ &nbsp; <B>  <A ID="tex2html2030"
+  HREF="node1.html">Contents</A></B> 
+ &nbsp; <B>  <A ID="tex2html2032"
+  HREF="node513.html">Index</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A ID="SECTION001032000000000000000"></A>
+<A ID="SECTION:pseudo"></A>
+<A NAME="9323"></A>
+<A NAME="9324"></A>
+<BR>
+Specification of pseudo atoms
+</H2>
+
+<P>
+There are virtual and pseudo atoms.  A virtual atom is an atom that
+occurs in the actual molecule, but whose position is not represented
+explicitly in the MODEL and topology file.  A pseudo atom is a
+position that does not correspond to an actual atom in a molecule, but
+is some sort of an average of positions of real atoms. Pseudo atoms can
+be added to the list of restraints by adding the objects below to the
+<I CLASS="sans"><A HREF="node208.html#MEMB:Restraints.pseudoatoms">Restraints.pseudo_atoms</A></I><A NAME="9758"></A> list. Atom ids are as for features, above.
+The M<SMALL>ODELLER</SMALL> pseudo and virtual atom types follow closely the G<SMALL>ROMOS</SMALL>
+definitions.
+
+<P>
+<A NAME="9765"></A><TT>pseudo_atom.gravity_center(*atom_ids)</TT>
+<BR>
+Gravity center of all of the supplied atoms.
+
+<P>
+<A NAME="9768"></A><TT>pseudo_atom.ch2(*atom_ids)</TT>
+<BR>
+Pseudo aliphatic proton on a tetrahedral carbon (<SPAN CLASS="MATH"><IMG STYLE="height: 1.40ex; vertical-align: -0.21ex; " SRC="img29.png"
+ ALT="$&gt;$"></SPAN>CH2). Not assigned
+stereospecifically; its position is between the two real protons; defined by
+the central C and the other two substituents (specified by <I CLASS="sans">atom_ids</I><A NAME="9772"></A>).
+
+<P>
+<A NAME="9774"></A><TT>pseudo_atom.ch31(*atom_ids)</TT>
+<BR>
+Pseudo aliphatic proton on a tetrahedral carbon (-CH3), defined by the central
+C and the heavy atom X in X-CH3 (specified by <I CLASS="sans">atom_ids</I><A NAME="9778"></A>); its position is
+the average of the three real protons.
+
+<P>
+<A NAME="9780"></A><TT>pseudo_atom.ch32(*atom_ids)</TT>
+<BR>
+Pseudo aliphatic proton between two unassigned -CH3 groups; defined by X in CH3&nbsp;-&nbsp;X&nbsp;-&nbsp;CH3 and the two C atoms from the two CH3 groups (specified by
+<I CLASS="sans">atom_ids</I><A NAME="9784"></A>).  Its position is the average of the six real protons.
+
+<P>
+<A NAME="9786"></A><TT>virtual_atom.ch1(*atom_ids)</TT>
+<BR>
+Virtual aliphatic proton on a tetrahedral carbon (-<SPAN CLASS="MATH"><IMG STYLE="height: 1.40ex; vertical-align: -0.21ex; " SRC="img29.png"
+ ALT="$&gt;$"></SPAN>CH), defined by the
+central C and the three other substituents (specified by <I CLASS="sans">atom_ids</I><A NAME="9790"></A>).
+
+<P>
+<A NAME="9792"></A><TT>virtual_atom.ch1a(*atom_ids)</TT>
+<BR>
+Virtual aromatic proton on a trigonal carbon (=CH), defined by the central C
+and the two C atoms bonded to the central C (specified by <I CLASS="sans">atom_ids</I><A NAME="9796"></A>).
+
+<P>
+<A NAME="9798"></A><TT>virtual_atom.ch2(*atom_ids)</TT>
+<BR>
+Virtual aliphatic proton on a tetrahedral carbon (<SPAN CLASS="MATH"><IMG STYLE="height: 1.40ex; vertical-align: -0.21ex; " SRC="img29.png"
+ ALT="$&gt;$"></SPAN>CH2) assigned
+stereospecifically; defined by the central tetrahedral atom and the other two
+substituents on it (specified by <I CLASS="sans">atom_ids</I><A NAME="9802"></A>).
+
+<P>
+
+  <DL>
+<DT><STRONG>Example: <A ID="tex2html85"
+  HREF="../examples/python/pseudo_atoms.py">examples/python/pseudo_atoms.py</A></STRONG></DT>
+<DD> <BR>  <div class="pygments"><pre><span></span><span class="kn">from</span> <span class="nn">modeller</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">modeller.scripts</span> <span class="kn">import</span> <span class="n">complete_pdb</span>
+<span class="kn">from</span> <span class="nn">modeller.optimizers</span> <span class="kn">import</span> <span class="n">conjugate_gradients</span>
+
+<span class="n">env</span> <span class="o">=</span> <span class="n">environ</span><span class="p">()</span>
+
+<span class="n">env</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">atom_files_directory</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;../atom_files&#39;</span><span class="p">]</span>
+<span class="n">log</span><span class="o">.</span><span class="n">verbose</span><span class="p">()</span>
+<span class="n">env</span><span class="o">.</span><span class="n">libs</span><span class="o">.</span><span class="n">topology</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="nb">file</span><span class="o">=</span><span class="s1">&#39;$(LIB)/top_heav.lib&#39;</span><span class="p">)</span>
+<span class="n">env</span><span class="o">.</span><span class="n">libs</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="nb">file</span><span class="o">=</span><span class="s1">&#39;$(LIB)/par.lib&#39;</span><span class="p">)</span>
+
+<span class="c1"># Read in the model</span>
+<span class="n">mdl</span> <span class="o">=</span> <span class="n">complete_pdb</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="s2">&quot;1fdn&quot;</span><span class="p">)</span>
+<span class="n">rsr</span> <span class="o">=</span> <span class="n">mdl</span><span class="o">.</span><span class="n">restraints</span>
+
+<span class="c1"># Select all C-alpha atoms</span>
+<span class="n">allat</span> <span class="o">=</span> <span class="n">selection</span><span class="p">(</span><span class="n">mdl</span><span class="p">)</span>
+<span class="n">allca</span> <span class="o">=</span> <span class="n">allat</span><span class="o">.</span><span class="n">only_atom_types</span><span class="p">(</span><span class="s1">&#39;CA&#39;</span><span class="p">)</span>
+
+<span class="c1"># Create a pseudo atom that is the center of all C-alphas, and activate it</span>
+<span class="n">center</span> <span class="o">=</span> <span class="n">pseudo_atom</span><span class="o">.</span><span class="n">gravity_center</span><span class="p">(</span><span class="n">allca</span><span class="p">)</span>
+<span class="n">rsr</span><span class="o">.</span><span class="n">pseudo_atoms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">center</span><span class="p">)</span>
+
+<span class="c1"># Constrain every C-alpha to be no more than 10 angstroms from the center</span>
+<span class="k">for</span> <span class="n">at</span> <span class="ow">in</span> <span class="n">allca</span><span class="p">:</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">upper_bound</span><span class="p">(</span><span class="n">group</span><span class="o">=</span><span class="n">physical</span><span class="o">.</span><span class="n">xy_distance</span><span class="p">,</span>
+                          <span class="n">feature</span><span class="o">=</span><span class="n">features</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">at</span><span class="p">,</span> <span class="n">center</span><span class="p">),</span>
+                          <span class="n">mean</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">stdev</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+    <span class="n">rsr</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+
+<span class="c1"># Constrain the gravity center to the x=0 plane</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">gaussian</span><span class="p">(</span><span class="n">group</span><span class="o">=</span><span class="n">physical</span><span class="o">.</span><span class="n">xy_distance</span><span class="p">,</span>
+                   <span class="n">feature</span><span class="o">=</span><span class="n">features</span><span class="o">.</span><span class="n">x_coordinate</span><span class="p">(</span><span class="n">center</span><span class="p">),</span>
+                   <span class="n">mean</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">stdev</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">rsr</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+
+<span class="c1"># Keep sensible stereochemistry</span>
+<span class="n">rsr</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">allat</span><span class="p">,</span> <span class="n">restraint_type</span><span class="o">=</span><span class="s1">&#39;stereo&#39;</span><span class="p">,</span> <span class="n">spline_on_site</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+<span class="c1"># Optimize with CG</span>
+<span class="n">cg</span> <span class="o">=</span> <span class="n">conjugate_gradients</span><span class="p">()</span>
+<span class="n">cg</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">allat</span><span class="p">,</span> <span class="n">max_iterations</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="s1">&#39;REPORT&#39;</span><span class="p">)</span>
+<span class="n">mdl</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">file</span><span class="o">=</span><span class="s1">&#39;1fas.ini&#39;</span><span class="p">)</span>
+</pre></div>
+  
+</DD>
+</DL>  <BR>
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node111.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node108.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node109.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html2029"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A> 
+<A ID="tex2html2031"
+  HREF="node513.html">
+<IMG WIDTH="43" HEIGHT="24" ALT="index" SRC="index.png"></A> 
+<BR>
+<B> Next:</B> <A
+ HREF="node111.html">Excluded pairs</A>
+<B> Up:</B> <A
+ HREF="node108.html">Spatial restraints</A>
+<B> Previous:</B> <A
+ HREF="node109.html">Specification of restraints</A>
+ &nbsp; <B>  <A ID="tex2html2030"
+  HREF="node1.html">Contents</A></B> 
+ &nbsp; <B>  <A ID="tex2html2032"
+  HREF="node513.html">Index</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

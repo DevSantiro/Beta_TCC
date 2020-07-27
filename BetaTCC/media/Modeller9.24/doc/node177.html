@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018.3 (Released July 19, 2018) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>model.get_deletions() &mdash; return a list of all deletions</TITLE>
+<META NAME="description" CONTENT="model.get_deletions() &mdash; return a list of all deletions">
+<META NAME="keywords" CONTENT="manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018.3">
+
+<LINK REL="STYLESHEET" HREF="manual.css">
+<LINK REL="STYLESHEET" HREF="pygments.css">
+
+<LINK REL="next" HREF="node178.html">
+<LINK REL="previous" HREF="node176.html">
+<LINK REL="next" HREF="node178.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node178.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node164.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node176.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html2750"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A> 
+<A ID="tex2html2752"
+  HREF="node513.html">
+<IMG WIDTH="43" HEIGHT="24" ALT="index" SRC="index.png"></A> 
+<BR>
+<B> Next:</B> <A
+ HREF="node178.html">model.loops()   return</A>
+<B> Up:</B> <A
+ HREF="node164.html">The model class: handling</A>
+<B> Previous:</B> <A
+ HREF="node176.html">model.get_insertions()   return</A>
+ &nbsp; <B>  <A ID="tex2html2751"
+  HREF="node1.html">Contents</A></B> 
+ &nbsp; <B>  <A ID="tex2html2753"
+  HREF="node513.html">Index</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A ID="SECTION0011613000000000000000">
+model.get_deletions() &mdash; return a list of all deletions</A>
+</H2> <A NAME="14674"></A><A ID="CMD:model.getdeletions"></A>
+<A NAME="14677"></A><TT>get_deletions(aln, extension, include_termini=True)</TT>
+<BR>
+<BLOCKQUOTE>
+This returns a list of all deletions (<EM>i.e.</EM>, residue ranges in which gaps in the
+model sequence, which must be the last in the alignment <I CLASS="sans">aln</I><A NAME="14692"></A>, are aligned
+to residues in the other sequences). Each residue range is extended by
+<I CLASS="sans">extension</I><A NAME="14695"></A> residues either side of the deletion.
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>If <I CLASS="sans">include_termini</I><A NAME="14698"></A> is <TT>False</TT>, any residue range that includes a chain
+terminus is excluded from the output.
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>See also <B><A HREF="node176.html#CMD:model.getinsertions">model.get_insertions()</A></B><A NAME="14702"></A>, <B><A HREF="node178.html#CMD:model.loops">model.loops()</A></B><A NAME="14707"></A>.
+
+</BLOCKQUOTE>
+<B>Example:</B> See <B><A HREF="node232.html#CMD:selection">selection()</A></B><A NAME="14715"></A> command.
+
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

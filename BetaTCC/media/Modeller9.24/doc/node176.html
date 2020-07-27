@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018.3 (Released July 19, 2018) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>model.get_insertions() &mdash; return a list of all insertions</TITLE>
+<META NAME="description" CONTENT="model.get_insertions() &mdash; return a list of all insertions">
+<META NAME="keywords" CONTENT="manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018.3">
+
+<LINK REL="STYLESHEET" HREF="manual.css">
+<LINK REL="STYLESHEET" HREF="pygments.css">
+
+<LINK REL="next" HREF="node177.html">
+<LINK REL="previous" HREF="node175.html">
+<LINK REL="next" HREF="node177.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node177.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node164.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node175.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html2746"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A> 
+<A ID="tex2html2748"
+  HREF="node513.html">
+<IMG WIDTH="43" HEIGHT="24" ALT="index" SRC="index.png"></A> 
+<BR>
+<B> Next:</B> <A
+ HREF="node177.html">model.get_deletions()   return</A>
+<B> Up:</B> <A
+ HREF="node164.html">The model class: handling</A>
+<B> Previous:</B> <A
+ HREF="node175.html">model.residue_range()   return</A>
+ &nbsp; <B>  <A ID="tex2html2747"
+  HREF="node1.html">Contents</A></B> 
+ &nbsp; <B>  <A ID="tex2html2749"
+  HREF="node513.html">Index</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A ID="SECTION0011612000000000000000">
+model.get_insertions() &mdash; return a list of all insertions</A>
+</H2> <A NAME="14620"></A><A ID="CMD:model.getinsertions"></A>
+<A NAME="14623"></A><TT>get_insertions(aln, minlength, maxlength, extension, include_termini=True)</TT>
+<BR>
+<BLOCKQUOTE>
+This returns a list of all insertions (<EM>i.e.</EM>, residue ranges in which the
+model sequence, which must be the last in the alignment <I CLASS="sans">aln</I><A NAME="14640"></A>, is aligned
+only with gaps in the other sequences). Each residue range is extended by
+<I CLASS="sans">extension</I><A NAME="14643"></A> residues either side of the insertion, and is only returned if
+it is at least <I CLASS="sans">minlength</I><A NAME="14646"></A> residues long, but not longer than <I CLASS="sans">maxlength</I><A NAME="14649"></A>.
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>If <I CLASS="sans">include_termini</I><A NAME="14652"></A> is <TT>False</TT>, any residue range that includes a chain
+terminus is excluded from the output.
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>See also <B><A HREF="node177.html#CMD:model.getdeletions">model.get_deletions()</A></B><A NAME="14656"></A>, <B><A HREF="node178.html#CMD:model.loops">model.loops()</A></B><A NAME="14661"></A>.
+
+</BLOCKQUOTE>
+<B>Example:</B> See <B><A HREF="node232.html#CMD:selection">selection()</A></B><A NAME="14669"></A> command.
+
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

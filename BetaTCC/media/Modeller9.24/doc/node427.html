@@ -1,0 +1,152 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018.3 (Released July 19, 2018) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>density.read() &mdash; read an EM (electron microscopy) density map file</TITLE>
+<META NAME="description" CONTENT="density.read() &mdash; read an EM (electron microscopy) density map file">
+<META NAME="keywords" CONTENT="manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018.3">
+
+<LINK REL="STYLESHEET" HREF="manual.css">
+<LINK REL="STYLESHEET" HREF="pygments.css">
+
+<LINK REL="next" HREF="node428.html">
+<LINK REL="previous" HREF="node426.html">
+<LINK REL="next" HREF="node428.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node428.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node418.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node426.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html3967"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A> 
+<A ID="tex2html3969"
+  HREF="node513.html">
+<IMG WIDTH="43" HEIGHT="24" ALT="index" SRC="index.png"></A> 
+<BR>
+<B> Next:</B> <A
+ HREF="node428.html">density.grid_search()   dock</A>
+<B> Up:</B> <A
+ HREF="node418.html">The density class: handling</A>
+<B> Previous:</B> <A
+ HREF="node426.html">density.grid   Density</A>
+ &nbsp; <B>  <A ID="tex2html3968"
+  HREF="node1.html">Contents</A></B> 
+ &nbsp; <B>  <A ID="tex2html3970"
+  HREF="node513.html">Index</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A ID="SECTION0011289000000000000000">
+density.read() &mdash; read an EM (electron microscopy) density map file</A>
+</H2> <A NAME="39089"></A><A ID="CMD:density.read"></A>
+<A NAME="39092"></A><TT>read(file, resolution, em_map_size=0, voxel_size=0.0, em_density_format='XPLOR', filter_type='NONE', filter_values=(0.0, 0.0), density_type='SPHERE', px=None, py=None, pz=None, cc_func_type='CCF')</TT>
+<BR>
+<BLOCKQUOTE>
+This command reads a density map from <I CLASS="sans">file</I><A NAME="39126"></A>, which should be provided as
+a grid of intensities, in the X-PLOR [<A
+ HREF="node512.html#BruXPLOR90">Br&#252;nger, 1992</A>], CCP4,
+or MRC format. (Note that CCP4 and MRC files are currently read in the same
+way, since the formats are very similar.) <I CLASS="sans">file</I><A NAME="39129"></A> can be a filename
+or a readable file handle (see <B><A HREF="node453.html#CMD:modfile.File">modfile.File()</A></B><A NAME="39134"></A>).
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>Note that while non-cubic grids can be read in, <B><A HREF="node428.html#CMD:density.gridsearch">density.grid_search()</A></B><A NAME="39139"></A>
+only works with cubic grids.
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>The size of the grid and the map voxel size
+(<I CLASS="sans">voxel_size</I><A NAME="39144"></A>) are both taken from the
+density map file itself. If, however, <I CLASS="sans">em_map_size</I><A NAME="39147"></A> is specified and is
+non-zero, the grid must be cubic and all dimensions must match this value.
+If <I CLASS="sans">voxel_size</I><A NAME="39150"></A> is
+specified and differs from that given in the file header, the user-specified
+value is used in preference.
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>The density map resolution is given by <I CLASS="sans">resolution</I><A NAME="39153"></A>.
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><I CLASS="sans">px</I><A NAME="39156"></A>, <I CLASS="sans">py</I><A NAME="39159"></A>, and <I CLASS="sans">pz</I><A NAME="39162"></A> specify the origin of the map, in angstroms. If not
+given, it is read from the MRC or CCP4 map header (X-PLOR files do not include
+this information, so the origin will default to zero in this case.)
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>When fitting the probe into the EM grid, the probe structure is converted
+first into probe density, by using the function indicated in the
+<I CLASS="sans">density_type</I><A NAME="39165"></A> variable. Each atom can be represented by one of several
+atomic density functions, including, the uniform sphere model (<TT>'SPHERE'</TT>),
+the Gaussian function (<TT>'GAUSS'</TT>), a normalized Gaussian function (<TT>'NORM'</TT>),
+a hybrid Gaussian/sphere model (<TT>'HYBRID'</TT>), and an interpolation to the
+closest point on the grid (<TT>'TRACE'</TT>). The recommended function is <TT>'SPHERE'</TT>.
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><I CLASS="sans">filter_type</I><A NAME="39174"></A> is used to filter the values of the EM density during this 
+calculation. Filters that can be used are: <TT>'THRESHOLD'</TT> for a lower 
+threshold (any density value below the first value set in <I CLASS="sans">filter_values</I><A NAME="39178"></A>
+will be set to 0); 
+<TT>'SQUARE'</TT> for a square filter; and <TT>'LAPLACIAN'</TT> for a Laplacian filter.
+<TT>'NONE'</TT> is the default option, and means that no filter is used. 
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>When calculating the cross-correlation coefficient between a probe model 
+and the density map, <I CLASS="sans">ccf_func_type</I><A NAME="39184"></A> specifies if you want the normalized 
+cross-correlation coefficient (<TT>'CCF'</TT>), or the local cross-correlation 
+coefficient (<TT>'LCCF'</TT>).
+</BLOCKQUOTE>
+<P>
+
+<P>
+<B>Example:</B> See <B><A HREF="node428.html#CMD:density.gridsearch">density.grid_search()</A></B><A NAME="39192"></A> command.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node428.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node418.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node426.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html3967"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A> 
+<A ID="tex2html3969"
+  HREF="node513.html">
+<IMG WIDTH="43" HEIGHT="24" ALT="index" SRC="index.png"></A> 
+<BR>
+<B> Next:</B> <A
+ HREF="node428.html">density.grid_search()   dock</A>
+<B> Up:</B> <A
+ HREF="node418.html">The density class: handling</A>
+<B> Previous:</B> <A
+ HREF="node426.html">density.grid   Density</A>
+ &nbsp; <B>  <A ID="tex2html3968"
+  HREF="node1.html">Contents</A></B> 
+ &nbsp; <B>  <A ID="tex2html3970"
+  HREF="node513.html">Index</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

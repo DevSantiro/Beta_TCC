@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018.3 (Released July 19, 2018) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>io_data() &mdash; create a new input parameters object</TITLE>
+<META NAME="description" CONTENT="io_data() &mdash; create a new input parameters object">
+<META NAME="keywords" CONTENT="manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018.3">
+
+<LINK REL="STYLESHEET" HREF="manual.css">
+<LINK REL="STYLESHEET" HREF="pygments.css">
+
+<LINK REL="next" HREF="node147.html">
+<LINK REL="previous" HREF="node145.html">
+<LINK REL="next" HREF="node147.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node147.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node145.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node145.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html2574"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A> 
+<A ID="tex2html2576"
+  HREF="node513.html">
+<IMG WIDTH="43" HEIGHT="24" ALT="index" SRC="index.png"></A> 
+<BR>
+<B> Next:</B> <A
+ HREF="node147.html">io_data.hetatm   whether</A>
+<B> Up:</B> <A
+ HREF="node145.html">The io_data class: coordinate</A>
+<B> Previous:</B> <A
+ HREF="node145.html">The io_data class: coordinate</A>
+ &nbsp; <B>  <A ID="tex2html2575"
+  HREF="node1.html">Contents</A></B> 
+ &nbsp; <B>  <A ID="tex2html2577"
+  HREF="node513.html">Index</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A ID="SECTION001141000000000000000">
+io_data() &mdash; create a new input parameters object</A>
+</H2> <A NAME="12483"></A><A ID="CMD:iodata"></A>
+<A NAME="12486"></A><TT>io_data(copy=None, **kwargs)</TT>
+<BR>
+<P>
+<BLOCKQUOTE>
+This creates a new <TT>io_data</TT> object, with default parameters. You can,
+however, specify any of these parameters when you create the object:
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+<BLOCKQUOTE>
+<TT>io = io_data(hetatm=True)
+</TT></BLOCKQUOTE></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>Alternatively, you can set parameters in an existing object:
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+<BLOCKQUOTE>
+<TT>io.hetatm = True
+</TT></BLOCKQUOTE></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>Many commands use <TT>io_data</TT> objects. However, for convenience, the
+<TT>environ</TT> class also contains an <TT>io_data</TT> object, as
+<I CLASS="sans"><A HREF="node118.html#MEMB:environ.io">environ.io</A></I><A NAME="12527"></A>. This is used as the default if you do not give an
+<TT>io_data</TT> parameter, so you can set this to change the input
+configuration used by all functions:
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+<BLOCKQUOTE>
+<TT>env = environ() 
+<BR>
+env.io.hetatm = True
+</TT></BLOCKQUOTE></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>Please note that <I CLASS="sans"><A HREF="node147.html#MEMB:iodata.hetatm">io_data.hetatm</A></I><A NAME="12534"></A>, <I CLASS="sans"><A HREF="node148.html#MEMB:iodata.hydrogen">io_data.hydrogen</A></I><A NAME="12539"></A>,
+<I CLASS="sans"><A HREF="node150.html#MEMB:iodata.convertmodres">io_data.convert_modres</A></I><A NAME="12544"></A> and <I CLASS="sans"><A HREF="node149.html#MEMB:iodata.water">io_data.water</A></I><A NAME="12549"></A> are ignored when
+reading <TT>UHBD</TT> files. When reading <TT>CHARMM</TT> files, <I CLASS="sans"><A HREF="node147.html#MEMB:iodata.hetatm">io_data.hetatm</A></I><A NAME="12556"></A>
+and <I CLASS="sans"><A HREF="node150.html#MEMB:iodata.convertmodres">io_data.convert_modres</A></I><A NAME="12561"></A> are ignored.
+
+</BLOCKQUOTE>
+
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018.3 (Released July 19, 2018) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>actions.write_structure() &mdash; write out the model coordinates</TITLE>
+<META NAME="description" CONTENT="actions.write_structure() &mdash; write out the model coordinates">
+<META NAME="keywords" CONTENT="manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018.3">
+
+<LINK REL="STYLESHEET" HREF="manual.css">
+<LINK REL="STYLESHEET" HREF="pygments.css">
+
+<LINK REL="next" HREF="node271.html">
+<LINK REL="previous" HREF="node269.html">
+<LINK REL="next" HREF="node271.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node271.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node266.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node269.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html3185"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A> 
+<A ID="tex2html3187"
+  HREF="node513.html">
+<IMG WIDTH="43" HEIGHT="24" ALT="index" SRC="index.png"></A> 
+<BR>
+<B> Next:</B> <A
+ HREF="node271.html">actions.trace()   write</A>
+<B> Up:</B> <A
+ HREF="node266.html">The optimizers module: optimization</A>
+<B> Previous:</B> <A
+ HREF="node269.html">molecular_dynamics()   optimize</A>
+ &nbsp; <B>  <A ID="tex2html3186"
+  HREF="node1.html">Contents</A></B> 
+ &nbsp; <B>  <A ID="tex2html3188"
+  HREF="node513.html">Index</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A ID="SECTION0011114000000000000000">
+actions.write_structure() &mdash; write out the model coordinates</A>
+</H2> <A NAME="25406"></A><A ID="CMD:actions.writestructure"></A>
+<A NAME="25409"></A><TT>write_structure(skip, filepattern, write_all_atoms=True, first=False, last=False, start=0)</TT>
+<BR>
+<BLOCKQUOTE>
+This action writes out a file containing the current optimizer
+structure, every <I CLASS="sans">skip</I><A NAME="25437"></A> steps during the optimization. It should be specified
+in the <I CLASS="sans">actions</I><A NAME="25440"></A> argument to an optimizer object (<EM>e.g.</EM>,
+<B><A HREF="node267.html#CMD:conjugategradients">conjugate_gradients()</A></B><A NAME="25444"></A> or <B><A HREF="node269.html#CMD:moleculardynamics">molecular_dynamics()</A></B><A NAME="25449"></A>).
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><I CLASS="sans">filepattern</I><A NAME="25454"></A> is a C-style format string, used to construct filenames. It
+should contain a <TT>%d</TT> format, which is substituted with the model number
+(<EM>e.g.</EM>, specifying <TT>'file%d.pdb'</TT> would generate files called <TT>'file0.pdb'</TT>,
+<TT>'file1.pdb'</TT>, <TT>'file2.pdb'</TT>, <EM>etc</EM>). The model number will start with
+<I CLASS="sans">start</I><A NAME="25464"></A> (or 0, if not given).
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>If <I CLASS="sans">write_all_atoms</I><A NAME="25467"></A> is <TT>True</TT> (the default) then all atoms in the model
+are written out to the structure file, whether or not they are selected.
+If <TT>False</TT>, only selected atoms are written out.
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>If <I CLASS="sans">first</I><A NAME="25472"></A> is <TT>True</TT>, then the structure at step 0 (before the optimization)
+is also written out. If <I CLASS="sans">last</I><A NAME="25476"></A> is <TT>True</TT>, then the structure of the last
+step is written, regardless of whether it is a multiple of <I CLASS="sans">skip</I><A NAME="25480"></A>. By default,
+both are <TT>False</TT>.
+
+</BLOCKQUOTE>
+
+<P>
+<B>Example:</B> See <B><A HREF="node267.html#CMD:conjugategradients">conjugate_gradients()</A></B><A NAME="25487"></A> command.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node271.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node266.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node269.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html3185"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A> 
+<A ID="tex2html3187"
+  HREF="node513.html">
+<IMG WIDTH="43" HEIGHT="24" ALT="index" SRC="index.png"></A> 
+<BR>
+<B> Next:</B> <A
+ HREF="node271.html">actions.trace()   write</A>
+<B> Up:</B> <A
+ HREF="node266.html">The optimizers module: optimization</A>
+<B> Previous:</B> <A
+ HREF="node269.html">molecular_dynamics()   optimize</A>
+ &nbsp; <B>  <A ID="tex2html3186"
+  HREF="node1.html">Contents</A></B> 
+ &nbsp; <B>  <A ID="tex2html3188"
+  HREF="node513.html">Index</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

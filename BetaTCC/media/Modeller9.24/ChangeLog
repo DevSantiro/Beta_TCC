@@ -1,0 +1,1833 @@
+Modeller 9.24 release 04-09-2020:
+  - Single-chain models, which are currently assigned a blank chain ID, can
+    now instead be labeled 'A' by setting automodel.blank_single_chain to
+    False, or by setting the same argument to alignment.append_sequence(),
+    model.generate_topology(), or model.build_sequence(). The default for
+    this argument will change to False in a future Modeller release.
+  - Bundled version of HDF5 updated to 1.10.5.
+  - The MEX and ABU residue types are no longer automatically converted to CYS,
+    regardless of the setting of env.io.convert_modres; they are treated as
+    any other ligand.
+  - Bugfix: alignment.append() no longer fails when given a very long file
+    name to read.
+
+Modeller 9.23 release 10-29-2019:
+  - Add Python 3.8 support.
+  - model.read() now understands mmCIF format author-provided
+    chain IDs, which are used instead of the canonical chain ID if available.
+  - model.read() now allows for chain IDs longer than 1 in model_segment when
+    reading mmCIF files.
+
+Modeller 9.22 release 06-21-2019:
+  - model.write_data() now writes chain IDs to the files for 'NGH'
+    and 'SSM' output.
+  - model.read() and model.write() now understand mmCIF format author-provided
+    residue numbers (these are always used by MODELLER if available, rather
+    than the canonical seq_id, which always counts from 1).
+  - model.write() now uses hybrid-36 notation in PDB files for atom serial
+    numbers >= 100000.
+  - Bugfix: correctly handle alignment expansion after truncation. In some
+    rare cases, lengthening the alignment with alignment.append() or
+    alignment.append_sequence() would add spurious repeated sequences to the
+    alignment. This should now be handled correctly.
+  - Bugfix: don't exhaust stack on Windows machines when processing large
+    structures with model.write_data().
+
+Modeller 9.21 release 12-11-2018:
+  - Add Python 3.7 support.
+  - Bugfix: first derivatives of SOAP potentials should now be handled correctly
+    (previously those of non-differentiable terms were undefined rather than
+    zero, and those of soap_pp.PairScorer() were applied to the wrong atoms).
+  - Bugfix: fix double-counting of soap_pp.PairScorer() energy.
+  - Bugfix: selection.rotate_dihedrals() and sequence_db.search()
+    now respect the random seed set when the environ() object was created
+    (previously they would use a fixed random seed).
+  - Bugfix: CONECT records in output PDB files should now contain the correct
+    atom serial numbers in all cases (previously they may have been incorrect
+    for multichain models, or model subsets written out with selection.write()).
+
+Modeller 9.20 release 06-05-2018:
+  - Bundled version of HDF5 updated to 1.8.20.
+  - mmCIF models now contain metadata consistent with the draft MA mmCIF
+    extension, describing the modeling procedure, custom restraints,
+    templates used, and the alignment.
+  - Information on the Python script used is now output in the model headers.
+  - If multi-chain templates are used, information is output on each chain
+    in the model headers (previously only one entry was emitted, for the
+    entire template sequence).
+  - Bugfix: certain pathological inputs could cause surface area calculation
+    to segfault due to an internal overflow. This is now handled more cleanly.
+  - Bugfix: model.assess_ga341() now reports an error (rather than segfaulting)
+    if asked to assess a DNA or RNA chain.
+  - Bugfix: environ.dendrogram() no longer fails with an internal error
+    if given only a single sequence.
+
+Modeller 9.19 release 07-25-2017:
+  - automodel-generated PDB or mmCIF files now point to the alignment file
+    used to generate them.
+  - Bundled version of HDF5 updated to 1.8.18.
+  - Bugfix: Whitespace in alignments aligned with gaps is now removed, not
+    erroneously mapped to the '.' residue type.
+  - Bugfix: automodel should now output SSBOND and CONECT records for any
+    disulfide bridges (previously they were present in the initial model but
+    not the final optimized models).
+
+Modeller 9.18 release 02-22-2017:
+  - Add Python 3.6 support.
+  - Bundled version of HDF5 updated to 1.8.17.
+  - Bugfix: output of fitted structures by alignment.salign() or
+    alignment.malign3d() should now work in the case where
+    current_directory=False and one or more structures were added using
+    alignment.append_model().
+
+Modeller 9.17 release 07-06-2016:
+  - Bundled version of HDF5 updated to 1.8.16.
+  - loopmodel-generated PDB or mmCIF files now contain extra header
+    information, including the values of any assessment scores.
+  - automodel-generated PDB or mmCIF files now list, for each template,
+    the sequence identity and the range of residues modeled.
+  - EM density maps used for purposes other than density.grid_search()
+    (e.g. use in Flex-EM) no longer have to be cubic.
+  - Chain breaks are now shown (if appropriate) when showing mismatches
+    between a sequence and a structure (SequenceMismatchError).
+  - Bugfix: if the alignment file does not specify chain IDs (usually the
+    case for all but the first chain) take them from the PDB file.
+  - Bugfix: don't overwrite molpdf and temperature factor info in
+    automodel/loopmodel output when using energy-based assessment scores
+    like DOPE or SOAP.
+  - Bugfix: handle residue numbers and insertion codes in mmCIF files 
+    correctly so that mmCIF -> PDB file conversions work as expected
+    (previously residue numbers in output PDB files would come out left
+    aligned, rather than right aligned as is more typical for PDB).
+  - Bugfix: if there are multiple models in an mmCIF file, read the first
+    one encountered, not that with pdbx_PDB_model_num=1.
+
+Modeller 9.16 release 01-12-2016:
+  - alignment.check_sequence_structure() no longer erroneously warns about
+    the potentially large CA-CA distances between residues in different
+    chains.
+  - Add Python 3.5 support.
+  - Bundled version of HDF5 updated to 1.8.14.
+  - Bugfix: process file xxx.c.pdb as a PDB file, not mmCIF.
+  - Bugfix: alignment.write() no longer fails on Python filelike objects.
+  - Bugfix: under some circumstances, overriding loopmodel.special_patches()
+    would cause coordinates to be incorrectly assigned and/or a "list index
+    out of range" error.
+  - Bugfix: in certain badly-performing optimizations, the nlogn nonbond pair
+    generation function would use all system memory. It is now capped at
+    approximately 200MiB, controllable with the energy_data.max_nlogn_grid_cells
+    parameter.
+
+Modeller 9.15 release 05-19-2015:
+  - Warn if 'structureX' is mistyped in alignment file header.
+  - The "RTF restraint not found" warning is now suppressed for the common
+    case of failing to make a peptide bond (and the associated improper)
+    to the next residue at the end of a chain.
+  - Suppress making peptide bond (and the associated improper) to HETATMs
+    unless they appear to be modified amino acids (they have a carbon CA
+    atom).
+  - Bundled version of HDF5 updated to 1.8.13.
+  - Bugfix: pad 4-digit residue numbers correctly for PDB output.
+
+Modeller 9.14 release 07-29-2014:
+  - The new PDB format (PDBx/mmCIF) is now handled. Templates can be mmCIF
+    files, and model.read() and model.write() also support mmCIF. See also
+    automodel.set_output_model_format() to write out models in mmCIF format.
+  - automodel-generated PDB or mmCIF files now contain extra header
+    information, including the names of the sequence and template(s) and the
+    values of any assessment scores.
+  - Add Python 3.4 support.
+  - Add support for 64-bit Windows.
+  - density.read() now uses the origin in the MRC/CCP4 file if it is not
+    specified.
+  - Bundled version of HDF5 updated to 1.8.11.
+  - Bugfix: Don't generate invalid format PDB files when biso <= -100.
+  - Bugfix: don't crash on reading an empty PSSM database.
+  - Bugfix: don't crash in model.to_iupac() if the residues to be modified
+    are missing sidechains or are not really amino acids (e.g. BLK residues).
+  - Bugfix: fix corruption of nonbonded list if selection.energy() is called
+    from within an optimizer action.
+  - Bugfix: use 64-bit integers to track memory usage to avoid overflows in
+    the 'Dynamically allocated memory' printout when more than 2GB is allocated.
+
+Modeller 9.13 release 02-12-2014:
+  - Modeller now includes a variety of SOAP (statistically optimized atomic
+    potential) scores for assessing proteins, loops, and interfaces.
+  - Bundled version of HDF5 updated to 1.8.10.
+  - The Lennard-Jones interaction energy is now artificially truncated at
+    very short distance; this makes simulations with poor starting conditions
+    much less likely to 'blow up'.
+  - Residue, Atom and Chain objects can now be meaningfully compared in Python
+    (previously == would always return False).
+  - model.get_insertions(), model.get_deletions() and model.loops() now have an
+    include_termini option; if False, residue ranges that include chain termini
+    are excluded from the output.
+  - Most Modeller objects can now be written to or read from file handles
+    (e.g. modfile.File(), or any Python filelike object) as well as named
+    files.
+  - automodel now accepts file handles or alignment objects for the 'alnfile'
+    parameter.
+  - Structure.read() allows reading an alternative conformation of a template.
+  - User-defined energy terms can now report violations and energy profiles.
+  - The sigma factor for EM fitting can now be modified (density.sigma_factor).
+  - Bugfix: have Restraints.make_distance() restrain distances where the
+    template is a non-standard residue with a standard backbone (e.g. UNK,
+    ASX, GLX).
+  - Bugfix: don't falsely warn about topology being available for every
+    BLK residue when automodel reads the initial model PDB file back in.
+  - Bugfix: model.get_insertions() previously ommitted the first residue
+    of insertions in some cases, while model.get_deletions() incorrectly
+    handled overhangs and a single residue between two deletions.
+  - Bugfix: model.build() no longer crashes when trying to interpolate and
+    exactly one atom in the segment has defined coordinates.
+  - Bugfix: model.build() no longer uses atoms in a different chain
+    as anchors for interpolation.
+  - Bugfix: derivatives of the angle feature are now more stable when the
+    angle is close to 180 degrees.
+
+Modeller 9.12 release 06-12-2013:
+  - Modeller is now only supported on Mac OS X 10.6 or later.
+    If you want to run Modeller on older OS X releases, use Modeller 9.11.
+  - alignment.align(), alignment.salign() and alignment.align2d() now attempt
+    to keep chain breaks aligned when aligning multi-chain sequences.
+    This behavior can be tuned with the break_break_bonus parameter.
+  - alignment.edit() has a new by_chain parameter; if set, overhangs are
+    removed for each chain in multi-chain alignments.
+  - alignment.edit() now returns the number of residues that it removed.
+  - Align codes (identifiers of sequences in alignment objects) can now be of
+    any length. (Codes in profile and sequence_db objects are still limited to
+    40 characters.)
+  - model.build() now does a better job of generating coordinates starting
+    from just CA positions.
+  - generate.transfer_xyz() now generates better structures for 6-membered
+    rings. (Previously, initial models could occasionally contain such badly
+    distorted rings that the optimizer was not able to recover the correct
+    geometry in the final models.)
+  - Atoms in BLK residues are now assumed to have typical heavy-atom radii
+    when calculating Lennard-Jones interactions, similar to soft-sphere
+    (previously no interaction was calculated).
+  - Atom types can now be changed by assigning to Atom.type. This can be
+    useful when employing BLK residues to use more accurate radii.
+  - A new function automodel.guess_atom_types() can now be called to try to
+    assign more appropriate atom types for BLK residues.
+  - Modeller now matches residues in PDB files using both name and ATOM/HETATM
+    indicator; previously just the name was used. This allows for correctly
+    reading PDB files containing amino acid ligands, for example (they were
+    previously forcibly mapped to ATOM on output).
+  - Added support for Python 3.3.
+  - Bundled version of HDF5 updated to 1.8.9.
+  - Bugfix: Q* and UNK atoms are no longer silently skipped when reading PDB
+    files.
+  - Bugfix: don't weaken distance basis restraints too much when two means are
+    too far apart, since this can cause a numeric overflow in
+    Restraints.spline() later.
+
+Modeller 9.11 release 09-06-2012:
+  - sequence_db objects now only store part of the sequence database in memory
+    when using a binary (HDF5) file (databases in PIR or FASTA format still
+    must be read in in their entirety). Functions that use sequence databases
+    now take a 'window_size' argument, that controls how much of the database
+    is read into memory at one time. This results in much lower memory usage
+    when using large databases such as UniProt.
+  - Limits on the numbers of atoms and bonds per residue have been removed.
+  - SSBOND and CONECT records are now written to PDB files when models
+    containing disulfides are saved.
+  - The default behavior of automatically converting common modified residues
+    (MSE, MEX, ABU) to their standard equivalents can now be disabled by
+    setting env.io.convert_modres=False.
+  - Rather than silently truncating align codes to the internal maximum
+    length (of 40 characters), too-long codes now result in an error.
+  - alignment.get_suboptimals() now takes an align_block argument to support
+    suboptimal alignments of two previously-aligned blocks of sequences.
+  - Bundled version of HDF5 updated to 1.8.8.
+  - Bugfix: Chain.join() now works correctly when joining adjacent chains.
+  - Bugfix: when converting MSE residues to MET, set the element correctly
+    for the SD atom (to S; previously it was left as SE).
+  - Bugfix: improve matching of alignment sequence to PDB when using '.'
+    in the alignment header and PDB contains duplicate residue numbers.
+  - Bugfix: parallel loopmodel runs no longer leak memory.
+  - Bugfix: alignment.salign() no longer leaks memory on encountering an
+    error.
+  - Bugfix: on machines without networking, allow parallel runs with
+    local_slaves only (rather than failing to create a job object at all).
+
+Modeller 9.10 release 09-28-2011:
+  - Add Python 3 support.
+  - Add support for Mac OS X 10.7 (Lion).
+  - Modeller on 64-bit Macs is now built with Intel Fortran, resulting in
+    a roughly 2x speedup compared to 9.9.
+  - Add Unicode support; all filenames should be UTF-8 encoded.
+  - CHARMM angle restraint on GLN OE1 and ASN OD1 atoms strengthened to
+    avoid generating poor stereochemistry for these residues.
+  - Bugfix: atoms with undefined coordinates are assigned zero accessibility.
+  - Bugfix: selection.superpose() no longer fails if given residues containing
+    multiple selected atoms with the same name.
+  - Bugfix: don't create empty .DLxxx files when loop modeling with
+    automodel.trace_output set to 0.
+  - Bugfix: model.to_iupac() now correctly handles hydrogen atoms in
+    Arg residues.
+  - Bugfix: fix a crash in alignment.write() with certain large alignments.
+  - Bugfix: set model.seq_id correctly when using a user-supplied initial
+    model with automodel.
+  - Bugfix: don't force HSE and HSP residues to be ATOM; leave them as HETATM
+    if they are so labeled in the input PDB.
+
+Modeller 9.9 release 04-04-2011:
+  - Modeller is now only supported on Windows XP Service Pack 2 or later.
+    If you want to run Modeller on Windows ME, 2000, or NT, use Modeller 9v8.
+  - Added support for Python 2.7; Python 2.5 is now supported on all
+    platforms.
+  - Bundled version of HDF5 updated to 1.8.5-patch1.
+  - Initial models generated by automodel now always contain valid PDB
+    coordinates, i.e. each coordinate is in the range -999.999 to 9999.999.
+  - During loop modeling, if atoms are missing from the initial model,
+    loopmodel.loop.write_defined_only can be set True to write out PDBs
+    containing only non-loop atoms present in the initial model.
+  - Restraints using user-defined one-dimensional mathematical forms can now
+    be converted to splines using Restraints.spline().
+  - Bonds between protein atoms and BLK residues are now restrained more
+    strongly than regular BLK-Calpha distances.
+  - alignment.salign() now generates the requested number of suboptimal
+    alignments, not one less.
+  - When reading new-style PDB files (with element names in columns 77-78)
+    Modeller will now use this information to determine whether an atom is a
+    hydrogen. (With old-style or non-conformant PDB files, it will continue to
+    guess based on the atom name, so will not read mercury ions for example
+    unless env.io.hydrogen=True, since it cannot unambiguously determine
+    whether HG is mercury or "hydrogen bonded to CG".)
+  - The Windows installer now supports silent installation with the /S flag.
+    Use the /D flag to specify install location and /KEY to specify the Modeller
+    license key, e.g. setup.exe /S /KEY=xxx /D=C:\Program Files\modeller
+  - Bugfix: complete_pdb() now preserves chain IDs.
+  - Bugfix: environ.dendrogram() no longer crashes if given a distance
+    matrix of size zero.
+  - Bugfix: Random seed is no longer ignored by model.make_region().
+  - Bugfix: MET residues marked as HETATM (e.g. ligands) are now correctly
+    skipped when env.io.hetatm=False (previously they were read in).
+  - Bugfix: lookup of atoms by name in models containing duplicated
+    residue and/or chain names now works correctly.
+  - Bugfix: fix PSA crash on models containing no amino acids.
+  - Bugfix: alignment.get_suboptimals() no longer fails to parse alignments
+    where neither sequence starts at the N terminus, and now correctly handles
+    alignments where the C termini are misaligned.
+  - Bugfix: sequences in PAP files can now start in any column (as long as
+    all the sequences start in the same column), not just column 11.
+  - Bugfix: allow atom names in the group_restraints atom class file to
+    contain single-quote characters (e.g. nucleic acid atoms such as O3').
+  - Bugfix: fix range of spline math forms when resplined by
+    Restraints.spline().
+
+Modeller 9v8 release 04-26-2010:
+  - Residues treated as BLK no longer have to be HETATM residues; they will
+    be marked as ATOM if so defined in restyp.lib or in the template PDB
+    (for example, DNA or RNA residues). automodel.nonstd_restraints() now
+    builds restraints on both HETATM and BLK residues.
+  - Python methods that previously expected lists or tuples can now work with
+    other iterables too (such as generators). For example, in Python 2.4 you
+    can now say 's = selection(x for x in mdl.atoms where x.biso > 0.5)' to
+    select all atoms with Biso over 0.5.
+  - The file argument to model.write_data() is now optional, since we may only
+    want the calculated property in Biso, and some properties (e.g. CRV)
+    cannot be written to files anyway.
+  - Models read with model.read() or complete_pdb() now have model.rfactor
+    set from the relevant PDB records.
+  - Bonds between BLK residues are now detected by a simple distance criterion
+    and are restrained more strongly than other distances by
+    automodel.nonstd_restraints().
+  - A new method Chain.join() allows chain breaks between chains to be removed.
+  - Files compressed with xz can now be read, provided that the xz binary
+    is available on your system.
+  - Bundled version of HDF5 updated to 1.8.3.
+  - The allow_alternates option to alignment.append() will now allow G in the
+    alignment sequence to match any non-standard residue type in the PDB file
+    which maps to G. This is useful if the alignment sequence is 'cleaned' as
+    by sequence_db.read().
+  - When using GB/SA with BLK residues, each BLK atom will now be treated as
+    an uncharged particle with a small radius, rather than causing an error.
+  - In sequence_db.filter(), if two sequences fail to align, don't terminate
+    the entire run; rather, place them in separate clusters.
+  - density.read() now supports CCP4 files, and reads the map and voxel sizes
+    from the density map file header if not specified by the user.
+  - Bugfix: invalid PAP files no longer crash Modeller with an assertion
+    failure.
+  - Bugfix: projected coordinates from environ.principal_components() are
+    now written correctly to the output file.
+  - Bugfix: models can now be built containing HSE or HSP residues without
+    the program terminating with a cryptic MDT error; homology-derived
+    restraints for these residues will look very similar to those for HIS.
+  - Bugfix: assigning to Residue.num now gives a correctly-formatted
+    (right-aligned) PDB residue number by default.
+  - Bugfix: assigning to r.type, r.code, r.name or r.pdb_name, where r is a
+    residue in an alignment, now works correctly (previously, the new
+    one-letter code was not used when the alignment was written to disk).
+  - Bugfix: mainchain curvature values for terminal residues were incorrect
+    in some cases.
+  - Bugfix: mainchain curvature calculation no longer spans chain breaks.
+  - Bugfix: in profile.scan(), if the target profile has no name, do not
+    trigger a GLib CRITICAL error.
+  - Bugfix: automodel with write_intermediates=True now works correctly.
+
+Modeller 9v7 release 06-16-2009:
+  - A new method alignment.get_suboptimals() allows the suboptimal alignment
+    file generated by alignment.salign() to be easily parsed.
+  - A new method iterative_structural_align() provides a
+    straightforward way to obtain the best SALIGN structure-structure alignment.
+  - Problems with statistics (e.g. profile.build() on a small database) now
+    raise a StatisticsError rather than the more generic ModellerError.
+  - Sequence mismatches between PDB files and alignments now raise a
+    SequenceMismatchError rather than the more generic ModellerError.
+  - alignment.append() and alignment.read_one() now take a new argument,
+    allow_alternates, which allow for alternate matches of one-letter codes
+    when reading PIR sequence ranges from PDB files (B to N, Z to Q).
+  - An error message is now reported when using an alignment containing an
+    empty sequence, and reading of the full sequence from a PDB file fails.
+  - Tab characters in alignment files are now treated the same as any other
+    whitespace, and do not result in cryptic failures.
+  - Parallel jobs have a new method, job.yield_tasks_unordered(), which is
+    like job.run_all_tasks() but which returns results as they are generated
+    rather than when all the tasks have finished.
+  - Parallel jobs now default to trying to duplicate the current Python
+    environment (using modslave.py and modpy.sh if necessary) when setting
+    "modeller_path", rather than running the mod9v7 script, since the latter
+    may conflict with the Python version of the master.
+  - Bugfix: TER records are now emitted even for single chain proteins,
+    and contain a unique serial number, the correctly formatted residue name,
+    and the chain ID, as per PDB specifications.
+  - Bugfix: correct slave Python search path when a parallel job master
+    script is run from a directory other than the current working directory.
+  - Bugfix: profile.build() no longer crashes when searching empty or very
+    small (less than 10 sequences) sequence databases.
+  - Bugfix: density.grid_search() no longer exhausts the stack when using
+    large density maps.
+  - Bugfix: PROFILE or BLOCK alignment with alignment.salign() should now work
+    correctly even when align_block=1.
+  - Bugfix: alignment.malign() and alignment.salign() now work correctly
+    with alignments containing zero-length sequences.
+  - Bugfix: when reading multiple copies of the same align code from an
+    alignment file, all sequence metadata is now duplicated correctly.
+  - Bugfix: scores from the multiple binormal restraint were slightly
+    incorrect in some cases.
+  - Bugfix: initial loop models containing hydrogens are now read back in
+    correctly (fixes an 'Index x out of range' error).
+  - Bugfix: residues marked in PDB file REMARKs as BLK are preserved as
+    BLK (rigid bodies) when the PDB is read back in, even when their name
+    appears in the topology library.
+  - Bugfix: PDB RESOLUTION lines should now be parsed correctly in both
+    old-style (v3.1 or older) PDB files and new-style (v3.2) PDBs.
+
+Modeller 9v6 release 02-09-2009:
+  - Added support for Python 2.6.
+  - Use 64-bit integers for indexes to residues in sequence databases, to
+    allow databases containing more than 2 billion residues.
+  - Bugfix: compressed files now work correctly on Windows (no more
+    "Bad file descriptor" errors).
+  - Bugfix: add some bonds that were missing from the DADE, GDP and NAD
+    topologies.
+  - Bugfix: correction of a minor inaccuracy in the SAXS excluded volume
+    calculation.
+  - Bugfix: profile.build() no longer exhausts the stack when scanning against
+    very large databases (e.g. UniProt).
+  - Bugfix: allow running more than 99 steps of EM grid search.
+  - Bugfix: output MRC files now contain the correct cell and voxel size.
+
+Modeller 9v5 release 10-16-2008:
+  - Default gap_penalties_1d for alignment.align2d() have been changed to match
+    the optimized 2D penalties, as determined from a test alignment set.
+  - automodel now constrains any protein-ligand close contacts (less than 2.3A)
+    to attempt to preserve protein-ligand chemical bonds.
+  - New normalized DOPE assessment method, which returns a Z-score, and is thus
+    comparable between different proteins (see model.assess_normalized_dope()).
+  - Bundled version of HDF5 updated to 1.8.1.
+  - PDB atom files are now also looked for in PDB-style subdirectories (the
+    first two characters after the digit); e.g. 1abc is searched for in the
+    'ab' subdirectory, pdb4xyz.ent in the 'xy' subdirectory.
+  - Libraries updated to correctly read and write remediated RNA and DNA,
+    some other HETATMs (e.g. ions) and to use the new hydrogen names, in PDB v3.
+  - Modeller now outputs new-style PDBs, with the element in columns 77 and 78,
+    rather than older-style PDB which has a sequence number in this position.
+  - Enable Large File Support, to correctly read files bigger than 2GB on
+    32-bit Unix systems.
+  - Remove unused residue_grouping and distance_atoms arguments from
+    Restraints.make().
+  - Bugfix: no longer ignore excluded pairs between two BLK residues.
+  - Bugfix: selection.only_mainchain() now considers OXT atoms to be mainchain.
+  - Bugfix: alignment.append_model() no longer crashes when trying to add a
+    structure containing only one atom.
+  - Bugfix: Topology.make() should now preserve complete IC/BILD entries for
+    patch residues.
+
+Modeller 9v4 release 05-15-2008:
+  - The speed of GB/SA calculations has been dramatically increased; the
+    cutoff distance used in the GB/SA calculation can also now be adjusted to
+    balance speed against accuracy (the default cutoff has been decreased from
+    15.0A to 8.0A).
+  - alignment.append() no longer takes rewind_file and close_file arguments;
+    they did not work correctly anyway. New method alignment.read_one() added
+    to read sequences one by one from a PIR or FASTA file.
+  - alignment.write(), model.write(), selection.write(), Chain.write() and
+    Structure.write() now take either a file name or a file handle
+    (modfile.File()).
+  - Split alignment.check() into alignment.check_structure_structure() and
+    alignment.check_sequence_structure(). Both functions now return the number
+    of pairs which exceeded the cutoffs, which are also adjustable.
+  - alignment.compare_with() now returns the percentage of equivalent
+    residue-residue pairs in the two alignments.
+  - io_data.atom_files_directory is now a Python list of directories, rather
+    than a colon-separated string. (This is so that everything works on Windows,
+    where ':' is a valid character in directory names.) Old scripts that
+    use colon-separated strings should still work, but will trigger a warning.
+  - When reading or writing compressed files, the uncompressed versions of
+    these files are now written into writeable local storage (${MODELLER_TMPDIR}
+    if set, otherwise the system temporary directory if possible, otherwise the
+    current working directory). Previously, these files were written into the
+    same directory as the compressed versions, which is problematic when that
+    directory is read-only or is on network storage.
+  - Files compressed with p7zip can now be read, provided that the 7za binary
+    is available on your system. Such files should contain only a single member
+    (e.g. a file foo.pdb could be compressed into the archive foo.pdb.7z).
+  - Update PDB files used in the examples (remediated PDBs are now used).
+  - Added selection.only_water_residues() method, which selects only atoms in
+    water residues.
+  - User-defined energy terms now take a cutoff parameter to use the
+    non-bonded list.
+  - Bugfix: use the basename, not the full path name, to generate output file
+    names in density.grid_search().
+  - Bugfix: model.transfer_xyz() with cluster_cut > 0.0 incorrectly calculated
+    the number of atoms in each residue, which in some circumstances could
+    cause a crash.
+  - Bugfix: miscellaneous alignment.salign() fixes.
+  - Bugfix: alignment.append_model() now copies the model's resolution,
+    R-factor, name and source to the alignment.
+  - Bugfix: if two or more different types for a single residue are listed in
+    a PDB with alternate location codes (e.g. 80:A in 1en2), only the first
+    is read by Modeller.
+
+Modeller 9v3 release 02-05-2008:
+  - Mac OS X 10.5 (Leopard) is now supported (with Python 2.5).
+  - Added structure.write() method, to write out current template
+    structures as PDB files.
+  - Added chain.write(), chain.filter(), and chain.atom_file_and_code()
+    methods, to write out sequences of individual chains. These obsolete the
+    model.make_chains() method.
+  - Added selection.only_defined() method, which selects only atoms with
+    defined coordinates.
+  - The GB/SA scorer is now implemented as a user-defined energy term;
+    energy_data.dynamic_gbsa has thus been removed.
+  - User-defined energy terms in C now get passed additional libraries and
+    energy_data parameters.
+  - Invalid headers in PIR alignment files now result in an error, to avoid
+    potential problems with these headers going unnoticed.
+  - File format errors now have their own Python exception - FileFormatError -
+    which is a subclass of the generic ModellerError.
+  - alignment.align() and alignment.consensus() no longer take a
+    max_gap_length parameter, as it is not used in any case.
+  - Profile objects now have a positions member, which is a list of all
+    aligned positions, similar to the same member for alignment objects.
+  - selection.debug_function() now returns the number of derivatives which
+    exceeded the cutoffs.
+  - Bundled version of HDF5 updated to 1.6.6.
+  - Bugfix: always read the first PDB alternate location encountered for each
+    residue, not only A or 1, which resulted in skipping of residues which
+    used neither of these codes.
+  - Bugfix: no longer limit atom file names in PIR comment lines to 80
+    characters.
+  - Bugfix: user-defined mathematical forms no longer cause an error in
+    restraints.pick() when restraints_filter is not -999.
+  - Bugfix: the scoring function will return an error if a coordinate has
+    become infinite or not-a-number (e.g. due to a bad optimization).
+  - Bugfix: the INITIAL_MALIGN3D option works again with TOP scripts.
+  - Bugfix: selection.superpose() now returns correct values for num_equiv_pos
+    and num_equiv_dist (previously these were erroneously the same as the
+    cutoff values).
+  - Bugfix: calling selection.energy() from within an optimizer periodic
+    action no longer causes the optimization to cycle endlessly.
+  - Bugfix: alignment.append_model() now puts the current model coordinates
+    into the alignment, not the PDB in its original orientation.
+
+Modeller 9v2 release 08-08-2007:
+  - Added loopmodel.user_after_single_loop_model() method.
+  - Added loopmodel.loop.library_schedule and loopmodel.loop.max_var_iterations
+    members, to allow the loop modeling optimization protocol to be modified.
+  - 'parallel' module should now work on all platforms, provided Python is
+    available.
+  - sge_qsub_job() now groups all automatically-spawned qsub jobs into SGE
+    task arrays.
+  - dope_loopmodel's confusingly-named initial_model argument is now removed.
+    To provide an initial loop conformation, override the
+    loopmodel.build_ini_loop() method.
+  - By default, automodel now only randomizes starting coordinates for
+    residues with defined topology (previously it also randomized BLK
+    residues, and in some cases the optimizer was then unable to recover their
+    rigidity). To override this behavior, set automodel.rand_method.
+  - alignment.salign() now takes a 'rms_cutoff' argument with a single RMS
+    value, rather than an 11-element 'rms_cutoffs' list, since only the first
+    value from this list was used, and alignment.compare_structures() now takes
+    a single 'varatom' argument rather than a 2-element 'distance_atoms' list,
+    for the same reason.
+  - All relevant data (initial RMS plus cutoff values) are now returned from
+    selection.superpose().
+  - The API has been cleaned up and given a much more logical structure.
+  - Windows and Linux installs of Modeller now support Python 2.5. (On other
+    platforms you can recompile the Python interface yourself for 2.5.)
+  - The scaling of rigid body angles in CG and QN optimizations can now be
+    tuned. The restraints file format for rigid bodies has changed accordingly.
+  - Switch from CHARMM to PDB naming for atoms in nucleic acids. DNA/RNA can
+    now be used by default in alignments by using the a, c, g, t and u
+    one-letter codes.
+  - Some of the alignment and profile functions have had redundant arguments
+    removed (e.g. profile.scan() no longer takes a write_summary argument, as
+    this is defined by the value of the summary_file argument).
+  - restraints.spline() now takes Python form, feature and group objects rather
+    than numeric 'spline_select' values.
+  - The default value of automodel.max_molpdf has been increased from 1e5 to
+    1e7, since some larger systems can legitimately exceed the smaller value.
+  - Bugfix: BLK residues written out in PDB files (e.g. in initial models) are
+    now correctly read back in as BLK residues, even if they have the same
+    name as a non-BLK residue type.
+  - Bugfix: in some cases, dihedral restraints were acting on the wrong atoms
+    after the user called model.patch().
+  - Bugfix: do not build dihedral restraints (phi/psi, omega) between residues
+    in different chains.
+  - Bugfix: remember template coordinates, so that automodel.initial_malign3d
+    works correctly and gives reasonable initial models.
+  - Bugfix: suboptimal alignments are now written to the
+    suboptimal_alignments.out file, not to the log file.
+  - Bugfix: opening the same gzipped file simultaneously from two separate
+    Modeller processes should now work correctly.
+  - Bugfix: conflicting omega restraints are now correctly removed from
+    systems containing ligands, even if they are not at the end of the sequence.
+  - Bugfix: patches that act on two residues (e.g. DISU) can now correctly add
+    or remove atoms that have names longer than 2 characters.
+
+Modeller 9v1 release 01-22-2007:
+  - Initial models (inifile argument to automodel()) are now handled more
+    robustly. They must have the same amino acid sequence as the template,
+    but missing or misordered atoms will be added/reordered automatically.
+  - 'add_segment' argument removed from model.generate_topology(). Call
+    model.clear_topology() first if you want to initiate the model.
+  - model.write_pdb_xref() command removed. Residue objects provide all
+    necessary information.
+  - 'selection_mode' and 'extend_hot_spot' arguments removed from
+    selection.hot_atoms(). Use selection.extend_by_residue() instead.
+  - 'model.rotate()' command removed. Use selection.translate(),
+    selection.transform(), or selection.rotate_origin() instead.
+
+Modeller 9v0 release to Accelrys: 09-05-2006:
+  - A new more sensitive assessment method is provided, high resolution DOPE;
+    see selection.assess_dopehr().
+  - A new loop modeling protocol, relying on the DOPE method, can be used to
+    obtain higher quality models in many cases, at the expense of more CPU time.
+    See the dope_loopmodel and dopehr_loopmodel classes.
+  - The speed of profile searches is now dramatically increased by storing the
+    template profiles in a PSSM database. See profile.scan().
+  - Profile commands now handle non-standard residues, which are treated as
+    equivalent standard residues (as defined in restyp.lib). Consequently, the
+    'clean_sequences' argument to alignment.to_profile() has been removed.
+  - Allow the number of PDB residues to be specified unambiguously in PIR files
+    (correctly handling the case where PDBs contain duplicated residue numbers).
+  - Universal binaries provided for Mac (i.e. both Intel and PPC Mac OS X).
+  - model_segment will no longer read file names and residue ranges from an
+    alignment; use the alignment object directly if you need access to this
+    information for model.read().
+  - Generated models with multiple chains now have these chains labeled A, B, C,
+    and so on. A chain break in a model is now taken to correspond to a change
+    in chain IDs in a PDB file (previous versions used the TER records). If
+    building models with ligands, you may need to move your alignment chain
+    breaks from before to after the ligands, to get the correct final chain IDs.
+  - The pdbent.lib file, which maps PDB codes to filenames, is no longer used.
+    If your PDB file names are not in a standard form (e.g. pdbxxxx.ent or
+    xxxx.pdb) then you can give Modeller explicit filenames. If you were not
+    using the pdbent.lib file before, you will not be affected by this change.
+  - The new sequence_db.convert() command converts sequence databases to
+    binary format sequence-by-sequence, and so uses much less memory than
+    sequence_db.read() followed by sequence_db.write().
+  - USER restraints format is no longer supported.
+  - The CHAINS_* files in the modlib directory, containing all PDB sequences
+    filtered by sequence identity, have been removed. You can download up to
+    date versions of these files from the Modeller download page, or build
+    them yourself using a local copy of the PDB and sequence_db.filter().
+  - model.optimize() has been replaced with two optimizer classes;
+    conjugate_gradients() and molecular_dynamics(). The trace_output variable
+    and model.switch_trace() command have also been replaced, with
+    actions.trace(). There is also a new state_optimizer() class, for building
+    your own optimizers, and a quasi_newton() class, for quasi-Newton
+    (variable metric) minimization.
+  - The molecular_dynamics() optimizer now supports self-guided MD, for
+    improved sampling.
+  - The old implicit schedules have been removed; if you wish to use an
+    optimization schedule, you must use an explicit schedule() object.
+    automodel's library_schedule variable now takes such an object, rather
+    than a number between 1 and 7.
+  - The old 'picked atom sets' 1 through 3 have been replaced with a new
+    selection object. Selections allow arbitary atoms or atom groups to be
+    added or removed, and support standard mathematical set operations.
+    * The following commands now act on selection rather than model objects:
+      selection.mutate(), selection.randomize_xyz(), selection.superpose(),
+      selection.rotate_dihedrals(), optimizers, selection.energy(),
+      selection.assess_dope(), selection.debug_function(), selection.unbuild(),
+      selection.hot_atoms().
+    * The 'pick_atoms' command has thus been removed.
+    * If you redefine the 'select_atoms' or 'select_loop_atoms' methods in
+      automodel or loopmodel, note that these should now return a selection
+      object. Some other automodel/loopmodel methods now take selection rather
+      than model objects, such as loopmodel.build_ini_loop(), and all of the
+      generate and refine methods.
+    * Rather than restraints.make(), use restraints.make_distance() for
+      DISTANCE and USER_DISTANCE restraints, and the secondary_structure
+      module for ALPHA, STRAND and SHEET restraints.
+    * The following commands now take a single selection object argument:
+      restraints.pick(), restraints.make()
+    * The following command now takes two selection object arguments:
+      restraints.make_distance()
+  - Default gap_penalties_2d have been changed; the new defaults were found to
+    be optimal for a test alignment set (see alignment.align2d()).
+  - Binary files are now read or written in industry-standard HDF5 format,
+    and are now machine-independent. Their contents can be inspected with
+    any program which understands the HDF5 format. Note, however, that they
+    are not compatible with old versions of MODELLER (you will have to
+    regenerate any old binary files from their text equivalents). See
+    sequence_db.read(), sequence_db.write(), profile.read() and profile.write().
+  - EM densities can now be read or written in MRC format as well as XPLOR.
+  - Warn, rather than crash, if a restraints file with negative or zero
+    atom indices is read.
+  - Restraint forms, groups, and features are now specified with Python
+    objects, and new forms and features can be implemented by the user in
+    Python or C. Consequently, 'USER_DISTANCE' restraints have been removed.
+  - Symmetry restraints are now also specified with Python objects; the
+    symmetry.define() command has been removed.
+  - restraints.unpick() now takes one or more Python atom objects, rather than
+    atom names.
+  - On most platforms, Modeller is now distributed as a shared library by
+    default, allowing it to be used like an ordinary Python module, or to
+    be linked against other programs.
+
+Modeller 8v2 release 02-28-2006:
+  - Bug fix for model_segment: specifying 'FIRST:@', 'LAST:' will now read in
+    all chains in a multi-chain PDB, even when the first has no ID.
+  - Bug fix: chain breaks were sometimes being placed incorrectly in
+    written-out alignments.
+  - Bug fix: some Python circular references, which were preventing memory
+    from being freed, have been removed, thus fixing some long-running scripts.
+  - Bug fix: pseudo atom tables are now reset where necessary; fixes some
+    'atom index out of range' errors.
+  - Bug fix: local alignments with alignment.salign() were incorrect in some
+    cases.
+  - Bug fix: alignment.compare_structures() was calculating incorrect RMS
+    values in some cases.
+  - New optimized 2D gap penalties are now used for alignment.salign() by
+    default.
+  - More explanatory error messages for the common 'mismatch between
+    alignment and PDB' problem.
+  - The number of segments for DRMS computation (nsegm) and the matrix offset
+    for structural local alignment (matrix_offset_3d) can now be specified
+    in alignment.salign().
+
+Modeller 8v1 release 06-20-2005:
+  - Removal of limits on the number of pseudo atoms, segments, the length of
+    file names and most other strings, and the number of parameters in
+    parameter files.
+  - Removal of the read_restyp() command. To read a user-defined residue
+    type file, set restyp_lib_file when creating an environ object.
+  - Bug fix: the correct VDW radii (as selected by topology.submodel) are
+    now used for PSA calculations (previously the all-hydrogen radii were
+    used in all cases).
+  - Improved error handling: almost all errors should be recoverable now
+    (using the standard Python exception handling mechanism) and incorrect
+    input should trigger an error rather than causing Modeller to crash
+    (please report any crashes as bugs to the developers).
+  - SALIGN bug fixes, improved binning of access classes.
+  - Modeller scripts are now more like 'real' Python scripts; the PYTHONPATH
+    environment variable is honored, and additional command line arguments
+    can be given to your scripts (accessible as sys.argv).
+  - Bug fix for SEGMENT_MATCHING: correct alignment scores are now written.
+  - Support for AMD64 and EM64T (Opteron/Xeon64) Linux machines.
+  - DOPE model assessment now returns only the DOPE energy itself by default,
+    ignoring other energy terms.
+  - Bug fix for restraints.pick() when used with absolute position restraints;
+    always allow 1-atom restraints to pass the residue_span_range check.
+
+Modeller 8v0 release 04-14-2005:
+  - Switch from TOP to Python as the primary scripting language.
+  - Incorporation of the GA341 and DOPE methods for model assessment.
+  - Improved handling of dynamic memory, and removal of various limits such
+    as MAXRES.
+  - New alignment.salign() alignment, based on the COMPARER program.
+  - Various fixes to profile.build(), and a new profile.scan() command.
+  - density.grid_search() allows docking of models to EM density maps.
+  - Modeller will now read compressed files in the .gz and .bz2 formats
+    (as well as the existing .Z format) provided the gzip and bzip2
+    programs are available.
+  - Fix for various problems reading alignment files with very long lines,
+    or with Mac, Unix or DOS-style line endings.
+  - Bug fix for alignment.compare_structures(); disulfide bridges were not
+    being properly considered in the comparison.
+  - Bug fix: atom names in which the first character does not match the
+    element (e.g. in NAD, where they begin with A or N) should now be
+    correctly aligned in output PDB files.
+  - Charges for all topologies are now assigned using a `nearest neighbor'
+    technique in topology.make().
+
+Modeller 7v7 release: 09-15-2004
+  - New features allow restraining absolute atomic positions and differences
+    between two dihedral angles.
+  - Point-and-click Windows installer, and Mac OS X 10.3 support.
+  - Basic support for mmCIF files
+  - Bug fix for beta (strand) restraints
+  - SALIGN, PROFILE_PROFILE_SCAN, and EM_GRID_SEARCH commands are disabled
+    for this release (still under development)
+
+Modeller 7v0 release to Accelrys: 01-31-2003
+  - The CUT_OVERHANGS argument to the WRITE_ALIGNMENT command has been
+    removed, and replaced by a more powerful EDIT_ALIGNMENT command.
+  - The MAX_LOOP_LENGTH argument to the PICK_ATOMS command has been replaced
+    by MINMAX_LOOP_LENGTH, such that both the minimum and maximum loop
+    segment lengths can be selected for in 'SEGMENT' mode.
+  - The SEARCH_CHAINS_LIST and SEARCH_CHAINS_FILE arguments to SEQUENCE_SEARCH
+    have been removed. Instead, a sequence database must now be read into
+    memory prior to using SEQUENCE_SEARCH by using the new READ_SEQUENCE_DB
+    command. (Such a database can also be written out with WRITE_SEQUENCE_DB.)
+  - New 'all-hydrogens' example directory.
+  - CHARMM topology libraries are now PDB (IUPAC) compliant, i.e.
+      HSD -> HIS
+      ILE CD -> ILE CD1
+      LEU CD1 -> LEU CD2
+      LEU CD2 -> LEU CD1
+    PDB hydrogen naming conventions apply.
+    See modlib/top-charmmH.lib for old CHARMM-style naming, and comments
+    at the start of modlib/top.lib.
+  - READ_ALIGNMENT can now read FASTA format. When reading PIR or FASTA
+    alignments, the CLOSE_FILE, REWIND_FILE and END_OF_FILE variables are
+    checked; such files will be left open if CLOSE_FILE is zero so that
+    future reads will start partway through the file, provided REWIND_FILE
+    is zero. END_OF_FILE is set to 1 if READ_ALIGNMENT reached the end of
+    the file.
+  - Initial code for 2D spline restraints.
+  - New 'CAV' output option for WRITE_DATA, which writes out protein and
+    internal cavity volumes (not currently functional).
+  - MALIGN3D uses the EDIT_FILE_EXT variable to allow customization of the
+    _fit extension for fitted atom files.
+  - MAKE_RESTRAINTS can now impose additional gap-distance weighting on
+    distance restraints, using the RESTRAINT_STDEV2 variable.
+  - New commands for dealing with profiles: ALN_TO_PROF, PROF_TO_ALN,
+    WRITE_PROFILE, READ_PROFILE, BUILD_PROFILE, PROFILE_PROFILE_SCAN
+  - Alterations to variable gap penalty for dealing with profiles (new WsC
+    parameter to GAP_PENALTIES_2D).
+  - New options to ALIGN and ALIGN2D for dealing with profiles: WEIGH_SEQUENCES,
+    SMOOTH_PROF_WEIGHT, READ_PROFILE, INPUT_PROFILE_FILE, WRITE_PROFILE,
+    OUTPUT_PROFILE_FILE. ALIGN_WHAT can also now take the value 'PROFILE'.
+  - New TIME_MARK command for benchmarking.
+  - New 'SALIGN' alignment, using structural information, and based on the
+    COMPARER program.
+  - Other new commands: SEQFILTER, MAKE_CHAINS, VOLUME, VOLUME_CAVITY.
+
+Modeller 6v2 release: 05-14-2002
+  - MODELLER has been ported for the Apple Mac OS X operating system.
+  - Dynamic memory allocation algorithm, which should increase the
+    stability of MODELLER
+  - IBM executable for AIX OS added
+  - Windows version of MODELLER 6v2!* For time being it is distributed as
+    a separate executable, although we plan to incorporate it with the rest
+    of the package.
+  - Big change is made with respect to the MODEL_SEGMENT. The residue number
+    for the first position (res_ID1) in the MODEL_SEGMENT
+    range (res_ID1:chain_ID1 res_ID2:chain_ID2) can be either a real residue
+    number or 'FIRST' (which indicates the first residue in a matching chain).
+    The residue number for the second position (res_ID2) in the MODEL_SEGMENT
+    range can be either: a real residue number; 'LAST' (which indicates the
+    last residue in a matching chain); or 'END' (which indicates the last
+    residue in the PDB file). The chain id for either position in the
+    MODEL_SEGMENT range (chain_ID1 or chian_ID2) can be either: a real chain
+    id (including a blank/space/null/empty); or '@', which matches any chain
+    id. Examples, assuming a two chain PDB file (chains 1 and 2):
+    'FIRST:@ 10:@' reads residues 1 to 10 in chain 1; 'FIRST:@ LAST:@' reads
+    all residues in chain 1, assuming 'FIRST' is not a real number of the
+    non-first residue in chain 1 (similarly for the LAST); '10:@ LAST:' reads
+    all residues from 10 in chain 1 to the end of the file (chain id for the
+    last residue is irrelevant), again assuming 'LAST' is not a real residue
+    number of a non-last residue; 'FIRST:@ END:' reads the whole file no
+    matter what, the chain_ID is ignored completely. For the SELECTION_SEGMENT
+    the string containing `@' will match any residue number and chain_ID.
+    For example, `@:A' is the first residue in chain `A' and `@:@' is the
+    first residue in the coordinate file. The last chain can not be specified
+    generically, except for the last residue in the file.
+
+Modeller 6v1 release: 01-25-2002
+  - ALIGN2D: Corrected weighing of the gap spanning distance term and
+    calculating the average gap spanning distance for multiple templates.
+  - READ_MODEL: Retained atomic charges of a model even after READ_MODEL
+    from a PDB file (allows the use of the Coloumb terms with the __model
+    script). Charges were zero before.
+  - READ_RESTRAINTS: Corrected reading of restraints from a file in the
+    USER format. No restraints were read before.
+  - MAKE_SS_TEMPLATES: Corrected automatic imposition of disulfides on the
+    target, from aligned templates. No disulfides were imposed before.
+  - __model script: The original alignment file is not overwritten by the
+    modeling alignment anymore. In 6v0, it was.
+  - Executable for Mandrake implementation of Linux added.
+
+Modeller 6v0 release: 12-26-2001
+  - Dynamic memory allocation removed limits on the size of most arrays,
+    including model and alignment arrays.
+  - The new TOP loop modeling routine 'loop' significantly improves the
+    accuracy of loop modeling. It can also be used in modeling of sidechains
+    or any other parts of the structure.
+  - A statistical atomic distance-dependent potential can be used for
+    modeling and model evaluation.
+  - The new ENERGY OUTPUT = 'ENERGY_PROFILE' command allows construction
+    of energy profiles for model evaluation, based on any combination of
+    MODELLER energy terms. It replaces the ENERGY_PROFILE command.
+  - New functional form and parameters for the binormal (Phi, Psi) restraints
+    improve their numerical stability and accuracy.
+  - New TOP command SEGMENT_MATCHING facilitates exploring many different
+    alignments in the difficult comparative modeling cases.
+  - Many bugs fixed, many small changes and improvements made.
+  - Redesigned MODELLER web site.
+
+01-01-2000:
+  - AŠ: too numerous changes to list here, conversion from f77 to f90.
+
+09-15-1998:
+  - AŠ: changed default NONBONDED_SEL_ATOMS from 2 to 1, in top.ini.
+
+09-10-1998:
+  - AŠ: updated COMPARE_SEQUENCES so that variability of the first sequence
+    in the alignment is written to the Biso column of MODEL.
+
+08-24-1998:
+  - AŠ: introduced NO_TER.
+  - AŠ: made a vector out of RENUMBER_SEGMENTS.
+  - AŠ: introduced EXPAND_CONTROL to allow more control for the
+    EXPAND_ALIGNMENT command.
+
+07-24-1998:
+  - AŠ: not using schedule in PICK_RESTRAINTS at all.
+
+07-20-1998:
+  - AŠ: biperiodic is now used
+
+07-18-1998:
+  - AŠ and AB: BUILD_METHOD for BUILD_MODEL can continue to be
+    3D_INTERPOLATION, INTERNAL_COORDINATES, but can now also assume ONE_STICK
+    and TWO_STICKS values to generate different initial structures for
+    inserted atoms.
+  - AB: New kind of error message is introduced: _B - to inform about bugs.
+    Now used for former "Increase MAX..." and similar messages only.
+    Scan_errors modified respectively.
+
+07-09-1998:
+  - AB: CA-only warning in READ_MODEL and other routines using rdpdb
+
+07-08-1998:
+  - AŠ: increased flexibility of ALIGN2D so that it needs only at least one
+    structure for the first block of sequences.
+
+07-07-1998:
+  - AB: the multimple binormal restraints were debugged: 1) detection of most
+    relevant phase of phi/psi angles 2) removal of the bug in calculation of
+    the derivatives
+
+07-01-1998:
+  - AŠ: changed format of mnch.lib, removed class weights from this library
+    because they occur in mnch?.lib.
+  - AŠ: removed sdch.lib for sidechain classes 1-2 from all parts, including
+    COMPARE.
+  - AŠ: Removed undefined entries from top.ini. Changed the meaning of
+    RENUMBER_RESIDUES so that it corresponds to the first residue index in
+    renumbering.
+  - AŠ: Added the missing ALIGN_ALIGNMENT top 'top.ini'.
+
+06-06-1998:
+  - AŠ: Added the single mutant modeling script.
+  - AŠ: Modified the loop modeling scripts and other scripts so that robust
+    loop modeling can be done automatically. There are at least 43 such
+    arrays with a dozen diffrent character length.
+  - AŠ: Expanded options to PICK_ATOMS by allowing for automated selection
+    of loops; a special value for SELECTION_SEGMENT of 'LOOPS' '' and new
+    variable GAP_EXTENSION were introduced.
+  - AŠ: Removed SELECTION_STEP from MODELLER.
+  - AŠ: Created new command SEGMENT_MATCHING for enumerating the alignments.
+
+04-30-1998:
+  - AB: In energy calculations, "slow" character parameters were replaced
+    by "fast" integer ones.
+  - AB: in 'model/build.F': all DISU stuff was deleted. atom classes are
+    assigned based on the iss array, resnam does not change.
+
+04-28-1998:
+  - AŠ: added MNCH?_LIB libraries to allow for i-1,i,i+1 mainchain
+    conformation restraints.
+
+03-23-1998:
+  - AŠ: changed ALIGN_CODES to ALIGN_CODES2 for READ_ALIGNMENT2.
+  - found a workaround for a nasty compiler bug in mod2ali (for SGI, make
+    opts) that caused naln=1.
+
+03-12-1998:
+  - AŠ: added option SIGNIF_CUTOFF to SEQUENCE_SEARCH.
+
+03-05-1998:
+  - AŠ: Changed the algorithm for calculating the mainchain curvature.
+    Now using least-squares lines instead of simple Ca - Ca vectors.
+
+02-27-1998:
+  - AŠ: MNCH2_LIB moved to MNCH_LIB.
+
+02-19-1998:
+  - AŠ: corrected a bug in distdp3.inc which sometimes caused incorrect
+    C-terminal overhang treatment, possibly incorrect alignment as a whole.
+
+01-25-1998:
+  - AŠ: changed default BUILD_METHOD back to INTERNAL_COORDINATES.
+
+01-05-1998:
+  - AŠ: Added keyword DIH_LIB_ONLY to MAKE_RESTRAINTS, to allow forcing the
+    calculation of the ``homology-derived'' mainchain and sidechain dihedral
+    angle restraints (single and binormal) from the residue type dependent
+    libraries only (templates ignored).
+
+02-06-1998:
+  - AB: version5g/doc: Improved the html version of the manual. Changes in
+    Makefile. latex2html was patched to properly handle the macros containing
+    sectioning commands.
+
+01-20-1998:
+  - AB: version5g = merge (5f-ab, 5f-as). To use solvent accessibility:
+    READ_PARAMETERS FILE = $LIB/par-32.lib
+
+01-05-1998:
+  - AŠ: A bug (causing a crash) in seqsearch.F is fixed.
+
+01-02-1998:
+  - AB: version 5f-ab: Introduced 32-nd physical restraint type and 7-th
+    feature type (accessible surface in Ang^2). Libraries 'sched.lib',
+    'feats.lib', and 'top.ini' are changed to reflect this. New logical
+    variable DYNAMIC_ACCESS was introduced. Limitation, each time before
+    you want to use the 32-nd feature in ENERGY etc., you have to calculate
+    solvent accessibility by WRITE_DATA OUTPUT=PSA.
+
+10-28-1997:
+  - AB: the bug in rsr9 (tmps size) fixed. Restored output of the objective
+    function to the output PDB file.
+
+09-28-1997:
+  - AB: New parameters:ASGL_2D_TYPE - controls the way 2D arrays are output
+    by the ENERGY_PROFILE command. PROFILE_2D_PHYS - selects physical type
+    to be presented as a 2D energy profile. NORMALIZE - selects normalization
+    for ENERGY_PROFILE. ASGL_2D_OUTPUT - whether or not to write 2D output
+    for ASGL. Command names changed: PATCH_DISULFIDES to PATCH_SS_MODEL.
+    INHERIT_DISULFIDES - to PATCH_SS_TEMPLATES. ENERGY_PROFILE now outputs
+    2D profiles. OUTPUT can contain the type of energy you output by
+    ENERGY_PROFILE: ENERGY or IDEAL_ENERGY1, and NORMALIZE specifies the type
+    of normalization. Removed the error in calculation of the spline
+    non-bonded terms.
+
+09-20-1997:
+  - AŠ: Introduced the ALIGN_BLOCK argument for the MALIGN command.
+
+09-16-1997:
+  - AŠ: Modified protsize.cst and Makefile to allow more flexibility in
+    defining the sizes of the most important arrays.
+
+09-13-1997:
+  - AŠ: Renamed TOP variable MODELLER_STATUS into ERROR_STATUS and moved
+    it within the top.ini file.
+
+09-07-1997:
+  - AŠ: Initialized the 'ialn()' array for the PAP, INSIGHT, and QUANTA
+    formats ('rdaln.F'). This bug may have caused some problems when a short
+    protein is added to the alignment that contained a longer protein(framework)
+    in its place (e.g., with READ_ALIGNMENT after MALIGN3D).
+
+08-09-1997:
+  - AŠ: Corrected a bug in 'preppdf.F' that sometimes resulted in a loss of
+    explicitly excluded non-bonded pairs when these were not defined or read
+    in before each call to 'preppdf.F'.
+  - AŠ: Optimized speed of PICK_RESTRAINTS by using the 'picatm' array instead
+    of the 'cnsin1' and 'cnsin2' functions.
+  - AŠ: Optimized speed of MAKE_RESTRAINTS for non-bonded restraints by
+    considering the selected atoms (set 1) instead of all atoms.
+  - AŠ: Corrected a bug in MAKE_RESTRAINTS ('mkdyn.F') that resulted in an
+    incorrect use of DYNAMIC_FLAG during calculation of the `static'
+    non-bonded restraints.
+  - AŠ: Modified the MAKE_RESTRAINTS command so that the calculation of the
+    `static' non-bonded restraints now takes into account RESIDUE_SPAN_RANGE
+    and RESIDUE_SPAN_SIGN.
+  - AŠ: Added RESTRAINT_SEL_ATOMS and modified the MAKE_RESTRAINTS command
+    so that the stereochemical, MRFP stereochemical, dihedral angle, and
+    bi-dihedral angle restraints are calculated only when a sufficiently
+    large number of atoms in a possible restraint are selected (set 1): For
+    a given possible restraint, only when all restraint atoms or at least
+    RESTRAINT_SEL_ATOMS are selected (set 1), is the restraint calculated.
+    An exactly equivalent role for the `static' non-bonded restraints (and
+    also for the `dynamic' non-bonded restraints calculated during OPTIMIZE)
+    is played by NONBONDED_SEL_ATOMS (the new TOP variable that replaces and
+    modifies the meaning of the old, deleted TOP variable DYNAMIC_FLAG).
+    This now makes it possible to restrict the calculation of all new
+    restraints to the selected atoms only (atom-atom distance restraints
+    already depended on selected atom sets 2 and 3; secondary structure
+    restraints are calculated for explicitly defined chain segments only).
+  - AŠ: Renamed the DYNAMIC_FLAG variable to NONBONDED_SEL_ATOMS and modified
+    its meaning in order to make it consistent with the new variable
+    RESTRAINT_SEL_ATOMS. Old DYNAMIC_FLAG of 0 (default) is equal to the
+    new NONBONDED_SEL_ATOMS of 2; and the old DYNAMIC_FLAG of 1 is equal
+    to the new NONBONDED_SEL_ATOMS of 1. Impacts MAKE_RESTRAINTS and OPTIMIZE.
+  - AŠ: Renamed the KEEP_RESTRAINTS string variable to the RESTRAINT_SEL_ATOMS
+    integer variable and generalized its meaning (see below). Old
+    KEEP_RESTRAINTS of ONE_ATOM (default) is equal to the new
+    RESTRAINT_SEL_ATOMS of 1; and the old KEEP_RESTRAINTS of ALL_ATOMS is
+    equal to the new RESTRAINT_SEL_ATOMS of 9999. Impacts MAKE_RESTRAINTS
+    and PICK_RESTRAINTS.
+  - AŠ: Changed the __model.top script so that the FINAL_MALIGN3D option
+    works for alignments that use the . option for segment specification.
+
+07-30-1997:
+  - AŠ: Added keyword SWAP_ATOMS_IN_RES to SUPERPOSE. This allows swapping
+    atoms in residues `DEFHLNQRVY' (as selected) to minimize sidechain RMS
+    deviation between MODEL and MODEL2 that have exactly the same atoms in
+    the same order (match.F).
+
+07-22-1997:
+  - AŠ: Added automatic recognition of the R, E, and P entries to the
+    ADD_RESTRAINT command (it was impossible to add the excluded pairs and
+    pseudo atom definitions before this modification).
+  - AŠ: Simplification of the 'mod5' script.
+  - AŠ: Added the READ_RESTYP_LIB command for reading new residue type
+    definitions, and the corresponding RESTYP_LIB_FILE variable for specifying
+    the library name.
+
+07-19-1997:
+  - AŠ: Added a check for sufficient overlap in MALIGN3D; not a stop, but
+    a return in that case now.
+
+07-13-1997:
+  - AŠ: Added structure resolution to the code in the output pairwise
+    distance matrix produced by the ID_TABLE and SEQUENCE_COMPARISON commands.
+  - AŠ: Added arguments SIGNIF_CUTOFF and SEARCH_GROUP_LIST to the
+    SEQUENCE_SEARCH command. All members of the groups that have SIGNIF
+    larger than SIGNIF_CUTOFF[1] and are not more than SIGNIF_CUTOFF[2]
+    units worse than the best hit are put into the alignment arrays.
+
+07-11-1997:
+  - AŠ: Changed the format of the representation of spline restraints in
+    the .rsr files (MODELLER12 format changes to MODELLER5 format). The
+    specs now contain only the y values, the derivatives are calculated on
+    the fly. The same for the non-bonded MODELLER restraints in the
+    parameter file. 
+
+06-27-1997:
+  - AŠ: Upgraded TRANSFER_XYZ by adding CLUSTER_METHOD, which selects how
+    are the template-template comparisons done at each residue position ('RMSD'
+    or 'MAXIMAL_DISTANCE') (routine trfxyz).
+  - AŠ: Changed BUILD BUILD_METHOD = '3D_INTERPOLATION' so that the new
+    ``line'' of atoms is a little randomized to prevent numerical problems
+    with energy calculations (linear impropers, angles, etc.) (routine insxyz).
+
+06-25-1997:
+  - AŠ: Incorporated several minor code changes suggested by Andrzej Sawaryn
+    to allow compilation with f90 on Ultra 2 running Solaris 2.5.1 (routine
+    ran6, file 'Makefile').
+
+06-24-1997:
+  - AŠ: Corrected the bug in OPERATE which sometimes caused errors in using
+    the result variable (e.g., with WRITE OBJECTS = RESULT) that has been
+    defined by the user and not assigned a scalar value before the call to
+    OPERATE (routine act13).
+
+06-23-1997:
+  - AŠ: Corrected the bug in OPERATE which sometimes caused errors in using
+    the result variable (e.g., with WRITE OBJECTS = RESULT) that has been
+    defined by the user and not assigned a scalar value before the call to
+    OPERATE (routine act13).
+
+modeller-4 release: 06-16-1997
+
+03-20-1997:
+  - Azat: src/io/report.F :  third kind of violation: PDF;
+          src/main/top.ini:  TOP variable VIOL_REPORT_CUT2 for third kind
+                             of violation
+  - Improved the efficiency of SEQUENCE_SEARCH by optimizing I/O.
+  - Using Roberto's extended significance tests in SEQUENCE_SEARCH
+  - Added syntax checking before command execution.
+  - Added additional restraints for MAKE_RESTAINTS RESTRAINT_TYPE = 'ALPHA'
+    from a specific helix in one of myoglobins (O-O, CA-O), to supplement
+    CA-CA and N-O hydrogen bonds.
+  - Added the option to omit overhangs when writing out the alignment.
+  - Added the option to omit beginning and ending residue numbers in the
+    Pir format .ali file.
+  - Corrected all errors in CHAINS* (mkchn.F, seqfilter.F). Now the chains
+    are defined exclusively according to the chain id in the PDB files.
+  - Changed the name of temporary file sys.tmp.file into time() so that
+    several independent modeller jobs can be run in the same directory.
+  - RESIDUE_SPAN_RANGE consists of two scalars now, not four (NRANG1 NRANG2).
+    It now means the same thing in MAKE_RESTRAINTS RESTRAINT_TYPE = 'distance',
+    PICK_RESTRAINTS, and in dynamic non-bonded pairs calculation. In addition,
+    a logical variable RESIDUE_SPAN_SIGN has been introduced. There are two
+    conditions, the active one is selected by RESIDUE_SPAN_SIGN:
+    a) NRANG1 <= |ires2 - ires1| <= NRANG2 when  RESIDUE_SPAN_SIGN = off
+    b) NRANG1 <=  ires2 - ires1  <= NRANG2 when  RESIDUE_SPAN_SIGN = on
+  - MAKE_RESTRAINTS: A distance restraint between a selected pair of atoms
+    with residue indices ires1 (PICK_ATOMS set 2) and ires2 (PICK_ATOMS set 3)
+    passes the span filter when (a) or (b) is satisfied, as selected by
+    RESIDUE_SPAN_SIGN.
+  - PICK_RESTRAINTS: A restraint that has all atom pairs satisfying
+    condition (a) above is selected for the specified action.
+    RESIDUE_SPAN_SIGN does not have any effect here.
+  - Dynamic non-bonded pair list calculation: An atom pair that passes
+    condition (a) is added to the list. RESIDUE_SPAN_SIGN does not have
+    any effect here.
+  - Added wrtmsg() routine for general message output and exit handling.
+  - Corrected a serious bug in rdabrk() that probably sometimes caused
+    not to read the appropriate PDB file to complete the alignment entries
+    in getdata(), COMPARE, SUPEPOSE, MAKE_RESTRAINTS ...
+  - The CG optimization is now more robust (an important source
+    of inifinites has beeen eliminated).
+  - I corrected a bug in the evaluation of the binormal Phi/Psi
+    restraints. For a periodic two-dimensional variable, both variables
+    and their correlation have to be taken into account simultaneously
+    when calculating the deviation from the mean value (itself a vector
+    of dimension 2). Thus, the new MPDF terms corresponding to the binormal
+    Phi/Psi restraints will be generally different from the old ones. The
+    bug was probably not very serious in terms of model quality because it
+    resulted only in less efficient optimization of Phi/Psi, not in a
+    minimization towards incorrect values of Phi/Psi.
+  - Several constants have been increased to remove 'array too small'
+    problems in 'genome' modeling.
+  - Split deltaf() function into scalar and two dimensional versions
+    to eliminate the IBM AIX xlf resolve problems.
+  - Re-introduced the check for co-linear angles so that the optimizer
+    does not crash anymore.
+  - Introduced the output from the ORIENT_MODEL command.
+  - Checking at the end of conmin() to see which of the two last
+    structures has lowest energy.
+  - Updated the examples/define-symmetry.top example.
+  - Increased MRESTYP to 120.
+  - Added SCHEDULE_SCALE argument to MAKE_SCHEDULE.
+  - Added options FAST_SEARCH, FAST_SEARCH_CUTOFF and DATA_FILE to
+    SEQUENCE_SEARCH.
+  - Not writing atom type errors in atmcls() for HETATM.
+  - Changed several constants (MAXCNS, MAXIMP) to allow for protein
+    modeling close to MAXRES. Also increased atom index space in
+    .rsr file output from i4 to i5 to allow for more than 9999 atoms.
+  - Changed maxpos in string.F to allow MAXSEQ > 100.
+
+03-18-1997:
+  - Azat added TOP variable NORMALIZE_PROF for normalizing the energy profiles
+    by the number of restraints per residue.
+
+03-12-1997:
+  - Released to MSI for QUANTA and InsightII 97.
+
+01-10-1997:
+  - Combined with Azat's 'dynamic' restraints changes -- but almost none
+    of that code is in the current version.
+  - Used flint and cvd to speed up and check the code.
+  - Added non-bonded pairs list for all dynamic restraints. A huge amount
+    of changes to the energy and reporting code had to be done.
+  - Added special non-bonded restraints between defined atom type classes;
+    they are specified in the 'MODELLER' block in the parameter library file.
+  - Only the violated restraints are reported by ENERGY when
+    OUTPUT = 'VERY_LONG' (before it was all restraints).
+  - Corrected a bug that sometimes calculated lower and upper harmonic bounds
+    without multiplying them by R*T (in the ENERGY output only, I think).
+  - Corrected lowercase 'precision' to upper case 'PRECISION' in numbers.cst and
+    head.F. The constants in the double precision version were single precision
+    so far -- not certain about it!
+  - Improved the efficiency of reading reals and integers and logicals from
+    strings (str_r(), ...).
+  - Added a check of sequences read in by READ_ALIGNMENT.
+  - Roberto added the perl options.pl for processing the manual using top.ini
+    source.
+  - Added segment specs for MODEL2.
+  - Coorected a bug that prevented writing out only selected atoms.
+  - Added the ENERGY_PROFILE command and removed the output of OUTPUT='RESVIOL'
+    from the ENERGY_COMMAND (now in ENERGY_PROFILE).
+  - Changed VDW_STDV keyword to SPHERE_STDV, DYNAMIC_VDW keyword to
+    DYNAMIC_SPHERE; VDW and VDW14 values in RESTRAINT_TYPE to SPHERE and
+    SPHERE14; ELEC and ELEC14 values in RESTRAINT_TYPE to COULOMB and COULOMB14.
+  - Added FIT option to ALIGN2D (for no alignment and just returning the 3D
+    info').
+  - Corrected rdpdbseq() in rdpir() so that rdpir reads the same sequence
+    as rdarbk() and rdatm(), according to HETATM_IO, ...
+  - Corrected the bug that made DO IVAR=1,2,3 do DO IVAR=123,123,1.
+
+12-20-1996:
+  - Made it compile under F90 on IRIX 6.2 (HOSTTYPE=F90).
+  - Corrected many (trivial?) problems with IPT FLINT.
+  - Added Roberto's upgrades to COMPARE_ALIGNMENTS.
+  - Added Roberto's restraint type USER_DISTANCE (hydrophobic effect).
+                                                                                
+10-25-1996:
+  - Added SPHERE_SEGMENT option to the PICK_ATOMS command. Usage:
+    PICK_ATOMS SELECTION_SEARCH = SPHERE_SEGMENT, ;
+               SELECTION_SEGMENT = '#RES1:C' '#RES2:C', ;
+               SPHERE_RADIUS  = <real:1>
+  - Changed the TOP scripts for 'model' so that READ_RESTRAINTS is done only
+    once or twice per model.
+  - Added value REPORT_PDB to the OUTPUT variable, which allows writing
+    model files during optimization.
+  - Added $+-number syntax expansion to the residue id for offsetting
+    residue id's.
+  - Introduced GAP_PENALTIES_1D (ALIGN and ALIGN2D),
+    GAP_PENALTIES_2D (ALIGN2D), and GAP_PENALTIES_3D (ALIGN3D)
+    to replace GAP_PENALTIES (ALIGN, ALIGN3D) and GAP_PENALTIES_3D (ALIGN2D).
+  - Added automated addition of the 'pdb' prefix to atom filenames for
+    easier atom file handling.
+  - Added $(DEFAULT) and $(JOB) for generating default filenames.
+  - Corrected a bug in PICK_RESTRAINTS (pickc()) that picked unselected
+    restraints if ADD_RESTRAINTS = on (addrsr=.T.) (default).
+  - Corrected a bug in local alignments (probably infrequent).
+  - Corrected a bug that prevented C-terminal overhangs with similarity
+    matrices (default).
+  - Extended gap penalty definition in ALIGN2D and introduced MAX_GAP_LEN.
+  - Added RENUMBER_RESIDUES option to RENAME_SEGMENTS command.
+  - Added optional output to the ASGL file of the distribution of the minimal
+    non-bonded distance for each atom.
+
+08-26-1996:
+  - Fixed a bug in patchss which caused bad dihedral definitions when a DISU
+    patch was used with an all H topology model.
+  - Added generic STD (standard) residue type for PICK_ATOMS.
+  - Removed two bugs from COMPARE_ALIGNMENTS (counted % of correctly aligned
+    incorrectly).
+
+07-26-1996:
+  - Added SCHEDULE_SCALE.
+  - Fixed a bug in ALIGN2D so that all ALIGN_BLOCK structures are used
+    in calculating the gap penalties (it did work for ALIGN_BLOCK=1, NSEQ=2
+    before).
+  - Introduced new command IUPAC_MODEL which swaps atoms for residues with
+    C2 planar sidechains (Glu, Asp, Phe, Tyr, Arg), so that dihedrals
+    observe IUPAC conventions. This is now done at the end of each
+    model calculation in __single_model.
+  - Introduced INIT_VELOCITIES for MD refinement. Used in __refine.top
+  - Added TOP variable CURRENT_DIRECTORY for MALIGN3D command.
+  - Added FIT variable to SUPERPOSE command.
+  - 'model' script was modified so that all templates and models are MALIGN3D
+    at the very end and written out to .fit files when
+    FINAL_MALIGN3D = 1 (0 by default).
+  - Added DENDROGRAM command.
+  - Added EXPAND_ALIGNMENT command.
+  - Only selected atoms are written out for WRITE_MODEL(2) in the PDB format.
+  - Added WRITE_ALL_ATOMS flag to WRITE_MODEL.
+  - Expanded SEQUENCE_TO_ALI, which now copies coordinates from MODEL to
+    ALIGNMENT, too.
+  - Added RMS and DRMS values to OUTPUT variable for the COMPARE command.
+
+06-26-1996:
+  - Heme group fix (courtesy of M. Sutcliffe) in top.lib, par.lib, radii.lib,
+    radii14.lib, models.lib.
+
+05-17-1996:
+  - Added various output options to the wrpap() routine (sec.str,
+    accessibility, variable gap penalties, etc.), selected by new TOP
+    variable ALIGNMENT_FEATURES.
+  - Added ALIGN2D routine for alignment of a sequence with structure(s) using
+    variable gap penalty depending on helix, beta, accessibility, mainchain
+    curvature, and distance between the two Calphas spanning the gap.
+    Using new routines align9 and 10, and TOP variable GAP_PENALTIES_3D.
+  - Added variable BUILD_METHOD for BUILD_MODEL so that simple 3D interpolation
+    can be used to generate undefined atoms; this reduces frequency of
+    knots and insertions modeled in extended conformation.
+  - Corrected the bug in parallel SHEET restraints, pointed out by
+    S. Grzybek (rsrsheet). Also changed the specification of sheet
+    restraints to allow complete control, by introducing ATOM_IDS
+    and SHEET_H-BONDS TOP variables.
+  - Corrected the inconvenient specification of atoms in ADD_RESTRAINT,
+    DELETE_RESTRAINT, and in the restraints file in the USER format:
+    Now using new atom id specification,
+    ATOM_IDS: atom_name:residue_id[:chain_id].
+  - Added improper dihedral angles to top.lib to ensure more planar sidechain
+    rings.
+  - Added the ability to write restraints in the USER format (selected via the
+    RESTRAINTS_FORMAT TOP variable), not only to read them.
+  - Modified WRITE_DATA command to add curvature and secondary structure output.    Removed separate options for writing to the output files and to the fourth
+    column of the MODEL data structure.
+  - Added the possibility to specify FILE in READ_MODEL with the second scalar
+    in MODEL_SEGMENT. The same for READ_MODEL2.
+
+Combined AS and RS version of Modeller 4: 05-10-1996
+  - RS changes (general):
+    - Added reduced model representation based on Herzyk & Hubbard (1993)
+      Proteins 17: 310-324, but using three types of C-alphas for residues
+      with helical, strand and turn propensities.
+    - Added reading and handling of parameter files in modeller restraint
+      format.
+    - Added new RESTRAINT_TYPE : MRFP_STEREO, MRFP_BOND, MRFP_ANGLE,
+                                 MRFP_DIHEDRAL, VDW14
+    - Added options to read multiple parameter and/or topology libraries;
+      ADD_TOPOLOGY and ADD_PARAMETERS options in READ_TOPOLOGY and
+      READ_PARAMETERS, respectively.
+    - Changed the atom type indexing to allow reading of multiple topology
+      files and topology files containing only a subset of atoms. This forced
+      changes in several places (check the headers of models.lib and rdrtop() ).
+  - RS changes (detailed):
+    - Changed models.lib and radii.lib to include the reduced model (model #9).
+    - Added radii14.lib, it contains radii for 1-4 interactions (used for
+      model #9).
+    - Added topology and parameter libraries for reduced model:
+      - top_ca3.lib : RTF for C-alphas in reduced model (no sidechains)
+      - tophh.lib :  RTF for complete reduced model (C-alphas + sidechains)
+      - par_ca3_spl.lib : Parameters for C-alphas in reduced model (this file
+                          is in modeller restraint format)
+      - parhh.lib : Parameters for sidechains from the Herzyk & Hubbard model
+    - Changed rdparf() to add the ADD_PARAMETERS option which allows to read
+      more than one parameter file. Added the MRFP keyword for parameter
+      files in modeller restraint format.
+    - The parameters in modeller restraint format read by rdparf() are stored
+      in a common structure defined in param.cmn, the corresponding constants
+      are defined in mod.cst.
+    - Changed getrsr() to add new RESTRAINT_TYPE for MAKE_RESTRAINTS. The new
+      types are MRFP_STEREO, MRFP_BOND, MRFP_ANGLE, MRFP_DIHEDRAL, and VDW14.
+    - Added new routine mrf_stereo() which is equivalent to stereo() but it
+      handles restraints in modeller format. The routines mrf_addcrs(),
+      mrf_addcs() and mrf_ifndprms() are equivalent to addcrs(), addcr()
+      and ifndprms(), respectively.
+    - Changed rdrtop() to allow reading of multiple residue topology files.
+      These forced the changing of atom type indexing as explained in the
+      headers of rdrtop() and radii.lib. Basically CHARMM atom types are
+      not considered anymore and RADII_LIB dictates the number of residues
+      types and atom types. All atoms in the residue topology library must
+      be defined in RADII_LIB which dictates the atom type index.
+    - The number of residue topology libraries in memory is kept in nrtl, which
+      is defined in topol.cmn.
+    - Changed act56: removed check for consistency when reading a topology file.
+      Consistency is now checked in rdrtop() by comparing the topology library
+      with the entries in RADII_LIB.
+    - Added RESTYP_LIB format check to inires().
+    - Changed ID2 output format from i2 to i4 in gennam2().
+
+Modeller 4 initiated: 04-12-1996
+  - Added secondary structure assignment routine to WRITE_DATA and
+    added the selection of output in WRITE_DATA by OUTPUT.
+  - Deleted most of .mat files and several other un-needed files in modlib\.
+  - Renamed GENERATE_MOLECULE to GENERATE_TOPOLOGY in several places.
+  - Added the COLOR_ALN_MODEL command that colors a structure according
+    to equivalences, insertions, and deletions in the aligned sequence.
+
+Modeller 3c released: 04-11-1996
+
+03-06-1996:
+  - Added WRITE_WHOLE_PDB for MALIGN3D.
+  - Corrected bug in __refine.top: TO-BE-REFINED.TMP
+  - Corrected bug in compare() that did not write comparison matrices
+    when ALIGN_CODES was empty.
+  - Corrected a bug in rdaln() so that the sequences without pending gaps '-'
+    also have gaps removed if so selected with REMOVE_GAPS.
+  - Corrected a bug in selatm() which made RESIDUE_TYPES = 'HET' ignored.
+  - Corrected a bug in schedule.lib which made hydrogen bonding group
+    of restraints ignored (e.g., produced by RESTRAINT_TYPE = SHEET, HELIX).
+  - Corrected a bug in build.F(getijk) found by Lisa Yan (natmpt-1) that could
+    interfere with building initial coformation.
+  - Corrected a bug in mod2ali that resulted in null characters at the end
+    of shorter sequences in the alignments constructed by SEQUENCE_TO_ALI.
+
+Modeller 3 released: 02-11-1996
+
+11-03-1995:
+  - Greatly improved the manual. Have the HTML version, too.
+  - Changed GENERATE_MOLECULE --> GENERATE_TOPOLOGY
+            MAKE_TOPOLOGY     --> MAKE_TOPOLOGY_MODEL
+  - Added RENAME_SEGMENTS command and SEGMENT_IDS argument for
+    automatically generating reasonable chain ids and residue
+    numbers for multi-chain systems.
+  - Changed the schedule for variable target function method
+    and added schedule library.
+  - Changed the residue specification in MODEL_SEGMENT, MODEL2_SEGMENT
+    and SEARCH_SEGMENT so that #RES:C is used where #RES is residue
+    number and C is the single character PDB chain id.
+  - Added the symmetry term to the objective function (DEFINE_SYMMETRY
+    command).
+  - Added check for existence of Cys-Cys pair in target in PATCH_DISULFIDE.
+  - Debugged, changed, and optimized  conmin() code for conjugate gradients.
+    Removed Newton-Raphson method. Changed UPDATE_DYNAMIC from a single
+    axis shift (0.23A) to 3D shift (0.39A) (top.ini, movsiz() and md2()).
+  - Modified wrpap and rdpap so that they can read Insight alignment files too.
+  - Optimized the generation of restraints a lot. Introduced SPLINE_ON_SPOT
+    logical variable to save space. Saved lots of space by using splines
+    instead of multiple gaussians.
+  - Removed KEEP_DUPL_RESTRAINTS variable.
+  - Added CHECK_ALIGNMENT command.
+  - Added DEFINE_SYMMETRY command.
+  - Added generic HET residue type for PICK_ATOMS.
+
+09-10-1995:
+  - Added check for SG atoms involved in more than one Cys-Cys bond.
+
+08-07-1995:
+  - Corrected a number of bugs found by Andras Szilagyi: MALIGN --> ALIGN
+    in __align_strs_seq.top; MALIGN3D within TRANSFER_XYZ; a few manual
+    mistakes.
+  - Changing TAB to BLANK in the .top files.
+
+07-04-1995:
+  - Cleaned the calculation of the objective function, collected routines
+    in one place: featpdf, objfunc, ...
+  - Removed the pre-calculation of the violations and saved some space
+    by deleting the corresponding arrays.
+  - Changed the way the scaling is done: objective function terms and
+    their derivatives are scaled directly, the restraint parameters
+    are kept constant.
+  - In PICK_RESTRAINTS, removed the selection criterion relying on the
+    scaling factors of the current schedule.
+  - Cleaned the output of the REPORT command.
+  - Removed the calculation of many different kinds of violations on
+    demand (relative, absolute, minimal, heavy). The relative
+    heavy violations are used in PICK_HOT_ATOMS and REPORT.
+  - Modified TOP scripts to use cubic splines if so selected instead of
+    poly-Gaussians.
+  - Added GDP and GTP residues to the topology and parameter files.
+  - Added checks for undefined jumps in all computed GO TO statements.
+  - Added automatic generation of stereochemical parameters from
+    the current structure, for bonds, angles, torsions, and
+    impropers that do not have an entry in the PAR.LIB file.
+  - Automatically determines the type of the input restraints file.
+  - Added BLK residue type for modeling residues without RTF entries.
+  - In SEQUENCE_SEARCH, using one file with all sequences (SEARCH_CHAINS_FILE).
+    Added SEARCH_CHAINS_LIST which is the same as the previous
+    SEARCH_CHAINS_FILE.
+
+05-17-1995:
+  - Increased maxngh from 30 to 50 to allow for buried HEME groups (Mike
+    Sutcliffe).
+  - Increased mcnsres from 100 to 200 to allow for FAD (Mike Suctliffe).
+  - Corrected the RAND_SEED = ISEED error which resulted in always
+    the same randomization of coordinates by RANDOMIZE_XYZ (the models
+    only differed because of the last MD part).
+  - Corrected a bug that replaced a strong stereochemical SG-SG disulfide
+    distance restraint with a weak SDCH-SDCH distance restraint based
+    on a homolog if that distance existed in a homolog (csrdst()).
+  - No more local optimization of sidechain dihedral angles in _refine.top
+    because there are sidechain distance restraints.
+  - Changed version number from 13 to 3.
+  - Added INDEX option to STRING_IF.
+
+04-29-1995:
+  - Cubic splines transformation added for the poly-Gaussian restraints.
+    This should speed up the execution and also allow using any number
+    of templates without speed decrease. Also, should be more robust
+    for optimization.
+
+03-29-1995:
+  - CONMIN changed to make it more robust with respect to precision 'problem 1'.  - SEQUENCE_SEARCH changed to allow writing out alignments.
+  - Corrected chi2 and chi3 spec for PRO in resdih.lib.
+    Corrected PRO pucker in resdih.lib and par.lib
+  - Introduced 'user_after_single_model' TOP routine so that some action
+    can be done by user after each model is calculated.
+
+Supplementary Modeller12 release: 03-11-1995
+
+02-15-1995:
+  - Small changes to sys.F.
+  - Free format for residue and chain ids in the alignment files (RDPIR()).
+    Also, only the first 6 fields now necessary. Improved the description
+    of the alignment file format in the manual.
+  - Added rotation around axis to ROTATE_MODEL and changed
+    the rotation matrix multiplication to make it consistent
+    with QUANTA and MOLSCRIPT.
+  - Added SUPERPOSE_REFINE to SUPERPOSE.
+
+Modeller12 release: 02-01-1995
+
+01-18-1995:
+  - Changed divide() to divide2() in various *.F files, N-O distance cutoff
+    from 15 to 12A, and SDCH-SDCH cutoff from 6 to 5 A (__homcsr.top) to
+    speed up the execution.
+  - Changed strnum2.F name to string.F
+  - Eliminated SIGNIF2 output in SEQUENCE_SEARCH for now.
+  - Added directory modelib/pdb/chn to the distribution. It contains about
+    600 representative PDB chains from the 3.0_30_XN list. These chains
+    can be used for template search by SEQUENCE_SEARCH. Modified
+    Makefile.install1 to install this directory, too.
+  - Recalculated the representative sets with the PDB version of January 18.
+  - Made SMALL version of MODELLER even smaller.
+  - Changed Makefile.include1 so that MODELLER12 runs fine in double precision
+    on HP 9000/735 machines. HP's seem to have a problem with the size of the
+    executable when there is not enough free memory. For this reason, Install
+    still compiles MODELLER in single precison. Even in single precision, RSIZE
+    is about 90MB.
+  - Edited the manual; added sections on dynamic programming and comparative
+    modeling primer (also in tests/primer).
+  - Cleaned the tests/* directory a little.
+  - Checked the official release 12 for MSI and others. Tested MODELLER on 18
+    families from ALBASE3 (test_modeller12).
+
+12-29-1994:
+  - Changed rdpdb() and rdseqpdb() (in rdpir) to interpret @@@@@ and @
+    strictly as any residue number and chain id, respectively.
+  - Introduced HELIX, STRAND and SHEET restraint types in MAKE_RESTRAINTS.
+    Not tested thoroughly.
+  - Introduced 'GRASP' atom file format for WRITE_MODEL(2).
+  - Introduced radii and radii2 vectors for MODEL and MODEL2.
+
+12-20-1994:
+  - Changed the default MAXRES from 400 to 600 and cutoff standard deviations
+    in __refine.top from 3 to 4.
+  - Reorganized the src directory to remove unnecessary programs.
+  - Added OFF_DIAGONAL, OVERHANG, LOCAL_ALIGNMENT to ALIGN, ALIGN3D,
+    MALIGN, MALIGN3D, and SEQUENCE_SEARCH. Corrected a bug in the
+    alignment routines to do with long gaps.
+  - Added logical ALIGN_ALIGNMENTS to ALIGN command.
+  - Added READ_ALIGNMENT2 and COMPARE_ALIGNMENTS commands.
+  - Added variables ALIGN_BLOCK and ALIGN_ALIGNMENT to the WRITE_ALIGNMENT
+    command so that residue conservation can be indicated for an alignment and
+    an alignment of two alignments.
+  - Added ALIGN_CONSENSUS command.
+  - Added alignment accuracy from ALIGN_CONSENSUS to be written out
+    by WRITE_ALIGNMENTS in 'PAP' format if ALIGNMENT_ACCURACY = on. Also,
+    absolute conservation of residues is always indicated by '*' in the
+    'PAP' format.
+  - Added optional version line to .rsr files (both formats).
+
+11-15-1994:
+  - Added strgin() function for unified processing of string options (case
+    insensitive).
+  - Made a major change in the restraint .rsr file format. The new format
+    is incompatible with the old one, but it was necessary to deal with
+    the NMR restraints, restraints on gravity centers, etc.
+  - A new USER restraint format introduced. Introduced new TOP variable
+    RESTRAINTS_FORMAT to select between MODELLER and USER restraint formats.
+  - Added several new tests directories to test new features.
+  - Added two new physical restraint types for NMR distance restraints.
+  - Added a new command PRINCIPAL_COMPONENTS for protein clustering.
+  - Cleaned and changed WRITE, READ, OPEN commands.
+  - Cleaned io.F.
+  - Introduced protected primes \' intro string values.
+  - Since the 'homol' script has become so general, it was renamed to 'model'.
+  - .csr extension for restraint files changed to .rsr extension.
+  - KEEP_DUPL_RESTR variable added to READ_RESTRAINTS command, too.
+  - Makefile.include1 improved (mkdir / mkdir -p selected as appropriate).
+  - Introduced STRING_IF TOP command for IF on STRING_ARGUMENTS.
+  - Changed __getnames.top to allowed user specification of the filenames
+    for the initial model and restraints.
+  - Changed TOP variable VDW_NEIGHBOURS to CONTACT_SHELL.
+
+10-29-1994:
+  - MODELLER12 upgrades started.
+  - Built the dih.F, ngh.F, and psa.F functionality in MODELLER. Calculation
+    of these derivative data only on demand and when not already in memory.
+  - Added a bi-dihedral feature for Phi and Psi dihedrals -- a new binormal
+    restraint. This restraint type really improves the Ramachandran plot
+    quality of the models according to Procheck. It is ideal now. Unfortunately,    the binormal mathematical type can only be applied to dihedral angles,
+    not to any feature type (distance, angle) because an assumption is made
+    about the order of atoms in the 8-atoms list for this feature.
+  - Least-squares fitted the multi-binormal Phi/Psi distributions in
+    the database of approximately 440 representative X-ray (<2.3A)
+    protein structures to obtain the new means, standard deviations
+    and cross-correlations for Phi and Psi multi-binormals. These
+    are stored in the new library MNCH2_LIB.
+  - The omega dihedral changes to par_heav.lib are now not necessary anymore -
+    they were needed in version 11 because par.lib applies to hydrogen
+    topologies only and the omega restraint was weak - because omega dihedrals
+    are restrained explicitly using the homologs and MNCH.LIB where
+    appropriately strong omega restraints are specified. The original par.lib
+    is therefore used again.
+  - Added SDCH-MNCH and SDCH-SDCH distance restraints for equivalent atoms
+    using the new ATMEQV.LIB library. This really helps positioning
+    sidechains according to the template --- before the sidechain
+    dihedral angle preferences frequently missed that. Now, if the template
+    has the same sequence as the target, the model is almost the same
+    as the template (only a few sidechains may differ a little).
+  - Artificially increased the standard deviations close to gaps for
+    0.6*(igap-4) in stdev() because I noticed that stereochemistry close to
+    gaps is frequently distorted, presumably due to too strong CA-CA and N-O
+    restraints.
+  - Increased the number of restraint groups to 27 to allow for new distance
+    restraints (SDCH-MNCH, SDCH-SDCH, protein - prosthetic groups).
+  - PICK_ATOMS command was updated to allow it to define three different
+    sets of selected atoms, selected by a new TOP variable PICK_ATOMS_SET.
+    The three sets are used for different purposes.
+  - Homology distance restraints derivation is improved a lot. Atom scanning
+    for generating atom pairs is much more flexible: all pairs of atoms from
+    selected sets 2 and 3 (as defined by the PICK_ATOMS command) are generated
+    that are within the residue span range specified by RESIDUE_SPAN_RANGE.
+    The meaning of RESIDUE_SPAN_RANGE is changed, too (a vector of 4 scalars
+    now). Also changed RESTRAINT_STDEV which now specifies the linear
+    transformation for ANY standard deviation for all 7 standard deviation
+    models (s' = a + b*s).
+  - A new command WRITE_DATA is introduced which writes out the PSA, DIH, and
+    NGH files for the current MODEL. This is to outphase the psa.F, dih.F,
+    and ngh.F programs completely. Note that the solvent accessibilities
+    are slightly different because the atom radii are slightly different
+    since the RADII.LIB is now used as opposed to PSA.DAT.
+
+Modeller 11 release: 10-01-1994
+  - Added many similarity matrices for sequence comparisons obtained from FASTA
+    distribution, Mark Johnson, and David Wishart (seqsee). It was shown by
+    Feng Yuan that my matrix as1.sim.mat is the best for remote homology
+    searches.
+
+09-24-1994:
+  - Simplified TOP <--> APPLICATION variable copying.
+  - Introduced CONTROL variable, which controls the stop status and
+    the amount of output written to the log file.
+
+09-13-1994:
+  - Added catching of the undefined atoms in PSA.F to prevent the crashes.
+
+09-01-1994:
+  - Added the TOP variable FILE_EXT and modified gennam() so that FILE_EXT
+    is added to all deault filenames. Now MSI can append '.modlr.pdb' to the
+    output B filenames.
+  - Changed __*.top scripts to write out the final models in the form
+    pdbcode.B9999nnPDB_EXT. Made all the test cases consistent with it.
+  - Added the TOP variables FILE_ACCESS and OUTPUT_DIRECTORY. Consolidated
+    input and output directory handling.
+
+08-24-1994:
+  - Changed many scripts/__*.top scripts to allow more flexible 'homol'
+    use: using pre-existing initial model or restraints files, exiting during
+    various stages of 'homol', and flexible specification of optimization
+    thoroughness. See file scripts/__defs.top for the options.
+
+08-23-1994:
+  - A bug that set nseq=2 in seqsearch() corrected.
+
+Modeller 10 release: 08-17-1994
+  - Created the anonymous ftp on tammy with the en-crypt-ed tar file.
+  - Added the OMEGA dihedral angle restraint type to MAKE_RESTRAINTS.
+    This now allows automated cis/trans restraints to be derived
+    for proline residues, according to the ALBASE paper (Sali & Overington,
+    Prot. Sci., 1994). Several other changes had to be made mainly
+    to the csrdih() and getcsr() routine to make this work. The top routine
+    __cispeptide.top is now almost irrelevant, unless you still want to
+    restrain some peptides manually; i.e., the cis/trans Pro restraints
+    are derived automatically by CALL ROUTINE = 'homol'.
+  - TOP variable BASIS_RELATIVE_WEIGHT was added to allow better reduction of
+    poly-Gaussian restraints.
+  - Created PATCH_DISULFIDES command which automatically derives disulfides
+    for MODEL from its sequence and disulfide presence in aligned structures.
+  - Also changed __*.top scripts so that Chi3 and Chi2 homology-derived
+    restraints for S-S bonds are calculated together with other Chi3 and
+    Chi2 restraints in __homcsr.top: disulfide restraints are derived
+    automatically by CALL ROUTINE = 'homol' if there are equivalent S-S
+    bonds in any of the templates; for unique S-S bonds the top routine
+    __special_patches still has to be created manually.
+  - Re-calculated all sidechain and mainchain *.mdt and *.bin files using
+    ALBASE_3.
+  - Added the calculation of the significance score to the SEQUENCE_SEARCH
+    command; regulated by the new top variable SEARCH_RANDOMIZATIONS.
+  - Checked all tests\* and consolidated/renamed some tests.
+
+08-09-1994:
+  - Included Phi, Psi, and Omega angles in the default refinement in
+    __refine.top.
+
+07-16-1994:
+  - Added full-proof atom building capability to the build() routine.
+    Atom always built, it is just a question what the coordinates are.
+    This is usefule when IC entries not sufficient for building (e.g.
+    only CA atoms available).
+  - Added CHI5_DIHEDRAL type restraint to getcsr()/mdtcsr() and updated
+    types.cst, TOP files in tests and scripts from 23 to 24 physical
+    feature types to reflect this.
+
+07-03-1994:
+  - Added the SEARCH_SORT TOP variable for seqsearch().
+  - Corrected small problems in Makefile to do with deleting Makefile.hosttype.
+  - Improved ALIGN3D by adding the option of the Subbiah/Laurents/Levitt
+    transformation of distances (ALIGN3D_TRF variable) and by allowing for
+    three additional initial alignments (ALIGN3D_REPEAT variable).
+
+06-25-1994:
+  - Adapted Makefile and system() to run on CRAY C90.
+  - Corrected a small bug in describe().
+  - Corrected a serious bug in seqsearch() which caused wrong %ID.
+
+06-14-1994:
+  - Added the MUTATE_MODEL command to mutate model sequence easily.
+
+06-10-1994:
+  - Added the handling for the distribution of the executables only.
+  - Added the ATOM_FILES_DIRECTORY TOP variable.
+
+06-01-1994:
+  - Corrected the S-S problem in the TOP scripts for homology modelling: the
+    S-S bonds were forgotten when GENERATE_MOLECULE was executed again in the
+    later stages of modelling without repeating the 'special_patches' call, too.
+
+05-23-1994:
+  - Corrected fmakedepend handling for automated dependency generation in
+    Makefile.
+  - Added install script to the root directory for easy interactive
+    installation.
+  - Clarified the roles of GENERATE_MOELCULE and READ_MODEL commands. Made
+    appropriate changes to the code and to the tests/*.top files.
+  - Introduced automated segment naming for PDB and CHARMM atom file I/O.
+
+05-22-1994:
+  - Added automated unique segment name generation to wrpdb2 for writing PDB
+    files.
+
+05-15-1994:
+  - A serious 'TOP routine name duplication' bug corrected in top1.F (only
+    had an effect when TOP routines were re-defined: e.g. __cispeptide,
+    __disulfide).
+  - The ELEC, ELEC14, LJ, and LJ14 restraint types added to MAKE_RESTRAINTS
+    and cross-checked with CHARMM. Reading the second set of LJ parameters
+    in the CHARMM parameter file for LJ14 implemented.
+  - mkexcl() routine generalized and corrected: excluded atom pairs are
+    derived from the list of bonds, angles, dihedrals, and explicitly excluded
+    pairs; not from stereochemical restraints anymore.
+  - BUILD generalized so that if the first three seed atoms do not result
+    in all the coordinates built with the given IC entries, other seed atoms
+    are tried. A bug in accic() corrected which sometime removed useful IC
+    entries.
+  - PMF (potential of mean force) routine added with TOP variable PMF_GRID.
+  - TOP variable RELATIVE_DIELECTRIC added for ELEC and ELEC14.
+    TOP variable PATCH_DEFAULT added for GENERATE_MOLECULE command.
+    TOP variable INTERSEGMENT added for MAKE_RESTRAINTS command.
+    TOP variable PMF_GRID added for PMF command.
+  - TOP variable ADD_RESTRAINTS got a meaning for PICK_RESTRAINTS;
+    adds the newly picked restraints if ADD_RESTRAINTS = ON.
+  - New test top files added to tests/pmf and tests/energy_debug (vdw*, elec*).
+  - Two new IC entries added to top.lib to allow BUILDing of individual
+    residues without patches.
+  - __homol.top modified so that exit after restraints calculation is possible.
+  - __homol.top modified so that .csr file always calculated so that possible
+    disulfide PATCH is always reflected in the template's topology arrays;
+    before, S-S were also restrained by the non-bonded restraints. This
+    could be done better with proper GENERATE_MOLECULE use.
+
+05-01-1994:
+  - OUTPUT = NO_ALIGNMENT option added to ALIGN3D and MALIGN3D.
+
+04-22-1994:
+  - __single_model.top corrected so that it did not boink out when no
+    refinement was done and SCHEDULE_STEP was out of range for a subsequent
+    energy evaluation (a bug discovered by Liz Potterton).
+
+03-22-1994:
+  - Added TOP variable RESTRAINT_STDEV which defines the standard deviation
+    of the Gaussians when DISTANCE_RSR_MODEL = 7 in MAKE_RESTRAINTS.
+  - Unified the numbers of residue types so that the MODELLER residue types
+    close to 100 are recognized everywhere. The previous code sometimes
+    recognized only the 20 standard residues.
+  - Added tests/prosthetic/tst2.top to illustrate homology modeling with
+    prosthetic groups.
+  - Changed dih3.F, psa.F, and ngh1.F to write out the HETATM residues so that
+    the .dih, .ngh, and .psa files have exactly the same sequence as the PDB
+    files with HETATM.
+
+03-17-1994:
+  - Added QUANTA alignment format for READ_ALIGNMENT and WRITE_ALIGNMENT.
+  - Added some arrays about segments in MODEL, MODEL2 and sequences in the
+    alignment arrays. Not finished yet.
+  - Added MALIGN3D and MALIGN, improved ALIGN, and ALIGN3D.
+    Added TOP variable ALIGN_BLOCK.
+  - Added scripts __full_homol.top and __align_strs_seq.top for
+    homology modelling from a list of structures and a sequence only (all
+    alignments are derived automatically).
+  - Created tests/malign3d, tests/full_homol, tests/align3d.
+  - Re-tested all tests/*.
+  - Updated the manual to reflect the new changes.
+  - Corrected the automatically derived top_ca.lib to allow BUILD to work.
+  - Added SEQUENCE_TO_ALI command for copying MODEL sequence to alignment
+    arrays.
+  - Added top variable ADD_SEQUENCES for adding sequences/alignment to existing
+    sequences/alignment.
+  - Added TOP variable NUMB_OF_SEQUENCES.
+  - Added TOP variables MODELLER_STATUS and STOP_STATUS to READ_ALIGNMENT and
+    all the alignment routines. Updated the meaning of these for OPTIMIZATION.
+  - Added an option in the ENERGY command that Biso column of the PDB file
+    becomes the average residue violation (when OUTPUT='RESIDUE_VIOLATIONS')
+    for displaying on the graphics screen.

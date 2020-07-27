@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018.3 (Released July 19, 2018) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>alignment.describe() &mdash; describe proteins</TITLE>
+<META NAME="description" CONTENT="alignment.describe() &mdash; describe proteins">
+<META NAME="keywords" CONTENT="manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018.3">
+
+<LINK REL="STYLESHEET" HREF="manual.css">
+<LINK REL="STYLESHEET" HREF="pygments.css">
+
+<LINK REL="next" HREF="node307.html">
+<LINK REL="previous" HREF="node305.html">
+<LINK REL="next" HREF="node307.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node307.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node290.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node305.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html3378"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A> 
+<A ID="tex2html3380"
+  HREF="node513.html">
+<IMG WIDTH="43" HEIGHT="24" ALT="index" SRC="index.png"></A> 
+<BR>
+<B> Next:</B> <A
+ HREF="node307.html">alignment.id_table()   calculate</A>
+<B> Up:</B> <A
+ HREF="node290.html">The alignment class: comparison</A>
+<B> Previous:</B> <A
+ HREF="node305.html">alignment.edit()   edit</A>
+ &nbsp; <B>  <A ID="tex2html3379"
+  HREF="node1.html">Contents</A></B> 
+ &nbsp; <B>  <A ID="tex2html3381"
+  HREF="node513.html">Index</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A ID="SECTION00111616000000000000000">
+alignment.describe() &mdash; describe proteins</A>
+</H2> <A NAME="28827"></A><A ID="CMD:alignment.describe"></A>
+<A NAME="28830"></A><TT>describe(io=None)</TT>
+<BR>
+<BLOCKQUOTE>
+This command outputs basic data about the proteins in the
+current alignment (<EM>e.g.</EM>as read in by <B><A HREF="node294.html#CMD:alignment.append">alignment.append()</A></B><A NAME="28839"></A>).
+This command is useful for preparation before comparative
+modeling because it summarizes disulfides, <EM>cis</EM>-prolines, charges,
+chain breaks, <EM>etc</EM>. Results which depend only on the amino acid sequences
+are still written out even if some atom files do not exist.
+                             
+</BLOCKQUOTE>
+
+<P>
+
+  <DL>
+<DT><STRONG>Example: <A ID="tex2html173"
+  HREF="../examples/commands/describe.py">examples/commands/describe.py</A></STRONG></DT>
+<DD> <BR>  <div class="pygments"><pre><span></span><span class="c1"># Example for: alignment.describe()</span>
+
+<span class="c1"># Describe the sequences and structures in the alignment.</span>
+
+<span class="kn">from</span> <span class="nn">modeller</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">env</span> <span class="o">=</span> <span class="n">environ</span><span class="p">()</span>
+<span class="n">env</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">atom_files_directory</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;../atom_files&#39;</span><span class="p">]</span>
+<span class="n">aln</span> <span class="o">=</span> <span class="n">alignment</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="s1">&#39;toxin.ali&#39;</span><span class="p">,</span> <span class="n">align_codes</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;2ctx&#39;</span><span class="p">,</span> <span class="s1">&#39;2abx&#39;</span><span class="p">))</span>
+<span class="n">aln</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+  
+</DD>
+</DL>  <BR>
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018.3 (Released July 19, 2018) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>model.orient() &mdash; center and orient MODEL</TITLE>
+<META NAME="description" CONTENT="model.orient() &mdash; center and orient MODEL">
+<META NAME="keywords" CONTENT="manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018.3">
+
+<LINK REL="STYLESHEET" HREF="manual.css">
+<LINK REL="STYLESHEET" HREF="pygments.css">
+
+<LINK REL="next" HREF="node196.html">
+<LINK REL="previous" HREF="node194.html">
+<LINK REL="next" HREF="node196.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node196.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node164.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node194.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html2822"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A> 
+<A ID="tex2html2824"
+  HREF="node513.html">
+<IMG WIDTH="43" HEIGHT="24" ALT="index" SRC="index.png"></A> 
+<BR>
+<B> Next:</B> <A
+ HREF="node196.html">model.write_data()   write</A>
+<B> Up:</B> <A
+ HREF="node164.html">The model class: handling</A>
+<B> Previous:</B> <A
+ HREF="node194.html">model.reorder_atoms()   standardize</A>
+ &nbsp; <B>  <A ID="tex2html2823"
+  HREF="node1.html">Contents</A></B> 
+ &nbsp; <B>  <A ID="tex2html2825"
+  HREF="node513.html">Index</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A ID="SECTION0011631000000000000000">
+model.orient() &mdash; center and orient MODEL</A>
+</H2> <A NAME="15755"></A><A ID="CMD:model.orient"></A>
+<A NAME="15758"></A><TT>orient()</TT>
+<BR>
+<DL>
+<DT><STRONG>Output:</STRONG></DT>
+<DD><I CLASS="sans">OrientData</I><A NAME="15765"></A> object
+                             
+</DD>
+</DL>
+
+<P>
+<BLOCKQUOTE>
+This command translates the MODEL so that its gravity center
+is at the origin of the coordinate system and that the 
+three principal axes of the model's inertia ellipsoid 
+correspond to the <SPAN CLASS="MATH"><IMG STYLE="height: 1.12ex; vertical-align: -0.12ex; " SRC="img48.png"
+ ALT="$x$"></SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 1.54ex; vertical-align: -0.57ex; " SRC="img49.png"
+ ALT="$y$"></SPAN>, and <SPAN CLASS="MATH"><IMG STYLE="height: 1.12ex; vertical-align: -0.12ex; " SRC="img50.png"
+ ALT="$z$"></SPAN> axes of the coordinate system.
+It may even be used for approximate superposition if
+molecules have a similar non-spherical shape. Information about
+the principal axes is written to the <TT>log</TT> file.
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>On successful completion, an <I CLASS="sans">OrientData</I><A NAME="15778"></A> object is returned; for instance,
+if you save this in a variable 'r', the following data are available:
+</BLOCKQUOTE>
+
+<UL>
+<LI><TT>r.translation</TT>; the translation used to transform <I CLASS="sans">mdl</I><A NAME="15782"></A> to the center of mass
+</LI>
+<LI><TT>r.rotation</TT>; the rotation matrix used to transform <I CLASS="sans">mdl</I><A NAME="15786"></A> (applied after the translation)
+</LI>
+</UL>
+
+<P>
+
+  <DL>
+<DT><STRONG>Example: <A ID="tex2html114"
+  HREF="../examples/commands/orient_model.py">examples/commands/orient_model.py</A></STRONG></DT>
+<DD> <BR>  <div class="pygments"><pre><span></span><span class="c1"># Example for: model.orient()</span>
+
+<span class="c1"># This will orient the model along the principal axes of the inertia ellipsoid:</span>
+
+<span class="kn">from</span> <span class="nn">modeller</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">env</span> <span class="o">=</span> <span class="n">environ</span><span class="p">()</span>
+<span class="n">env</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">atom_files_directory</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;../atom_files&#39;</span><span class="p">]</span>
+<span class="n">mdl</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
+<span class="n">mdl</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="nb">file</span><span class="o">=</span><span class="s1">&#39;1fas&#39;</span><span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">mdl</span><span class="o">.</span><span class="n">orient</span><span class="p">()</span>
+<span class="n">mdl</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">file</span><span class="o">=</span><span class="s1">&#39;1fas.ini&#39;</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Translation: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">translation</span><span class="p">))</span>
+</pre></div>
+  
+</DD>
+</DL>  <BR>
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

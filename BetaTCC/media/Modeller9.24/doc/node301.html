@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018.3 (Released July 19, 2018) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>alignment.append_model() &mdash; copy model sequence and coordinates to alignment</TITLE>
+<META NAME="description" CONTENT="alignment.append_model() &mdash; copy model sequence and coordinates to alignment">
+<META NAME="keywords" CONTENT="manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018.3">
+
+<LINK REL="STYLESHEET" HREF="manual.css">
+<LINK REL="STYLESHEET" HREF="pygments.css">
+
+<LINK REL="next" HREF="node302.html">
+<LINK REL="previous" HREF="node300.html">
+<LINK REL="next" HREF="node302.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node302.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node290.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node300.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html3358"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A> 
+<A ID="tex2html3360"
+  HREF="node513.html">
+<IMG WIDTH="43" HEIGHT="24" ALT="index" SRC="index.png"></A> 
+<BR>
+<B> Next:</B> <A
+ HREF="node302.html">alignment.append_sequence()   add</A>
+<B> Up:</B> <A
+ HREF="node290.html">The alignment class: comparison</A>
+<B> Previous:</B> <A
+ HREF="node300.html">alignment.compare_with()   compare</A>
+ &nbsp; <B>  <A ID="tex2html3359"
+  HREF="node1.html">Contents</A></B> 
+ &nbsp; <B>  <A ID="tex2html3361"
+  HREF="node513.html">Index</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A ID="SECTION00111611000000000000000">
+alignment.append_model() &mdash; copy model sequence and coordinates to alignment</A>
+</H2> <A NAME="28461"></A><A ID="CMD:alignment.appendmodel"></A>
+<A NAME="28464"></A><TT>append_model(mdl, align_codes, atom_files=&rdquo;)</TT>
+<BR>
+<BLOCKQUOTE>
+This command adds the sequence and coordinates of the 
+given model, <I CLASS="sans">mdl</I><A NAME="28479"></A>, to the end of the current alignment.
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>You should additionally set <I CLASS="sans">align_codes</I><A NAME="28482"></A> and <I CLASS="sans">atom_files</I><A NAME="28485"></A> to the
+PDB ID and file name, respectively. This information is added to the
+alignment with the new sequence. (Alternatively, you can set this information
+later by setting <I CLASS="sans"><A HREF="node322.html#MEMB:Sequence.code">Sequence.code</A></I><A NAME="28488"></A> and <I CLASS="sans"><A HREF="node323.html#MEMB:Sequence.atomfile">Sequence.atom_file</A></I><A NAME="28493"></A>.)
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>This command can raise a <TT>ValueError</TT><A NAME="28498"></A> if the align code is too long (see
+<I CLASS="sans"><A HREF="node322.html#MEMB:Sequence.code">Sequence.code</A></I><A NAME="28500"></A>.)
+
+</BLOCKQUOTE>
+
+<P>
+
+  <DL>
+<DT><STRONG>Example: <A ID="tex2html171"
+  HREF="../examples/commands/aln_append_model.py">examples/commands/aln_append_model.py</A></STRONG></DT>
+<DD> <BR>  <div class="pygments"><pre><span></span><span class="c1"># This demonstrates one way to generate an initial alignment between two</span>
+<span class="c1"># PDB sequences. It can later be edited by hand.</span>
+
+<span class="c1"># Set Modeller environment (including search patch for model.read())</span>
+<span class="kn">from</span> <span class="nn">modeller</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">env</span> <span class="o">=</span> <span class="n">environ</span><span class="p">()</span>
+<span class="n">env</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">atom_files_directory</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="s2">&quot;../atom_files/&quot;</span><span class="p">]</span>
+
+<span class="c1"># Create a new empty alignment and model:</span>
+<span class="n">aln</span> <span class="o">=</span> <span class="n">alignment</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
+<span class="n">mdl</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
+
+<span class="c1"># Read the whole 1fdn atom file</span>
+<span class="n">code</span><span class="o">=</span><span class="s1">&#39;1fdn&#39;</span>
+<span class="n">mdl</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="nb">file</span><span class="o">=</span><span class="n">code</span><span class="p">,</span> <span class="n">model_segment</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;FIRST:@&#39;</span><span class="p">,</span> <span class="s1">&#39;END:&#39;</span><span class="p">))</span>
+
+<span class="c1"># Add the model sequence to the alignment</span>
+<span class="n">aln</span><span class="o">.</span><span class="n">append_model</span><span class="p">(</span><span class="n">mdl</span><span class="p">,</span> <span class="n">align_codes</span><span class="o">=</span><span class="n">code</span><span class="p">,</span> <span class="n">atom_files</span><span class="o">=</span><span class="n">code</span><span class="p">)</span>
+
+<span class="c1"># Read 5fd1 atom file chain A from 1-63, and add to alignment</span>
+<span class="n">code</span><span class="o">=</span><span class="s1">&#39;5fd1&#39;</span>
+<span class="n">mdl</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="nb">file</span><span class="o">=</span><span class="n">code</span><span class="p">,</span> <span class="n">model_segment</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;1:A&#39;</span><span class="p">,</span> <span class="s1">&#39;63:A&#39;</span><span class="p">))</span>
+<span class="n">aln</span><span class="o">.</span><span class="n">append_model</span><span class="p">(</span><span class="n">mdl</span><span class="p">,</span> <span class="n">align_codes</span><span class="o">=</span><span class="n">code</span><span class="p">,</span> <span class="n">atom_files</span><span class="o">=</span><span class="n">code</span><span class="p">)</span>
+
+<span class="c1"># Align them by sequence</span>
+<span class="n">aln</span><span class="o">.</span><span class="n">malign</span><span class="p">(</span><span class="n">gap_penalties_1d</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">500</span><span class="p">,</span> <span class="o">-</span><span class="mi">300</span><span class="p">))</span>
+<span class="n">aln</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">file</span><span class="o">=</span><span class="s1">&#39;fer1-seq.ali&#39;</span><span class="p">)</span>
+
+<span class="c1"># Align them by structure</span>
+<span class="n">aln</span><span class="o">.</span><span class="n">malign3d</span><span class="p">(</span><span class="n">gap_penalties_3d</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">))</span>
+
+<span class="c1"># check the alignment for its suitability for modeling</span>
+<span class="n">aln</span><span class="o">.</span><span class="n">check</span><span class="p">()</span>
+
+<span class="n">aln</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">file</span><span class="o">=</span><span class="s1">&#39;fer1.ali&#39;</span><span class="p">)</span>
+</pre></div>
+  
+</DD>
+</DL>  <BR>
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

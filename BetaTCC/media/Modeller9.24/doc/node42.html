@@ -1,0 +1,198 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018.3 (Released July 19, 2018) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>Comparative modeling class reference</TITLE>
+<META NAME="description" CONTENT="Comparative modeling class reference">
+<META NAME="keywords" CONTENT="manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018.3">
+
+<LINK REL="STYLESHEET" HREF="manual.css">
+<LINK REL="STYLESHEET" HREF="pygments.css">
+
+<LINK REL="next" HREF="node100.html">
+<LINK REL="previous" HREF="node37.html">
+<LINK REL="next" HREF="node43.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node43.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="manual.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node41.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html1595"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A> 
+<A ID="tex2html1597"
+  HREF="node513.html">
+<IMG WIDTH="43" HEIGHT="24" ALT="index" SRC="index.png"></A> 
+<BR>
+<B> Next:</B> <A
+ HREF="node43.html">automodel reference</A>
+<B> Up:</B> <A
+ HREF="manual.html">MODELLER A Program for</A>
+<B> Previous:</B> <A
+ HREF="node41.html">Changes since release 9.22</A>
+ &nbsp; <B>  <A ID="tex2html1596"
+  HREF="node1.html">Contents</A></B> 
+ &nbsp; <B>  <A ID="tex2html1598"
+  HREF="node513.html">Index</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION00900000000000000000"></A>
+    <A ID="CHAPTERAUTOMODELREF"></A>
+<BR>
+Comparative modeling class reference
+</H1>
+    <BR><HR>
+<!--Table of Child-Links-->
+<A ID="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A ID="tex2html1599"
+  HREF="node43.html"><TT>automodel</TT> reference</A>
+<UL>
+<LI><A ID="tex2html1600"
+  HREF="node44.html">automodel() &mdash; prepare to build one or more comparative models</A>
+<LI><A ID="tex2html1601"
+  HREF="node45.html">automodel.library_schedule &mdash; select optimization schedule</A>
+<LI><A ID="tex2html1602"
+  HREF="node46.html">automodel.md_level &mdash; control the model refinement level</A>
+<LI><A ID="tex2html1603"
+  HREF="node47.html">automodel.outputs &mdash; all output data for generated models</A>
+<LI><A ID="tex2html1604"
+  HREF="node48.html">automodel.rand_method &mdash; control initial model randomization</A>
+<LI><A ID="tex2html1605"
+  HREF="node49.html">automodel.generate_method &mdash; control initial model generation</A>
+<LI><A ID="tex2html1606"
+  HREF="node50.html">automodel.max_var_iterations &mdash; select length of optimizations</A>
+<LI><A ID="tex2html1607"
+  HREF="node51.html">automodel.repeat_optimization &mdash; number of times to repeat optimization</A>
+<LI><A ID="tex2html1608"
+  HREF="node52.html">automodel.max_molpdf &mdash; objective function cutoff</A>
+<LI><A ID="tex2html1609"
+  HREF="node53.html">automodel.initial_malign3d &mdash; initial template alignment</A>
+<LI><A ID="tex2html1610"
+  HREF="node54.html">automodel.starting_model &mdash; first model to build</A>
+<LI><A ID="tex2html1611"
+  HREF="node55.html">automodel.ending_model &mdash; last model to build</A>
+<LI><A ID="tex2html1612"
+  HREF="node56.html">automodel.final_malign3d &mdash; final template-model alignment</A>
+<LI><A ID="tex2html1613"
+  HREF="node57.html">automodel.write_intermediates &mdash; write intermediate files during optimization</A>
+<LI><A ID="tex2html1614"
+  HREF="node58.html">automodel.trace_output &mdash; control optimization output</A>
+<LI><A ID="tex2html1615"
+  HREF="node59.html">automodel.max_ca_ca_distance &mdash; Distance cutoff for CA-CA homology-derived restraints</A>
+<LI><A ID="tex2html1616"
+  HREF="node60.html">automodel.max_n_o_distance &mdash; Distance cutoff for N-O homology-derived restraints</A>
+<LI><A ID="tex2html1617"
+  HREF="node61.html">automodel.max_sc_mc_distance &mdash; Distance cutoff for sidechain-mainchain homology-derived restraints</A>
+<LI><A ID="tex2html1618"
+  HREF="node62.html">automodel.max_sc_sc_distance &mdash; Distance cutoff for sidechain-sidechain homology-derived restraints</A>
+<LI><A ID="tex2html1619"
+  HREF="node63.html">automodel.blank_single_chain &mdash; Control chain ID for single-chain models</A>
+<LI><A ID="tex2html1620"
+  HREF="node64.html">automodel.set_output_model_format() &mdash; set format for output models</A>
+<LI><A ID="tex2html1621"
+  HREF="node65.html">automodel.get_optimize_actions() &mdash; get actions to carry out during the initial optimization</A>
+<LI><A ID="tex2html1622"
+  HREF="node66.html">automodel.get_refine_actions() &mdash; get actions to carry out during the refinement</A>
+<LI><A ID="tex2html1623"
+  HREF="node67.html">automodel.select_atoms() &mdash; select region for optimization and assessment</A>
+<LI><A ID="tex2html1624"
+  HREF="node68.html">automodel.auto_align() &mdash; generate an automatic initial alignment</A>
+<LI><A ID="tex2html1625"
+  HREF="node69.html">automodel.very_fast() &mdash; request rapid optimization</A>
+<LI><A ID="tex2html1626"
+  HREF="node70.html">automodel.make() &mdash; build all models</A>
+<LI><A ID="tex2html1627"
+  HREF="node71.html">automodel.cluster() &mdash; cluster all built models</A>
+<LI><A ID="tex2html1628"
+  HREF="node72.html">automodel.special_restraints() &mdash; add additional restraints</A>
+<LI><A ID="tex2html1629"
+  HREF="node73.html">automodel.nonstd_restraints() &mdash; add restraints on ligands</A>
+<LI><A ID="tex2html1630"
+  HREF="node74.html">automodel.special_patches() &mdash; add additional patches to the topology</A>
+<LI><A ID="tex2html1631"
+  HREF="node75.html">automodel.user_after_single_model() &mdash; analyze or refine each model</A>
+<LI><A ID="tex2html1632"
+  HREF="node76.html">automodel.get_model_filename() &mdash; get the model PDB/mmCIF name</A>
+<LI><A ID="tex2html1633"
+  HREF="node77.html">automodel.use_parallel_job() &mdash; parallelize model building</A>
+<LI><A ID="tex2html1634"
+  HREF="node78.html">automodel.guess_atom_types() &mdash; automatically assign C<SMALL>HARMM</SMALL> atom types</A>
+<LI><A ID="tex2html1635"
+  HREF="node79.html">automodel.guess_atom_type() &mdash; automatically assign C<SMALL>HARMM</SMALL> atom type</A>
+</UL>
+<BR>
+<LI><A ID="tex2html1636"
+  HREF="node80.html"><TT>allhmodel</TT> reference</A>
+<UL>
+<LI><A ID="tex2html1637"
+  HREF="node81.html">allhmodel() &mdash; prepare to build all-hydrogen models</A>
+</UL>
+<BR>
+<LI><A ID="tex2html1638"
+  HREF="node82.html"><TT>loopmodel</TT> reference</A>
+<UL>
+<LI><A ID="tex2html1639"
+  HREF="node83.html">loopmodel() &mdash; prepare to build models with loop refinement</A>
+<LI><A ID="tex2html1640"
+  HREF="node84.html">loopmodel.loop.md_level &mdash; control the loop model refinement level</A>
+<LI><A ID="tex2html1641"
+  HREF="node85.html">loopmodel.loop.max_var_iterations &mdash; select length of optimizations</A>
+<LI><A ID="tex2html1642"
+  HREF="node86.html">loopmodel.loop.library_schedule &mdash; select optimization schedule</A>
+<LI><A ID="tex2html1643"
+  HREF="node87.html">loopmodel.loop.starting_model &mdash; first loop model to build</A>
+<LI><A ID="tex2html1644"
+  HREF="node88.html">loopmodel.loop.ending_model &mdash; last loop model to build</A>
+<LI><A ID="tex2html1645"
+  HREF="node89.html">loopmodel.loop.write_selection_only &mdash; write PDB/mmCIFs containing only the loops</A>
+<LI><A ID="tex2html1646"
+  HREF="node90.html">loopmodel.loop.write_defined_only &mdash; only write non-loop atoms present in the input model</A>
+<LI><A ID="tex2html1647"
+  HREF="node91.html">loopmodel.loop.outputs &mdash; all output data for generated loop models</A>
+<LI><A ID="tex2html1648"
+  HREF="node92.html">loopmodel.select_loop_atoms() &mdash; select region for loop optimization and assessment</A>
+<LI><A ID="tex2html1649"
+  HREF="node93.html">loopmodel.get_loop_model_filename() &mdash; get the model PDB/mmCIF name</A>
+<LI><A ID="tex2html1650"
+  HREF="node94.html">loopmodel.user_after_single_loop_model() &mdash; analyze or refine each loop model</A>
+<LI><A ID="tex2html1651"
+  HREF="node95.html">loopmodel.read_potential() &mdash; read in the loop modeling potential</A>
+<LI><A ID="tex2html1652"
+  HREF="node96.html">loopmodel.build_ini_loop() &mdash; create the initial conformation of the loop</A>
+</UL>
+<BR>
+<LI><A ID="tex2html1653"
+  HREF="node97.html"><TT>dope_loopmodel</TT> reference</A>
+<UL>
+<LI><A ID="tex2html1654"
+  HREF="node98.html">dope_loopmodel() &mdash; prepare to build models with DOPE loop refinement</A>
+</UL>
+<BR>
+<LI><A ID="tex2html1655"
+  HREF="node99.html"><TT>dopehr_loopmodel</TT> reference</A>
+</UL>
+<!--End of Table of Child-Links-->
+<BR><HR>
+
+</BODY>
+</HTML>

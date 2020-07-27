@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018.3 (Released July 19, 2018) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>modfile.File() &mdash; open a handle to a MODELLER file</TITLE>
+<META NAME="description" CONTENT="modfile.File() &mdash; open a handle to a MODELLER file">
+<META NAME="keywords" CONTENT="manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018.3">
+
+<LINK REL="STYLESHEET" HREF="manual.css">
+<LINK REL="STYLESHEET" HREF="pygments.css">
+
+<LINK REL="previous" HREF="node452.html">
+<LINK REL="next" HREF="node454.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node454.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node449.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node452.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html4092"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A> 
+<A ID="tex2html4094"
+  HREF="node513.html">
+<IMG WIDTH="43" HEIGHT="24" ALT="index" SRC="index.png"></A> 
+<BR>
+<B> Next:</B> <A
+ HREF="node454.html">The scripts module: utility</A>
+<B> Up:</B> <A
+ HREF="node449.html">The modfile module: handling</A>
+<B> Previous:</B> <A
+ HREF="node452.html">modfile.inquire()   check</A>
+ &nbsp; <B>  <A ID="tex2html4093"
+  HREF="node1.html">Contents</A></B> 
+ &nbsp; <B>  <A ID="tex2html4095"
+  HREF="node513.html">Index</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A ID="SECTION0011324000000000000000">
+modfile.File() &mdash; open a handle to a M<SMALL>ODELLER</SMALL> file</A>
+</H2> <A NAME="40718"></A><A ID="CMD:modfile.File"></A>
+<A NAME="40723"></A><TT>File(filename, mode='r')</TT>
+<BR>
+<BLOCKQUOTE>
+This opens a file and returns a handle object, which can be used for methods
+that need an open file, such as <B><A HREF="node296.html#CMD:alignment.readone">alignment.read_one()</A></B><A NAME="40744"></A>. Many methods (such
+as <B><A HREF="node181.html#CMD:model.write">model.write()</A></B><A NAME="40749"></A>) can also be given a writeable file handle, to have them
+append their output to that file rather than creating a new one. (They can also
+be given a <A ID="tex2html231"
+  HREF="https://www.python.org/">Python</A> filelike object, such as <TT>sys.stdout</TT> or <TT>io.StringIO</TT>,
+to write to a Python file; however, this is less efficient as it must call
+Python functions to do the IO.) Similarly, many methods (such as
+<B><A HREF="node179.html#CMD:model.read">model.read()</A></B><A NAME="40759"></A> can be given a readable file handle, or a <A ID="tex2html232"
+  HREF="https://www.python.org/">Python</A> filelike
+object.
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>The file is closed automatically when the handle object is deleted, or
+explicitly by calling its <TT>close</TT> method.
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>The <I CLASS="sans">mode</I><A NAME="40768"></A> argument functions similarly to that used by C or <A ID="tex2html233"
+  HREF="https://www.python.org/">Python</A>; <EM>i.e.</EM>,
+the following modes are acceptable: <TT>'r'</TT>, <TT>'w'</TT>, <TT>'rb'</TT> and <TT>'wb'</TT>, to open
+a file for reading in text mode, writing in text mode, reading in binary mode,
+or writing in binary mode, respectively. Note that while only Windows operating
+systems make a distinction between text and binary mode, M<SMALL>ODELLER</SMALL> will do
+some additional checks on text format files to catch common mistakes
+(<EM>e.g.</EM>, trying to read a Unicode rather than plain text file) so you should use
+the <TT>'b'</TT> suffix on all platforms if you are using binary files.
+
+</BLOCKQUOTE>
+<B>Example:</B> See <B><A HREF="node296.html#CMD:alignment.readone">alignment.read_one()</A></B><A NAME="40786"></A> command.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node454.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node449.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node452.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html4092"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A> 
+<A ID="tex2html4094"
+  HREF="node513.html">
+<IMG WIDTH="43" HEIGHT="24" ALT="index" SRC="index.png"></A> 
+<BR>
+<B> Next:</B> <A
+ HREF="node454.html">The scripts module: utility</A>
+<B> Up:</B> <A
+ HREF="node449.html">The modfile module: handling</A>
+<B> Previous:</B> <A
+ HREF="node452.html">modfile.inquire()   check</A>
+ &nbsp; <B>  <A ID="tex2html4093"
+  HREF="node1.html">Contents</A></B> 
+ &nbsp; <B>  <A ID="tex2html4095"
+  HREF="node513.html">Index</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

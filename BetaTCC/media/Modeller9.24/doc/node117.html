@@ -1,0 +1,149 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018.3 (Released July 19, 2018) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>environ() &mdash; create a new MODELLER environment</TITLE>
+<META NAME="description" CONTENT="environ() &mdash; create a new MODELLER environment">
+<META NAME="keywords" CONTENT="manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018.3">
+
+<LINK REL="STYLESHEET" HREF="manual.css">
+<LINK REL="STYLESHEET" HREF="pygments.css">
+
+<LINK REL="next" HREF="node118.html">
+<LINK REL="previous" HREF="node116.html">
+<LINK REL="next" HREF="node118.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node118.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node116.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node116.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html2434"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A> 
+<A ID="tex2html2436"
+  HREF="node513.html">
+<IMG WIDTH="43" HEIGHT="24" ALT="index" SRC="index.png"></A> 
+<BR>
+<B> Next:</B> <A
+ HREF="node118.html">environ.io   default</A>
+<B> Up:</B> <A
+ HREF="node116.html">The environ class: MODELLER</A>
+<B> Previous:</B> <A
+ HREF="node116.html">The environ class: MODELLER</A>
+ &nbsp; <B>  <A ID="tex2html2435"
+  HREF="node1.html">Contents</A></B> 
+ &nbsp; <B>  <A ID="tex2html2437"
+  HREF="node513.html">Index</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A ID="SECTION001121000000000000000">
+environ() &mdash; create a new M<SMALL>ODELLER</SMALL> environment</A>
+</H2> <A NAME="10831"></A><A ID="CMD:environ"></A>
+<A NAME="10836"></A><TT>environ(rand_seed=-8123, restyp_lib_file='$(LIB)/restyp.lib', copy=None)</TT>
+<BR>
+<BLOCKQUOTE>
+This creates a new <TT>environ</TT> object. <I CLASS="sans">rand_seed</I><A NAME="10866"></A> is
+used to seed the random number generator used throughout M<SMALL>ODELLER</SMALL>, and should
+be set to a negative integer between <SPAN CLASS="MATH"><IMG STYLE="height: 1.54ex; vertical-align: -0.31ex; " SRC="img30.png"
+ ALT="$-2$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.61ex; vertical-align: -0.31ex; " SRC="img31.png"
+ ALT="$-50000$"></SPAN> if you do not want
+to use the default value. <I CLASS="sans">restyp_lib_file</I><A NAME="10871"></A> specifies the file to read
+the residue type library from; it should be a filename or readable file handle (see <B><A HREF="node453.html#CMD:modfile.File">modfile.File()</A></B><A NAME="10876"></A>).
+If unspecified, the default (<TT>'restyp.lib'</TT>) file
+is used. This file contains the mapping between one-letter residue types and
+CHARMM and PDB names; see the FAQ Section&nbsp;<A HREF="node38.html#SECTION:faq">3.1</A>,
+Question&nbsp;<A HREF="node38.html#FAQ:restop">8</A> for the format of this file.
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>You can assign the new <TT>environ</TT> object to the <A ID="tex2html91"
+  HREF="https://www.python.org/">Python</A> variable
+<TT>'env'</TT> with the following:
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+<BLOCKQUOTE>
+<TT>env = environ()
+</TT></BLOCKQUOTE></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>You can release the object from memory when you no longer need it in standard
+<A ID="tex2html92"
+  HREF="https://www.python.org/">Python</A> fashion, either by an explicit <TT>del(env)</TT> or by reassigning
+<TT>env</TT> to some other object.
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>When you create new M<SMALL>ODELLER</SMALL> objects (such as <TT>model</TT> or
+<TT>alignment</TT> objects) they require an <TT>environ</TT> object, which they
+use for their own default values. Note that each object gets a <EM>copy</EM>
+of the environment, so it is not affected by any changes you make to the global
+environment <EM>after</EM> its creation. You can, however, modify the object's own
+environment directly, by assigning to its <TT>.env</TT> member:
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+<BLOCKQUOTE>
+<TT>env = environ() 
+<BR>
+env.io.hetatm = True     # New objects will read HETATM records from PDB by default 
+<BR>
+mdl = model(env)          # Create new model object (with hetatm=True) 
+<BR>
+mdl.env.io.hetatm = False # hetatm is now False, but only for 'mdl'
+</TT></BLOCKQUOTE></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>If in doubt, set anything you need to set within <TT>environ</TT> <EM>before</EM>
+you create any objects.
+
+</BLOCKQUOTE>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node118.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node116.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node116.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html2434"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A> 
+<A ID="tex2html2436"
+  HREF="node513.html">
+<IMG WIDTH="43" HEIGHT="24" ALT="index" SRC="index.png"></A> 
+<BR>
+<B> Next:</B> <A
+ HREF="node118.html">environ.io   default</A>
+<B> Up:</B> <A
+ HREF="node116.html">The environ class: MODELLER</A>
+<B> Previous:</B> <A
+ HREF="node116.html">The environ class: MODELLER</A>
+ &nbsp; <B>  <A ID="tex2html2435"
+  HREF="node1.html">Contents</A></B> 
+ &nbsp; <B>  <A ID="tex2html2437"
+  HREF="node513.html">Index</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

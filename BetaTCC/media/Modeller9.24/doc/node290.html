@@ -1,0 +1,170 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018.3 (Released July 19, 2018) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>The alignment class: comparison of sequences and structures</TITLE>
+<META NAME="description" CONTENT="The alignment class: comparison of sequences and structures">
+<META NAME="keywords" CONTENT="manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018.3">
+
+<LINK REL="STYLESHEET" HREF="manual.css">
+<LINK REL="STYLESHEET" HREF="pygments.css">
+
+<LINK REL="next" HREF="node320.html">
+<LINK REL="previous" HREF="node283.html">
+<LINK REL="next" HREF="node291.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node291.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node114.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node289.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html3277"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A> 
+<A ID="tex2html3279"
+  HREF="node513.html">
+<IMG WIDTH="43" HEIGHT="24" ALT="index" SRC="index.png"></A> 
+<BR>
+<B> Next:</B> <A
+ HREF="node291.html">alignment()   create</A>
+<B> Up:</B> <A
+ HREF="node114.html">MODELLER command reference</A>
+<B> Previous:</B> <A
+ HREF="node289.html">soap_protein_od.Scorer()   create</A>
+ &nbsp; <B>  <A ID="tex2html3278"
+  HREF="node1.html">Contents</A></B> 
+ &nbsp; <B>  <A ID="tex2html3280"
+  HREF="node513.html">Index</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION0011160000000000000000"></A>
+    <A ID="SECTION:compare"></A>
+<BR>
+The <TT>alignment</TT> class: comparison of sequences and structures
+</H1>
+    <A ID="CLASS:alignment"></A><A NAME="27148"></A>
+This section describes the commands
+for reading, writing, making, analyzing and using the alignments of
+sequences and structures (pairwise and multiple). For the
+underlying dynamic programming methods see Section&nbsp;<A HREF="node482.html#SECTION:comparedesc">A.1</A>.
+
+<P>
+An <TT>alignment</TT> object acts like a regular <A ID="tex2html166"
+  HREF="https://www.python.org/">Python</A> list, where each
+element in the list represents a sequence in the alignment, as a
+<TT>Sequence</TT> object (see Section&nbsp;<A HREF="node320.html#CLASS:Sequence">6.17</A>). The list can be
+indexed in standard Python fashion or by alignment code. Thus, given an
+<TT>alignment</TT> object <TT>aln</TT>, <TT>len(aln)</TT> gives the number of sequences
+in the alignment, <TT>aln[0]</TT> the first sequence, <TT>aln[-1]</TT> the last sequence,
+and <TT>aln['1abcA']</TT> the sequence with alignment code '1abcA'.
+
+<P>
+<BR>
+<BR>
+
+<P>
+<BR><HR>
+<!--Table of Child-Links-->
+<A ID="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A ID="tex2html3281"
+  HREF="node291.html">alignment() &mdash; create a new alignment</A>
+<LI><A ID="tex2html3282"
+  HREF="node292.html">alignment.comments &mdash; alignment file comments</A>
+<LI><A ID="tex2html3283"
+  HREF="node293.html">alignment.positions &mdash; list of residue-residue alignment positions (including gaps)</A>
+<LI><A ID="tex2html3284"
+  HREF="node294.html">alignment.append() &mdash; read sequences and/or their alignment</A>
+<LI><A ID="tex2html3285"
+  HREF="node295.html">alignment.clear() &mdash; delete all sequences from the alignment</A>
+<LI><A ID="tex2html3286"
+  HREF="node296.html">alignment.read_one() &mdash; read sequences one by one from a file</A>
+<LI><A ID="tex2html3287"
+  HREF="node297.html">alignment.check_structure_structure() &mdash; check template structure superpositions</A>
+<LI><A ID="tex2html3288"
+  HREF="node298.html">alignment.check_sequence_structure() &mdash; check sequence/structure alignment for sanity</A>
+<LI><A ID="tex2html3289"
+  HREF="node299.html">alignment.check() &mdash; check alignment for modeling</A>
+<LI><A ID="tex2html3290"
+  HREF="node300.html">alignment.compare_with() &mdash; compare two alignments</A>
+<LI><A ID="tex2html3291"
+  HREF="node301.html">alignment.append_model() &mdash; copy model sequence and coordinates to alignment</A>
+<LI><A ID="tex2html3292"
+  HREF="node302.html">alignment.append_sequence() &mdash; add a sequence from one-letter codes</A>
+<LI><A ID="tex2html3293"
+  HREF="node303.html">alignment.append_profile() &mdash; add profile sequences to the alignment</A>
+<LI><A ID="tex2html3294"
+  HREF="node304.html">alignment.write() &mdash; write sequences and/or their alignment</A>
+<LI><A ID="tex2html3295"
+  HREF="node305.html">alignment.edit() &mdash; edit overhangs in alignment</A>
+<LI><A ID="tex2html3296"
+  HREF="node306.html">alignment.describe() &mdash; describe proteins</A>
+<LI><A ID="tex2html3297"
+  HREF="node307.html">alignment.id_table() &mdash; calculate percentage sequence identities</A>
+<LI><A ID="tex2html3298"
+  HREF="node308.html">alignment.compare_sequences() &mdash; compare sequences in alignment</A>
+<LI><A ID="tex2html3299"
+  HREF="node309.html">alignment.align() &mdash; align two (blocks of) sequences</A>
+<LI><A ID="tex2html3300"
+  HREF="node310.html">alignment.align2d() &mdash; align sequences with structures</A>
+<LI><A ID="tex2html3301"
+  HREF="node311.html">alignment.malign() &mdash; align two or more sequences</A>
+<LI><A ID="tex2html3302"
+  HREF="node312.html">alignment.consensus() &mdash; consensus sequence alignment</A>
+<LI><A ID="tex2html3303"
+  HREF="node313.html">alignment.compare_structures() &mdash; compare 3D structures given alignment</A>
+<LI><A ID="tex2html3304"
+  HREF="node314.html">alignment.align3d() &mdash; align two structures</A>
+<LI><A ID="tex2html3305"
+  HREF="node315.html">alignment.malign3d() &mdash; align two or more structures</A>
+<LI><A ID="tex2html3306"
+  HREF="node316.html">alignment.salign() &mdash; align two or more sequences/structures of proteins</A>
+<UL>
+<LI><A ID="tex2html3307"
+  HREF="node316.html#SECTION00111626100000000000000">Features of proteins used for alignment</A>
+<LI><A ID="tex2html3308"
+  HREF="node316.html#SECTION00111626200000000000000">Alignment of protein sequences</A>
+<LI><A ID="tex2html3309"
+  HREF="node316.html#SECTION00111626300000000000000">Alignment of protein structures with sequences</A>
+<LI><A ID="tex2html3310"
+  HREF="node316.html#SECTION00111626400000000000000">Alignment of protein structures</A>
+<LI><A ID="tex2html3311"
+  HREF="node316.html#SECTION00111626500000000000000">Sub-optimal alignments</A>
+<LI><A ID="tex2html3312"
+  HREF="node316.html#SECTION00111626600000000000000">Alignments using external restraints</A>
+<LI><A ID="tex2html3313"
+  HREF="node316.html#SECTION00111626700000000000000">Gap penalties and correcting for gaps</A>
+<LI><A ID="tex2html3314"
+  HREF="node316.html#SECTION00111626800000000000000">Useful SALIGN information and commands</A>
+</UL>
+<BR>
+<LI><A ID="tex2html3315"
+  HREF="node317.html">alignment.get_suboptimals() &mdash; parse suboptimal alignments file</A>
+<LI><A ID="tex2html3316"
+  HREF="node318.html">alignment.to_profile() &mdash; convert alignment to profile format</A>
+<LI><A ID="tex2html3317"
+  HREF="node319.html">alignment.segment_matching() &mdash; align segments</A>
+</UL>
+<!--End of Table of Child-Links-->
+<BR><HR>
+
+</BODY>
+</HTML>

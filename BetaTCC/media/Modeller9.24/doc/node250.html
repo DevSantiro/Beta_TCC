@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018.3 (Released July 19, 2018) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>selection.transform() &mdash; transform coordinates with a matrix</TITLE>
+<META NAME="description" CONTENT="selection.transform() &mdash; transform coordinates with a matrix">
+<META NAME="keywords" CONTENT="manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018.3">
+
+<LINK REL="STYLESHEET" HREF="manual.css">
+<LINK REL="STYLESHEET" HREF="pygments.css">
+
+<LINK REL="next" HREF="node251.html">
+<LINK REL="previous" HREF="node249.html">
+<LINK REL="next" HREF="node251.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node251.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node231.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node249.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html3097"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A> 
+<A ID="tex2html3099"
+  HREF="node513.html">
+<IMG WIDTH="43" HEIGHT="24" ALT="index" SRC="index.png"></A> 
+<BR>
+<B> Next:</B> <A
+ HREF="node251.html">selection.mutate()   mutate</A>
+<B> Up:</B> <A
+ HREF="node231.html">The selection class: handling</A>
+<B> Previous:</B> <A
+ HREF="node249.html">selection.rotate_mass_center()   rotate</A>
+ &nbsp; <B>  <A ID="tex2html3098"
+  HREF="node1.html">Contents</A></B> 
+ &nbsp; <B>  <A ID="tex2html3100"
+  HREF="node513.html">Index</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A ID="SECTION0011919000000000000000">
+selection.transform() &mdash; transform coordinates with a matrix</A>
+</H2> <A NAME="22421"></A><A ID="CMD:selection.transform"></A>
+<A NAME="22424"></A><TT>transform(matrix)</TT>
+<BR>
+<BLOCKQUOTE>
+This transforms all the selection's coordinates using the given 3x3 matrix. This
+can be used to perform rotations, translations, shears, <EM>etc</EM>.
+
+</BLOCKQUOTE>
+
+  <DL>
+<DT><STRONG>Example: <A ID="tex2html134"
+  HREF="../examples/commands/rotate_model.py">examples/commands/rotate_model.py</A></STRONG></DT>
+<DD> <BR>  <div class="pygments"><pre><span></span><span class="c1"># Example for: selection.transform(), selection.translate(),</span>
+<span class="c1"># selection.rotate_origin()</span>
+
+<span class="c1"># This will orient a model as specified:</span>
+
+<span class="kn">from</span> <span class="nn">modeller</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="c1"># Read the structure:</span>
+<span class="n">env</span> <span class="o">=</span> <span class="n">environ</span><span class="p">()</span>
+<span class="n">env</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">atom_files_directory</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;../atom_files&#39;</span><span class="p">]</span>
+<span class="n">mdl</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="s1">&#39;1fas&#39;</span><span class="p">)</span>
+<span class="c1"># Select all atoms</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">selection</span><span class="p">(</span><span class="n">mdl</span><span class="p">)</span>
+
+<span class="c1"># Translate 1 angstrom along the x axis:</span>
+<span class="n">s</span><span class="o">.</span><span class="n">translate</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+
+<span class="c1"># Transform with a rotation matrix (no change in this example):</span>
+<span class="n">s</span><span class="o">.</span><span class="n">transform</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+             <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+             <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+
+<span class="c1"># Rotate 90 degrees about the axis, through the origin:</span>
+<span class="n">s</span><span class="o">.</span><span class="n">rotate_origin</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="mi">90</span><span class="p">)</span>
+
+<span class="n">mdl</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">file</span><span class="o">=</span><span class="s1">&#39;1fas.ini&#39;</span><span class="p">)</span>
+</pre></div>
+  
+</DD>
+</DL>  <BR>
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

@@ -1,0 +1,162 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018.3 (Released July 19, 2018) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>model.patch() &mdash; patch MODEL topology</TITLE>
+<META NAME="description" CONTENT="model.patch() &mdash; patch MODEL topology">
+<META NAME="keywords" CONTENT="manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018.3">
+
+<LINK REL="STYLESHEET" HREF="manual.css">
+<LINK REL="STYLESHEET" HREF="pygments.css">
+
+<LINK REL="next" HREF="node187.html">
+<LINK REL="previous" HREF="node185.html">
+<LINK REL="next" HREF="node187.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node187.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node164.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node185.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html2786"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A> 
+<A ID="tex2html2788"
+  HREF="node513.html">
+<IMG WIDTH="43" HEIGHT="24" ALT="index" SRC="index.png"></A> 
+<BR>
+<B> Next:</B> <A
+ HREF="node187.html">model.patch_ss_templates()   guess</A>
+<B> Up:</B> <A
+ HREF="node164.html">The model class: handling</A>
+<B> Previous:</B> <A
+ HREF="node185.html">model.write_psf()   write</A>
+ &nbsp; <B>  <A ID="tex2html2787"
+  HREF="node1.html">Contents</A></B> 
+ &nbsp; <B>  <A ID="tex2html2789"
+  HREF="node513.html">Index</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A ID="SECTION0011622000000000000000">
+model.patch() &mdash; patch MODEL topology</A>
+</H2> <A NAME="15334"></A><A ID="CMD:model.patch"></A>     
+<A NAME="15337"></A><TT>patch(residue_type, residues)</TT>
+<BR>
+<BLOCKQUOTE>
+This command uses a C<SMALL>HARMM</SMALL> patching residue to patch 
+the topology of the MODEL. C<SMALL>HARMM</SMALL> patch rules are observed.
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><I CLASS="sans">residue_type</I><A NAME="15364"></A> is the type of the patching residue (<TT>PRES</TT> entry in
+the topology library), such as <TT>'DISU'</TT>, <TT>'NTER'</TT>, <TT>'CTER'</TT>, <EM>etc</EM>.  You do not
+have to apply explicitly the N- and C-terminal patches to protein chains
+because the <TT>'NTER'</TT> and <TT>'CTER'</TT> patches are applied automatically to the 
+appropriate residue types at the termini of each chain at the
+end of each <B><A HREF="node183.html#CMD:model.generatetopology">model.generate_topology()</A></B><A NAME="15374"></A> command. 
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><I CLASS="sans">residues</I><A NAME="15379"></A> should be one or more <TT>Residue</TT> objects to be patched.
+The first residue is the patched residue 1, the second residue is the patched
+residue 2, <EM>etc</EM>;
+for example, the <TT>'DISU'</TT> patching residue has two patched Cys residues
+while the <TT>'ACE'</TT> patching residue has only one patched residue.
+The order of the residue identifiers here has to match the definition
+of the patching residue in the topology library.
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>It is not allowed to patch an already patched residue. Since the
+N- and C-terminal residues of each chain are automatically patched
+with the <TT>'NTER'</TT> and <TT>'CTER'</TT> patching residues, respectively,
+a user who wants to patch the N- or C-terminal residues with other
+patches, should turn the default patching off before executing 
+<B><A HREF="node183.html#CMD:model.generatetopology">model.generate_topology()</A></B><A NAME="15389"></A>. This is achieved by setting
+<I CLASS="sans">patch_default</I><A NAME="15394"></A> = <TT>False</TT>.
+
+</BLOCKQUOTE>
+
+<P>
+
+  <DL>
+<DT><STRONG>Example: <A ID="tex2html105"
+  HREF="../examples/commands/patch.py">examples/commands/patch.py</A></STRONG></DT>
+<DD> <BR>  <div class="pygments"><pre><span></span><span class="c1"># Example for: model.patch(), topology(), parameters.read()</span>
+
+<span class="c1"># This will define a CYS-CYS disulfide bond between residues 3 and 22.</span>
+
+<span class="kn">from</span> <span class="nn">modeller</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">modeller.scripts</span> <span class="kn">import</span> <span class="n">complete_pdb</span>
+
+<span class="n">env</span> <span class="o">=</span> <span class="n">environ</span><span class="p">()</span>
+<span class="n">env</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">atom_files_directory</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;../atom_files&#39;</span><span class="p">]</span>
+<span class="n">env</span><span class="o">.</span><span class="n">libs</span><span class="o">.</span><span class="n">topology</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="nb">file</span><span class="o">=</span><span class="s1">&#39;$(LIB)/top_heav.lib&#39;</span><span class="p">)</span>
+<span class="n">env</span><span class="o">.</span><span class="n">libs</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="nb">file</span><span class="o">=</span><span class="s1">&#39;$(LIB)/par.lib&#39;</span><span class="p">)</span>
+
+<span class="c1"># Create the disulfide bond:</span>
+<span class="k">def</span> <span class="nf">patches</span><span class="p">(</span><span class="n">mdl</span><span class="p">):</span>
+    <span class="n">mdl</span><span class="o">.</span><span class="n">patch</span><span class="p">(</span><span class="n">residue_type</span><span class="o">=</span><span class="s1">&#39;DISU&#39;</span><span class="p">,</span> <span class="n">residues</span><span class="o">=</span><span class="p">(</span><span class="n">mdl</span><span class="o">.</span><span class="n">residues</span><span class="p">[</span><span class="s1">&#39;3:&#39;</span><span class="p">],</span>
+                                             <span class="n">mdl</span><span class="o">.</span><span class="n">residues</span><span class="p">[</span><span class="s1">&#39;22:&#39;</span><span class="p">]))</span>
+<span class="c1"># Read the sequence:</span>
+<span class="n">code</span> <span class="o">=</span> <span class="s1">&#39;1fas&#39;</span>
+<span class="n">mdl</span> <span class="o">=</span> <span class="n">complete_pdb</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">code</span><span class="p">,</span> <span class="n">special_patches</span><span class="o">=</span><span class="n">patches</span><span class="p">)</span>
+
+<span class="c1"># Create the stereochemical restraints</span>
+<span class="n">sel</span> <span class="o">=</span> <span class="n">selection</span><span class="p">(</span><span class="n">mdl</span><span class="p">)</span>
+<span class="n">mdl</span><span class="o">.</span><span class="n">restraints</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">sel</span><span class="p">,</span> <span class="n">restraint_type</span><span class="o">=</span><span class="s1">&#39;stereo&#39;</span><span class="p">,</span> <span class="n">spline_on_site</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+<span class="c1"># Calculate the energy to test the disulfide:</span>
+<span class="n">sel</span><span class="o">.</span><span class="n">energy</span><span class="p">()</span>
+</pre></div>
+  
+</DD>
+</DL>  <BR>
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node187.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node164.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node185.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html2786"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A> 
+<A ID="tex2html2788"
+  HREF="node513.html">
+<IMG WIDTH="43" HEIGHT="24" ALT="index" SRC="index.png"></A> 
+<BR>
+<B> Next:</B> <A
+ HREF="node187.html">model.patch_ss_templates()   guess</A>
+<B> Up:</B> <A
+ HREF="node164.html">The model class: handling</A>
+<B> Previous:</B> <A
+ HREF="node185.html">model.write_psf()   write</A>
+ &nbsp; <B>  <A ID="tex2html2787"
+  HREF="node1.html">Contents</A></B> 
+ &nbsp; <B>  <A ID="tex2html2789"
+  HREF="node513.html">Index</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

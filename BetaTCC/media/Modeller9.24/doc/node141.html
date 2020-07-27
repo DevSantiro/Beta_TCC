@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018.3 (Released July 19, 2018) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>energy_data.nonbonded_sel_atoms &mdash; control interaction with picked atoms</TITLE>
+<META NAME="description" CONTENT="energy_data.nonbonded_sel_atoms &mdash; control interaction with picked atoms">
+<META NAME="keywords" CONTENT="manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018.3">
+
+<LINK REL="STYLESHEET" HREF="manual.css">
+<LINK REL="STYLESHEET" HREF="pygments.css">
+
+<LINK REL="next" HREF="node142.html">
+<LINK REL="previous" HREF="node140.html">
+<LINK REL="next" HREF="node142.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node142.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node126.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node140.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html2548"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A> 
+<A ID="tex2html2550"
+  HREF="node513.html">
+<IMG WIDTH="43" HEIGHT="24" ALT="index" SRC="index.png"></A> 
+<BR>
+<B> Next:</B> <A
+ HREF="node142.html">energy_data.nlogn_use   select</A>
+<B> Up:</B> <A
+ HREF="node126.html">The energy_data class: objective</A>
+<B> Previous:</B> <A
+ HREF="node140.html">energy_data.covalent_cys   use</A>
+ &nbsp; <B>  <A ID="tex2html2549"
+  HREF="node1.html">Contents</A></B> 
+ &nbsp; <B>  <A ID="tex2html2551"
+  HREF="node513.html">Index</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A ID="SECTION0011315000000000000000">
+energy_data.nonbonded_sel_atoms &mdash; control interaction with picked atoms</A>
+</H2> <A NAME="11947"></A><A ID="MEMB:energydata.nonbondedselatoms"></A>
+<P>
+<BLOCKQUOTE>
+This specifies the number of atoms that must be selected in each
+nonbonded pair, in order for the energy term to be calculated. Thus, when only
+a subset of all atoms is used in energy evaluation, this variable controls the
+interaction between the picked atoms and the rest of the
+system. When it is <TT>2</TT>, the non-bonded pairs will contain only
+selected atoms. This means that the optimized atoms will not &ldquo;feel&rdquo;
+the rest of the protein through the non-bonded terms at all.
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>If <I CLASS="sans"><A HREF="#MEMB:energydata.nonbondedselatoms">energy_data.nonbonded_sel_atoms</A></I><A NAME="11959"></A> is <TT>1</TT> (the default), only one of
+the atoms in the non-bonded pair has to be a selected atom. This means that
+the selected region feels the rest of the system through the non-bonded terms,
+at the expense of longer CPU times.
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>See Section&nbsp;<A HREF="node23.html#SECTION:model-segment">2.2.6</A> for an example.
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>When all atoms are selected, this variable has no effect.
+                             
+</BLOCKQUOTE>
+
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

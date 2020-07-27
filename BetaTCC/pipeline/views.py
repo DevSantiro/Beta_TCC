@@ -23,11 +23,15 @@ def Index(request):
     
     return render(request, 'pipeline/index.html') 
 
-# Metodo teste para pegar o arquivo enviado pelo Formulário
-# Também será necessário configurar o MEDIA_ROOT e MEDIA_URL em settings.py
+# Metodo oficial para gerar a modelagem (Pipeline)
 def upload(request):
+    # Processo Pipeline concluido - Falta somente pegar o melhor modelo gerado.
+    # Rodrigo 27/07/2020.
+    
     if request.method == 'POST':
         
+        #diretorio = ""
+
         proteina = request.FILES['proteina']
         template = request.FILES['documento']
 
@@ -36,10 +40,6 @@ def upload(request):
         fs.save(proteina.name, proteina)
         fs.save(template.name, template)
         
-        # Estou nesse processo do Pipeline! Eu tenho os arquivos e preciso usar eles para continuar no pipeline.
-        # O Primeiro arquivo será o Template do .pdb preciso alterar o "id_maior" para o nome do arquivo que subi como upload.
-        # A variavel "sequencia" neste contexto, será substituida pelo meu arquivo .fasta que será gerado o modelo.
-
         w = open("media\\"+ template.name +".fasta","w")
         w.write(">"+template.name+"\n")
         cadeia = 'A'
@@ -86,57 +86,21 @@ def upload(request):
                 new_aln.write(linha)
         new_aln.close()
 
-        #os.system("blastp -query media/" + proteina.name + " -subject media/" + multi_fasta.name + " -outfmt=6 > media/resultado.txt")
+        # ****************************************************************************************
+        # modeller
+        # ****************************************************************************************
+        criaScript(proteina, template)
 
-    return render(request, 'pipeline/upload.html')
-
-def upload2(request):
-    if request.method == 'POST':
-        
-        form = UploadFileForm(request.POST, request.FILES)
-
-
-        file = request.FILES['proteina']
-        arquivo = request.FILES['documento']
-
-        data = file.read()
-
-        data2 = arquivo.read()
-
-        print(data)
-
-        print(data2)
-
-        # uploaded_file = request.FILES['document']
-        # fs = FileSystemStorage()
-
-        # fs.save(uploaded_file.name, uploaded_file)
-
-        # uploaded = UploadedFile.read()
-
-        # print(uploaded)
-
-
-        
-
+        os.system("media\\Modeller.lnk")
+ 
     return render(request, 'pipeline/upload.html')
 
 
-
-
-def teste(request):
-    if request.method == 'POST':
-        form = testeFormulario(request.POST)
-        if form.is_valid():
-            proteina = request.POST['proteina']
-            arquivo = request.POST['arquivo']
-
-        print(proteina)
-        print(arquivo)
-        proteina = proteina.replace('\n','')
-        print(len(proteina.replace(' ','')))
-
-    return render(request, 'pipeline/teste.html')
+def criaScript(template, proteina):
+    w = open("media\\run.py","w")
+    script = "from modeller import *\nfrom modeller.automodel import *\nlog.verbose()\nenv = environ()\n\nenv.io.atom_files_directory = ['.']\n\nenv.io.hetatm = True\nenv.io.water = True\n\na = automodel(env, alnfile = 'new_alinha.pir', knowns = '"+proteina.name+"', sequence = '"+template.name+"')\na.starting_model = 1\na.ending_model = 3\na.make() \n"
+    w.write(script)
+    w.close()
     
 # Implementar uma Rotina para tentar pegar toda a sequencia inserida e começar a execução do Pipeline
 

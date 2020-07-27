@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018.3 (Released July 19, 2018) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>model.assess_ga341() &mdash; assess a model with the GA341 method</TITLE>
+<META NAME="description" CONTENT="model.assess_ga341() &mdash; assess a model with the GA341 method">
+<META NAME="keywords" CONTENT="manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018.3">
+
+<LINK REL="STYLESHEET" HREF="manual.css">
+<LINK REL="STYLESHEET" HREF="pygments.css">
+
+<LINK REL="next" HREF="node204.html">
+<LINK REL="previous" HREF="node202.html">
+<LINK REL="next" HREF="node204.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node204.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node164.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node202.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html2854"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A> 
+<A ID="tex2html2856"
+  HREF="node513.html">
+<IMG WIDTH="43" HEIGHT="24" ALT="index" SRC="index.png"></A> 
+<BR>
+<B> Next:</B> <A
+ HREF="node204.html">model.assess_normalized_dope()   assess</A>
+<B> Up:</B> <A
+ HREF="node164.html">The model class: handling</A>
+<B> Previous:</B> <A
+ HREF="node202.html">model.saxs_chifun()   Calculate</A>
+ &nbsp; <B>  <A ID="tex2html2855"
+  HREF="node1.html">Contents</A></B> 
+ &nbsp; <B>  <A ID="tex2html2857"
+  HREF="node513.html">Index</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A ID="SECTION0011639000000000000000">
+model.assess_ga341() &mdash; assess a model with the GA341 method</A>
+</H2> <A NAME="17923"></A><A ID="CMD:model.assessga341"></A>
+<A NAME="17926"></A><TT>assess_ga341()</TT>
+<BR>
+<DL>
+<DT><STRONG>Output:</STRONG></DT>
+<DD>(<I CLASS="sans">score</I><A NAME="17940"></A>, <I CLASS="sans">compactness</I><A NAME="17943"></A>, <I CLASS="sans">e_native_pair</I><A NAME="17946"></A>, <I CLASS="sans">e_native_surf</I><A NAME="17949"></A>,
+          <I CLASS="sans">e_native_comb</I><A NAME="17952"></A>, <I CLASS="sans">z_pair</I><A NAME="17955"></A>, <I CLASS="sans">z_surf</I><A NAME="17958"></A>, <I CLASS="sans">z_comb</I><A NAME="17961"></A>)
+                             
+</DD>
+</DL>
+
+<P>
+<BLOCKQUOTE>
+This command assesses the quality of the model using the GA341
+method method [<A
+ HREF="node512.html#MelSal02">Melo <EM>et&nbsp;al.</EM>, 2002</A>,<A
+ HREF="node512.html#JohSal03">John &amp; &#352;ali, 2003</A>]. The method uses the
+percentage sequence identity between the template and the model as a parameter.
+M<SMALL>ODELLER</SMALL>-produced PDB files contain this information in a <TT>'REMARK'</TT>; in the
+case of other PDB files, you should supply this by setting <I CLASS="sans"><A HREF="node166.html#MEMB:model.seqid">model.seq_id</A></I><A NAME="17980"></A>.
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>If the model contains multiple chains, only the first is evaluated by this
+method; if you wish to evaluate the model in a different chain, you should
+write out that single chain into a new model first. (The method was
+parameterized for use with single-chain proteins, so its use for multi-chain
+models is not recommended.)
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>Only standard amino acids are assessed by this command. A <TT>ModellerError</TT><A NAME="17985"></A>
+exception will be raised if the model contains no standard amino acids.
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>When using <TT>automodel</TT> or <TT>loopmodel</TT>, automatic GA341
+assessment of each model can be requested by adding <TT>assess.GA341</TT> to
+<I CLASS="sans"><A HREF="node44.html#MEMB:automodel.assessmethods">automodel.assess_methods</A></I><A NAME="17992"></A> or <I CLASS="sans"><A HREF="node83.html#MEMB:loopmodel.loop.assessmethods">loopmodel.loop.assess_methods</A></I><A NAME="17997"></A>
+respectively.
+
+</BLOCKQUOTE>
+
+<P>
+
+  <DL>
+<DT><STRONG>Example: <A ID="tex2html119"
+  HREF="../examples/assessment/assess_ga341.py">examples/assessment/assess_ga341.py</A></STRONG></DT>
+<DD> <BR>  <div class="pygments"><pre><span></span><span class="c1"># Example for: model.assess_ga341()</span>
+
+<span class="kn">from</span> <span class="nn">modeller</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">modeller.scripts</span> <span class="kn">import</span> <span class="n">complete_pdb</span>
+
+<span class="n">env</span> <span class="o">=</span> <span class="n">environ</span><span class="p">()</span>
+<span class="n">env</span><span class="o">.</span><span class="n">libs</span><span class="o">.</span><span class="n">topology</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="nb">file</span><span class="o">=</span><span class="s1">&#39;$(LIB)/top_heav.lib&#39;</span><span class="p">)</span>
+<span class="n">env</span><span class="o">.</span><span class="n">libs</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="nb">file</span><span class="o">=</span><span class="s1">&#39;$(LIB)/par.lib&#39;</span><span class="p">)</span>
+
+<span class="c1"># Read a model previously generated by Modeller&#39;s automodel class</span>
+<span class="n">mdl</span> <span class="o">=</span> <span class="n">complete_pdb</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="s1">&#39;../atom_files/1fdx.B99990001.pdb&#39;</span><span class="p">)</span>
+
+<span class="c1"># Set template-model sequence identity. (Not needed in this case, since</span>
+<span class="c1"># this is written by Modeller into the .pdb file.)</span>
+<span class="n">mdl</span><span class="o">.</span><span class="n">seq_id</span> <span class="o">=</span> <span class="mf">37.037</span>
+
+<span class="n">score</span> <span class="o">=</span> <span class="n">mdl</span><span class="o">.</span><span class="n">assess_ga341</span><span class="p">()</span>
+</pre></div>
+  
+</DD>
+</DL>  <BR>
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node204.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node164.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node202.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html2854"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A> 
+<A ID="tex2html2856"
+  HREF="node513.html">
+<IMG WIDTH="43" HEIGHT="24" ALT="index" SRC="index.png"></A> 
+<BR>
+<B> Next:</B> <A
+ HREF="node204.html">model.assess_normalized_dope()   assess</A>
+<B> Up:</B> <A
+ HREF="node164.html">The model class: handling</A>
+<B> Previous:</B> <A
+ HREF="node202.html">model.saxs_chifun()   Calculate</A>
+ &nbsp; <B>  <A ID="tex2html2855"
+  HREF="node1.html">Contents</A></B> 
+ &nbsp; <B>  <A ID="tex2html2857"
+  HREF="node513.html">Index</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

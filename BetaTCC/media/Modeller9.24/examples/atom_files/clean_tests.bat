@@ -1,0 +1,2 @@
+del *.psa
+del *.sol

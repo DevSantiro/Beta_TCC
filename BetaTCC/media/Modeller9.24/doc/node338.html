@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018.3 (Released July 19, 2018) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>The Chain class: a single chain in a model or alignment</TITLE>
+<META NAME="description" CONTENT="The Chain class: a single chain in a model or alignment">
+<META NAME="keywords" CONTENT="manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018.3">
+
+<LINK REL="STYLESHEET" HREF="manual.css">
+<LINK REL="STYLESHEET" HREF="pygments.css">
+
+<LINK REL="next" HREF="node346.html">
+<LINK REL="previous" HREF="node334.html">
+<LINK REL="next" HREF="node339.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node339.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node114.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node337.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html3530"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A> 
+<A ID="tex2html3532"
+  HREF="node513.html">
+<IMG WIDTH="43" HEIGHT="24" ALT="index" SRC="index.png"></A> 
+<BR>
+<B> Next:</B> <A
+ HREF="node339.html">Chain.name   chain</A>
+<B> Up:</B> <A
+ HREF="node114.html">MODELLER command reference</A>
+<B> Previous:</B> <A
+ HREF="node337.html">Structure.read()   read</A>
+ &nbsp; <B>  <A ID="tex2html3531"
+  HREF="node1.html">Contents</A></B> 
+ &nbsp; <B>  <A ID="tex2html3533"
+  HREF="node513.html">Index</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION0011190000000000000000"></A>
+    <A ID="SECTION:chain"></A>
+<BR>
+The <TT>Chain</TT> class: a single chain in a model or alignment
+</H1>
+    <A ID="CLASS:Chain"></A><A NAME="34113"></A>
+The <TT>Chain</TT> class holds information about a single chain, in a
+<TT>model</TT> (see <I CLASS="sans"><A HREF="node330.html#MEMB:Sequence.chains">Sequence.chains</A></I><A NAME="34228"></A>), an alignment sequence, or an alignment
+template structure.
+
+<P>
+Two <TT>Chain</TT> objects are considered equal if and only if they represent
+the same chain in the same sequence.
+
+<P>
+
+  <DL>
+<DT><STRONG>Example: <A ID="tex2html204"
+  HREF="../examples/python/chains.py">examples/python/chains.py</A></STRONG></DT>
+<DD> <BR>  <div class="pygments"><pre><span></span><span class="c1"># Example for &#39;chain&#39; objects</span>
+
+<span class="kn">from</span> <span class="nn">modeller</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">modeller.scripts</span> <span class="kn">import</span> <span class="n">complete_pdb</span>
+
+<span class="n">env</span> <span class="o">=</span> <span class="n">environ</span><span class="p">()</span>
+<span class="n">env</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">atom_files_directory</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;../atom_files&#39;</span><span class="p">]</span>
+<span class="n">env</span><span class="o">.</span><span class="n">libs</span><span class="o">.</span><span class="n">topology</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="nb">file</span><span class="o">=</span><span class="s1">&#39;$(LIB)/top_heav.lib&#39;</span><span class="p">)</span>
+<span class="n">env</span><span class="o">.</span><span class="n">libs</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="nb">file</span><span class="o">=</span><span class="s1">&#39;$(LIB)/par.lib&#39;</span><span class="p">)</span>
+
+<span class="n">mdl</span> <span class="o">=</span> <span class="n">complete_pdb</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="s2">&quot;1b3q&quot;</span><span class="p">)</span>
+
+<span class="c1"># Print existing chain IDs and lengths:</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Chain IDs and lengths: &quot;</span> \
+      <span class="o">+</span> <span class="nb">str</span><span class="p">([(</span><span class="n">c</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">residues</span><span class="p">))</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">mdl</span><span class="o">.</span><span class="n">chains</span><span class="p">]))</span>
+
+<span class="c1"># Set new chain IDs:</span>
+<span class="n">mdl</span><span class="o">.</span><span class="n">chains</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;X&#39;</span>
+<span class="n">mdl</span><span class="o">.</span><span class="n">chains</span><span class="p">[</span><span class="s1">&#39;B&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Y&#39;</span>
+
+<span class="c1"># Write out chain sequences:</span>
+<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">mdl</span><span class="o">.</span><span class="n">chains</span><span class="p">:</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">file</span><span class="o">=</span><span class="s1">&#39;1b3q</span><span class="si">%s</span><span class="s1">.chn&#39;</span> <span class="o">%</span> <span class="n">c</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">atom_file</span><span class="o">=</span><span class="s1">&#39;1b3q&#39;</span><span class="p">,</span>
+            <span class="n">align_code</span><span class="o">=</span><span class="s1">&#39;1b3q</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">c</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+</pre></div>
+  
+</DD>
+</DL>  <BR>
+<P>
+<BR><HR>
+<!--Table of Child-Links-->
+<A ID="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A ID="tex2html3534"
+  HREF="node339.html">Chain.name &mdash; chain ID</A>
+<LI><A ID="tex2html3535"
+  HREF="node340.html">Chain.residues &mdash; all residues in the chain</A>
+<LI><A ID="tex2html3536"
+  HREF="node341.html">Chain.atoms &mdash; all atoms in the chain</A>
+<LI><A ID="tex2html3537"
+  HREF="node342.html">Chain.filter() &mdash; check if this chain passes all criteria</A>
+<LI><A ID="tex2html3538"
+  HREF="node343.html">Chain.write() &mdash; write out chain sequence to an alignment file</A>
+<LI><A ID="tex2html3539"
+  HREF="node344.html">Chain.atom_file_and_code() &mdash; get suitable names for this chain</A>
+<LI><A ID="tex2html3540"
+  HREF="node345.html">Chain.join() &mdash; join other chain(s) onto this one</A>
+</UL>
+<!--End of Table of Child-Links-->
+<BR><HR>
+
+</BODY>
+</HTML>

@@ -1,0 +1,218 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018.3 (Released July 19, 2018) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>The selection class: handling of sets of atom coordinates</TITLE>
+<META NAME="description" CONTENT="The selection class: handling of sets of atom coordinates">
+<META NAME="keywords" CONTENT="manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018.3">
+
+<LINK REL="STYLESHEET" HREF="manual.css">
+<LINK REL="STYLESHEET" HREF="pygments.css">
+
+<LINK REL="next" HREF="node264.html">
+<LINK REL="previous" HREF="node227.html">
+<LINK REL="next" HREF="node232.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node232.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node114.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node230.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html2989"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A> 
+<A ID="tex2html2991"
+  HREF="node513.html">
+<IMG WIDTH="43" HEIGHT="24" ALT="index" SRC="index.png"></A> 
+<BR>
+<B> Next:</B> <A
+ HREF="node232.html">selection()   create</A>
+<B> Up:</B> <A
+ HREF="node114.html">MODELLER command reference</A>
+<B> Previous:</B> <A
+ HREF="node230.html">sheet()   make</A>
+ &nbsp; <B>  <A ID="tex2html2990"
+  HREF="node1.html">Contents</A></B> 
+ &nbsp; <B>  <A ID="tex2html2992"
+  HREF="node513.html">Index</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION001190000000000000000"></A>
+    <A ID="SECTION:selection"></A>
+<BR>
+The <TT>selection</TT> class: handling of sets of atom coordinates
+</H1>
+    <A ID="CLASS:selection"></A><A NAME="21374"></A>
+The <TT>selection</TT> class holds a set of atoms from a model. Such selections
+can be used to perform actions on only some model atoms.
+
+<P>
+Selections in M<SMALL>ODELLER</SMALL> behave almost identically to standard <A ID="tex2html128"
+  HREF="https://www.python.org/">Python</A> sets -
+see the <A ID="tex2html130"
+  HREF="https://docs.python.org/2/library/stdtypes.html#set-types-set-frozenset">section in the Python manual on sets</A>
+for further information.
+Selections are &lsquo;sets&rsquo; in the mathematical sense, and as such can be combined
+with each other in unions (using the Python <TT>union</TT> function, or the <TT>|</TT>
+operator) or intersections (using the <TT>intersection</TT> function, or the <TT>&amp;</TT>
+operator), <EM>etc</EM>.
+
+<P>
+All of the atoms in a selection must belong to the same <TT>model</TT> object.
+Note that the selection is not a copy of the model atoms; if model atoms are
+changed, the atoms will also be moved in any selection that contains those
+atoms, and vice versa.
+
+<P>
+To add objects to a selection, you can list them when you create the selection
+with the <B><A HREF="node232.html#CMD:selection">selection()</A></B><A NAME="21968"></A> constructor, add them to an existing selection
+with <B><A HREF="node233.html#CMD:selection.add">selection.add()</A></B><A NAME="21973"></A>, or combine selections with set operations (see above).
+
+<P>
+See
+<I CLASS="sans"><A HREF="node172.html#MEMB:model.atoms">model.atoms</A></I><A NAME="21978"></A>, <I CLASS="sans"><A HREF="node329.html#MEMB:Sequence.residues">Sequence.residues</A></I><A NAME="21983"></A>, <I CLASS="sans"><A HREF="node330.html#MEMB:Sequence.chains">Sequence.chains</A></I><A NAME="21988"></A>,
+<B><A HREF="node174.html#CMD:model.atomrange">model.atom_range()</A></B><A NAME="21993"></A>,
+<B><A HREF="node175.html#CMD:model.residuerange">model.residue_range()</A></B><A NAME="21998"></A>, <B><A HREF="node176.html#CMD:model.getinsertions">model.get_insertions()</A></B><A NAME="22003"></A>,
+<B><A HREF="node177.html#CMD:model.getdeletions">model.get_deletions()</A></B><A NAME="22008"></A>, and <B><A HREF="node178.html#CMD:model.loops">model.loops()</A></B><A NAME="22013"></A> for valid objects (groups
+of atoms) to add to the selection. You can also add <TT>model</TT> objects and
+existing <TT>selection</TT> objects to a selection. (Adding a residue adds all
+atoms in that residue to the selection, adding a model adds all atoms in the
+model, and so on.)
+
+<P>
+See also <B><A HREF="node378.html#CMD:Point.selectsphere">Point.select_sphere()</A></B><A NAME="22022"></A>,
+which creates a new <TT>selection</TT> object.
+
+<P>
+Once you have a selection,
+it can be manipulated by standard <A ID="tex2html129"
+  HREF="https://www.python.org/">Python</A> set operations (above), by methods to
+add new atoms (<B><A HREF="node235.html#CMD:selection.byresidue">selection.by_residue()</A></B><A NAME="22032"></A>, <B><A HREF="node236.html#CMD:selection.selectsphere">selection.select_sphere()</A></B><A NAME="22037"></A>),
+or by methods to exclude atom or residue types (<B><A HREF="node238.html#CMD:selection.onlysidechain">selection.only_sidechain()</A></B><A NAME="22042"></A>,
+<B><A HREF="node237.html#CMD:selection.onlymainchain">selection.only_mainchain()</A></B><A NAME="22047"></A>, <B><A HREF="node239.html#CMD:selection.onlyatomtypes">selection.only_atom_types()</A></B><A NAME="22052"></A>,
+<B><A HREF="node240.html#CMD:selection.onlyresiduetypes">selection.only_residue_types()</A></B><A NAME="22057"></A>, <B><A HREF="node241.html#CMD:selection.onlystdresidues">selection.only_std_residues()</A></B><A NAME="22062"></A>,
+<B><A HREF="node242.html#CMD:selection.onlynotopology">selection.only_no_topology()</A></B><A NAME="22067"></A>, <B><A HREF="node243.html#CMD:selection.onlyhetresidues">selection.only_het_residues()</A></B><A NAME="22072"></A>,
+<B><A HREF="node244.html#CMD:selection.onlywaterresidues">selection.only_water_residues()</A></B><A NAME="22077"></A>, <B><A HREF="node245.html#CMD:selection.onlydefined">selection.only_defined()</A></B><A NAME="22082"></A>).
+
+<P>
+<BR><HR>
+<!--Table of Child-Links-->
+<A ID="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A ID="tex2html2993"
+  HREF="node232.html">selection() &mdash; create a new selection</A>
+<LI><A ID="tex2html2994"
+  HREF="node233.html">selection.add() &mdash; add objects to selection</A>
+<LI><A ID="tex2html2995"
+  HREF="node234.html">selection.extend_by_residue() &mdash; extend selection by residue</A>
+<LI><A ID="tex2html2996"
+  HREF="node235.html">selection.by_residue() &mdash; make sure all residues are fully selected</A>
+<LI><A ID="tex2html2997"
+  HREF="node236.html">selection.select_sphere() &mdash; select all atoms within radius</A>
+<LI><A ID="tex2html2998"
+  HREF="node237.html">selection.only_mainchain() &mdash; select only mainchain atoms</A>
+<LI><A ID="tex2html2999"
+  HREF="node238.html">selection.only_sidechain() &mdash; select only sidechain atoms</A>
+<LI><A ID="tex2html3000"
+  HREF="node239.html">selection.only_atom_types() &mdash; select only atoms of given types</A>
+<LI><A ID="tex2html3001"
+  HREF="node240.html">selection.only_residue_types() &mdash; select only atoms of given residue type</A>
+<LI><A ID="tex2html3002"
+  HREF="node241.html">selection.only_std_residues() &mdash; select only standard residues</A>
+<LI><A ID="tex2html3003"
+  HREF="node242.html">selection.only_no_topology() &mdash; select only residues without topology</A>
+<LI><A ID="tex2html3004"
+  HREF="node243.html">selection.only_het_residues() &mdash; select only HETATM residues</A>
+<LI><A ID="tex2html3005"
+  HREF="node244.html">selection.only_water_residues() &mdash; select only water residues</A>
+<LI><A ID="tex2html3006"
+  HREF="node245.html">selection.only_defined() &mdash; select only atoms with defined coordinates</A>
+<LI><A ID="tex2html3007"
+  HREF="node246.html">selection.write() &mdash; write selection coordinates to a file</A>
+<LI><A ID="tex2html3008"
+  HREF="node247.html">selection.translate() &mdash; translate all coordinates</A>
+<LI><A ID="tex2html3009"
+  HREF="node248.html">selection.rotate_origin() &mdash; rotate coordinates about origin</A>
+<LI><A ID="tex2html3010"
+  HREF="node249.html">selection.rotate_mass_center() &mdash; rotate coordinates about mass center</A>
+<LI><A ID="tex2html3011"
+  HREF="node250.html">selection.transform() &mdash; transform coordinates with a matrix</A>
+<LI><A ID="tex2html3012"
+  HREF="node251.html">selection.mutate() &mdash; mutate selected residues</A>
+<LI><A ID="tex2html3013"
+  HREF="node252.html">selection.randomize_xyz() &mdash; randomize selected coordinates</A>
+<LI><A ID="tex2html3014"
+  HREF="node253.html">selection.superpose() &mdash; superpose model on selection given alignment</A>
+<LI><A ID="tex2html3015"
+  HREF="node254.html">selection.rotate_dihedrals() &mdash; change dihedral angles</A>
+<LI><A ID="tex2html3016"
+  HREF="node255.html">selection.unbuild() &mdash; undefine coordinates</A>
+<LI><A ID="tex2html3017"
+  HREF="node256.html">selection.hot_atoms() &mdash; atoms violating restraints</A>
+<LI><A ID="tex2html3018"
+  HREF="node257.html">selection.energy() &mdash; evaluate atom selection given restraints</A>
+<LI><A ID="tex2html3019"
+  HREF="node258.html">selection.debug_function() &mdash; test code self-consistency</A>
+<LI><A ID="tex2html3020"
+  HREF="node259.html">selection.assess_dope() &mdash; assess a model selection with the DOPE method</A>
+<LI><A ID="tex2html3021"
+  HREF="node260.html">selection.assess_dopehr() &mdash; assess a model with the DOPE-HR method</A>
+<LI><A ID="tex2html3022"
+  HREF="node261.html">selection.get_dope_profile() &mdash; get per-residue DOPE profile</A>
+<LI><A ID="tex2html3023"
+  HREF="node262.html">selection.get_dopehr_profile() &mdash; get per-residue DOPE-HR profile</A>
+<LI><A ID="tex2html3024"
+  HREF="node263.html">selection.assess() &mdash; assess a model selection</A>
+</UL>
+<!--End of Table of Child-Links-->
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node232.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node114.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node230.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html2989"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A> 
+<A ID="tex2html2991"
+  HREF="node513.html">
+<IMG WIDTH="43" HEIGHT="24" ALT="index" SRC="index.png"></A> 
+<BR>
+<B> Next:</B> <A
+ HREF="node232.html">selection()   create</A>
+<B> Up:</B> <A
+ HREF="node114.html">MODELLER command reference</A>
+<B> Previous:</B> <A
+ HREF="node230.html">sheet()   make</A>
+ &nbsp; <B>  <A ID="tex2html2990"
+  HREF="node1.html">Contents</A></B> 
+ &nbsp; <B>  <A ID="tex2html2992"
+  HREF="node513.html">Index</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

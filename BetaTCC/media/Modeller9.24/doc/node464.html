@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018.3 (Released July 19, 2018) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>job.queue_task() &mdash; submit a task to run within the job</TITLE>
+<META NAME="description" CONTENT="job.queue_task() &mdash; submit a task to run within the job">
+<META NAME="keywords" CONTENT="manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018.3">
+
+<LINK REL="STYLESHEET" HREF="manual.css">
+<LINK REL="STYLESHEET" HREF="pygments.css">
+
+<LINK REL="next" HREF="node465.html">
+<LINK REL="previous" HREF="node463.html">
+<LINK REL="next" HREF="node465.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node465.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node459.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node463.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html4154"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A> 
+<A ID="tex2html4156"
+  HREF="node513.html">
+<IMG WIDTH="43" HEIGHT="24" ALT="index" SRC="index.png"></A> 
+<BR>
+<B> Next:</B> <A
+ HREF="node465.html">job.run_all_tasks()   run</A>
+<B> Up:</B> <A
+ HREF="node459.html">Parallel job support</A>
+<B> Previous:</B> <A
+ HREF="node463.html">job.slave_startup_commands   Slave</A>
+ &nbsp; <B>  <A ID="tex2html4155"
+  HREF="node1.html">Contents</A></B> 
+ &nbsp; <B>  <A ID="tex2html4157"
+  HREF="node513.html">Index</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A ID="SECTION0011355000000000000000">
+job.queue_task() &mdash; submit a task to run within the job</A>
+</H2> <A NAME="41681"></A><A ID="CMD:job.queuetask"></A>
+<A NAME="41684"></A><TT>queue_task(taskobj)</TT>
+<BR>
+<BLOCKQUOTE>
+This adds the given <TT>task</TT> object to the job's queue. All tasks in the
+queue can later be run with <B><A HREF="node465.html#CMD:job.runalltasks">job.run_all_tasks()</A></B><A NAME="41704"></A> or
+<B><A HREF="node466.html#CMD:job.yieldtasksunordered">job.yield_tasks_unordered()</A></B><A NAME="41709"></A>.
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>The task should be a instance of a class derived from <TT>task</TT>, which
+provides a <TT>'run'</TT> method. This method will be run on the slave node; any
+arguments to this method are given on the master when the object is created,
+and are automatically passed for you to the slave. Anything you return from
+this method is automatically passed back to the master. (Note that
+<B><A HREF="node468.html#CMD:Communicator.senddata">Communicator.send_data()</A></B><A NAME="41717"></A> is used to send this data, which cannot send all
+internal M<SMALL>ODELLER</SMALL> types.)
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>Note that generally you need to declare tasks in a separate <A ID="tex2html239"
+  HREF="https://www.python.org/">Python</A> module,
+and load them in with the <TT>import</TT> statement, as the tasks are passed using
+<A ID="tex2html240"
+  HREF="https://www.python.org/">Python</A>'s <TT>pickle</TT> module, which will otherwise give an error such as
+<TT>'AttributeError: 'module' object has no attribute 'mytask''</TT>.
+
+</BLOCKQUOTE>
+<B>Example:</B> See <B><A HREF="node465.html#CMD:job.runalltasks">job.run_all_tasks()</A></B><A NAME="41736"></A> command.
+
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018.3 (Released July 19, 2018) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>Key for command descriptions</TITLE>
+<META NAME="description" CONTENT="Key for command descriptions">
+<META NAME="keywords" CONTENT="manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018.3">
+
+<LINK REL="STYLESHEET" HREF="manual.css">
+<LINK REL="STYLESHEET" HREF="pygments.css">
+
+<LINK REL="next" HREF="node116.html">
+<LINK REL="previous" HREF="node114.html">
+<LINK REL="next" HREF="node116.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node116.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node114.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node114.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html2417"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A> 
+<A ID="tex2html2419"
+  HREF="node513.html">
+<IMG WIDTH="43" HEIGHT="24" ALT="index" SRC="index.png"></A> 
+<BR>
+<B> Next:</B> <A
+ HREF="node116.html">The environ class: MODELLER</A>
+<B> Up:</B> <A
+ HREF="node114.html">MODELLER command reference</A>
+<B> Previous:</B> <A
+ HREF="node114.html">MODELLER command reference</A>
+ &nbsp; <B>  <A ID="tex2html2418"
+  HREF="node1.html">Contents</A></B> 
+ &nbsp; <B>  <A ID="tex2html2420"
+  HREF="node513.html">Index</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION001110000000000000000"></A>
+<A ID="SECTION:commandkey"></A>
+<BR>
+Key for command descriptions
+</H1>
+
+<P>
+Most commands in M<SMALL>ODELLER</SMALL> take one or more arguments, usually as <A ID="tex2html90"
+  HREF="https://www.python.org/">Python</A>
+keywords. For convenience, many of these arguments take a default value if
+you do not specify them.
+
+<P>
+Each argument must be of a specific type, either a M<SMALL>ODELLER</SMALL> class
+object (<EM>e.g.</EM>, a <TT>model</TT> or <TT>alignment</TT>) or one of the standard
+Python types (integers, strings, floating point numbers, or lists of these
+types).
+
+<P>
+Many commands take optional <I CLASS="sans">io</I><A NAME="10606"></A> and/or <I CLASS="sans">edat</I><A NAME="10609"></A> arguments. <I CLASS="sans">io</I><A NAME="10612"></A> should
+always be an <B><A HREF="node146.html#CMD:iodata">io_data()</A></B><A NAME="10615"></A> object, and is used by commands that need to
+read coordinate files, while <I CLASS="sans">edat</I><A NAME="10620"></A> should be an <B><A HREF="node127.html#CMD:energydata">energy_data</A></B><A NAME="10623"></A> object,
+and is used by commands that need to use the energy function. For convenience,
+if these arguments are not specified, default values are taken from the
+M<SMALL>ODELLER</SMALL> environment (<I CLASS="sans"><A HREF="node118.html#MEMB:environ.io">environ.io</A></I><A NAME="10630"></A> and <I CLASS="sans"><A HREF="node119.html#MEMB:environ.edat">environ.edat</A></I><A NAME="10635"></A> respectively).
+
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018.3 (Released July 19, 2018) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>energy_data.nlogn_use &mdash; select non-bond list generation algorithm</TITLE>
+<META NAME="description" CONTENT="energy_data.nlogn_use &mdash; select non-bond list generation algorithm">
+<META NAME="keywords" CONTENT="manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018.3">
+
+<LINK REL="STYLESHEET" HREF="manual.css">
+<LINK REL="STYLESHEET" HREF="pygments.css">
+
+<LINK REL="next" HREF="node143.html">
+<LINK REL="previous" HREF="node141.html">
+<LINK REL="next" HREF="node143.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node143.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node126.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node141.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html2552"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A> 
+<A ID="tex2html2554"
+  HREF="node513.html">
+<IMG WIDTH="43" HEIGHT="24" ALT="index" SRC="index.png"></A> 
+<BR>
+<B> Next:</B> <A
+ HREF="node143.html">energy_data.max_nlogn_grid_cells   maximum</A>
+<B> Up:</B> <A
+ HREF="node126.html">The energy_data class: objective</A>
+<B> Previous:</B> <A
+ HREF="node141.html">energy_data.nonbonded_sel_atoms   control</A>
+ &nbsp; <B>  <A ID="tex2html2553"
+  HREF="node1.html">Contents</A></B> 
+ &nbsp; <B>  <A ID="tex2html2555"
+  HREF="node513.html">Index</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A ID="SECTION0011316000000000000000">
+energy_data.nlogn_use &mdash; select non-bond list generation algorithm</A>
+</H2> <A NAME="11965"></A><A ID="MEMB:energydata.nlognuse"></A>
+<P>
+<BLOCKQUOTE>
+Before calculating dynamic non-bonded restraints, M<SMALL>ODELLER</SMALL>
+determines which of the several routines is most appropriate and efficient for
+calculating the non-bonded atom pairs list. The user can use this variable to
+influence the selection, of either a straightforward <!-- MATH
+ ${\cal O}(n^2)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.59ex; vertical-align: -0.70ex; " SRC="img41.png"
+ ALT="${\cal O}(n^2)$"></SPAN> search
+or a cell-based algorithm which has <SPAN CLASS="MATH"><IMG STYLE="height: 2.10ex; vertical-align: -0.57ex; " SRC="img42.png"
+ ALT="$n \log n $"></SPAN> dependency of CPU time
+<EM>versus</EM> size <SPAN CLASS="MATH"><IMG STYLE="height: 1.12ex; vertical-align: -0.12ex; " SRC="img43.png"
+ ALT="$n$"></SPAN>. The latter algorithm is used when the maximal difference
+in residue indices of the atoms in the current dynamic restraints is larger
+than <I CLASS="sans"><A HREF="#MEMB:energydata.nlognuse">energy_data.nlogn_use</A></I><A NAME="11981"></A>, <I CLASS="sans"><A HREF="node128.html#MEMB:energydata.contactshell">energy_data.contact_shell</A></I><A NAME="11986"></A> is
+less than 8&#197;, the necessary number of cells is less than
+<I CLASS="sans"><A HREF="node143.html#MEMB:energydata.maxnlogngridcells">energy_data.max_nlogn_grid_cells</A></I><A NAME="11991"></A> and fits in an integer without
+overflow, and there is sufficient system memory to store the cells. The
+default value is 15.
+                             
+</BLOCKQUOTE>
+
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

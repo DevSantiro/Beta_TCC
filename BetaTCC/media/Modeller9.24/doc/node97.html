@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018.3 (Released July 19, 2018) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>dope_loopmodel reference</TITLE>
+<META NAME="description" CONTENT="dope_loopmodel reference">
+<META NAME="keywords" CONTENT="manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018.3">
+
+<LINK REL="STYLESHEET" HREF="manual.css">
+<LINK REL="STYLESHEET" HREF="pygments.css">
+
+<LINK REL="next" HREF="node99.html">
+<LINK REL="previous" HREF="node82.html">
+<LINK REL="next" HREF="node98.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node98.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node42.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node96.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html1923"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A> 
+<A ID="tex2html1925"
+  HREF="node513.html">
+<IMG WIDTH="43" HEIGHT="24" ALT="index" SRC="index.png"></A> 
+<BR>
+<B> Next:</B> <A
+ HREF="node98.html">dope_loopmodel()   prepare</A>
+<B> Up:</B> <A
+ HREF="node42.html">Comparative modeling class reference</A>
+<B> Previous:</B> <A
+ HREF="node96.html">loopmodel.build_ini_loop()   create</A>
+ &nbsp; <B>  <A ID="tex2html1924"
+  HREF="node1.html">Contents</A></B> 
+ &nbsp; <B>  <A ID="tex2html1926"
+  HREF="node513.html">Index</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION00940000000000000000"></A>
+<A ID="CLASS:dopeloopmodel"></A><A NAME="5801"></A>
+<BR>
+<TT>dope_loopmodel</TT> reference
+</H1>
+
+<P>
+The <TT>dope_loopmodel</TT> class is derived from <TT>loopmodel</TT>, and is
+very similar in operation, except that a newer DOPE-based loop modeling
+protocol is used (see <B><A HREF="node259.html#CMD:selection.assessdope">selection.assess_dope()</A></B><A NAME="7157"></A>). The main differences are:
+
+<UL>
+<LI>DOPE (see <B><A HREF="node259.html#CMD:selection.assessdope">selection.assess_dope()</A></B><A NAME="7162"></A>) potential used in combination
+with GB/SA implicit solvent interaction (see Section&nbsp;<A HREF="node281.html#SECTION:gbsa">6.14</A>).
+
+<P>
+</LI>
+<LI>Lennard-Jones<A NAME="7166"></A> potential used rather than soft-sphere<A NAME="7167"></A>.
+
+<P>
+</LI>
+<LI>Improved handling of ligand-loop interactions.
+</LI>
+</UL>
+
+<P>
+To use, simply use '<TT>dope_loopmodel</TT>' rather than '<TT>loopmodel</TT>' in
+your <A ID="tex2html71"
+  HREF="https://www.python.org/">Python</A> scripts (see Section <A HREF="node33.html#SECTION:loops">2.3</A> for examples). Note
+that it will be significantly slower than the regular loop modeling procedure,
+primarily due to the GB/SA interaction.
+
+<P>
+<BR><HR>
+<!--Table of Child-Links-->
+<A ID="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A ID="tex2html1927"
+  HREF="node98.html">dope_loopmodel() &mdash; prepare to build models with DOPE loop refinement</A>
+</UL>
+<!--End of Table of Child-Links-->
+<BR><HR>
+
+</BODY>
+</HTML>

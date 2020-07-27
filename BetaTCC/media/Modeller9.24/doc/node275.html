@@ -1,0 +1,204 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018.3 (Released July 19, 2018) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>schedule() &mdash; create a new schedule</TITLE>
+<META NAME="description" CONTENT="schedule() &mdash; create a new schedule">
+<META NAME="keywords" CONTENT="manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018.3">
+
+<LINK REL="STYLESHEET" HREF="manual.css">
+<LINK REL="STYLESHEET" HREF="pygments.css">
+
+<LINK REL="next" HREF="node276.html">
+<LINK REL="previous" HREF="node274.html">
+<LINK REL="next" HREF="node276.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node276.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node274.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node274.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html3208"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A> 
+<A ID="tex2html3210"
+  HREF="node513.html">
+<IMG WIDTH="43" HEIGHT="24" ALT="index" SRC="index.png"></A> 
+<BR>
+<B> Next:</B> <A
+ HREF="node276.html">schedule.make_for_model()   trim</A>
+<B> Up:</B> <A
+ HREF="node274.html">The schedule class: variable</A>
+<B> Previous:</B> <A
+ HREF="node274.html">The schedule class: variable</A>
+ &nbsp; <B>  <A ID="tex2html3209"
+  HREF="node1.html">Contents</A></B> 
+ &nbsp; <B>  <A ID="tex2html3211"
+  HREF="node513.html">Index</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A ID="SECTION0011121000000000000000">
+schedule() &mdash; create a new schedule</A>
+</H2> <A NAME="26167"></A><A ID="CMD:schedule"></A>
+<A NAME="26170"></A><TT>schedule(last_scales, steps)</TT>
+<BR>
+<BLOCKQUOTE>
+This creates a new <TT>schedule</TT> object, which can contain multiple
+schedule steps, given by the list <I CLASS="sans">steps</I><A NAME="26198"></A>. Each step then defines some of
+the optimization parameters: (1) the optimization method; (2) maximal number
+of residues that the restraints are allowed to span
+(Section&nbsp;<A HREF="node213.html#SECTION:span">6.7.7</A>); (3) the individual scaling factors for all the
+physical restraint types. <I CLASS="sans">last_scales</I><A NAME="26201"></A> is used by
+<B><A HREF="node276.html#CMD:schedule.makeformodel">schedule.make_for_model()</A></B><A NAME="26204"></A>.
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><A NAME="26180"></A>
+The usual schedule for the variable target function part of
+optimization in comparative modeling is as follows. The residue range
+(<B><A HREF="node217.html#CMD:Restraints.pick">Restraints.pick()</A></B><A NAME="26209"></A> and Section&nbsp;<A HREF="node213.html#SECTION:span">6.7.7</A>)
+is increased with increasingly larger steps until the protein length
+is reached. The scaling of homology-derived and bonded stereochemical
+restraints increases from a small value to 1 in the initial few steps
+to allow for imperfect starting geometries, especially those that
+result from <B><A HREF="node252.html#CMD:selection.randomizexyz">selection.randomize_xyz()</A></B><A NAME="26214"></A> and long insertions or deletions.
+(For <TT>automodel</TT>, the restraints are additionally scaled by
+<I CLASS="sans"><A HREF="node121.html#MEMB:environ.schedulescale">environ.schedule_scale</A></I><A NAME="26221"></A>. This is useful when template-derived fold
+restraints have to be weakened relative to some external restraints, so that
+the fold can actually reflect these external restraints, even when they
+are quite different from the template-derived restraints.) The soft-sphere<A NAME="26225"></A>
+overlap restraints are slowly introduced only in the last four steps of the
+variable target function method to save CPU time and increase the radius
+of convergence.
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>In comparative modeling by the <TT>automodel</TT> class in the default mode,
+the variable target function method is usually followed by simulated annealing
+with molecular dynamics. In this last stage, all homology-derived and 
+stereochemical restraints are generally used scaled only by
+<I CLASS="sans"><A HREF="node121.html#MEMB:environ.schedulescale">environ.schedule_scale</A></I><A NAME="26229"></A>. Thus, it is recommended that if you define your
+own schedule, the scaling factors for the last step are all 1, so that the
+energy surface followed in optimization is continuous.
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>There are a number of variables defined in the <TT>automodel</TT> class
+that can be used to influence the thoroughness of both the variable
+target function and molecular dynamics parts of the optimization; see
+Section&nbsp;<A HREF="node19.html#SECTION:model-changeopt">2.2.2</A>.
+
+</BLOCKQUOTE>
+
+  <DL>
+<DT><STRONG>Example: <A ID="tex2html162"
+  HREF="../examples/commands/make_schedule.py">examples/commands/make_schedule.py</A></STRONG></DT>
+<DD> <BR>  <div class="pygments"><pre><span></span><span class="c1"># This will create a VTFM optimization schedule and then</span>
+<span class="c1"># use it to optimize the model</span>
+
+<span class="kn">from</span> <span class="nn">modeller</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">modeller.scripts</span> <span class="kn">import</span> <span class="n">complete_pdb</span>
+
+<span class="c1"># Load in optimizer and schedule support</span>
+<span class="kn">from</span> <span class="nn">modeller</span> <span class="kn">import</span> <span class="n">schedule</span><span class="p">,</span> <span class="n">optimizers</span>
+
+<span class="n">log</span><span class="o">.</span><span class="n">verbose</span><span class="p">()</span>
+
+<span class="n">env</span> <span class="o">=</span> <span class="n">environ</span><span class="p">()</span>
+<span class="n">env</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">atom_files_directory</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;../atom_files&#39;</span><span class="p">]</span>
+<span class="n">env</span><span class="o">.</span><span class="n">edat</span><span class="o">.</span><span class="n">dynamic_sphere</span> <span class="o">=</span> <span class="bp">True</span>
+
+<span class="n">env</span><span class="o">.</span><span class="n">libs</span><span class="o">.</span><span class="n">topology</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="nb">file</span><span class="o">=</span><span class="s1">&#39;$(LIB)/top_heav.lib&#39;</span><span class="p">)</span>
+<span class="n">env</span><span class="o">.</span><span class="n">libs</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="nb">file</span><span class="o">=</span><span class="s1">&#39;$(LIB)/par.lib&#39;</span><span class="p">)</span>
+<span class="n">code</span> <span class="o">=</span> <span class="s1">&#39;1fas&#39;</span>
+<span class="n">mdl</span> <span class="o">=</span> <span class="n">complete_pdb</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">code</span><span class="p">)</span>
+
+<span class="c1"># Generate the restraints:</span>
+<span class="n">atmsel</span> <span class="o">=</span> <span class="n">selection</span><span class="p">(</span><span class="n">mdl</span><span class="p">)</span>
+<span class="n">mdl</span><span class="o">.</span><span class="n">restraints</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">atmsel</span><span class="p">,</span> <span class="n">restraint_type</span><span class="o">=</span><span class="s1">&#39;stereo&#39;</span><span class="p">,</span> <span class="n">spline_on_site</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+<span class="c1"># Create our own library schedule:</span>
+<span class="c1"># 5 steps of conjugate gradients (CG), each step using a larger</span>
+<span class="c1"># residue range (2 up to 9999) and energy scaling factor (0.01 up to 1.0),</span>
+<span class="c1"># followed by 3 steps of molecular dynamics (MD) at successively lower</span>
+<span class="c1"># temperature. The scaling factors for the last 5 steps are always retained.</span>
+<span class="n">CG</span> <span class="o">=</span> <span class="n">optimizers</span><span class="o">.</span><span class="n">conjugate_gradients</span>
+<span class="n">MD</span> <span class="o">=</span> <span class="n">optimizers</span><span class="o">.</span><span class="n">molecular_dynamics</span>
+<span class="n">libsched</span> <span class="o">=</span> <span class="n">schedule</span><span class="o">.</span><span class="n">schedule</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span>
+          <span class="p">[</span> <span class="n">schedule</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">CG</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">physical</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)),</span>
+            <span class="n">schedule</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">CG</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">physical</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)),</span>
+            <span class="n">schedule</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">CG</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">physical</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)),</span>
+            <span class="n">schedule</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">CG</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="n">physical</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)),</span>
+            <span class="n">schedule</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">CG</span><span class="p">,</span> <span class="mi">9999</span><span class="p">,</span> <span class="n">physical</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)),</span>
+            <span class="n">schedule</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">MD</span><span class="p">(</span><span class="n">temperature</span><span class="o">=</span><span class="mf">300.</span><span class="p">),</span> <span class="mi">9999</span><span class="p">,</span> \
+                          <span class="n">physical</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)),</span>
+            <span class="n">schedule</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">MD</span><span class="p">(</span><span class="n">temperature</span><span class="o">=</span><span class="mf">200.</span><span class="p">),</span> <span class="mi">9999</span><span class="p">,</span> \
+                          <span class="n">physical</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)),</span>
+            <span class="n">schedule</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">MD</span><span class="p">(</span><span class="n">temperature</span><span class="o">=</span><span class="mf">100.</span><span class="p">),</span> <span class="mi">9999</span><span class="p">,</span> \
+                          <span class="n">physical</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mf">1.0</span><span class="p">))</span> <span class="p">])</span>
+
+<span class="c1"># Make a trimmed schedule suitable for our model, and scale it by schedule_scale</span>
+<span class="n">mysched</span> <span class="o">=</span> <span class="n">libsched</span><span class="o">.</span><span class="n">make_for_model</span><span class="p">(</span><span class="n">mdl</span><span class="p">)</span> <span class="o">*</span> <span class="n">env</span><span class="o">.</span><span class="n">schedule_scale</span>
+
+<span class="c1"># Write the trimmed schedule to a file</span>
+<span class="n">fh</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">code</span><span class="o">+</span><span class="s1">&#39;.sch&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
+<span class="n">mysched</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">fh</span><span class="p">)</span>
+<span class="n">fh</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="c1"># Optimize for all steps in the schedule</span>
+<span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="n">mysched</span><span class="p">:</span>
+    <span class="n">step</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">atmsel</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="s1">&#39;REPORT&#39;</span><span class="p">,</span> <span class="n">max_iterations</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+
+<span class="n">mdl</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">file</span><span class="o">=</span><span class="n">code</span><span class="o">+</span><span class="s1">&#39;.B&#39;</span><span class="p">)</span>
+</pre></div>
+  
+</DD>
+</DL>  <BR>
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node276.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node274.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node274.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html3208"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A> 
+<A ID="tex2html3210"
+  HREF="node513.html">
+<IMG WIDTH="43" HEIGHT="24" ALT="index" SRC="index.png"></A> 
+<BR>
+<B> Next:</B> <A
+ HREF="node276.html">schedule.make_for_model()   trim</A>
+<B> Up:</B> <A
+ HREF="node274.html">The schedule class: variable</A>
+<B> Previous:</B> <A
+ HREF="node274.html">The schedule class: variable</A>
+ &nbsp; <B>  <A ID="tex2html3209"
+  HREF="node1.html">Contents</A></B> 
+ &nbsp; <B>  <A ID="tex2html3211"
+  HREF="node513.html">Index</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

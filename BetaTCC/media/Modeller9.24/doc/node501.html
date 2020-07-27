@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018.3 (Released July 19, 2018) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>Pseudo atoms</TITLE>
+<META NAME="description" CONTENT="Pseudo atoms">
+<META NAME="keywords" CONTENT="manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018.3">
+
+<LINK REL="STYLESHEET" HREF="manual.css">
+<LINK REL="STYLESHEET" HREF="pygments.css">
+
+<LINK REL="next" HREF="node502.html">
+<LINK REL="previous" HREF="node500.html">
+<LINK REL="next" HREF="node502.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node502.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node498.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node500.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html4413"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A> 
+<A ID="tex2html4415"
+  HREF="node513.html">
+<IMG WIDTH="43" HEIGHT="24" ALT="index" SRC="index.png"></A> 
+<BR>
+<B> Next:</B> <A
+ HREF="node502.html">Symmetry restraints</A>
+<B> Up:</B> <A
+ HREF="node498.html">Restraints file</A>
+<B> Previous:</B> <A
+ HREF="node500.html">Excluded pairs</A>
+ &nbsp; <B>  <A ID="tex2html4414"
+  HREF="node1.html">Contents</A></B> 
+ &nbsp; <B>  <A ID="tex2html4416"
+  HREF="node513.html">Index</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A ID="SECTION001423000000000000000">
+Pseudo atoms</A>
+</H2>
+A 'P' line should look like:
+
+<P>
+<PRE>
+P Pseudo_atom_index Pseudo_atom_type Numb_real_atoms Real_atom_indices
+</PRE>
+
+<P>
+These parameters encode the pseudo atom information as given in
+Section&nbsp;<A HREF="node110.html#SECTION:pseudo">5.3.2</A>. <TT>Pseudo_atom_index</TT> is the atom index, which
+should be a number between NATM+1 and NATM+NPSEUDO, where NATM is the number
+of real atoms in the model, and NPSEUDO the number of pseudo atoms.
+<TT>Pseudo_atom_type</TT> is the numerical pseudo atom type, as given in
+Table&nbsp;<A HREF="#tab:numpseudo">B.3</A>. The pseudo atom is defined as an average of
+<TT>Numb_real_atoms</TT>, of indices <TT>Real_atom_indices</TT>. For example,
+<PRE>
+P    144   1   3    120 121 122
+</PRE>
+creates a pseudo atom at index 144, which is a gravity center of the 3 atoms
+120, 121 and 122.
+
+<P>
+<BR><P></P>
+<DIV class="CENTER"><A ID="45827"></A>
+<TABLE>
+<CAPTION><STRONG>Table B.3:</STRONG>
+<EM>Numerical pseudo atom types</EM></CAPTION>
+<TR><TD>
+<DIV class="CENTER">
+<TABLE CELLPADDING=3 BORDER="1" ALIGN="CENTER">
+<TR><TD ALIGN="RIGHT">Numeric pseudo atom type</TD>
+<TD ALIGN="LEFT">Pseudo atom type</TD>
+</TR>
+<TR><TD ALIGN="RIGHT">1</TD>
+<TD ALIGN="LEFT"><TT>pseudo_atom.gravity_center</TT></TD>
+</TR>
+<TR><TD ALIGN="RIGHT">2</TD>
+<TD ALIGN="LEFT"><TT>virtual_atom.ch1</TT></TD>
+</TR>
+<TR><TD ALIGN="RIGHT">3</TD>
+<TD ALIGN="LEFT"><TT>virtual_atom.ch1a</TT></TD>
+</TR>
+<TR><TD ALIGN="RIGHT">4</TD>
+<TD ALIGN="LEFT"><TT>pseudo_atom.ch2</TT></TD>
+</TR>
+<TR><TD ALIGN="RIGHT">5</TD>
+<TD ALIGN="LEFT"><TT>virtual_atom.ch2</TT></TD>
+</TR>
+<TR><TD ALIGN="RIGHT">6</TD>
+<TD ALIGN="LEFT"><TT>pseudo_atom.ch31</TT></TD>
+</TR>
+<TR><TD ALIGN="RIGHT">7</TD>
+<TD ALIGN="LEFT"><TT>pseudo_atom.ch32</TT></TD>
+</TR>
+</TABLE>
+</DIV>
+
+<A ID="tab:numpseudo"></A>
+<BR> 
+                 <DIV class="CENTER">
+ 
+</DIV></TD></TR>
+</TABLE>
+</DIV><P></P>
+<BR>
+
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

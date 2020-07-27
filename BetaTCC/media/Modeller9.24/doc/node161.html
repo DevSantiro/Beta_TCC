@@ -1,0 +1,157 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018.3 (Released July 19, 2018) -->
+<HTML lang="EN">
+<HEAD>
+<TITLE>Topology.make() &mdash; make a subset topology library</TITLE>
+<META NAME="description" CONTENT="Topology.make() &mdash; make a subset topology library">
+<META NAME="keywords" CONTENT="manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018.3">
+
+<LINK REL="STYLESHEET" HREF="manual.css">
+<LINK REL="STYLESHEET" HREF="pygments.css">
+
+<LINK REL="next" HREF="node162.html">
+<LINK REL="previous" HREF="node160.html">
+<LINK REL="next" HREF="node162.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node162.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node152.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node160.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html2645"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A> 
+<A ID="tex2html2647"
+  HREF="node513.html">
+<IMG WIDTH="43" HEIGHT="24" ALT="index" SRC="index.png"></A> 
+<BR>
+<B> Next:</B> <A
+ HREF="node162.html">Topology.submodel   select</A>
+<B> Up:</B> <A
+ HREF="node152.html">The Libraries class: stereochemical</A>
+<B> Previous:</B> <A
+ HREF="node160.html">Parameters.read()   read</A>
+ &nbsp; <B>  <A ID="tex2html2646"
+  HREF="node1.html">Contents</A></B> 
+ &nbsp; <B>  <A ID="tex2html2648"
+  HREF="node513.html">Index</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A ID="SECTION001159000000000000000">
+Topology.make() &mdash; make a subset topology library</A>
+</H2> <A NAME="13154"></A><A ID="CMD:Topology.make"></A>
+<A NAME="13157"></A><TT>make(submodel)</TT>
+<BR>
+<A ID="make-topology-model"></A>
+<P>
+<BLOCKQUOTE>
+This command makes a residue topology library
+from the most detailed C<SMALL>HARMM</SMALL> topology library, which contains all atoms,
+including all hydrogens (corresponding to <I CLASS="sans"><A HREF="node162.html#MEMB:Topology.submodel">Topology.submodel</A></I><A NAME="13178"></A> = 1). There are 
+currently ten residue topologies, all of which are defined in library <TT>
+$MODELS_LIB</TT>, which is also read in by this function.
+For example, the default non-hydrogen atom topology is selected
+by <I CLASS="sans">submodel</I><A NAME="13183"></A> = 3. For each <I CLASS="sans">submodel</I><A NAME="13186"></A> and residue
+type, the <TT>$MODELS_LIB</TT> library lists those atoms in the full 
+atom set that are part of the specified topology.
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>This command works by deleting all the entries that contain non-existing atoms
+from the original topology file. The charge of each removed atom is
+redistributed equally between the atoms directly bonded to it (if any of these
+atoms is in turn marked for deletion, the charge is instead placed on that
+atom's bonded neighbors, and so on). Any remaining charge is then spread
+around the entire residue, in proportion to the absolute charge of each atom.
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>One must carefully test topology files produced in
+this way. Library <TT>$RADII_LIB</TT> must specify atomic radii for each
+atom in each residue type for each topology model. <I CLASS="sans">submodel</I><A NAME="13189"></A> must
+be an integer from 1 to 10. On exit from this routine,
+<I CLASS="sans"><A HREF="node162.html#MEMB:Topology.submodel">Topology.submodel</A></I><A NAME="13192"></A> is set to <I CLASS="sans">submodel</I><A NAME="13197"></A>.
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>For more information about the topology
+library, see the FAQ Section&nbsp;<A HREF="node38.html#SECTION:faq">3.1</A>, Questions&nbsp;<A HREF="node38.html#FAQ:restop">8</A> and
+<A HREF="node38.html#FAQ:respatch">9</A>. 
+                             
+</BLOCKQUOTE>
+
+<P>
+
+  <DL>
+<DT><STRONG>Example: <A ID="tex2html97"
+  HREF="../examples/commands/make_topology_model.py">examples/commands/make_topology_model.py</A></STRONG></DT>
+<DD> <BR>  <div class="pygments"><pre><span></span><span class="c1"># Example for: topology.make(), topology.write()</span>
+
+<span class="c1"># This creates a topology library for heavy atoms from the</span>
+<span class="c1"># CHARMM all-atom topology library:</span>
+
+<span class="kn">from</span> <span class="nn">modeller</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">env</span> <span class="o">=</span> <span class="n">environ</span><span class="p">()</span>
+
+<span class="n">tpl</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">libs</span><span class="o">.</span><span class="n">topology</span>
+<span class="c1"># Read CHARMM all-atom topology library:</span>
+<span class="n">tpl</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="nb">file</span><span class="o">=</span><span class="s1">&#39;${LIB}/top.lib&#39;</span><span class="p">)</span>
+
+<span class="c1"># Keep only heavy atoms (TOPOLOGY_MODEL = 3)</span>
+<span class="n">tpl</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">submodel</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="c1"># Write the resulting topology library to a new file:</span>
+<span class="n">tpl</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">file</span><span class="o">=</span><span class="s1">&#39;top_heav.lib&#39;</span><span class="p">)</span>
+</pre></div>
+  
+</DD>
+</DL>  <BR>
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node162.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node152.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node160.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html2645"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A> 
+<A ID="tex2html2647"
+  HREF="node513.html">
+<IMG WIDTH="43" HEIGHT="24" ALT="index" SRC="index.png"></A> 
+<BR>
+<B> Next:</B> <A
+ HREF="node162.html">Topology.submodel   select</A>
+<B> Up:</B> <A
+ HREF="node152.html">The Libraries class: stereochemical</A>
+<B> Previous:</B> <A
+ HREF="node160.html">Parameters.read()   read</A>
+ &nbsp; <B>  <A ID="tex2html2646"
+  HREF="node1.html">Contents</A></B> 
+ &nbsp; <B>  <A ID="tex2html2648"
+  HREF="node513.html">Index</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>
