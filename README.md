@@ -27,16 +27,20 @@ Fluxo de Eventos para a modelagem:
 # Blast
 
 * Realizar o Blast através de 2 arquivos (Minha Proteina Base e um arquivo com várias proteinas da mesma familia afim de identificar o template com maior identidade).
-* Após realizada essa rotina usar o ID (do template com maior valor que nos foi apresentado) e realizar o Download de forma automática através do PDB, comando: https://files.rcsb.org/download/"+id_maior+".pdb"
 
 
 # Alinhamento
 
-* Preparar o processo automático de Alinhamento (Ainda preciso estudar este caso).
+* Preparar o processo automático de Alinhamento.
+* O precesso é dado a partir da leitura de 2 arquivos:
+  1º Arquivo da Proteina em questão (no caso estou utilizando a Beta-glucosidase), utilizo o clustalw para Alinhar.
+  2º Arquivo template referente a esta proteina, o arquivo template é no formato .pdb (Após pesquisas, estou utilizando o arquivo 4hpg.pdb para esta proteina em questão)
+ 
 
 # Modeller
 
-* Executar o Modeller após o Alinhamento (Estudar o caso)
+* Executar o Modeller após o Alinhamento.
+* Instalei o Modeller dentro do meu Projeto Django e configurei todo o ambiente para poder ser executado através do meu código fonte, aqui eu crio um script em Python (dinâmico) e uso o "mod9.24 run.py" para a execução da rotina, atualmente gero 3 modelos, mas é possivel alterar via código fonte. (Cada modelo leva cerca de 30s para finalizar).
 
 # Identificar o Melhor modelo
 
