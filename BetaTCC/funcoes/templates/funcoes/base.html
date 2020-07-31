@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Proteinas</title>
+    <link href="{% static 'css/mycss.css' %}" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/3f82430996.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+<body>
+    <!-- Barra de Navegação -->
+    <nav class="navbar navbar-light bg-light">
+        <span><a class="navbar-brand mb-0 h1" href="{% url 'index' %}"><img id="icon-dna" src="{% static 'img/dna4.jpg' %}" alt=""> Projeto Pré TCC</a></span>
+    </nav>
+
+    {% block body %}
+
+
+    {% endblock %}
+
+</body>
+</html>

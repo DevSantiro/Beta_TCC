@@ -4,9 +4,10 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('', views.Index, name='teste'),
-    path('upload', views.upload, name='upload'),
-    
+    path('', views.index, name='index-funcao'),
+    path('index', views.Index, name='index-funcoes'),
+    path('comparar', views.comparar, name='comparar'),
+    path('formulario', views.formulario, name="formulario")
 ]
 
 if settings.DEBUG:

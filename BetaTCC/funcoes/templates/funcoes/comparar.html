@@ -1,0 +1,102 @@
+{% extends "funcoes/base.html" %}
+
+{% block body %}
+    <style>
+        .conteudo{
+            width: 100%;
+        }
+
+        .primeiroDado{
+            width: 50%;
+            float: left;
+            background-color: red;
+        }
+
+        .segundoDado{
+            width: 50%;
+            float: right;
+            background-color: blue;
+        }
+
+        .info-dado{
+            width: 100%;
+            background-color: black;
+            color: white;
+        }
+
+        #resultado{
+            background-color: black;
+            width: 100%;
+            text-align: center;
+        }
+
+        #row-resultado{
+            color: white;
+            width: 100%;
+        }
+
+    </style>
+
+    <div class="conteudo">
+        <div class="primeiroDado">
+            <div class="row"><span class="info-dado"><b>Primeira Sequência</b></span></div>
+            <form method="POST">
+              {% csrf_token %}
+              <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Cabeçalho</span>
+                  </div>
+                  <input type="text" name="nome1" class="form-control" aria-label="Cabeçalho ou Nome da Sequência">
+                </div>
+                
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Sequência</span>
+                  </div>
+                  <textarea class="form-control" name="sequencia1" aria-label="Conteúdo da Sequência"></textarea>
+                </div>
+
+          </div>
+
+          <div class="segundoDado">
+              <div class="row"><span class="info-dado"><b>Segunda Sequência</b></span></div>
+
+              <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Cabeçalho</span>
+                  </div>
+                  <input type="text" name="nome2" class="form-control" aria-label="Cabeçalho ou Nome da Sequência">
+              </div>
+                
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Sequência</span>
+                </div>
+                <textarea class="form-control" name="sequencia2" aria-label="Conteúdo da Sequência"></textarea>
+              </div>
+          </div>
+
+          <center> <button type="submit" class="btn btn-primary">Alinhar</button> </center>
+
+      </form>
+
+
+        <div id="resultado"><span id="row-resultado"><b>Resultado do Alinhamento</b></span></div>
+        <p>Nome1: {{nome1}}</p>
+        <p>Nome2: {{nome2}}</p>
+        <p>Sequencia1: {{sequencia1}}</p>
+        <p>Sequencia2: {{sequencia2}}</p>
+
+    </div>
+
+
+    <script>
+
+      function Alinhamento(){
+        
+      }
+
+    </script>
+
+    
+{% endblock %}

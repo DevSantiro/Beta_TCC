@@ -98,7 +98,7 @@ def upload(request):
 
 def criaScript(template, proteina):
     w = open("media\\run.py","w")
-    script = "from modeller import *\nfrom modeller.automodel import *\nlog.verbose()\nenv = environ()\n\nenv.io.atom_files_directory = ['.']\n\nenv.io.hetatm = True\nenv.io.water = True\n\na = automodel(env, alnfile = 'new_alinha.pir', knowns = '"+proteina.name+"', sequence = '"+template.name+"')\na.starting_model = 1\na.ending_model = 3\na.make() \n"
+    script = "from modeller import *\nfrom modeller.automodel import *\nlog.verbose()\nenv = environ()\n\nenv.io.atom_files_directory = ['\\modelos']\n\nenv.io.hetatm = True\nenv.io.water = True\n\na = automodel(env, alnfile = 'new_alinha.pir', knowns = '"+proteina.name+"', sequence = '"+template.name+"')\na.starting_model = 1\na.ending_model = 3\na.make() \n"
     w.write(script)
     w.close()
     

@@ -1,0 +1,26 @@
+{% extends "funcoes/base.html" %}
+
+{% block body %}
+    <form method="POST">
+        {% csrf_token %}
+        <label>Nome</label>
+        <input type="text" name="nome"><br><br>
+
+        <label>Ativo</label>
+        <input type="checkbox" name="active" id=""> <br><br>
+
+        <label>Semana</label>
+        <input type="week" name="week"><br><br>
+
+        <label>Mes</label>
+        <input type="month" name="month"><br><br>
+
+        <button type="submit"> Enviar</button>
+
+    </form>
+
+    <p>Nome digitado {{nome}}</p>
+    <p>Status {{active}}</p>
+    <p>Semana digitada {{week}}</p>
+    <p>Mês digitado {{month}}</p>
+{% endblock %}
