@@ -27,16 +27,16 @@ def comparar(request):
         sequencia1 = request.POST.get('sequencia1')
         sequencia2 = request.POST.get('sequencia2')
 
-        print(len(sequencia1))
-        print(len(sequencia2))
+        #print(len(sequencia1))
+        #print(len(sequencia2))
 
-        print(sequencia1[1])
+        #print(sequencia1[1])
 
         # Aqui eu identifico qual é menor e realizo a iteração em cima dela
         # Pois os valores após o seu tamanho serão automaticamente "Diferentes"
         x = 0
         resultado = []
-        if sequencia1 > sequencia2:
+        if len(sequencia1) > len(sequencia2):
             maior = len(sequencia1)
             for idx in range(len(sequencia2)):
                 if sequencia1[idx] == sequencia2[x]:
@@ -53,16 +53,25 @@ def comparar(request):
                     resultado.append('D') # Diferente
                 x+=1
 
-        print(resultado)
-        print(x)
+        #print(resultado)
+        #print(x)
 
         while x != maior:
             resultado.append('D')
             x +=1
         
-        print(x)
-        print(resultado)
-    return render(request, "funcoes/comparar.html", dados)
+
+        #print(x)
+        #print(resultado)
+
+
+        return render(request, "funcoes/comparar.html", 
+        {
+            'dados': dados, 
+            'resultado': resultado
+        })
+
+    return render(request, "funcoes/comparar.html")
 
         
 
@@ -83,3 +92,8 @@ def formulario(request):
         data['month'] = request.POST.get('month', 'month não encontrado')
     
     return render(request, "funcoes/formulario.html", data)
+
+
+
+
+

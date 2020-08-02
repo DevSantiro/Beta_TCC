@@ -35,6 +35,10 @@
             width: 100%;
         }
 
+        .rst-conteudo{
+          display: none;;
+        }
+
     </style>
 
     <div class="conteudo">
@@ -80,20 +84,92 @@
 
       </form>
 
+        {% if resultado %}
+          <div id="resultado"><span id="row-resultado"><b>Resultado do Alinhamento</b></span></div>
 
-        <div id="resultado"><span id="row-resultado"><b>Resultado do Alinhamento</b></span></div>
-        <p>Nome1: {{nome1}}</p>
-        <p>Nome2: {{nome2}}</p>
-        <p>Sequencia1: {{sequencia1}}</p>
-        <p>Sequencia2: {{sequencia2}}</p>
+          <div class="conteudo">
+            <div class="primeiroDado">
+              <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Cabeçalho</span>
+                  </div>
+                  <input type="text" value="{{dados.nome1}}" id="rst-dado1" class="form-control" aria-label="Cabeçalho ou Nome da Sequência" disabled>
+              </div>
+                
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Sequência</span>
+                </div>
+                <textarea class="form-control" id="rst-sequencia1" aria-label="Conteúdo da Sequência" disabled>{{dados.sequencia1}}</textarea>
+              </div>
+            </div>
 
-    </div>
+          <div class="segundoDado">
 
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Cabeçalho</span>
+                </div>
+                <input type="text" id="rst-dado2" value="{{dados.nome2}}" class="form-control" aria-label="Cabeçalho ou Nome da Sequência" disabled>
+            </div>
+              
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Sequência</span>
+              </div>
+              <textarea class="form-control" id="rst-sequencia2" aria-label="Conteúdo da Sequência" disabled>{{dados.sequencia2}}</textarea>
+            </div>
+
+          </div>
+          <p><b>Resultado Alinhamento (Sobreposição das Sequências)</b></p>
+          <p><b>{{resultado}}</b></p>
+          <p><b>Legenda: M: <span style="color: green;" >Match</span> D: <span style="color: red;">Diferente</span></b></p>
+
+          <button onclick="Detalhar()">Detalhar</button>
+          </div>
+      </div>
+      <div id="teste">
+
+      </div>
+    {% endif %}
 
     <script>
 
-      function Alinhamento(){
+      function Detalhar(){
+        var dado1 = $('#rst-sequencia1').val();
+        var dado2 = $('#rst-sequencia2').val();
+
+        var x = 0;
+        // Utilizo a sequencia 1 e crio as informações a partir dela
+        comparacao = '';
         
+        tamanho1 = dado1.length;
+        tamanho2 = dado2.length;
+
+        console.log(tamanho1, tamanho2);
+
+
+        if (tamanho1 > tamanho2){
+          for(x = 0; x < tamanho1; x++){
+            if(dado1[x] == dado2[x]){
+              comparacao += '<p style="color:green; padding-top:0px; padding-bottom:0px;">'+dado1[x]+'</p>';
+            }
+            else{
+              comparacao += '<p style="color:red; padding-top:0px; padding-bottom:0px;">'+dado1[x]+'</p>';
+            }
+          }
+        }
+        else{
+          for(x = 0; x < tamanho2; x++){
+            if(dado1[x] == dado2[x]){
+              comparacao += '<p style="color:green; padding-top:0px; padding-bottom:0px;">'+dado2[x]+'</p>';
+            }
+            else{
+              comparacao += '<p style="color:red; padding-top:0px; padding-bottom:0px;">'+dado2[x]+'</p>';
+            }
+          }          
+        }
+        $('#teste').append(comparacao);
       }
 
     </script>
