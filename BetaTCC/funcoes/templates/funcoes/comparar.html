@@ -39,6 +39,18 @@
           display: none;;
         }
 
+        #detalhar{
+          display: none;
+        }
+
+        .verde{
+          color: green;
+        }
+
+        .vermelho{
+          color: red;
+        }
+
     </style>
 
     <div class="conteudo">
@@ -126,16 +138,18 @@
           <p><b>Legenda: M: <span style="color: green;" >Match</span> D: <span style="color: red;">Diferente</span></b></p>
 
           <button onclick="Detalhar()">Detalhar</button>
+          <button onclick="testeAjaxJason()">Detalhar</button>
           </div>
       </div>
-      <div id="teste">
-
+      <div id="detalhar">
+        <span><b>Alinhamento Detalhado das Sequências:</b></span><br>
       </div>
     {% endif %}
 
     <script>
 
       function Detalhar(){
+        
         var dado1 = $('#rst-sequencia1').val();
         var dado2 = $('#rst-sequencia2').val();
 
@@ -152,24 +166,50 @@
         if (tamanho1 > tamanho2){
           for(x = 0; x < tamanho1; x++){
             if(dado1[x] == dado2[x]){
-              comparacao += '<p style="color:green; padding-top:0px; padding-bottom:0px;">'+dado1[x]+'</p>';
+              comparacao += '<span class="verde">'+dado1[x]+'</span>';
             }
             else{
-              comparacao += '<p style="color:red; padding-top:0px; padding-bottom:0px;">'+dado1[x]+'</p>';
+              comparacao += '<span class="vermelho">'+dado1[x]+'</span>';
             }
           }
         }
         else{
           for(x = 0; x < tamanho2; x++){
             if(dado1[x] == dado2[x]){
-              comparacao += '<p style="color:green; padding-top:0px; padding-bottom:0px;">'+dado2[x]+'</p>';
+              comparacao += '<span class="verde">'+dado2[x]+'</span>';
             }
             else{
-              comparacao += '<p style="color:red; padding-top:0px; padding-bottom:0px;">'+dado2[x]+'</p>';
+              comparacao += '<span sclass="vermelho">'+dado2[x]+'</span>';
             }
           }          
         }
-        $('#teste').append(comparacao);
+
+
+        $('#detalhar').append(comparacao);
+        $('#detalhar').css('display', 'block');
+      }
+
+      function testeAjaxJason(){
+
+        var sequencia1 = $('#rst-sequencia1').val();
+        var sequencia2 = $('#rst-sequencia2').val();
+        
+        $.ajax({
+          method: "POST",
+          url: "comparar",
+          data: 
+          { 
+            act: "teste", 
+            sequencia1: sequencia1,
+            sequencia2: sequencia2,
+            csrfmiddlewaretoken: '{{ csrf_token }}' 
+          },
+          success: function(data){
+            console.log(data['seq1']);
+            console.log(data['seq2']);
+          }
+        })
+
       }
 
     </script>
