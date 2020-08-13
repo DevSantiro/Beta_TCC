@@ -7,7 +7,8 @@ urlpatterns = [
     path('', views.index, name='index-funcao'),
     path('index', views.Index, name='index-funcoes'),
     path('comparar', views.comparar, name='comparar'),
-    path('formulario', views.formulario, name="formulario")
+    path('formulario', views.formulario, name="formulario"),
+    path('conversor', views.conversorDNA, name='conversor')
 ]
 
 if settings.DEBUG:

@@ -9,3 +9,11 @@ class Proteina(models.Model):
     
     def __str__(self):
         return self.titulo
+
+class DNA(models.Model):
+    titulo = models.CharField(max_length=255)
+    cabecalho = models.CharField(max_length=255)
+    sequencia = models.TextField()
+    
+    def __str__(self):
+        return self.titulo

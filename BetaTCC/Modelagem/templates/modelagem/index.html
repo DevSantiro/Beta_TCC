@@ -2,8 +2,8 @@
 
 {% block body %}
 <div class="action">
-    <a href="{% url 'Lista' %}"><button class="btn-action"><span>(Imagem DNA) - Lista</span></button></a>
-    <a href="{% url 'upload' %}"><button class="btn-action" onclick = "alert('Em Desenvolvimento!');"> <span>(Imagem Comparar Sequências) - Comparar</span></button></a> 
-    <button class="btn-action" onclick = "alert('Em Desenvolvimento!');"> <span>(Imagem Tela de Controle) - Dados</span></button>
+    <a href="{% url 'selecao' %}"><button class="btn-action"><span>Lista Cadastradas</span></button></a>
+    <a href="{% url 'upload' %}"><button class="btn-action" onclick = "alert('Em Desenvolvimento!');"> <span>Pipeline Proteina - Template</span></button></a> 
+    <a href="{% url 'comparar' %}"><button class="btn-action" onclick = "alert('Em Desenvolvimento!');"> <span>Comparar Sequência</span></button></a>
 </div>
 {% endblock %}

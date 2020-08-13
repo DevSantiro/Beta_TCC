@@ -1,12 +1,52 @@
 {% extends "modelagem/base.html" %}
 
 {% block body %}
+    <style>
+        .conteudo{
+            width: 100%;
+        }
+
+        .hide{
+            display: none;
+        }
+
+        .show{
+            display: block;
+        }
+
+    </style>
+
     <div class="info-prot">
         <button class="btn-voltar" onclick='window.location.href = "/listaProteina" ';>Voltar</button>
         <h1>ID: <span class="title-prot">{{prot.id}}</span> - Proteina: <span class="title-prot">{{prot.titulo}} </span> </h1> 
-        <span><b>{{prot.cabecalho}}</b></span>
+        
+        <div class="col">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Sequência</span>
+                <textarea class="form-control col-md-7" rows="3" name="sequencia" id="sequencia" aria-label="Conteúdo da Sequência" disabled>{{prot.sequencia}}</textarea>
+                <button onclick="Converter();">Converter</button>
+            </div>
+        </div>     
         <br>
-        <span><b>{{prot.sequencia}}</b></span>
+    </div>
+
+    <div class="info-prot">
+        <ul>
+            <li><b>Fita Complementar do DNA inserido</b></li>
+            <div id="Fita" class="hide"> 
+            </div>
+            <li><b>Formar RNA mensageiro</b></li>
+            <div id="RNAm" class="hide">
+            </div>
+            <!-- <li><b>Formar RNA transportadores</b></li>
+            <div id="RNAt" class="hide">
+            </div> -->
+            <li><b>Gerar a Proteina formada (aminoacidos)</b></li>
+            <div id="Aminoacidos" class="hide">
+            </div>
+            <li><b>Tabela de Códons<b></li>
+    
+        </ul>
     </div>
 
     <div class="info-prot">
@@ -39,4 +79,32 @@
             <div class='grafic-info' style='background-color:rgba(0, 0, 0, {{transparencia.V}}')><p >{{dados.V}} - V</p></div>
         </div>
     </div>
+</div>
+
+<script>
+    function Converter(){
+        $("#Fita").html('');
+        $("#RNAm").html('');
+        $("#RNAt").html('');
+        $("#Aminoacidos").html('');
+        var sequencia = $('#sequencia').val();
+        $.ajax({
+            method: "POST",
+            url: "..\\conversor",
+            data: 
+            { 
+                sequencia: sequencia,
+                csrfmiddlewaretoken: '{{ csrf_token }}' 
+            },
+            success: function(data){
+                console.log(data['fita']);
+                $("#Fita").removeClass('hide').append(data['fita'],'<p><b>Fita Completa:</b></p>',data['fitaCompleta'],'<p><b>Sobreposição:</b></p>', data['sequencia'], '<br>', data['fita']);
+                $("#RNAm").removeClass('hide').append(data['RNAm']);
+                $("#Aminoacidos").removeClass('hide').append(data['aminoacidos']);
+                
+            }
+        })
+    }
+</script>
+
 {% endblock %}

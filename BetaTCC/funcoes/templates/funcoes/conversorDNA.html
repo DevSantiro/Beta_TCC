@@ -1,0 +1,78 @@
+{% extends "funcoes/base.html" %}
+
+{% block body %}
+    <style>
+        .conteudo{
+            width: 100%;
+        }
+
+        .hide{
+            display: none;
+        }
+
+        .show{
+            display: block;
+        }
+
+    </style>
+
+    <!-- Estrutura desta página -->
+    
+    <div class="conteudo">
+        <div class="inp-sequencia">
+            <div class="row"><span class="info-dado"><b>Sequência do DNA</b></span></div>
+            
+            <div class="col">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Sequência</span>
+                    <textarea class="form-control col-md-7" rows="3" name="sequencia" id="sequencia" aria-label="Conteúdo da Sequência"></textarea>
+                    <button onclick="Converter();">Converter</button>
+                </div>
+            </div>
+
+        </div>
+        <ul>
+            <li><b>Fita Complementar do DNA inserido</b></li>
+            <div id="Fita" class="hide"> 
+            </div>
+            <li><b>Formar RNA mensageiro</b></li>
+            <div id="RNAm" class="hide">
+            </div>
+            <!-- <li><b>Formar RNA transportadores</b></li>
+            <div id="RNAt" class="hide">
+            </div> -->
+            <li><b>Gerar a Proteina formada (aminoacidos)</b></li>
+            <div id="Aminoacidos" class="hide">
+            </div>
+            <li><b>Tabela de Códons<b></li>
+
+        </ul>
+    </div>
+    <script>
+        function Converter(){
+            $("#Fita").html('');
+            $("#RNAm").html('');
+            $("#RNAt").html('');
+            $("#Aminoacidos").html('');
+            var sequencia = $('#sequencia').val();
+            $.ajax({
+                method: "POST",
+                url: "conversor",
+                data: 
+                { 
+                    sequencia: sequencia,
+                    csrfmiddlewaretoken: '{{ csrf_token }}' 
+                },
+                success: function(data){
+                    console.log(data['fita']);
+                    $("#Fita").removeClass('hide').append(data['fita'],'<p><b>Fita Completa:</b></p>',data['fitaCompleta'],'<p><b>Sobreposição:</b></p>', data['sequencia'], '<br>', data['fita']);
+                    $("#RNAm").removeClass('hide').append(data['RNAm']);
+                    $("#Aminoacidos").removeClass('hide').append(data['aminoacidos']);
+                    
+                }
+            })
+        }
+    </script>
+
+    
+{% endblock %}
