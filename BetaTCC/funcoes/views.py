@@ -23,17 +23,61 @@ def comparar(request):
     dados = {}
 
     if request.method == 'POST':
-
         if(request.POST.get('act') == 'teste'):
+
+            sequencia1 = request.POST.get('sequencia1') 
+            sequencia2 = request.POST.get('sequencia2') 
+
+            tamanho1 = int(request.POST.get('tamanho1'))
+            tamanho2 = int(request.POST.get('tamanho2'))
+            comparacao = ''
+            indice = 0
+
+            #for indice in range(len(sequencia)):
+            if (tamanho1 > tamanho2):
+                while indice < len(sequencia1):
+                    try:
+                        if(sequencia1[indice] == sequencia2[indice]):
+                            comparacao += '<span class="verde">'+sequencia1[indice]+'</span>'
+                        else:
+                            comparacao += '<span class="vermelho">'+sequencia1[indice]+'</span>'
+                        
+                        print(indice)
+                        indice += 1
+                    except:
+                        comparacao += '<span class="vermelho">'+sequencia1[indice]+'</span>'
+                        indice += 1
+                    
+            else:
+                while indice < len(sequencia2):
+                    try:
+                        if(sequencia1[indice] == sequencia2[indice]):
+                            comparacao += '<span class="verde">'+sequencia2[indice]+'</span>'
+                        else:
+                            comparacao += '<span class="vermelho">'+sequencia2[indice]+'</span>'
+                        print(indice)
+                        indice += 1
+                    except:
+                        comparacao += '<span class="vermelho">'+sequencia2[indice]+'</span>'
+                        indice += 1
+
+
+
+            html = "\
+            <div>\
+                <h4> Resultados </h4>\
+                <b>Teste</b>\
+            </div>\
+            "
+
             dados = {
                 'seq1': request.POST.get('sequencia1'),
                 'seq2': request.POST.get('sequencia2'),
+                'html': comparacao,
             }
-            # return render(request, "funcoes/comparar.html", 
-            # {
-            #     'dados': dados 
-            # })
-            
+
+
+                        
             return JsonResponse(dados)
 
 

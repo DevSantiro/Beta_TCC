@@ -14,6 +14,12 @@
             display: block;
         }
 
+        #qnt-amino{
+            color: blue;
+            font-weight: bold;
+            display: none;
+        }
+
     </style>
 
     <div class="info-prot">
@@ -32,25 +38,12 @@
 
     <div class="info-prot">
         <ul>
-            <li><b>Fita Complementar do DNA inserido</b></li>
-            <div id="Fita" class="hide"> 
-            </div>
-            <li><b>Formar RNA mensageiro</b></li>
-            <div id="RNAm" class="hide">
-            </div>
-            <!-- <li><b>Formar RNA transportadores</b></li>
-            <div id="RNAt" class="hide">
-            </div> -->
-            <li><b>Gerar a Proteina formada (aminoacidos)</b></li>
-            <div id="Aminoacidos" class="hide">
-            </div>
-            <li><b>Tabela de Códons<b></li>
     
         </ul>
     </div>
 
     <div class="info-prot">
-        <h2>Taxa de Aparição:</h2>
+        <h2>Taxa de Aparição:</h2> <h2 id='qnt-amino'> aminoacidos</h2>
         <span><b>{{dados}}</b></span>
     </div>
 
@@ -83,26 +76,23 @@
 
 <script>
     function Converter(){
-        $("#Fita").html('');
-        $("#RNAm").html('');
-        $("#RNAt").html('');
-        $("#Aminoacidos").html('');
         var sequencia = $('#sequencia').val();
-        $.ajax({
-            method: "POST",
-            url: "..\\conversor",
-            data: 
-            { 
-                sequencia: sequencia,
-                csrfmiddlewaretoken: '{{ csrf_token }}' 
-            },
-            success: function(data){
-                console.log(data['fita']);
-                $("#Fita").removeClass('hide').append(data['fita'],'<p><b>Fita Completa:</b></p>',data['fitaCompleta'],'<p><b>Sobreposição:</b></p>', data['sequencia'], '<br>', data['fita']);
-                $("#RNAm").removeClass('hide').append(data['RNAm']);
-                $("#Aminoacidos").removeClass('hide').append(data['aminoacidos']);
+        $('#qnt-amino').css('display', 'block');
+        // $.ajax({
+        //     method: "POST",
+        //     url: "..\\conversor",
+        //     data: 
+        //     { 
+        //         sequencia: sequencia,
+        //         csrfmiddlewaretoken: '{{ csrf_token }}' 
+        //     },
+        //     success: function(data){
+        //         console.log(data['fita']);
+        //         $("#Fita").removeClass('hide').append(data['fita'],'<p><b>Fita Completa:</b></p>',data['fitaCompleta'],'<p><b>Sobreposição:</b></p>', data['sequencia'], '<br>', data['fita']);
+        //         $("#RNAm").removeClass('hide').append(data['RNAm']);
+        //         $("#Aminoacidos").removeClass('hide').append(data['aminoacidos']);
                 
-            }
+        //     }
         })
     }
 </script>

@@ -45,6 +45,132 @@
             <div id="Aminoacidos" class="hide">
             </div>
             <li><b>Tabela de Códons<b></li>
+                <div id="table-codon" class="hide">
+                    <table id="genCode" border="1">
+                        <caption>
+                        </caption>
+                        <tbody><tr>
+                        <th rowspan="2">1ª posição<br>(extr. 5')</th>
+                        <th colspan="4" style="text-align:center;">2ª posição (meio)</th>
+                        <th rowspan="2">3ª posição<br>(extr. 3')</th>
+                        </tr>
+                        
+                        
+                        <tr>
+                        <th class="base2">U</th>
+                        <th class="base2">C</th>
+                        <th class="base2">A</th>
+                        <th class="base2">G</th>
+                        </tr>
+                        
+                        <tr>
+                        <th class="base1">U</th>
+                        <td>Phe F
+                        <br>Phe F
+                        <br><i>Leu L</i>
+                        <br><i>Leu L</i></td>
+                        
+                        <td><i>Ser S</i>
+                        <br><i>Ser S</i>
+                        <br><i>Ser S</i>
+                        <br><i>Ser S</i></td>
+                        
+                        <td>Tyr Y
+                        <br>Tyr Y
+                        <br>
+                        <span class="stop">stop</span>
+                        <br>
+                        <span class="stop">stop</span></td>
+                        
+                        <td>Cys C
+                        <br>Cys C
+                        <br>
+                        <span class="stop">stop</span>
+                        <br><b>Trp W</b></td>
+                        
+                        <th class="base3">U<br>C<br>A<br>G</th>
+                        </tr>
+                        
+                        <tr>
+                        <th class="base1">C</th>
+                        
+                        <td><i>Leu L</i>
+                        <br><i>Leu L</i>
+                        <br><i>Leu L</i>
+                        <br><i>Leu L</i></td>
+                        
+                        <td>Pro P
+                        <br>Pro P
+                        <br>Pro P
+                        <br>Pro P</td>
+                        
+                        <td>His H
+                        <br>His H
+                        <br>Gln Q
+                        <br>Gln Q</td>
+                        
+                        <td><i>Arg R</i>
+                        <br><i>Arg R</i>
+                        <br><i>Arg R</i>
+                        <br><i>Arg R</i></td>
+                        
+                        <th class="base3">U<br>C<br>A<br>G</th>
+                        </tr>
+                        
+                        <tr>
+                        <th class="base1">A</th>
+                        
+                        <td>Ile I
+                        <br>Ile I
+                        <br>Ile I
+                        <br><b>Met M</b></td>
+                        
+                        <td>Thr T
+                        <br>Thr T
+                        <br>Thr T
+                        <br>Thr T</td>
+                        
+                        <td>Asn N
+                        <br>Asn N
+                        <br>Lys K
+                        <br>Lys K</td>
+                        
+                        <td><i>Ser S</i>
+                        <br><i>Ser S</i>
+                        <br><i>Arg R</i>
+                        <br><i>Arg R</i></td>
+                        
+                        <th class="base3">U<br>C<br>A<br>G</th>
+                        </tr>
+                        
+                        <tr>
+                        <th class="base1">G</th>
+                        
+                        <td>Val V
+                        <br>Val V
+                        <br>Val V
+                        <br>Val V</td>
+                        
+                        <td>Ala A
+                        <br>Ala A
+                        <br>Ala A
+                        <br>Ala A</td>
+                        
+                        <td>Asp D
+                        <br>Asp D
+                        <br>Glu E
+                        <br>Glu E</td>
+                        
+                        <td>Gly G
+                        <br>Gly G
+                        <br>Gly G
+                        <br>Gly G</td>
+                        
+                        <th class="base3">U<br>C<br>A<br>G</th>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
     
         </ul>
     </div>
@@ -85,7 +211,7 @@
                 $("#Fita").removeClass('hide').append(data['fita'],'<p><b>Fita Completa:</b></p>',data['fitaCompleta'],'<p><b>Sobreposição:</b></p>', data['sequencia'], '<br>', data['fita']);
                 $("#RNAm").removeClass('hide').append(data['RNAm']);
                 $("#Aminoacidos").removeClass('hide').append(data['aminoacidos']);
-                
+                $("#table-codon").removeClass('hide');
             }
         })
     }

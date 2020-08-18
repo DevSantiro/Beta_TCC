@@ -144,6 +144,10 @@
       <div id="detalhar">
         <span><b>Alinhamento Detalhado das Sequências:</b></span><br>
       </div>
+
+      <div id="teste2">
+
+      </div>
     {% endif %}
 
     <script>
@@ -193,7 +197,13 @@
 
         var sequencia1 = $('#rst-sequencia1').val();
         var sequencia2 = $('#rst-sequencia2').val();
-        
+  
+        tamanho1 = sequencia1.length;
+        tamanho2 = sequencia2.length;
+
+        console.log(tamanho1, tamanho2);
+
+
         $.ajax({
           method: "POST",
           url: "comparar",
@@ -202,12 +212,15 @@
             act: "teste", 
             sequencia1: sequencia1,
             sequencia2: sequencia2,
+            tamanho1: tamanho1,
+            tamanho2: tamanho2,
             csrfmiddlewaretoken: '{{ csrf_token }}' 
           },
           success: function(data){
             console.log(data['seq1']);
             console.log(data['seq2']);
-          }
+            $("#teste2").append('<span><b>Alinhamento Detalhado das Sequências a partir do Back End Django:</b></span><br>' + data['html']);
+          }  
         })
 
       }
