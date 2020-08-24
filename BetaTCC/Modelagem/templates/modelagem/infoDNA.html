@@ -14,6 +14,7 @@
             display: block;
         }
 
+
     </style>
 
     <div class="info-prot">
@@ -23,29 +24,42 @@
         <div class="col">
             <div class="input-group-prepend">
                 <span class="input-group-text">Sequência</span>
-                <textarea class="form-control col-md-7" rows="3" name="sequencia" id="sequencia" aria-label="Conteúdo da Sequência" disabled>{{dna.sequencia}}</textarea>
+                <textarea class="form-control col-md-6" rows="3" name="sequencia" id="sequencia" aria-label="Conteúdo da Sequência" disabled>{{dna.sequencia}}</textarea>
                 <button onclick="Converter();">Converter</button>
             </div>
-        </div>     
+            <div class="info-prot grafico" style="position: absolute;top: -23%;margin-right: 0%;margin-left: 65%;">
+                <div style="text-align: center;">
+                    <div class='grafic-info' style='width: 88px; height: 86px; background-color:rgba(0, 0, 0, {{transparencia.A}}')><p >{{dados.A}} - A</p></div>
+                    <div class='grafic-info' style='width: 88px; height: 86px; background-color:rgba(0, 0, 0, {{transparencia.T}}')><p >{{dados.T}} - T</p></div>
+                    <div class='grafic-info' style='width: 88px; height: 86px; background-color:rgba(0, 0, 0, {{transparencia.G}}')><p >{{dados.G}} - G</p></div>
+                    <div class='grafic-info' style='width: 88px; height: 86px; background-color:rgba(0, 0, 0, {{transparencia.C}}')><p >{{dados.C}} - C</p></div>
+                </div>
+            </div> 
+        </div>
+        <div class="info-prot" style="position: absolute;top: 33%;margin-right: 0%; margin-left: 63.2%;">
+            <span><b>{{dados}}</b></span>
+        </div>
+    
+    
         <br>
     </div>
 
     <div class="info-prot">
-        <ul>
-            <li><b>Fita Complementar do DNA inserido</b></li>
-            <div id="Fita" class="hide"> 
-            </div>
-            <li><b>Formar RNA mensageiro</b></li>
-            <div id="RNAm" class="hide">
-            </div>
-            <!-- <li><b>Formar RNA transportadores</b></li>
-            <div id="RNAt" class="hide">
-            </div> -->
-            <li><b>Gerar a Proteina formada (aminoacidos)</b></li>
-            <div id="Aminoacidos" class="hide">
-            </div>
-            <li><b>Tabela de Códons<b></li>
-                <div id="table-codon" class="hide">
+
+        <div class="titulo">
+            <span class="texto-titulo"><b>Fita Complementar do DNA inserido</b></span>
+        </div>
+        <div id="Fita" class="hide"> </div>
+
+        <div class="titulo">
+            <span class="texto-titulo"><b>Formar RNA mensageiro</b></span>
+        </div>
+        <div id="RNAm" class="hide"> </div>
+
+        <div class="titulo">
+            <span class="texto-titulo"><b>Tabela de Códons</b></span>
+            <div id="table-codon" class="hide">
+                <center>
                     <table id="genCode" border="1">
                         <caption>
                         </caption>
@@ -170,25 +184,36 @@
                         </tr>
                         </tbody>
                     </table>
-                </div>
+                </center>
+            </div>
     
-        </ul>
+            <div class="titulo">
+                <span class="texto-titulo"><b>Gerar a Proteina formada (aminoacidos)</b></span>
+            </div>
+            <div id="Aminoacidos" class="hide"> </div>
+            
+            
+            </div>
+
+
+        </div>
+
+            
     </div>
 
-    <div class="info-prot">
+    <!-- <div class="info-prot">
         <h2>Taxa de Aparição:</h2>
         <span><b>{{dados}}</b></span>
-    </div>
+    </div> -->
 
-    <div class="info-prot grafico">
-        <h2>Representação Gráfica:</h2>
+    <!-- <div class="info-prot grafico">
         <div style="text-align: center;">
             <div class='grafic-info' style='background-color:rgba(0, 0, 0, {{transparencia.A}}')><p >{{dados.A}} - A</p></div>
             <div class='grafic-info' style='background-color:rgba(0, 0, 0, {{transparencia.T}}')><p >{{dados.T}} - T</p></div>
             <div class='grafic-info' style='background-color:rgba(0, 0, 0, {{transparencia.G}}')><p >{{dados.G}} - G</p></div>
             <div class='grafic-info' style='background-color:rgba(0, 0, 0, {{transparencia.C}}')><p >{{dados.C}} - C</p></div>
         </div>
-    </div>
+    </div> -->
 </div>
 
 <script>
@@ -208,8 +233,8 @@
             },
             success: function(data){
                 console.log(data['fita']);
-                $("#Fita").removeClass('hide').append(data['fita'],'<p><b>Fita Completa:</b></p>',data['fitaCompleta'],'<p><b>Sobreposição:</b></p>', data['sequencia'], '<br>', data['fita']);
-                $("#RNAm").removeClass('hide').append(data['RNAm']);
+                $("#Fita").removeClass('hide').append('<p><b>Fita:</b></p>' + data['fita'] +'<p><b>Fita Completa:</b></p>' + data['fitaCompleta'] + '<p><b>Sobreposição:</b></p> <span style="font-family: monospace; font-size:17px;">' + data['sequencia'] + '<br>' + data['fita'] + '</span>');
+                $("#RNAm").removeClass('hide').append('<p><b>RNA Mensageiro: </b></p>' + data['RNAm']);
                 $("#Aminoacidos").removeClass('hide').append(data['aminoacidos']);
                 $("#table-codon").removeClass('hide');
             }

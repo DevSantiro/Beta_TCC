@@ -24,13 +24,13 @@
             color: white;
         }
 
-        #resultado{
+        .resultado{
             background-color: black;
             width: 100%;
             text-align: center;
         }
 
-        #row-resultado{
+        .row-resultado{
             color: white;
             width: 100%;
         }
@@ -50,6 +50,28 @@
         .vermelho{
           color: red;
         }
+
+        #parte1{
+          width: 50%;
+          float: left;
+        }
+
+        #parte2{
+          width: 50%;
+          float: right;
+        }
+
+
+      .detalhar_seq{
+        width: 100%;
+        padding-top: 10px;
+        padding-left: 20px;
+        display: none;
+      }
+
+      #teste2{
+        display: none;
+      }
 
     </style>
 
@@ -97,7 +119,7 @@
       </form>
       <!-- <button class="btn btn-primary">Gerar RNA Equivalente</button> -->
         {% if resultado %}
-          <div id="resultado"><span id="row-resultado"><b>Resultado do Alinhamento</b></span></div>
+          <div class="resultado"><span class="row-resultado"><b>Resultado do Alinhamento</b></span></div>
 
           <div class="conteudo">
             <div class="primeiroDado">
@@ -133,21 +155,47 @@
             </div>
 
           </div>
-          <p><b>Resultado Alinhamento (Sobreposição das Sequências)</b></p>
+          <div class="resultado"><span class="row-resultado"><b>Matriz comparação (Teste)</b></span></div>
+
           <p><b>{{resultado}}</b></p>
-          <p><b>Legenda: M: <span style="color: green;" >Match</span> D: <span style="color: red;">Diferente</span></b></p>
-
-          <button onclick="Detalhar()">Detalhar</button>
-          <button onclick="testeAjaxJason()">Detalhar</button>
-          </div>
+        </div>
       </div>
+
+      <div class="conteudo">
+        <div style="width: 50%; float: left;"><p><b>Legenda: M: <span style="color: green;" >Match</span> D: <span style="color: red;">Diferente</span></b></p></div>
+        <div style="width: 50%; float: right;">  
+          <button style="float: right;" class="btn btn-primary fa fa-eye" onclick="funcaoBlastp()">Blastp*</button> 
+          <button style="float: right;" class="btn btn-primary fa fa-pencil-square-o" onclick="testeAjaxJason()">Detalhar</button>
+        </div>
+      </div>
+
+      <br>
+      <br>
+      
+      <div style="width: 100%; background-color: black; text-align: center;"><span class="row-resultado"><b>Funções</b></span></div>
+
       <div id="detalhar">
-        <span><b>Alinhamento Detalhado das Sequências:</b></span><br>
       </div>
 
-      <div id="teste2">
+      <br>
+    
+      <div class="detalhar_seq">
+        <div id="parte1">
+        </div>
+
+        <div id="parte2">
+        </div>
 
       </div>
+
+
+      <br>
+      
+      <div id="teste2" style="float: left; padding-left: 20px;">
+        <div style="width: 100%; background-color: black; text-align: center; margin-bottom: 10px;"><span class="row-resultado"><b>Sobreposição (Simulação)</b></span></div>
+      </div>
+
+
     {% endif %}
 
     <script>
@@ -219,7 +267,37 @@
           success: function(data){
             console.log(data['seq1']);
             console.log(data['seq2']);
-            $("#teste2").append('<span><b>Alinhamento Detalhado das Sequências a partir do Back End Django:</b></span><br>' + data['html']);
+            $(".detalhar_seq").css('display', 'block');
+            $("#teste2").css('display', 'block');
+            $("#parte1").append('<div style="font-family: monospace;"><span><b>Alinhamento Detalhado das Sequências a partir do Back End Django | Comparação 1:</b></span><br>' + data['comparacao1'] + '</div>');
+            $("#parte2").append('<div style="font-family: monospace;"><span><b>Alinhamento Detalhado das Sequências a partir do Back End Django | Comparação 2:</b></span><br>' + data['comparacao2'] + '</div><br>');
+            $("#teste2").append('<div style="font-family: monospace;">' + data['teste3'] + '</div>');
+          }  
+        })
+
+      }
+
+      function funcaoBlastp(){
+        var sequencia1 = $('#rst-sequencia1').val();
+        var sequencia2 = $('#rst-sequencia2').val();
+  
+        tamanho1 = sequencia1.length;
+        tamanho2 = sequencia2.length;
+
+        $.ajax({
+          method: "POST",
+          url: "teste",
+          data: 
+          { 
+            act: "compararTeste", 
+            sequencia1: sequencia1,
+            sequencia2: sequencia2,
+            tamanho1: tamanho1,
+            tamanho2: tamanho2,
+            csrfmiddlewaretoken: '{{ csrf_token }}' 
+          },
+          success: function(data){
+            $("#teste2").append('<div style="font-family: monospace;"><span><b>Simulação: </b></span><br>' + data['teste3'] + '</div><br>');
           }  
         })
 

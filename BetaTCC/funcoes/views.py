@@ -18,6 +18,62 @@ def Index(request):
     return render(request, 'funcoes/index.html') 
 
 
+def compararTeste(request):
+    # pass
+    dados = {}
+
+    if request.method == 'POST':
+        if(request.POST.get('act') == 'compararTeste'):
+
+            sequencia1 = request.POST.get('sequencia1') 
+            sequencia2 = request.POST.get('sequencia2') 
+
+            tamanho1 = int(request.POST.get('tamanho1'))
+            tamanho2 = int(request.POST.get('tamanho2'))  
+            
+            if tamanho1 > tamanho2:
+                teste3 = '<div>'
+                linha1 = ''
+                linha2 = ''
+                linha3 = ''
+
+                contador = 0
+
+                while contador < len(sequencia1):
+                    # print(contador)
+                    linha1 += sequencia1[contador] 
+                    
+                    try:
+                        if sequencia1[contador] == sequencia2[contador]:
+                            linha2 += sequencia1[contador]
+                        else: 
+                            linha2 += '+'
+                    except:
+                        linha2 += ' '
+
+                    try:
+                        linha3 += sequencia2[contador]
+                    except:
+                        linha3 += ' '
+                    
+                    contador += 1
+
+                i = 0
+
+                while i < tamanho1:
+                    teste3 += '<span>' + linha1[i:i+60] + '<br>' + linha2[i:i+60] + '<br>' + linha3[i:i+60] + '</span><br><br>'
+                    i += 60
+
+        dados = {
+           'teste3': teste3,
+        }
+
+    return JsonResponse(dados)
+        
+
+
+
+    
 def comparar(request):
     
     dados = {}
@@ -30,37 +86,106 @@ def comparar(request):
 
             tamanho1 = int(request.POST.get('tamanho1'))
             tamanho2 = int(request.POST.get('tamanho2'))
-            comparacao = ''
-            indice = 0
+            
+            comparacao1 = ''
+            comparacaoM = ''
+            comparacao2 = ''
 
+            indice = 0
+            count_amino = 1
             #for indice in range(len(sequencia)):
             if (tamanho1 > tamanho2):
                 while indice < len(sequencia1):
+                    # print(indice)
                     try:
                         if(sequencia1[indice] == sequencia2[indice]):
-                            comparacao += '<span class="verde">'+sequencia1[indice]+'</span>'
+                            comparacao1 += '<span class="verde">'+sequencia1[indice]+'</span>'
+                            try:
+                                comparacao2 += '<span class="verde">'+sequencia2[indice]+'</span>'
+                            except:
+                                comparacao2 += '<span>-</span>'
+                                
                         else:
-                            comparacao += '<span class="vermelho">'+sequencia1[indice]+'</span>'
-                        
-                        print(indice)
+                            comparacao1 += '<span class="vermelho">'+sequencia1[indice]+'</span>'
+                            try:
+                                comparacao2 += '<span class="vermelho">'+sequencia2[indice]+'</span>'
+                            except:
+                                comparacao2 += '<span>-</span>'
+
                         indice += 1
                     except:
-                        comparacao += '<span class="vermelho">'+sequencia1[indice]+'</span>'
+                        comparacao1 += '<span class="vermelho">'+sequencia1[indice]+'</span>'
                         indice += 1
+ 
+                    if count_amino % 60 == 0: 
+                        comparacao1 += '<br>'
+                        comparacao2 += '<br>'
+
+                    count_amino += 1    
+
                     
             else:
                 while indice < len(sequencia2):
                     try:
                         if(sequencia1[indice] == sequencia2[indice]):
-                            comparacao += '<span class="verde">'+sequencia2[indice]+'</span>'
+                            comparacao1 += '<span class="verde">'+sequencia2[indice]+'</span>'
+                            try:
+                                comparacao2 += '<span class="verde">'+sequencia1[indice]+'</span>'
+                            except:
+                                comparacao2 += '<span>-</span>'
+
                         else:
-                            comparacao += '<span class="vermelho">'+sequencia2[indice]+'</span>'
-                        print(indice)
+                            comparacao1 += '<span class="vermelho">'+sequencia2[indice]+'</span>'
+                            try:
+                                comparacao2 += '<span class="verde">'+sequencia1[indice]+'</span>'
+                            except:
+                                comparacao2 += '<span>-</span>'
+
                         indice += 1
                     except:
-                        comparacao += '<span class="vermelho">'+sequencia2[indice]+'</span>'
+                        comparacao1 += '<span class="vermelho">'+sequencia2[indice]+'</span>'
                         indice += 1
+                    
 
+                    if count_amino % 50 == 0:   
+                        comparacao1 += '<br>'
+                        comparacao2 += '<br>'
+
+                    count_amino += 1
+
+            
+            if tamanho1 > tamanho2:
+                teste3 = '<div>'
+                linha1 = ''
+                linha2 = ''
+                linha3 = ''
+
+                contador = 0
+
+                while contador < len(sequencia1):
+                    # print(contador)
+                    linha1 += sequencia1[contador] 
+                    
+                    try:
+                        if sequencia1[contador] == sequencia2[contador]:
+                            linha2 += sequencia1[contador]
+                        else: 
+                            linha2 += '+'
+                    except:
+                        linha2 += ' '
+
+                    try:
+                        linha3 += sequencia2[contador]
+                    except:
+                        linha3 += ' '
+                    
+                    contador += 1
+
+                i = 0
+
+                while i < tamanho1:
+                    teste3 += '<span>' + linha1[i:i+60] + '<br>' + linha2[i:i+60] + '<br>' + linha3[i:i+60] + '</span><br><br>'
+                    i += 60
 
 
             html = "\
@@ -73,7 +198,9 @@ def comparar(request):
             dados = {
                 'seq1': request.POST.get('sequencia1'),
                 'seq2': request.POST.get('sequencia2'),
-                'html': comparacao,
+                'comparacao1': comparacao1,
+                'comparacao2': comparacao2,
+                'teste3': teste3,
             }
 
 
