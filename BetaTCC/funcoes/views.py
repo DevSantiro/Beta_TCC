@@ -18,13 +18,76 @@ def Index(request):
     return render(request, 'funcoes/index.html') 
 
 
+# def compararTeste(request):
+#     # pass
+#     dados = {}
+
+#     if request.method == 'POST':
+#         if(request.POST.get('act') == 'compararTeste'):
+            
+#             ondeestou = 0
+#             sequencia1 = request.POST.get('sequencia1') 
+#             sequencia2 = request.POST.get('sequencia2') 
+
+#             tamanho1 = int(request.POST.get('tamanho1'))
+#             tamanho2 = int(request.POST.get('tamanho2'))  
+            
+#             if tamanho1 > tamanho2:
+#                 teste3 = '<div>'
+#                 linha1 = ''
+#                 linha2 = ''
+#                 linha3 = ''
+
+#                 inicioT = []
+#                 fimT = []
+
+#                 contador = 0
+
+#                 sequenciaTeste = ''
+
+#                 while contador < len(sequencia1):
+#                     # print(contador)
+#                     try:
+#                         linha1 += sequencia1[contador:contador+2] 
+
+#                         if(sequencia1[contador:contador+2] == sequencia2[contador:contador+2]):
+#                             #Gravei o Inicio na lista do Contador
+#                             inicioT.append(contador)
+#                             # Comecei outro while a partir do contador
+#                             while contador < len(sequencia1):
+#                             # É igual, inseri a primeira vez
+#                                 if(sequencia1[contador:contador+2] == sequencia2[contador:contador+2]):
+#                                     sequenciaTeste += sequencia1[contador:contador+2]
+
+
+
+#                         else:
+
+                   
+#                     except:
+#                         break
+   
+#                 i = 0
+
+#                 while i < tamanho2:
+#                     teste3 += '<span>' + linha1[i:i+60] + '<br>' + linha2[i:i+60] + '<br>' + linha3[i:i+60] + '</span><br><br>'
+#                     i += 60
+
+#         dados = {
+#            'teste3': teste3,
+#         }
+
+#     return JsonResponse(dados)
+        
+
 def compararTeste(request):
     # pass
     dados = {}
 
     if request.method == 'POST':
         if(request.POST.get('act') == 'compararTeste'):
-
+            
+            ondeestou = 0
             sequencia1 = request.POST.get('sequencia1') 
             sequencia2 = request.POST.get('sequencia2') 
 
@@ -63,6 +126,38 @@ def compararTeste(request):
                 while i < tamanho1:
                     teste3 += '<span>' + linha1[i:i+60] + '<br>' + linha2[i:i+60] + '<br>' + linha3[i:i+60] + '</span><br><br>'
                     i += 60
+            else:
+                teste3 = '<div>'
+                linha1 = ''
+                linha2 = ''
+                linha3 = ''
+
+                contador = 0
+
+                while contador < len(sequencia2):
+                    # print(contador)
+                    linha1 += sequencia2[contador] 
+                    
+                    try:
+                        if sequencia2[contador] == sequencia1[contador]:
+                            linha2 += sequencia2[contador]
+                        else: 
+                            linha2 += '+'
+                    except:
+                        linha2 += ' '
+
+                    try:
+                        linha3 += sequencia1[contador]
+                    except:
+                        linha3 += ' '
+                    
+                    contador += 1
+
+                i = 0
+
+                while i < tamanho2:
+                    teste3 += '<span>' + linha1[i:i+60] + '<br>' + linha2[i:i+60] + '<br>' + linha3[i:i+60] + '</span><br><br>'
+                    i += 60
 
         dados = {
            'teste3': teste3,
@@ -70,8 +165,6 @@ def compararTeste(request):
 
     return JsonResponse(dados)
         
-
-
 
     
 def comparar(request):
@@ -434,6 +527,31 @@ def geraFitaCompleta(sequencia):
 
 
 
+# def geraRNAm(sequencia):
+#     # Acredito que aqui eu vou precisar gerar a FITA para esse RNAm e depois fazer o mesmo.
+#     RNAm = ''
+
+#     for indice in range(len(sequencia)):
+        
+#         if sequencia[indice] == 'A':
+#             RNAm += 'U'
+#             continue
+#         if sequencia[indice] == 'T':
+#             RNAm += 'A'
+#             continue
+        
+#         if sequencia[indice] == 'G':
+#             RNAm += 'C'
+#             continue
+
+#         if sequencia[indice] == 'C':
+#             RNAm += 'G'
+#             continue
+
+
+#     return RNAm
+
+
 def geraRNAm(sequencia):
     # Acredito que aqui eu vou precisar gerar a FITA para esse RNAm e depois fazer o mesmo.
     RNAm = ''
@@ -441,22 +559,23 @@ def geraRNAm(sequencia):
     for indice in range(len(sequencia)):
         
         if sequencia[indice] == 'A':
-            RNAm += 'U'
+            RNAm += 'A'
             continue
         if sequencia[indice] == 'T':
-            RNAm += 'A'
+            RNAm += 'U'
             continue
         
         if sequencia[indice] == 'G':
-            RNAm += 'C'
+            RNAm += 'G'
             continue
 
         if sequencia[indice] == 'C':
-            RNAm += 'G'
+            RNAm += 'C'
             continue
 
 
     return RNAm
+
 
 def geraAminoacidos(sequencia):
     CodonTable = {
@@ -519,7 +638,7 @@ def geraAminoacidos(sequencia):
             if seqAtual in CodonTable:
                 seq_aminoacidos += CodonTable[seqAtual] + ' - '
             
-            print(seq_aminoacidos)
+            #print(seq_aminoacidos)
             indice += 3
         except:
             break
@@ -558,3 +677,54 @@ def conversorDNA(request):
 
     return render(request, "funcoes/conversorDNA.html")
     
+
+
+
+def Alinhamento(request):
+    dados = {}
+    if request.method == 'POST':
+
+        sequencia1 = request.POST.get('sequencia1') 
+        sequencia2 = request.POST.get('sequencia2') 
+
+        tamanho1 = int(request.POST.get('tamanho1'))
+        tamanho2 = int(request.POST.get('tamanho2'))  
+        
+        if tamanho1 > tamanho2:
+            teste3 = '<div>'
+            linha1 = ''
+            linha2 = ''
+            linha3 = ''
+
+            contador = 0
+
+            while contador < len(sequencia1):
+                # print(contador)
+                linha1 += sequencia1[contador] 
+                
+                try:
+                    if sequencia1[contador] == sequencia2[contador]:
+                        linha2 += sequencia1[contador]
+                    else: 
+                        linha2 += '+'
+                except:
+                    linha2 += ' '
+
+                try:
+                    linha3 += sequencia2[contador]
+                except:
+                    linha3 += ' '
+                
+                contador += 1
+
+            i = 0
+
+            while i < tamanho1:
+                teste3 += '<span>' + linha1[i:i+60] + '<br>' + linha2[i:i+60] + '<br>' + linha3[i:i+60] + '</span><br><br>'
+                i += 60
+
+            dados = {
+                'teste3': teste3,
+            }
+
+    return JsonResponse(dados)

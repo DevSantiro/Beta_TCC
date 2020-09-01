@@ -9,7 +9,8 @@ urlpatterns = [
     path('comparar', views.comparar, name='comparar'),
     path('formulario', views.formulario, name="formulario"),
     path('conversor', views.conversorDNA, name='conversor'),
-    path('teste', views.compararTeste, name='teste')
+    path('teste', views.compararTeste, name='teste'),
+    path('Alinhamento', views.Alinhamento, name='alinhamento'),
 ]
 
 if settings.DEBUG:

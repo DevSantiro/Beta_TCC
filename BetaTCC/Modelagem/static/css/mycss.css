@@ -110,6 +110,12 @@ footer p{
 
 /* Estruturar padrão de paginas aqui! */
 
+.fundo{
+    background-image: url('../img/fundo.jpg');
+    background-size: auto;
+    /* background-repeat: no-repeat; */
+}
+
 .titulo{
     width: 100%;
     background-color: black;
@@ -117,4 +123,178 @@ footer p{
     color: white;
     border: 3px solid #9e9e9e;
     text-align: center;
+}
+
+.informacoes-dados{
+    background-color: black;
+    color: white;
+    border: 3px solid #9e9e9e;
+}
+
+
+/**************** Upload page **************/
+
+.upload-form{
+    background-color: #000000c2;
+    /* opacity: 82%; */
+    color: white;
+    margin-top: 35px;
+}
+
+
+
+/**************** Comparacao page **************/
+
+.conteudo{
+    margin-top: 10px;
+    width: 100%;
+}
+
+.conteudo2{
+    width: 100%;
+}
+
+.primeiroDado{
+    width: 50%;
+    float: left;
+    background-color: black;
+    /* background-color: #000000c2; */
+}
+
+.segundoDado{
+    width: 50%;
+    float: right;
+    background-color: black;
+    /* background-color: #000000c2; */
+}
+
+.info-dado{
+    width: 100%;
+    background-color: black;
+    color: white;
+}
+
+.resultado{
+    background-color: black;
+    color: white;
+    width: 100%;
+    text-align: center;
+}
+
+.resultado p{
+    text-align: left;
+    font-family: monospace;
+    font-size: 17px;
+    font-weight: bold;
+    border: 1px solid;
+}
+
+.row-resultado{
+    margin-top: 10px;
+    color: white;
+    width: 100%;
+    background-color: black;
+}
+
+.rst-conteudo{
+  display: none;;
+}
+
+#detalhar{
+  display: none;
+}
+
+.verde{
+  color: green;
+}
+
+.vermelho{
+  color: red;
+}
+
+#parte1{
+  width: 50%;
+  float: left;
+}
+
+#parte2{
+  width: 50%;
+  float: right;
+}
+
+
+#teste2{
+display: none;
+}
+
+
+.legenda{
+    width: 100%;
+    background-color: black;
+}
+
+.legenda1{
+    width: 50%; 
+    float: left;
+    background-color: black;
+    color: white;
+    /* font-size: 17px; */
+    font-weight: bold;
+    height: 40px;
+}
+
+.legenda2{
+    width: 50%; 
+    float: right;
+    background-color: black;
+    color: white;
+    height: 40px;
+    /* font-size: 17px; */
+    /* font-weight: bold; */
+}
+
+.legenda2 button{
+    float: right;
+}
+
+.detalhar_seq{
+    width: 100%;
+    padding-top: 10px;
+    padding-left: 20px;
+    display: none;
+    background-color: black;
+    padding-bottom: 20%;
+}
+
+.detalhar_seq2{
+    width: 100%;
+    padding-top: 10px;
+    padding-left: 20px;
+    display: none;
+    background-color: black;
+    padding-bottom: 100%;
+}
+
+
+#parte1{
+    background-color: black;
+}
+
+
+#parte2{
+    background-color: black;
+}
+
+.teste2{
+    margin-top: 35px;
+    float: left; 
+    width: 50%;
+    background-color: black;
+}
+
+.teste3{
+    margin-top: 35px;
+    float: right; 
+    width: 50%;
+    background-color: black;
 }

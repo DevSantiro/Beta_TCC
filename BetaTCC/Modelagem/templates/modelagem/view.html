@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+  </style>
+</head>
+
+<body>
+  <script src="./ngl.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var stage = new NGL.Stage("viewport");
+      window.addEventListener("resize", function (event) {
+        stage.handleResize();
+      }, false);
+
+         //stage.loadFile("rcsb://1crn", {defaultRepresentation: true});
+      stage.loadFile("C:/Users/33rod/Desktop/Python/testeModelo3d/NGL/Sample/DIP28.pdb", { defaultRepresentation: true });
+
+    });
+  </script>
+  <div id="viewport" style="width:400px; height:300px;"></div>
+</body>
+
+</html>

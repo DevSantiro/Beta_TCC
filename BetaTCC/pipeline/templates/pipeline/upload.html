@@ -1,8 +1,8 @@
-{% extends "funcoes/base.html" %}
+{% extends "modelagem/base.html" %}
 
 {% block body %}
-
-    <h2>Upload</h2>
+<div class="upload-form">
+    <h2><b>Upload</b></h2>
 
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
@@ -16,5 +16,5 @@
     <button type="submit">Upload File</button>
 
     </form>
-
+</div>
 {% endblock %}

@@ -47,13 +47,13 @@ def infoProteina(request, id):
     for i in dicionario:
         if dicionario[i] > 0:
             transparencia[i] = dicionario[i]  / contador
-            print(transparencia[i])
+            #print(transparencia[i])
 
         else: 
             transparencia[i] = 0
 
     #print(len(sequencia.replace('\n','')))
-    print(contador)
+    #print(contador)
     
     # grafico += "<div style='width:100px; border:1px solid #111; color:#fff; height:100px; float:left; background-color:rgba(0, 0, 0, "+ str(transparencia) +"')>"+ str(dicionario[i]) + "</div>"
     # grafico += "</div>"
@@ -132,6 +132,30 @@ def geraFitaCompleta(sequencia):
 
 
 
+# def geraRNAm(sequencia):
+#     # Acredito que aqui eu vou precisar gerar a FITA para esse RNAm e depois fazer o mesmo.
+#     RNAm = ''
+
+#     for indice in range(len(sequencia)):
+        
+#         if sequencia[indice] == 'A':
+#             RNAm += 'U'
+#             continue
+#         if sequencia[indice] == 'T':
+#             RNAm += 'A'
+#             continue
+        
+#         if sequencia[indice] == 'G':
+#             RNAm += 'C'
+#             continue
+
+#         if sequencia[indice] == 'C':
+#             RNAm += 'G'
+#             continue
+
+
+#     return RNAm
+
 def geraRNAm(sequencia):
     # Acredito que aqui eu vou precisar gerar a FITA para esse RNAm e depois fazer o mesmo.
     RNAm = ''
@@ -139,18 +163,18 @@ def geraRNAm(sequencia):
     for indice in range(len(sequencia)):
         
         if sequencia[indice] == 'A':
-            RNAm += 'U'
+            RNAm += 'A'
             continue
         if sequencia[indice] == 'T':
-            RNAm += 'A'
+            RNAm += 'U'
             continue
         
         if sequencia[indice] == 'G':
-            RNAm += 'C'
+            RNAm += 'G'
             continue
 
         if sequencia[indice] == 'C':
-            RNAm += 'G'
+            RNAm += 'C'
             continue
 
 
@@ -162,7 +186,7 @@ def geraAminoacidos(sequencia):
         'UUA': 'Leucina', 'UUG': 'Leucina', 'CUU': 'Leucina', 'CUC': 'Leucina', 'CUA': 'Leucina', 'CUG': 'Leucina',
         'AUU': 'Isoleucina', 'AUC': 'Isoleucina', 'AUA': 'Isoleucina',
         'AUG': 'Metionina', #Códon de iniciação
-        'GUG': 'Valina',
+        'GUG': 'Valina', 'GUC': 'Valina', 'GUU': 'Valina',
         'UCU': 'Serina', 'UCC': 'Serina', 'UCA': 'Serina', 'UCG': 'Serina',
         'CCU': 'Prolina', 'CCC': 'Prolina', 'CCA': 'Prolina', 'CCG': 'Prolina',
         'ACU': 'Treonina', 'ACC': 'Treonina', 'ACA': 'Treonina', 'ACG': 'Treonina',
@@ -179,7 +203,7 @@ def geraAminoacidos(sequencia):
         'GAA': 'Glutamato', # VERIFICAR
         'GAG': 'Glutamato', # VERIFICAR
         'UGU': 'Cisteína', 'UGC': 'Cisteína',
-        'UGA': 'Triptofano',
+        'UGA': 'Stop Códon',
         'UGG': 'Arginina', 'CGU': 'Arginina', 'CGC': 'Arginina', 'CGA': 'Arginina',
         'CGG': 'Serina', 'AGU': 'Serina',
         'AGC': 'Arginina', 'AGA': 'Arginina',
@@ -217,7 +241,7 @@ def geraAminoacidos(sequencia):
             if seqAtual in CodonTable:
                 seq_aminoacidos += CodonTable[seqAtual] + ' - '
             
-            print(seq_aminoacidos)
+            #print(seq_aminoacidos)
             indice += 3
         except:
             break
@@ -237,6 +261,8 @@ def conversorDNA(request):
         fitaCompleta = geraFitaCompleta(sequencia)
 
         RNAm = geraRNAm(sequencia)
+
+        RNAm = quebraLinhas(RNAm)
 
         RNAt = ''
 
@@ -292,13 +318,13 @@ def infoDNA(request, id):
     for i in dicionario:
         if dicionario[i] > 0:
             transparencia[i] = dicionario[i]  / contador
-            print(transparencia[i])
+            #print(transparencia[i])
 
         else: 
             transparencia[i] = 0
 
     #print(len(sequencia.replace('\n','')))
-    print(contador)
+    #print(contador)
     
 
     return render(request, 'modelagem/infoDNA.html', 
@@ -307,3 +333,27 @@ def infoDNA(request, id):
         'dados': dicionario,
         'transparencia': transparencia
     })
+
+
+
+
+def quebraLinhas(sequencia):
+    novaseq = ''
+    contador = 1
+    
+    for i in range(len(sequencia)):
+        try:
+            novaseq += sequencia[contador]
+            if contador % 60 == 0:
+                novaseq += '<br>'
+            
+            contador +=1
+        except:
+            break
+    
+    return novaseq
+
+
+
+def view3d(request):
+    return render(request, "modelagem/view.html")

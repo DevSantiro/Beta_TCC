@@ -1,83 +1,9 @@
-{% extends "funcoes/base.html" %}
+{% extends "modelagem/base.html" %}
 
 {% block body %}
-    <style>
-        .conteudo{
-            width: 100%;
-        }
-
-        .primeiroDado{
-            width: 50%;
-            float: left;
-            background-color: red;
-        }
-
-        .segundoDado{
-            width: 50%;
-            float: right;
-            background-color: blue;
-        }
-
-        .info-dado{
-            width: 100%;
-            background-color: black;
-            color: white;
-        }
-
-        .resultado{
-            background-color: black;
-            width: 100%;
-            text-align: center;
-        }
-
-        .row-resultado{
-            color: white;
-            width: 100%;
-        }
-
-        .rst-conteudo{
-          display: none;;
-        }
-
-        #detalhar{
-          display: none;
-        }
-
-        .verde{
-          color: green;
-        }
-
-        .vermelho{
-          color: red;
-        }
-
-        #parte1{
-          width: 50%;
-          float: left;
-        }
-
-        #parte2{
-          width: 50%;
-          float: right;
-        }
-
-
-      .detalhar_seq{
-        width: 100%;
-        padding-top: 10px;
-        padding-left: 20px;
-        display: none;
-      }
-
-      #teste2{
-        display: none;
-      }
-
-    </style>
-
     <div class="conteudo">
         <div class="primeiroDado">
-            <div class="row"><span class="info-dado"><b>Primeira Sequência</b></span></div>
+            <div><span class="info-dado"><b>Primeira Sequência</b></span></div>
             <form method="POST">
               {% csrf_token %}
               <div class="input-group mb-3">
@@ -97,7 +23,7 @@
           </div>
 
           <div class="segundoDado">
-              <div class="row"><span class="info-dado"><b>Segunda Sequência</b></span></div>
+              <div><span class="info-dado"><b>Segunda Sequência</b></span></div>
 
               <div class="input-group mb-3">
                   <div class="input-group-prepend">
@@ -121,7 +47,7 @@
         {% if resultado %}
           <div class="resultado"><span class="row-resultado"><b>Resultado do Alinhamento</b></span></div>
 
-          <div class="conteudo">
+          <div class="conteudo2">
             <div class="primeiroDado">
               <div class="input-group mb-3">
                   <div class="input-group-prepend">
@@ -155,17 +81,19 @@
             </div>
 
           </div>
-          <div class="resultado"><span class="row-resultado"><b>Matriz comparação (Teste)</b></span></div>
+          <div class="resultado"><span class="row-resultado"><b>Matriz comparação (Teste)</b></span>
+            <p><b>{{resultado}}</b></p>
+          </div>
 
-          <p><b>{{resultado}}</b></p>
         </div>
       </div>
 
-      <div class="conteudo">
-        <div style="width: 50%; float: left;"><p><b>Legenda: M: <span style="color: green;" >Match</span> D: <span style="color: red;">Diferente</span></b></p></div>
-        <div style="width: 50%; float: right;">  
-          <button style="float: right;" class="btn btn-primary fa fa-eye" onclick="funcaoBlastp()">Blastp*</button> 
-          <button style="float: right;" class="btn btn-primary fa fa-pencil-square-o" onclick="testeAjaxJason()">Detalhar</button>
+      <div class="legenda">
+        <div class="legenda1"><p><b>Legenda: M: <span style="color: green;" >Match</span> D: <span style="color: red;">Diferente</span></b></p></div>
+        <div class="legenda2">  
+          <button class="btn btn-primary fa fa-pencil-square-o" onclick="Alinhamento()">Alinhamento</button>
+          <button class="btn btn-primary fa fa-eye" onclick="funcaoBlastp()">Blastp*</button> 
+          <button class="btn btn-primary fa fa-pencil-square-o" onclick="testeAjaxJason()">Detalhar</button>
         </div>
       </div>
 
@@ -191,11 +119,18 @@
 
       <br>
       
-      <div id="teste2" style="float: left; padding-left: 20px;">
-        <div style="width: 100%; background-color: black; text-align: center; margin-bottom: 10px;"><span class="row-resultado"><b>Sobreposição (Simulação)</b></span></div>
+      <div class="detalhar_seq2">
+
+        <div style="width: 100%; background-color: black; text-align: center;"><span class="row-resultado"><b>Alinhamento - Blastp*</b></span></div>
+
+        <!-- <div id="teste2">
+          <div style="width: 67%; background-color: black; text-align: center; margin-bottom: 10px;"><span class="row-resultado"><b>Sobreposição (Simulação)</b></span></div>
+        </div> -->
+
+        <!-- <div id="teste3">
+          <div style="width: 67%; background-color: black; text-align: center; margin-bottom: 10px;"><span class="row-resultado"><b>Blastp*</b></span></div>
+        </div> -->
       </div>
-
-
     {% endif %}
 
     <script>
@@ -268,10 +203,9 @@
             console.log(data['seq1']);
             console.log(data['seq2']);
             $(".detalhar_seq").css('display', 'block');
-            $("#teste2").css('display', 'block');
-            $("#parte1").append('<div style="font-family: monospace;"><span><b>Alinhamento Detalhado das Sequências a partir do Back End Django | Comparação 1:</b></span><br>' + data['comparacao1'] + '</div>');
-            $("#parte2").append('<div style="font-family: monospace;"><span><b>Alinhamento Detalhado das Sequências a partir do Back End Django | Comparação 2:</b></span><br>' + data['comparacao2'] + '</div><br>');
-            $("#teste2").append('<div style="font-family: monospace;">' + data['teste3'] + '</div>');
+            $("#parte1").append('<div style="font-family: monospace;"><span style="color: white;"><b>Alinhamento Detalhado das Sequências a partir do Back End Django | Comparação 1:</b></span><br>' + data['comparacao1'] + '</div>');
+            $("#parte2").append('<div style="font-family: monospace;"><span style="color: white;"><b>Alinhamento Detalhado das Sequências a partir do Back End Django | Comparação 2:</b></span><br>' + data['comparacao2'] + '</div><br>');
+            // $("#teste2").append('<div style="font-family: monospace;"><span><b>Simulação: </b></span>' + data['teste3'] + '</div>');
           }  
         })
 
@@ -297,11 +231,41 @@
             csrfmiddlewaretoken: '{{ csrf_token }}' 
           },
           success: function(data){
-            $("#teste2").append('<div style="font-family: monospace;"><span><b>Simulação: </b></span><br>' + data['teste3'] + '</div><br>');
+            $(".detalhar_seq2").css('display', 'block');
+            $(".detalhar_seq2").append('<div class="teste3" style="font-family: monospace; color: yellowgreen;"><span style="color: white;"><b>Blastp*: </b></span><br>' + data['teste3'] + '</div><br>');
+            
+          
           }  
         })
 
       }
+
+      function Alinhamento(){
+        var sequencia1 = $('#rst-sequencia1').val();
+        var sequencia2 = $('#rst-sequencia2').val();
+  
+        tamanho1 = sequencia1.length;
+        tamanho2 = sequencia2.length;
+
+        $.ajax({
+          method: "POST",
+          url: "teste",
+          data: 
+          { 
+            act: "compararTeste", 
+            sequencia1: sequencia1,
+            sequencia2: sequencia2,
+            tamanho1: tamanho1,
+            tamanho2: tamanho2,
+            csrfmiddlewaretoken: '{{ csrf_token }}' 
+          },
+          success: function(data){
+            $(".detalhar_seq2").css('display', 'block');
+            $(".detalhar_seq2").append('<div class="teste2" style="font-family: monospace; color: aquamarine;"><span style="color: white;"><b>Simulação: </b></span>' + data['teste3'] + '</div>');
+          }  
+        })     
+      }
+
 
     </script>
 

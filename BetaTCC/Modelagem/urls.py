@@ -8,5 +8,6 @@ urlpatterns = [
     path('selecionarTipo', views.selecionarTipo, name='selecao'),
     path('infoProteina/<int:id>', views.infoProteina, name='infoProteina'),
     path('infoDNA/<int:id>', views.infoDNA, name='infoDNA'),
-    path('conversor', views.conversorDNA, name='conversor')
+    path('conversor', views.conversorDNA, name='conversor'),
+    path('view3d', views.view3d, name='view3d')
 ]
