@@ -10,6 +10,7 @@ urlpatterns = [
     path('formulario', views.formulario, name="formulario"),
     path('conversor', views.conversorDNA, name='conversor'),
     path('teste', views.compararTeste, name='teste'),
+    path('blastp', views.blastp, name='blastp'),
     path('Alinhamento', views.Alinhamento, name='alinhamento'),
 ]
 

@@ -1,6 +1,8 @@
 {% extends "modelagem/base.html" %}
 
 {% block body %}
+{% load static %}
+
 <div class="upload-form">
     <h2><b>Upload</b></h2>
 
@@ -17,4 +19,61 @@
 
     </form>
 </div>
+
+<!-- <script>
+    function barra(){
+        acao = $("#btn-barra").data("valor");
+
+        if (acao == 1){
+            $('body,html').css('overflow','hidden');
+            $("#btn-barra").data('valor','2');
+            alert($("#btn-barra").data());
+        }
+        else{
+            $('body,html').css('overflow','auto');
+            $("#btn-barra").data('valor','1');
+            alert($("#btn-barra").data());
+        }
+    }
+</script> -->
+
+{% if resultado %}
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+        var stage = new NGL.Stage("viewport");
+        var stage1 = new NGL.Stage("viewport1");
+        var stage2 = new NGL.Stage("viewport2");
+        var stage3 = new NGL.Stage("viewport3");
+
+        window.addEventListener("resize", function (event) {
+            stage.handleResize();
+            stage1.handleResize();
+            stage2.handleResize();
+            stage3.handleResize();
+        }, false);
+
+        //stage.loadFile("rcsb://1crn", {defaultRepresentation: true});
+        stage.loadFile("media/4hpg.pdb", { defaultRepresentation: true });
+        stage1.loadFile("media/beta_glucosidase.fasta.B99990001.pdb", { defaultRepresentation: true });
+        stage2.loadFile("media/beta_glucosidase.fasta.B99990002.pdb", { defaultRepresentation: true });
+        stage3.loadFile("media/beta_glucosidase.fasta.B99990003.pdb", { defaultRepresentation: true });
+
+        });
+
+    </script>
+    
+    <div class="invi">
+        <div id="viewport" style="width:400px; height:300px;"></div>
+        <div id="viewport1" style="width:400px; height:300px;"></div>
+        <div id="viewport2" style="width:400px; height:300px;"></div>
+        <div id="viewport3" style="width:400px; height:300px;"></div>
+    </div>
+
+
+
+{% endif %}
+
+    <!-- <button id="btn-barra" onclick="barra()" data-valor="1" style="position: fixed; margin-left: 87%;">Bloquear/Desbloquear Barra</button> -->
+
 {% endblock %}

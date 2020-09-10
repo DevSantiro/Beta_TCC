@@ -1,9 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-  <meta charset="utf-8">
-  <style>
+{% extends "modelagem/base.html" %}
+
+{% block body %}
+{% load static %}
+
+<style>
     * {
       margin: 0;
       padding: 0;
@@ -13,26 +14,36 @@
     body {
       width: 100%;
       height: 100%;
-      overflow: hidden;
     }
   </style>
-</head>
-
-<body>
-  <script src="./ngl.js"></script>
+  <!-- <script src="./ngl.js"></script> -->
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       var stage = new NGL.Stage("viewport");
+      var stage1 = new NGL.Stage("viewport1");
+      var stage2 = new NGL.Stage("viewport2");
+      var stage3 = new NGL.Stage("viewport3");
+
       window.addEventListener("resize", function (event) {
         stage.handleResize();
+        stage1.handleResize();
+        stage2.handleResize();
+        stage3.handleResize();
       }, false);
 
-         //stage.loadFile("rcsb://1crn", {defaultRepresentation: true});
-      stage.loadFile("C:/Users/33rod/Desktop/Python/testeModelo3d/NGL/Sample/DIP28.pdb", { defaultRepresentation: true });
+      //stage.loadFile("rcsb://1crn", {defaultRepresentation: true});
+      stage.loadFile("{% static '3d/4hpg.pdb' %}", { defaultRepresentation: true });
+      stage1.loadFile("{% static '3d/a1.pdb' %}", { defaultRepresentation: true });
+      stage2.loadFile("{% static '3d/a2.pdb' %}", { defaultRepresentation: true });
+      stage3.loadFile("{% static '3d/a3.pdb' %}", { defaultRepresentation: true });
 
     });
   </script>
-  <div id="viewport" style="width:400px; height:300px;"></div>
-</body>
+  <div>
+    <div id="viewport" style="width:400px; height:300px;"></div>
+    <div id="viewport1" style="width:400px; height:300px;"></div>
+    <div id="viewport2" style="width:400px; height:300px;"></div>
+    <div id="viewport3" style="width:400px; height:300px;"></div>
+  </div>
 
-</html>
+{% endblock %}

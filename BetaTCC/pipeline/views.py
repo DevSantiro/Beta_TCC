@@ -42,12 +42,12 @@ def upload(request):
         
         w = open("media\\"+ template.name +".fasta","w")
         w.write(">"+template.name+"\n")
-        cadeia = 'A'
+        cadeia = 'A' # Aqui eu estou deixando Fixo "A", mas no caso não é o correto, deveria verificar uma forma de identificar.
         comeco = 0
         fim = 0
         pdb = open('media\\' + template.name).readlines()
         for linha in pdb:
-            if linha[0:4] == "ATOM" and linha[21] == cadeia and linha[13:15] == 'CA':
+            if linha[0:4] == "ATOM" and linha[21] == cadeia and linha[13:15] == 'CA': # ver o que é CA
                 resname3 = linha[17:20]
                 if comeco == 0:
                     comeco = int(linha[22:26])
@@ -81,7 +81,7 @@ def upload(request):
                     tipo = tipo+1
                 elif tipo == 1:
                     new_aln.write(">P1;"+proteina.name+"\n")
-                    new_aln.write("sequence:"+proteina.name+":"+str(1)+":A:"+str(tamanho_seq)+":A::::")
+                    new_aln.write("sequence:"+proteina.name+":"+str(1)+":A:"+str(tamanho_seq)+":A::::") # Mesma coisa aqui!
             else:
                 new_aln.write(linha)
         new_aln.close()
@@ -92,8 +92,11 @@ def upload(request):
         criaScript(proteina, template)
 
         os.system("media\\Modeller.lnk")
- 
-    return render(request, 'pipeline/upload.html')
+    
+        return render(request, 'pipeline/upload.html', {'resultado': '1' } )
+    
+    return render(request, 'pipeline/upload.html' )
+    
 
 
 def criaScript(template, proteina):

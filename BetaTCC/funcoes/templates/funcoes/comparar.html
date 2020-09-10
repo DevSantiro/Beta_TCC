@@ -92,7 +92,7 @@
         <div class="legenda1"><p><b>Legenda: M: <span style="color: green;" >Match</span> D: <span style="color: red;">Diferente</span></b></p></div>
         <div class="legenda2">  
           <button class="btn btn-primary fa fa-pencil-square-o" onclick="Alinhamento()">Alinhamento</button>
-          <button class="btn btn-primary fa fa-eye" onclick="funcaoBlastp()">Blastp*</button> 
+          <button class="btn btn-primary fa fa-eye" onclick="funcaoBlastp()">Blastp</button> 
           <button class="btn btn-primary fa fa-pencil-square-o" onclick="testeAjaxJason()">Detalhar</button>
         </div>
       </div>
@@ -220,10 +220,10 @@
 
         $.ajax({
           method: "POST",
-          url: "teste",
+          url: "blastp",
           data: 
           { 
-            act: "compararTeste", 
+            act: "blastp", 
             sequencia1: sequencia1,
             sequencia2: sequencia2,
             tamanho1: tamanho1,
@@ -232,7 +232,10 @@
           },
           success: function(data){
             $(".detalhar_seq2").css('display', 'block');
-            $(".detalhar_seq2").append('<div class="teste3" style="font-family: monospace; color: yellowgreen;"><span style="color: white;"><b>Blastp*: </b></span><br>' + data['teste3'] + '</div><br>');
+
+            html = ''
+
+            $(".detalhar_seq2").append('<div class="teste3" style="font-family: monospace;"><span style="color: white;"><b>Blastp: </b></span><br>' + data['blast'] + '</div><br>');
             
           
           }  

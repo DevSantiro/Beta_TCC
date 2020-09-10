@@ -23,7 +23,7 @@
 Kind, OS, HostName, Kernel, Processor: 4, Windows Vista build 9200, LAPTOP-CECH6ITM, SMP, unknown
 Date and time of compilation         : 2020/04/06 12:03:25
 MODELLER executable type             : x86_64-w64
-Job starting time (YY/MM/DD HH:MM:SS): 2020/08/24 21:10:16
+Job starting time (YY/MM/DD HH:MM:SS): 2020/09/08 18:01:09
 
 openf___224_> Open           $(LIB)/restyp.lib
 openf___224_> Open           ${MODINSTALL9v24}/modlib/resgrp.lib
@@ -1234,6 +1234,6 @@ beta_glucosidase.fasta.B99990003.pdb     2081.47314
 
 
 Dynamically allocated memory at          finish [B,KiB,MiB]:      6754390    6596.084     6.441
-Starting time                                            : 2020/08/24 21:10:16
-Closing time                                             : 2020/08/24 21:10:59
-Total CPU time [seconds]                                 :      42.42
+Starting time                                            : 2020/09/08 18:01:09
+Closing time                                             : 2020/09/08 18:01:58
+Total CPU time [seconds]                                 :      49.05

@@ -2,6 +2,13 @@ from django.http import HttpResponse, HttpRequest
 from django.shortcuts import render
 from .forms import *
 from django.http import JsonResponse
+from Bio.Blast.Applications import NcbiblastpCommandline
+from io import StringIO ## for Python 3
+from Bio.Blast import NCBIXML
+from Bio.Seq import Seq
+from Bio.SeqRecord import SeqRecord
+from Bio import SeqIO
+
 
 # Create your views here.
 
@@ -18,68 +25,67 @@ def Index(request):
     return render(request, 'funcoes/index.html') 
 
 
-# def compararTeste(request):
-#     # pass
-#     dados = {}
-
-#     if request.method == 'POST':
-#         if(request.POST.get('act') == 'compararTeste'):
+def blastp(request):
+    dados = {}
+    if request.method == 'POST':
+        if(request.POST.get('act') == 'blastp'):
             
-#             ondeestou = 0
-#             sequencia1 = request.POST.get('sequencia1') 
-#             sequencia2 = request.POST.get('sequencia2') 
+            sequencia1 = request.POST.get('sequencia1') 
+            sequencia2 = request.POST.get('sequencia2') 
+            print(sequencia1)
+            # Create two sequence files
+            seq1 = SeqRecord(Seq(sequencia1),
+            id="seq1")
+            seq2 = SeqRecord(Seq(sequencia2),
+            id="seq2")
+            SeqIO.write(seq1, "media\\seq1.fasta", "fasta")
+            SeqIO.write(seq2, "media\\seq2.fasta", "fasta")
 
-#             tamanho1 = int(request.POST.get('tamanho1'))
-#             tamanho2 = int(request.POST.get('tamanho2'))  
-            
-#             if tamanho1 > tamanho2:
-#                 teste3 = '<div>'
-#                 linha1 = ''
-#                 linha2 = ''
-#                 linha3 = ''
+            # Run BLAST and parse the output as XML
+            output = NcbiblastpCommandline(query="media\\seq1.fasta", subject="media\\seq2.fasta", outfmt=5)()[0]
+            blast_result_record = NCBIXML.read(StringIO(output))
+            # Print some information on the result
+            for alignment in blast_result_record.alignments:
+                for hsp in alignment.hsps:
+                    #print('****Alignment****')
+                    #print('sequence:', alignment.title)
+                    titulo_alinhamento = alignment.title
+                    #print('length:', alignment.length)
+                    tamanho = alignment.length
+                    #print('e value:', hsp.expect)
+                    valorE = hsp.expect
+                    #print('###### Query #####')
+                    #print(hsp.query)
+                    query = hsp.query
+                    #print('###### Match #####')
+                    #print(hsp.match)
+                    match = hsp.match
+                    #print('###### Subject ######')
+                    #print(hsp.sbjct)
+                    subject = hsp.sbjct
+                    #print('###########')
+        
+        i = 0 
+        blast = ''
+        
+        while i < alignment.length:
+            blast += '<span style="color:white;">' + query[i:i+60] + '</span><br>' + '<span style="color: yellowgreen;";>' + match[i:i+60] + '</span><br>' + '<span style="color:white">' + subject[i:i+60] + '</span><br><br>'
+            i += 60            
 
-#                 inicioT = []
-#                 fimT = []
+        dados = {
+           'titulo': titulo_alinhamento,
+           'tamanho': tamanho,
+           'valorE': valorE,
+           'query': query,
+           'match': match,
+           'subject': subject,
+           'blast': blast
+        }
 
-#                 contador = 0
-
-#                 sequenciaTeste = ''
-
-#                 while contador < len(sequencia1):
-#                     # print(contador)
-#                     try:
-#                         linha1 += sequencia1[contador:contador+2] 
-
-#                         if(sequencia1[contador:contador+2] == sequencia2[contador:contador+2]):
-#                             #Gravei o Inicio na lista do Contador
-#                             inicioT.append(contador)
-#                             # Comecei outro while a partir do contador
-#                             while contador < len(sequencia1):
-#                             # É igual, inseri a primeira vez
-#                                 if(sequencia1[contador:contador+2] == sequencia2[contador:contador+2]):
-#                                     sequenciaTeste += sequencia1[contador:contador+2]
-
-
-
-#                         else:
-
-                   
-#                     except:
-#                         break
-   
-#                 i = 0
-
-#                 while i < tamanho2:
-#                     teste3 += '<span>' + linha1[i:i+60] + '<br>' + linha2[i:i+60] + '<br>' + linha3[i:i+60] + '</span><br><br>'
-#                     i += 60
-
-#         dados = {
-#            'teste3': teste3,
-#         }
-
-#     return JsonResponse(dados)
+    return JsonResponse(dados)
         
 
+# #Forma Correta
 def compararTeste(request):
     # pass
     dados = {}
