@@ -227,22 +227,22 @@ def comparar(request):
                 while indice < len(sequencia2):
                     try:
                         if(sequencia1[indice] == sequencia2[indice]):
-                            comparacao1 += '<span class="verde">'+sequencia2[indice]+'</span>'
+                            comparacao2 += '<span class="verde">'+sequencia2[indice]+'</span>'
                             try:
-                                comparacao2 += '<span class="verde">'+sequencia1[indice]+'</span>'
+                                comparacao1 += '<span class="verde">'+sequencia1[indice]+'</span>'
                             except:
-                                comparacao2 += '<span>-</span>'
+                                comparacao1 += '<span>-</span>'
 
                         else:
-                            comparacao1 += '<span class="vermelho">'+sequencia2[indice]+'</span>'
+                            comparacao2 += '<span class="vermelho">'+sequencia2[indice]+'</span>'
                             try:
-                                comparacao2 += '<span class="verde">'+sequencia1[indice]+'</span>'
+                                comparacao1 += '<span class="vermelho">'+sequencia1[indice]+'</span>'
                             except:
-                                comparacao2 += '<span>-</span>'
+                                comparacao1 += '<span>-</span>'
 
                         indice += 1
                     except:
-                        comparacao1 += '<span class="vermelho">'+sequencia2[indice]+'</span>'
+                        comparacao2 += '<span class="vermelho">'+sequencia2[indice]+'</span>'
                         indice += 1
                     
 
@@ -252,12 +252,12 @@ def comparar(request):
 
                     count_amino += 1
 
+            teste3 = '<div>'
+            linha1 = ''
+            linha2 = ''
+            linha3 = ''
             
             if tamanho1 > tamanho2:
-                teste3 = '<div>'
-                linha1 = ''
-                linha2 = ''
-                linha3 = ''
 
                 contador = 0
 
@@ -281,8 +281,36 @@ def comparar(request):
                     contador += 1
 
                 i = 0
-
                 while i < tamanho1:
+                    teste3 += '<span>' + linha1[i:i+60] + '<br>' + linha2[i:i+60] + '<br>' + linha3[i:i+60] + '</span><br><br>'
+                    i += 60
+
+            else:
+
+                contador = 0
+
+                while contador < len(sequencia2):
+                    # print(contador)
+                    linha1 += sequencia2[contador] 
+                    
+                    try:
+                        if sequencia2[contador] == sequencia1[contador]:
+                            linha2 += sequencia2[contador]
+                        else: 
+                            linha2 += '+'
+                    except:
+                        linha2 += ' '
+
+                    try:
+                        linha3 += sequencia1[contador]
+                    except:
+                        linha3 += ' '
+                    
+                    contador += 1           
+
+                i = 0
+
+                while i < tamanho2:
                     teste3 += '<span>' + linha1[i:i+60] + '<br>' + linha2[i:i+60] + '<br>' + linha3[i:i+60] + '</span><br><br>'
                     i += 60
 
