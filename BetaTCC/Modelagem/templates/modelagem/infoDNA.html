@@ -49,12 +49,12 @@
         <div class="titulo">
             <span class="texto-titulo"><b>Fita Complementar do DNA inserido</b></span>
         </div>
-        <div id="Fita" class="hide informacoes-dados"> </div>
+        <div id="Fita" style="font-family: monospace;" class="hide informacoes-dados"> </div>
 
         <div class="titulo">
             <span class="texto-titulo"><b>Formar RNA mensageiro</b></span>
         </div>
-        <div id="RNAm" class="hide informacoes-dados"> </div>
+        <div id="RNAm" style="font-family: monospace;" class="hide informacoes-dados"> </div>
 
         <div class="titulo">
             <span class="texto-titulo"><b>Tabela de Códons</b></span>
@@ -233,7 +233,8 @@
             },
             success: function(data){
                 console.log(data['fita']);
-                $("#Fita").removeClass('hide').append('<p><b>Fita:</b></p>' + data['fita'] +'<p><b>Fita Completa:</b></p>' + data['fitaCompleta'] + '<p><b>Sobreposição:</b></p> <span style="font-family: monospace; font-size:17px;">' + data['sequencia'] + '<br>' + data['fita'] + '</span>');
+                // Mudar aqui, pensei no caso se houvesse somente uma linha, no final desta div quando realizo uma sobreposição preciso gerar eles alinhando linha a linha 
+                $("#Fita").removeClass('hide').append('<p><b>Fita:</b></p>' + data['fita'] +'<p><b>Fita Completa:</b></p>' + data['fitaCompleta'] + '<p><b>Sobreposição:</b></p> <span style="font-family: monospace;">' + data['sobreposicao'] + '</span>'); 
                 $("#RNAm").removeClass('hide').append('<p><b>RNA Mensageiro: </b></p>' + '<div style="font-family: monospace;">' + data['RNAm'] + '</div>');
                 $("#Aminoacidos").removeClass('hide').append(data['aminoacidos']);
                 $("#table-codon").removeClass('hide');

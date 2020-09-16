@@ -80,28 +80,40 @@ def infoProteina(request, id):
 
     # Processo de Modelagem da Proteina a partir de um Pipeline 
 
-def geraFita(sequencia):
+
+# Usar isso nas demais funções, estas condições de IF
+def geraFita(sequencia, espacos = False):
 
     fita = ''
+    count = 0
 
     for indice in range(len(sequencia)):
 
+        if count == 100 and espacos: 
+            count = 0
+            fita += '<br>'
+
         if sequencia[indice] == 'A':
             fita += 'T'
+            count += 1
             continue
 
         if sequencia[indice] == 'T':
             fita += 'A'      
+            count += 1
             continue
 
         if sequencia[indice] == 'G':
             fita += 'C'
+            count += 1
             continue
         
         if sequencia[indice] == 'C':
             fita += 'G'
+            count += 1
             continue
-        
+    
+    #print(fita)
     return fita
 
 
@@ -109,23 +121,32 @@ def geraFita(sequencia):
 def geraFitaCompleta(sequencia):
 
     fita = ''
+    count = 0
 
     for indice in range(len(sequencia)):
 
+        if count == 70: 
+            count = 0
+            fita += '<br>'
+
         if sequencia[indice] == 'A':
             fita += sequencia[indice] + 'T'
+            count += 1
             continue
 
         if sequencia[indice] == 'T':
             fita += sequencia[indice] + 'A'      
+            count += 1
             continue
 
         if sequencia[indice] == 'G':
             fita += sequencia[indice] + 'C'
+            count += 1
             continue
         
         if sequencia[indice] == 'C':
             fita += sequencia[indice] + 'G'
+            count += 1
             continue
         
     return fita
@@ -248,6 +269,83 @@ def geraAminoacidos(sequencia):
     
     return seq_aminoacidos
 
+
+#Problema ... Estou desconsiderando o 1º caractere..... Aqui e na função que quebra linha
+
+def geraSobreposicao(sequencia1, sequencia2):
+    sobreposicao = ''
+
+    sequencia1 = sequencia1.rstrip("\n")
+    print(sequencia1)
+    sequencia2 = sequencia2.rstrip("<br>")
+
+    print(len(sequencia1))
+    print(len(sequencia2))
+    print(sequencia2)
+    
+    i = 0
+
+    while i < len(sequencia1):
+        sobreposicao += '<span>' + sequencia1[i:i+60] + '<br>' + sequencia2[i:i+60] + '</span><br>'
+        i += 60
+
+    return sobreposicao
+
+
+
+
+    # for i in range(len(sequencia)):
+
+    #     try:
+    #         if sequencia[i] == '\n':
+    #             contadorSeq +=1
+    #         else:
+    #             novaseq += sequencia[i]
+    #             if contadorSeq == 70:
+    #                 novaseq += '<br>'
+    #                 contadorSeq = -1
+                
+    #             contadorSeq +=1
+    #     except:
+    #         continue
+
+    #     try:
+    #         if sequencia[i] == '\n':
+    #             contadorFita += 1
+    #         else:
+    #             novafita += sequencia[i]
+    #             if contadorFita == 70:
+    #                 contadorFita = -1
+    #                 novafita += '<br>'
+                
+    #             contadorFita += 1
+
+    #     except:
+    #         continue
+        
+
+        # if (contadorFita % 10 == 0 and contadorSeq % 10 == 0):
+        #     if contadorFita == 0 or contadorSeq == 0:
+        #         pass
+        #     else:
+        #         sobreposicao = sobreposicao + novaseq + novafita
+        #         novaseq = ''
+        #         novafita = ''
+
+    # sobreposicao = sobreposicao.rstrip("\n")
+
+    # count = 70
+
+    # while count < len(sequencia):
+    #     sobreposicao = sobreposicao[0:count] + '\n' + sobreposicao[count:]
+    #     count += 70
+
+    # sobreposicao = sobreposicao + novaseq + novafita
+
+    return sobreposicao
+
+
+
 def conversorDNA(request):
     dados = {}
     if request.method == 'POST':
@@ -256,13 +354,15 @@ def conversorDNA(request):
 
         # Adenosina se liga uma Timina e toda Guanina, a uma Citosina.
 
-        fita = geraFita(sequencia)
+        fita = geraFita(sequencia, True)
 
         fitaCompleta = geraFitaCompleta(sequencia)
 
         RNAm = geraRNAm(sequencia)
 
         RNAm = quebraLinhas(RNAm)
+
+        sobreposicao = geraSobreposicao(sequencia, geraFita(sequencia))
 
         RNAt = ''
 
@@ -274,6 +374,7 @@ def conversorDNA(request):
            'fita': fita,
            'fitaCompleta': fitaCompleta,
            'RNAm': RNAm,
+           'sobreposicao': sobreposicao,
            'aminoacidos': aminoacidos
         }
 
@@ -343,7 +444,7 @@ def quebraLinhas(sequencia):
     
     for i in range(len(sequencia)):
         try:
-            novaseq += sequencia[contador]
+            novaseq += sequencia[contador-1]
             if contador % 60 == 0:
                 novaseq += '<br>'
             

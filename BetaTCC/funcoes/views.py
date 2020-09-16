@@ -190,6 +190,45 @@ def comparar(request):
             comparacaoM = ''
             comparacao2 = ''
 
+            aminoacidos_seq1 = {'A': 0,'C': 0,'D': 0,'E': 0,'F': 0,'G': 0,'H': 0,'I': 0,'K': 0,'L': 0,'M': 0,'N': 0,'P': 0,'Q': 0,'R': 0,'S': 0,'T': 0,'V': 0,'W': 0,'Y': 0}
+            aminoacidos_seq2 = {'A': 0,'C': 0,'D': 0,'E': 0,'F': 0,'G': 0,'H': 0,'I': 0,'K': 0,'L': 0,'M': 0,'N': 0,'P': 0,'Q': 0,'R': 0,'S': 0,'T': 0,'V': 0,'W': 0,'Y': 0}
+
+            count = 0
+            espaco = 0
+            for i in sequencia1:
+                if sequencia1[count] == ' ':
+                    count += 1
+                    espaco += 1
+                    continue
+                aminoacidos_seq1[i] = aminoacidos_seq1[i] + 1
+                count += 1
+
+            count = count - espaco
+            
+            tam_seq_1 = count
+
+            aparicao_seq1 = '<div style="color: white;">' + '<b>Quantidade de Aparições para cada Amionoacido </b><br>A: '+  str(aminoacidos_seq1['A']) + ' C: '+ str(aminoacidos_seq1['C'])+ ' D: '+ str(aminoacidos_seq1['D'])+ ' E: '+ str(aminoacidos_seq1['E'])+ ' F: '+ str(aminoacidos_seq1['F'])+ ' G: '+ str(aminoacidos_seq1['G'])+ ' H: '+ str(aminoacidos_seq1['H'])+' I: '+ str(aminoacidos_seq1['I'])+ ' K: '+ str(aminoacidos_seq1['K'])+ ' L: '+ str(aminoacidos_seq1['L'])+ ' M: '+ str(aminoacidos_seq1['M'])+ ' N: '+ str(aminoacidos_seq1['N'])+ ' P: '+ str(aminoacidos_seq1['P'])+ ' Q: '+ str(aminoacidos_seq1['Q'])+ ' R: '+ str(aminoacidos_seq1['R'])+ ' S: '+ str(aminoacidos_seq1['S'])+ ' T: '+ str(aminoacidos_seq1['T'])+ '<br>V: '+ str(aminoacidos_seq1['V'])+ ' W: '+ str(aminoacidos_seq1['W'])+ ' Y: '+ str(aminoacidos_seq1['Y'])+' </div>'
+            porc_seq1 = '<div style="color: white;">'+ '<b>Porcentagem de Aparições para cada Amionoacido </b><br>A: '+ str(round(aminoacidos_seq1['A'] * 100 / count, 2))+ '% C: '+ str(round(aminoacidos_seq1['C'] * 100 / count, 2))+ '% D: '+ str(round(aminoacidos_seq1['D'] * 100 / count, 2))+ '% E: '+ str(round(aminoacidos_seq1['E'] * 100 / count, 2))+ '% F: '+ str(round(aminoacidos_seq1['F'] * 100 / count, 2))+ '% G: '+ str(round(aminoacidos_seq1['G'] * 100 / count, 2))+ '% H: '+ str(round(aminoacidos_seq1['H'] * 100 / count, 2))+'% I: '+ str(round(aminoacidos_seq1['I'] * 100 / count, 2))+ '% K: '+ str(round(aminoacidos_seq1['K'] * 100 / count, 2))+ '% L: '+ str(round(aminoacidos_seq1['L'] * 100 / count, 2))+ '%<br>M: '+ str(round(aminoacidos_seq1['M'] * 100 / count, 2))+ '% N: '+ str(round(aminoacidos_seq1['N'] * 100 / count, 2))+ '% P: '+ str(round(aminoacidos_seq1['P'] * 100 / count, 2))+ '% Q: '+ str(round(aminoacidos_seq1['Q'] * 100 / count, 2))+ '% R: '+ str(round(aminoacidos_seq1['R'] * 100 / count, 2))+ '% S: '+ str(round(aminoacidos_seq1['S'] * 100 / count, 2))+ '% T: '+ str(round(aminoacidos_seq1['T'] * 100 / count, 2))+ '% V: '+ str(round(aminoacidos_seq1['V'] * 100 / count, 2))+ '% W: '+ str(round(aminoacidos_seq1['W'] * 100 / count, 2))+ '% Y: '+ str(round(aminoacidos_seq1['Y'] * 100 / count, 2))+'% </div>'
+     
+            count = 0
+
+            for i in sequencia2:
+                if sequencia2[count] == ' ':
+                    count += 1
+                    espaco += 1
+                    continue
+                aminoacidos_seq2[i] = aminoacidos_seq2[i] + 1
+                count += 1
+            
+            count = count - espaco
+            
+            tam_seq_2 = count
+
+            aparicao_seq2 = '<div style="color: white;">' + '<b>Quantidade de Aparições para cada Amionoacido </b><br>A: '+  str(aminoacidos_seq2['A']) + ' C: '+ str(aminoacidos_seq2['C'])+ ' D: '+ str(aminoacidos_seq2['D'])+ ' E: '+ str(aminoacidos_seq2['E'])+ ' F: '+ str(aminoacidos_seq2['F'])+ ' G: '+ str(aminoacidos_seq2['G'])+ ' H: '+ str(aminoacidos_seq2['H'])+' I: '+ str(aminoacidos_seq2['I'])+ ' K: '+ str(aminoacidos_seq2['K'])+ ' L: '+ str(aminoacidos_seq2['L'])+ ' M: '+ str(aminoacidos_seq2['M'])+ ' N: '+ str(aminoacidos_seq2['N'])+ ' P: '+ str(aminoacidos_seq2['P'])+ ' Q: '+ str(aminoacidos_seq2['Q'])+ ' R: '+ str(aminoacidos_seq2['R'])+ ' S: '+ str(aminoacidos_seq2['S'])+ ' T: '+ str(aminoacidos_seq2['T'])+ '<br>V: '+ str(aminoacidos_seq2['V'])+ ' W: '+ str(aminoacidos_seq2['W'])+ ' Y: '+ str(aminoacidos_seq2['Y'])+' </div>'
+            porc_seq2 = '<div style="color: white;">'+ '<b>Porcentagem de Aparições para cada Amionoacido </b><br>A: '+ str(round(aminoacidos_seq2['A'] * 100 / count, 2))+ '% C: '+ str(round(aminoacidos_seq2['C'] * 100 / count, 2))+ '% D: '+ str(round(aminoacidos_seq2['D'] * 100 / count, 2))+ '% E: '+ str(round(aminoacidos_seq2['E'] * 100 / count, 2))+ '% F: '+ str(round(aminoacidos_seq2['F'] * 100 / count, 2))+ '% G: '+ str(round(aminoacidos_seq2['G'] * 100 / count, 2))+ '% H: '+ str(round(aminoacidos_seq2['H'] * 100 / count, 2))+'% I: '+ str(round(aminoacidos_seq2['I'] * 100 / count, 2))+ '% K: '+ str(round(aminoacidos_seq2['K'] * 100 / count, 2))+ '% L: '+ str(round(aminoacidos_seq2['L'] * 100 / count, 2))+ '%<br>M: '+ str(round(aminoacidos_seq2['M'] * 100 / count, 2))+ '% N: '+ str(round(aminoacidos_seq2['N'] * 100 / count, 2))+ '% P: '+ str(round(aminoacidos_seq2['P'] * 100 / count, 2))+ '% Q: '+ str(round(aminoacidos_seq2['Q'] * 100 / count, 2))+ '% R: '+ str(round(aminoacidos_seq2['R'] * 100 / count, 2))+ '% S: '+ str(round(aminoacidos_seq2['S'] * 100 / count, 2))+ '% T: '+ str(round(aminoacidos_seq2['T'] * 100 / count, 2))+ '% V: '+ str(round(aminoacidos_seq2['V'] * 100 / count, 2))+ '% W: '+ str(round(aminoacidos_seq2['W'] * 100 / count, 2))+ '% Y: '+ str(round(aminoacidos_seq2['Y'] * 100 / count, 2))+'% </div>'
+
+            # print(aminoacidos_seq1)
+
             indice = 0
             count_amino = 1
             #for indice in range(len(sequencia)):
@@ -328,8 +367,15 @@ def comparar(request):
                 'comparacao1': comparacao1,
                 'comparacao2': comparacao2,
                 'teste3': teste3,
+                'aminoacidos1': aminoacidos_seq1,
+                'aminoacidos2': aminoacidos_seq2,
+                'aparicao': aparicao_seq1,
+                'porcentagem': porc_seq1,
+                'aparicao2': aparicao_seq2,
+                'porcentagem2': porc_seq2,
+                'tamanho': tam_seq_1,
+                'tamanho2': tam_seq_2
             }
-
 
                         
             return JsonResponse(dados)
@@ -538,7 +584,6 @@ def geraFita(sequencia):
 def geraFitaCompleta(sequencia):
 
     fita = ''
-
     for indice in range(len(sequencia)):
 
         if sequencia[indice] == 'A':

@@ -200,11 +200,18 @@
             csrfmiddlewaretoken: '{{ csrf_token }}' 
           },
           success: function(data){
-            console.log(data['seq1']);
-            console.log(data['seq2']);
+            //console.log(data['seq1']);
+            //console.log(data['seq2']);
             $(".detalhar_seq").css('display', 'block');
             $("#parte1").append('<div style="font-family: monospace;"><span style="color: white;"><b>Alinhamento Detalhado das Sequências a partir do Back End Django | Comparação 1:</b></span><br>' + data['comparacao1'] + '</div>');
+            $("#parte1").append('<div>' + data['aparicao'] + '</div>');
+            $("#parte1").append('<div>' + data['porcentagem'] + '</div>');
+            $("#parte1").append('<div><span style="color: white;"><b> Tamanho da Sequência: </b>' + data['tamanho'] + '</span></div>');
             $("#parte2").append('<div style="font-family: monospace;"><span style="color: white;"><b>Alinhamento Detalhado das Sequências a partir do Back End Django | Comparação 2:</b></span><br>' + data['comparacao2'] + '</div><br>');
+            $("#parte2").append('<div>' + data['aparicao2'] + '</div>');
+            $("#parte2").append('<div>' + data['porcentagem2'] + '</div>');
+            $("#parte2").append('<div><span style="color: white;"><b> Tamanho da Sequência: </b>' + data['tamanho2'] + ' </span></div>');
+
             // $("#teste2").append('<div style="font-family: monospace;"><span><b>Simulação: </b></span>' + data['teste3'] + '</div>');
           }  
         })
