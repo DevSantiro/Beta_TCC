@@ -60,17 +60,99 @@
         stage3.loadFile("media/beta_glucosidase.fasta.B99990003.pdb", { defaultRepresentation: true });
 
         });
+        function Bloquear(){
+        var acao = $('#valor_scroll').val();
+        //alert(acao);
+        if(acao == 0){
+            $('html').css('overflow', 'hidden');
+            $('#valor_scroll').val('1');
+            $('.block').html('Desbloquear Scroll');
+
+        }
+        else{
+            $('html').css('overflow', '');
+            $('#valor_scroll').val('0');   
+            $('.block').html('Bloquear Scroll');
+        }
+    }
+
+    function fullScreen(){
+        $('#viewport').css('width', '100%');
+        $('#viewport').css('height', '100%');
+    }
+
+    $.ajax({
+          method: "POST",
+          url: "teste",
+          data: 
+          { 
+            csrfmiddlewaretoken: '{{ csrf_token }}' 
+          },
+          success: function(data){
+
+            $('#template').html(data['teste']);
+            $('#modelo').html(data['modelo']);
+            $('#modelo1').html(data['modelo1']);
+            $('#modelo2').html(data['modelo2']);
+
+          }  
+        })
+
 
     </script>
     
-    <div class="invi">
-        <div id="viewport" style="width:400px; height:300px;"></div>
-        <div id="viewport1" style="width:400px; height:300px;"></div>
-        <div id="viewport2" style="width:400px; height:300px;"></div>
-        <div id="viewport3" style="width:400px; height:300px;"></div>
+    <div class="invi" style="width: 100%;">
+        <input type="text" id="valor_scroll" value="0" hidden>
+    
+        <div style="height: 300px; background-color: white;">
+            <div style="width: 400px; float: left;">
+                <div id="viewport" style="width:400px; height:300px;"></div>
+            </div>
+            <div style="background-color: white; width: 70%; float:right;">
+                <b>Template:</b>
+                <textarea style="width: 100%;" name="" id="template" cols="30" rows="10"></textarea>
+                <button  class="block" onclick="Bloquear();">Bloquear Scroll</button> 
+                <!-- <button class="fs_1" onclick="fullScreen();">Tela Cheia</button>  -->
+            </div>
+        </div>
+    
+        <div style="height: 300px; background-color: white;">
+            <div style="width: 400px; float: left;">
+                <div id="viewport1" style="width:400px; height:300px;"></div>
+            </div>
+            <div style="background-color: white; width: 70%; float:right;">
+                <b>Modelo 1:</b>
+                <textarea style="width: 100%;" name="" id="modelo" cols="30" rows="10"></textarea>
+                <button  class="block" onclick="Bloquear();">Bloquear Scroll</button> 
+                <!-- <button class="fs_1" onclick="fullScreen();">Tela Cheia</button>  -->
+            </div>
+        </div>
+    
+        <div style="height: 300px; background-color: white;">
+            <div style="width: 400px; float: left;">
+                <div id="viewport2" style="width:400px; height:300px;"></div>
+            </div>
+            <div style="background-color: white; width: 70%; float:right;">
+                <b>Modelo 2:</b>
+                <textarea style="width: 100%;" name="" id="modelo1" cols="30" rows="10"></textarea>
+                <button  class="block" onclick="Bloquear();">Bloquear Scroll</button> 
+                <!-- <button class="fs_1" onclick="fullScreen();">Tela Cheia</button>  -->
+            </div>
+        </div>
+    
+        <div style="height: 300px; background-color: white;">
+            <div style="width: 400px; float: left;">
+                <div id="viewport3" style="width:400px; height:300px;"></div>
+            </div>
+            <div style="background-color: white; width: 70%; float:right;">
+                <b>Modelo 3:</b>
+                <textarea style="width: 100%;" name="" id="modelo2" cols="30" rows="10"></textarea>
+                <button  class="block" onclick="Bloquear();">Bloquear Scroll</button> 
+                <!-- <button class="fs_1" onclick="fullScreen();">Tela Cheia</button>  -->
+            </div>
+        </div>
+    
     </div>
-
-
 
 {% endif %}
 

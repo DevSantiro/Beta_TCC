@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.core.files.storage import FileSystemStorage
 from django.core.files import File
+from django.http import JsonResponse
 from django.core.files.uploadedfile import UploadedFile
 from django import forms
 from Bio.PDB import Polypeptide
@@ -19,7 +20,39 @@ class testeFormulario(forms.Form):
 
 # Create your views here.
 
+def lerArquivos(request):
+    if request.method == 'POST':
+        
+        arquivo = open('media\\4hpg.pdb', 'r')
+        lista = arquivo.readlines() # readlinesssssss
+        arquivo.close()
+
+        arquivo = open('media\\beta_glucosidase.fasta.B99990001.pdb', 'r')
+        modelo = arquivo.readlines() # readlinesssssss
+        arquivo.close()
+
+        arquivo = open('media\\beta_glucosidase.fasta.B99990002.pdb', 'r')
+        modelo1 = arquivo.readlines() # readlinesssssss
+        arquivo.close()
+
+        arquivo = open('media\\beta_glucosidase.fasta.B99990003.pdb', 'r')
+        modelo2 = arquivo.readlines() # readlinesssssss
+        arquivo.close()
+
+        dados = {'teste': lista,
+                 'modelo': modelo,           
+                 'modelo1': modelo1,           
+                 'modelo2': modelo2           
+                }
+        # print(lista)
+        return JsonResponse(dados)
+
+
 def Index(request):
+    
+    return render(request, 'pipeline/teste.html') 
+
+def Teste(request):
     
     return render(request, 'pipeline/index.html') 
 
