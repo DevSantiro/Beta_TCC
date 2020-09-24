@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpRequest
 from django.core.files.storage import FileSystemStorage
 from django.core.files import File
 from django.http import JsonResponse
@@ -67,6 +67,11 @@ def upload(request):
 
         proteina = request.FILES['proteina']
         template = request.FILES['documento']
+        # Cadeia da Sequencia
+        cadeiaS = request.POST.get('cadeiaS').upper()
+
+        #Cadeia do Template
+        cadeiaT = request.POST.get('cadeiaT').upper()
 
         fs = FileSystemStorage()
         
@@ -75,7 +80,7 @@ def upload(request):
         
         w = open("media\\"+ template.name +".fasta","w")
         w.write(">"+template.name+"\n")
-        cadeia = 'A' # Aqui eu estou deixando Fixo "A", mas no caso não é o correto, deveria verificar uma forma de identificar.
+        cadeia = cadeiaT # Aqui eu estou deixando Fixo "A", mas no caso não é o correto, deveria verificar uma forma de identificar. Cadeia Template * Update 23/09
         comeco = 0
         fim = 0
         pdb = open('media\\' + template.name).readlines()
@@ -114,7 +119,7 @@ def upload(request):
                     tipo = tipo+1
                 elif tipo == 1:
                     new_aln.write(">P1;"+proteina.name+"\n")
-                    new_aln.write("sequence:"+proteina.name+":"+str(1)+":A:"+str(tamanho_seq)+":A::::") # Mesma coisa aqui!
+                    new_aln.write("sequence:"+proteina.name+":"+str(1)+":"+str(cadeiaS)+":"+str(tamanho_seq)+":"+str(cadeiaS)+"::::") # Mesma coisa aqui, porém aqui é a Cadeia da Sequencia que vamos modelar!
             else:
                 new_aln.write(linha)
         new_aln.close()
