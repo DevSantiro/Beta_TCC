@@ -23,6 +23,7 @@
     <button onclick="myFunction();" type="submit">Upload File</button>
 
     </form>
+
     <div id="loader"></div>
 
 </div>
@@ -30,7 +31,7 @@
 <script>
     function myFunction() {
         $("#loader").css('display','block');
-        $("body").addClass('funcaoLoading');
+        $("#carregando").css('display', 'block');
     }
 </script>
 
@@ -91,7 +92,6 @@
             $('#modelo').html(data['modelo']);
             $('#modelo1').html(data['modelo1']);
             $('#modelo2').html(data['modelo2']);
-            showPage();
 
           }  
         })
@@ -99,13 +99,13 @@
 
     
         function showPage() {
-            document.getElementById("loader").style.display = "none";
-            document.getElementById("myDiv").style.display = "block";
-            $("body").removeClass('funcaoLoading');
+            $("#myDiv").css('display', 'block');
+            $("#loader").css('display', 'none');
+            $("#carregando").css('display', 'none'); 
         }
     </script>
 
-    <div style="display:none;" id="myDiv" class="animate-bottom">
+    <div style="display:none;" id="myDiv">
         <div class="invi" style="width: 100%;">
             <input type="text" id="valor_scroll" value="0" hidden>
         
@@ -115,7 +115,7 @@
                 </div>
                 <div style="background-color: white; width: 70%; float:right;">
                     <b>Template:</b>
-                    <textarea style="width: 100%;" name="" id="template" cols="30" rows="10"></textarea>
+                    <textarea disabled style="width: 100%;" name="" id="template" cols="30" rows="10"></textarea>
                     <button  class="block" onclick="Bloquear();">Bloquear Scroll</button> 
                     <!-- <button class="fs_1" onclick="fullScreen();">Tela Cheia</button>  -->
                 </div>
@@ -127,7 +127,7 @@
                 </div>
                 <div style="background-color: white; width: 70%; float:right;">
                     <b>Modelo 1:</b>
-                    <textarea style="width: 100%;" name="" id="modelo" cols="30" rows="10"></textarea>
+                    <textarea disabled style="width: 100%;" name="" id="modelo" cols="30" rows="10"></textarea>
                     <button  class="block" onclick="Bloquear();">Bloquear Scroll</button> 
                     <!-- <button class="fs_1" onclick="fullScreen();">Tela Cheia</button>  -->
                 </div>
@@ -139,7 +139,7 @@
                 </div>
                 <div style="background-color: white; width: 70%; float:right;">
                     <b>Modelo 2:</b>
-                    <textarea style="width: 100%;" name="" id="modelo1" cols="30" rows="10"></textarea>
+                    <textarea disabled style="width: 100%;" name="" id="modelo1" cols="30" rows="10"></textarea>
                     <button  class="block" onclick="Bloquear();">Bloquear Scroll</button> 
                     <!-- <button class="fs_1" onclick="fullScreen();">Tela Cheia</button>  -->
                 </div>
@@ -151,17 +151,20 @@
                 </div>
                 <div style="background-color: white; width: 70%; float:right;">
                     <b>Modelo 3:</b>
-                    <textarea style="width: 100%;" name="" id="modelo2" cols="30" rows="10"></textarea>
+                    <textarea disabled style="width: 100%;" name="" id="modelo2" cols="30" rows="10"></textarea>
                     <button  class="block" onclick="Bloquear();">Bloquear Scroll</button> 
                     <!-- <button class="fs_1" onclick="fullScreen();">Tela Cheia</button>  -->
                 </div>
             </div>
         
         </div>
+
+        <script> 
+            showPage();
+        </script>
     </div>
 
 {% endif %}
-
     <!-- <button id="btn-barra" onclick="barra()" data-valor="1" style="position: fixed; margin-left: 87%;">Bloquear/Desbloquear Barra</button> -->
 
 {% endblock %}

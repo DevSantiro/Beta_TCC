@@ -10,21 +10,23 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 </head>
 <body class="fundo">
-    <!-- Barra de Navegação -->
-    <nav class="navbar navbar-light bg-light">
-        <span><a class="navbar-brand mb-0 h1" href="{% url 'index' %}"><img id="icon-dna" src="{% static 'img/dna4.jpg' %}" alt=""> Projeto Beta TCC</a></span>
-    </nav>
+        <!-- Barra de Navegação -->
+        <nav class="navbar navbar-light bg-light">
+            <span><a class="navbar-brand mb-0 h1" href="{% url 'index' %}"><img id="icon-dna" src="{% static 'img/dna4.jpg' %}" alt=""> Projeto Beta TCC</a></span>
+        </nav>
 
-    {% block body %}
+        {% block body %}
 
 
-    {% endblock %}
+        {% endblock %}
 
-    <!-- <div id="rodape">   
-        <footer>
-            <p>Teste</p>
-        </footer>
-    </div>
-     -->
+        <!-- <div id="rodape">   
+            <footer>
+                <p>Teste</p>
+            </footer>
+        </div>
+        -->
+        <div id="carregando" style="height: 654px; width: 100%; display: none; position: fixed; top: 0;" class="funcaoLoading">
+        </div>
 </body>
 </html>

@@ -323,6 +323,7 @@ display: none;
     -webkit-animation: spin 2s linear infinite;
     animation: spin 2s linear infinite;
     display: none;
+    cursor: not-allowed;
     }
     
     #myDiv {

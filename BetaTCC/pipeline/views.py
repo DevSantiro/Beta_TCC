@@ -67,6 +67,7 @@ def upload(request):
 
         proteina = request.FILES['proteina']
         template = request.FILES['documento']
+
         # Cadeia da Sequencia
         cadeiaS = request.POST.get('cadeiaS').upper()
 
@@ -123,13 +124,19 @@ def upload(request):
             else:
                 new_aln.write(linha)
         new_aln.close()
-
+        seq.close()
         # ****************************************************************************************
         # modeller
         # ****************************************************************************************
         criaScript(proteina, template)
 
         os.system("media\\Modeller.lnk")
+
+        # Atualizar o arquivo.bat dinamico para ir de acordo com a pasta  
+
+        os.system("mkdir media\\teste2")
+
+        os.system("media\\Clear.lnk")
     
         return render(request, 'pipeline/upload.html', {'resultado': '1' } )
     
@@ -139,13 +146,15 @@ def upload(request):
 
 def criaScript(template, proteina):
     w = open("media\\run.py","w")
-    script = "from modeller import *\nfrom modeller.automodel import *\nlog.verbose()\nenv = environ()\n\nenv.io.atom_files_directory = ['\\modelos']\n\nenv.io.hetatm = True\nenv.io.water = True\n\na = automodel(env, alnfile = 'new_alinha.pir', knowns = '"+proteina.name+"', sequence = '"+template.name+"')\na.starting_model = 1\na.ending_model = 3\na.make() \n"
+    script = "from modeller import *\nfrom modeller.automodel import *\nlog.verbose()\nenv = environ()\n\nenv.io.atom_files_directory = ['\\modelos']\n\nenv.io.hetatm = True\nenv.io.water = True\n\na = automodel(env, alnfile = 'new_alinha.pir', knowns = '"+proteina.name+"', sequence = '"+template.name+"')\na.starting_model = 1\na.ending_model = 1\na.make() \n"
     w.write(script)
     w.close()
     
 # Implementar uma Rotina para tentar pegar toda a sequencia inserida e começar a execução do Pipeline
 
-
+def organizaDiretorio():
+    os.system('mkdir \\media ')
+    pass
 
 # A Fazeres: 
 
