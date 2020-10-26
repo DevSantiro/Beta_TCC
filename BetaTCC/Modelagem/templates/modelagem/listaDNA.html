@@ -3,6 +3,12 @@
 {% block body %}
     <div class="offset-1 col-10 list-div"> 
         <h1>Lista de Proteinas</h1>
+        <br>
+        <a id="add-link" href="newbutton/">
+            <div>
+                <i class="btn btn-success"> Adicionar DNA </i>
+            </div>
+        </a>
         <ul class="prot-list"> 
             {% for dna in dnas %}
                 <li class="prot-item">

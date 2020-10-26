@@ -7,6 +7,11 @@
     padding-right: 10px;
 }
 
+#add-link {
+    text-decoration: none;
+}
+
+
 /* Pagina de index */
 
 
@@ -139,6 +144,14 @@ footer p{
     /* opacity: 82%; */
     color: white;
     margin-top: 35px;
+}
+
+.modelo3d{
+    cursor: grab;
+}
+
+.modelo3d:active{
+    cursor: grabbing;
 }
 
 /* .invi{

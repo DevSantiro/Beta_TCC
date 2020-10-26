@@ -12,7 +12,8 @@ urlpatterns = [
     path('infoProteina/<int:id>', views.infoProteina, name='infoProteina'),
     path('infoDNA/<int:id>', views.infoDNA, name='infoDNA'),
     path('conversor', views.conversorDNA, name='conversor'),
-    path('view3d', views.view3d, name='view3d')
+    path('view3d', views.view3d, name='view3d'),
+    path('newbutton/', views.newButton, name="new-button")
 ]
 
 if settings.DEBUG:

@@ -1,8 +1,9 @@
 from django.http import HttpResponse, HttpRequest
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Proteina, DNA
 from django.http import JsonResponse
+from .forms import DNAForm
 
 # Create your views here.
 
@@ -458,3 +459,21 @@ def quebraLinhas(sequencia):
 
 def view3d(request):
     return render(request, "modelagem/view.html")
+
+
+def newButton(request): 
+ 
+    if request.method == 'POST':
+        
+        form = DNAForm(request.POST)
+        
+        if form.is_valid():
+            dna = form.save(commit=False)
+            dna.save()
+            return redirect('/listaDNA')
+ 
+    else:   
+        form = DNAForm()
+        return render(request, 'modelagem/addtask.html', {'form': form})
+
+

@@ -23,6 +23,22 @@
     <button onclick="myFunction();" type="submit">Upload File</button>
 
     </form>
+<!-- 
+    <ul class="prot-list"> 
+        {% for diretorio in diretorios %}
+            <li class="prot-item">
+                <span><a href="{ids}">{{diretorio}}</a></span>
+            
+            </li>
+            {% empty %}
+                <li class="prot-item"> Lista Vazia</li>
+        {% endfor %}
+    </ul> -->
+
+
+    <ul class="prot-list"> 
+
+    </ul>
 
     <div id="loader"></div>
 
@@ -33,11 +49,26 @@
         $("#loader").css('display','block');
         $("#carregando").css('display', 'block');
     }
+
+
+    $.ajax({
+          method: "POST",
+          url: "gerarLista",
+          data: 
+          { 
+            csrfmiddlewaretoken: '{{ csrf_token }}' 
+          },
+          success: function(data){
+            $('.prot-list').append(data['listaUL']);
+          }  
+        })
+    
 </script>
 
-{% if resultado %}
+<!-- {% if resultado %}
 
     <script>
+        
         document.addEventListener("DOMContentLoaded", function () {
         var stage = new NGL.Stage("viewport");
         var stage1 = new NGL.Stage("viewport1");
@@ -58,6 +89,9 @@
         stage3.loadFile("media/beta_glucosidase.fasta.B99990003.pdb", { defaultRepresentation: true });
 
         });
+
+
+
         function Bloquear(){
         var acao = $('#valor_scroll').val();
         //alert(acao);
@@ -117,7 +151,7 @@
                     <b>Template:</b>
                     <textarea disabled style="width: 100%;" name="" id="template" cols="30" rows="10"></textarea>
                     <button  class="block" onclick="Bloquear();">Bloquear Scroll</button> 
-                    <!-- <button class="fs_1" onclick="fullScreen();">Tela Cheia</button>  -->
+                     <button class="fs_1" onclick="fullScreen();">Tela Cheia</button>  
                 </div>
             </div>
         
@@ -129,7 +163,7 @@
                     <b>Modelo 1:</b>
                     <textarea disabled style="width: 100%;" name="" id="modelo" cols="30" rows="10"></textarea>
                     <button  class="block" onclick="Bloquear();">Bloquear Scroll</button> 
-                    <!-- <button class="fs_1" onclick="fullScreen();">Tela Cheia</button>  -->
+                    <button class="fs_1" onclick="fullScreen();">Tela Cheia</button> 
                 </div>
             </div>
         
@@ -141,7 +175,7 @@
                     <b>Modelo 2:</b>
                     <textarea disabled style="width: 100%;" name="" id="modelo1" cols="30" rows="10"></textarea>
                     <button  class="block" onclick="Bloquear();">Bloquear Scroll</button> 
-                    <!-- <button class="fs_1" onclick="fullScreen();">Tela Cheia</button>  -->
+                    <button class="fs_1" onclick="fullScreen();">Tela Cheia</button>  
                 </div>
             </div>
         
@@ -153,7 +187,7 @@
                     <b>Modelo 3:</b>
                     <textarea disabled style="width: 100%;" name="" id="modelo2" cols="30" rows="10"></textarea>
                     <button  class="block" onclick="Bloquear();">Bloquear Scroll</button> 
-                    <!-- <button class="fs_1" onclick="fullScreen();">Tela Cheia</button>  -->
+                    <button class="fs_1" onclick="fullScreen();">Tela Cheia</button> 
                 </div>
             </div>
         
@@ -164,7 +198,7 @@
         </script>
     </div>
 
-{% endif %}
+{% endif %} -->
     <!-- <button id="btn-barra" onclick="barra()" data-valor="1" style="position: fixed; margin-left: 87%;">Bloquear/Desbloquear Barra</button> -->
 
 {% endblock %}

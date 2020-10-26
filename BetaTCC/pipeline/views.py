@@ -8,6 +8,8 @@ from django import forms
 from Bio.PDB import Polypeptide
 import os
 import subprocess
+from .models import *
+import sqlite3
 
 class UploadFileForm(forms.Form):
     title = forms.CharField(max_length=50)
@@ -18,38 +20,155 @@ class testeFormulario(forms.Form):
     proteina   = forms.Textarea()
     arquivo    = forms.Textarea()
 
-# Create your views here.
+# Classe conexao banco de dados sqlite3
+class conexaoBanco:
 
-def lerArquivos(request):
-    if request.method == 'POST':
+    @staticmethod
+    def criaARVBanco():
+        path = 'db.sqlite3'
+
+        conn = sqlite3.connect(path)
+        conn.close()
+
+class Banco:  
+    path = 'db.sqlite3'
+
+    def conectaBanco(self):
+        conn = sqlite3.connect(self.path)
+        print ('Aberta a Conexão')
+        return conn
+    
+    def fechaBanco(self,conn):
+        conn.close()
+        print('Conexão Fechada')
+
+    def getDiretorioID(self, idx):
         
-        arquivo = open('media\\4hpg.pdb', 'r')
-        lista = arquivo.readlines() # readlinesssssss
-        arquivo.close()
+        conecta = Banco()
+        
+        conn = conecta.conectaBanco()
+        
+        cursor = conn.cursor()   
 
-        arquivo = open('media\\beta_glucosidase.fasta.B99990001.pdb', 'r')
-        modelo = arquivo.readlines() # readlinesssssss
-        arquivo.close()
+        query = "SELECT diretorio FROM modelos WHERE id = " + str(idx)
 
-        arquivo = open('media\\beta_glucosidase.fasta.B99990002.pdb', 'r')
-        modelo1 = arquivo.readlines() # readlinesssssss
-        arquivo.close()
+        cursor.execute(query)
 
-        arquivo = open('media\\beta_glucosidase.fasta.B99990003.pdb', 'r')
-        modelo2 = arquivo.readlines() # readlinesssssss
-        arquivo.close()
+        diretorios = cursor.fetchall()
 
-        dados = {'teste': lista,
-                 'modelo': modelo,           
-                 'modelo1': modelo1,           
-                 'modelo2': modelo2           
-                }
-        # print(lista)
-        return JsonResponse(dados)
+        # editar diretorio
+
+        diretorio = 'arquivos_'+str(diretorios[0][0])
+        
+        return diretorio
+
+
+    def getDiretorios(self):
+    
+        conecta = Banco()
+        
+        conn = conecta.conectaBanco()
+        
+        cursor = conn.cursor()   
+
+        query = "SELECT * FROM modelos"
+
+        cursor.execute(query)
+
+        diretorios = cursor.fetchall()
+        
+        return diretorios
+
+    def cadastraModelo(self,nome):
+        
+        conecta = Banco()
+        
+        conn = conecta.conectaBanco()
+        
+        cursor = conn.cursor()        
+        
+        #Altere para os valores necessarios a sua tabela
+        
+        query_insert = "INSERT INTO modelos (diretorio) VALUES ('"+ nome +"')"
+        
+        # insert_values = (nome)
+        
+        cursor.execute(query_insert)
+        
+        cursor.execute('SELECT MAX(id) FROM modelos')
+            
+        maxid = cursor.fetchall()
+
+        conn.commit()
+        
+        return maxid[0][0]
+
+    def getArquivosID(self, idmodelo):
+
+        conecta = Banco()
+        
+        conn = conecta.conectaBanco()
+        
+        cursor = conn.cursor() 
+
+        query = "select arquivo, extensao from arquivos where extensao like '%pdb' and id_modelo = " + str(idmodelo)
+
+        cursor.execute(query)
+
+        arquivos = cursor.fetchall()
+
+        #print(arquivos)
+
+        return arquivos
+
+
+
+    def cadastraArquivo(self, id_modelo, array): 
+
+        conecta = Banco()
+        
+        conn = conecta.conectaBanco()
+        
+        cursor = conn.cursor()        
+        
+        #Altere para os valores necessarios a sua tabela
+
+        for arquivo in array:
+            
+            separador = arquivo.split('.')
+
+            extensao = separador[1:]
+
+            print(separador[0])
+
+            novo = ''
+
+            tamanho = len(extensao)
+            count = 1
+
+            for ext in extensao:
+                if tamanho > count:
+                    novo += ext+"."
+                else:
+                    novo += ext
+
+                count += 1
+
+            query_insert = "INSERT INTO arquivos (id_modelo, arquivo, extensao) VALUES ("+ str(id_modelo) +", '" + separador[0] + "', '"+ novo +"')"
+                        
+            cursor.execute(query_insert)
+            
+            conn.commit()
+        
+        return 1
+
+
 
 
 def Index(request):
     
+
+
     return render(request, 'pipeline/teste.html') 
 
 def Teste(request):
@@ -134,19 +253,72 @@ def upload(request):
 
         # Atualizar o arquivo.bat dinamico para ir de acordo com a pasta  
 
-        os.system("mkdir media\\teste2")
 
-        os.system("media\\Clear.lnk")
+        atualizaArquivoBAT(proteina.name)
+        max_id = inserirDiretorio(proteina.name)
+
+        os.system("media\\clear.lnk")
+
+        inserirArquivos(proteina.name, max_id)
+
+        d = Banco()
+
+        diretorios = d.getDiretorios()
+
+        print(diretorios[0][0])
+
+        # result = subprocess.run(['dir', '*.py'], stdout=subprocess.PIPE)
+        # result.stdout
+
+        # print(result.stdout)    
+        return render(request, 'pipeline/upload.html', {'resultado': '1', 'diretorios': diretorios[0:] } ) # Falta aqui! 
+
+
+    d = Banco()
+
+    diretorios = d.getDiretorios()
+
+    #print(diretorios[0][0])
     
-        return render(request, 'pipeline/upload.html', {'resultado': '1' } )
+    # listaUL = '<ul class="prot-list">'
+    # contador = 0
+
+    # for dire in diretorios:
+
+    #     listaUL += '<li class="prot-item"><span><a href="">'+ dire[contador][contador] +'</a></span></li>'
+    #     contador += 1
     
-    return render(request, 'pipeline/upload.html' )
+    # listaUL += '</ul>'
+
+    return render(request, 'pipeline/upload.html')
+
     
 
+def gerarLista(request):
+    #pass
+    
+    d = Banco()
+
+    diretorios = d.getDiretorios()
+
+    listaUL = ''
+
+    for dire in diretorios:
+        # print(type(dire[0]))
+
+        nome = dire[0]
+        idm = dire[1]
+        print(nome)
+        listaUL += '<li class="prot-item"><span><a href="/pipeline/Modelos/'+ str(idm) +'">'+ nome +'</a></span></li>'
+    
+           
+    dados = {'listaUL': listaUL}
+
+    return JsonResponse(dados)
 
 def criaScript(template, proteina):
     w = open("media\\run.py","w")
-    script = "from modeller import *\nfrom modeller.automodel import *\nlog.verbose()\nenv = environ()\n\nenv.io.atom_files_directory = ['\\modelos']\n\nenv.io.hetatm = True\nenv.io.water = True\n\na = automodel(env, alnfile = 'new_alinha.pir', knowns = '"+proteina.name+"', sequence = '"+template.name+"')\na.starting_model = 1\na.ending_model = 1\na.make() \n"
+    script = "from modeller import *\nfrom modeller.automodel import *\nlog.verbose()\nenv = environ()\n\nenv.io.atom_files_directory = ['\\modelos']\n\nenv.io.hetatm = True\nenv.io.water = True\n\na = automodel(env, alnfile = 'new_alinha.pir', knowns = '"+proteina.name+"', sequence = '"+template.name+"')\na.starting_model = 1\na.ending_model = 2\na.make() \n"
     w.write(script)
     w.close()
     
@@ -156,19 +328,213 @@ def organizaDiretorio():
     os.system('mkdir \\media ')
     pass
 
-# A Fazeres: 
-
-#  Observações sobre esse tipo de implementação:
-#  Aqui eu consegui gerar uma função que recebe o arquivo enviado por 'POST' e pegar o conteúdo do arquivo enviado! 
-#  No entando eu precisei utilizar um formulário (preciso verificar e adaptar melhor o uso do mesmo) UploadFileForm.
-#  Ainda não está da forma que eu quero, mas já é um bom esboço para implementar a ideia do projeto.
-#  É importante lembrar que apesar de conseguir ler o conteúdo, existem vários pequenos problemas, como os caracteres "\r" e "\n" (pesquisar para que serve "\r")
-#  PS: optei por não armazenar os arquivos enviados por upload em um diretório (por enquanto), somente para evitar lixo eletrônico.
-
-# Agora preciso trabalhar melhor com os valores obtidos através de um arquivo disparado direto da página, por "padrão", vou tentar considerar
-# somente arquivos do tipo ".fasta", facilitando o trabalho. 
-# Preciso ignorar o header (1º Linha do arquivo), o mesmo começa com um caractere de ">", podendo ser um identificador para remoção caso a 1º linha
-# contenha.
 
 
-# Rodrigo - 15/07/2020
+def get_arquivos(*args):
+    arquivos = []
+    for item in args:
+        for p, _, files in os.walk(os.path.abspath(item)):
+            for file in files:
+                arquivos.append((file))
+    return arquivos
+
+
+def atualizaArquivoBAT(nome):
+    arquivo = open("media\\clear.bat", "w")
+    # arquivo.write('mkdir ', proteina.name ,')
+    arquivo.write('mkdir arquivos_'+ str(nome) +' \n')
+    arquivo.write('move *.pdb arquivos_'+ str(nome) +' \n')
+    arquivo.write('move *.pir arquivos_'+ str(nome) +' \n')
+    arquivo.write('move *.fasta arquivos_'+ str(nome) +'\n')
+    arquivo.write('move *.log arquivos_'+ str(nome) +'\n')
+    arquivo.write('del *.dnd \n')
+    arquivo.write('del *.fasta.* \n')
+    arquivo.write('del *run.py \n')
+    arquivo.write('exit \n')
+    arquivo.close()
+
+
+def inserirDiretorio(nome):
+
+    d = Banco()
+    max_id = d.cadastraModelo(nome)
+
+
+    return max_id
+
+
+def inserirArquivos(nome, max_id):
+
+    d = Banco()
+
+    diretorio = 'media\\arquivos_'+str(nome)
+
+    array = get_arquivos(diretorio)
+
+    print(diretorio)
+    print(array)
+    print(max_id)
+
+    d.cadastraArquivo(max_id, array)
+
+
+def Modelos(request, id):
+
+    # if request.method == 'POST':
+    d = Banco()
+
+    diretorio = d.getDiretorioID(id)
+
+    html = '{% extends "modelagem/base.html" %} {% block body %} {% load static %} <div id="info_loading" style="padding-top: 10px;" class="alert alert-warning" role="alert"><span style="font-size:28px; font-weight: bold; widht: 50%;" id="header-info"><i id="icon" style="font-size: 28px;" class="fa fa-spinner fa-pulse fa-3x fa-fw"></i> Carregando...</span><span id="btn-voltar" style="float: right; widht: 50%; display: none;"> <button class="btn btn-primary" onclick="Botao_voltar()">Voltar</button></span></div><div class="invi" style="width: 100%;"><input type="text" id="valor_scroll" value="0" hidden>'
+
+    diretorio = 'media\\'+str(diretorio)
+
+    array = get_arquivos(diretorio)
+
+    #print(array)
+
+    arquivos = d.getArquivosID(id)
+
+
+    # Criando Lista de Arquivos e juntando a extensao
+
+    listaArq = []
+    # conteudoArq = []
+    teste = ''
+    for arq in arquivos:
+        arq_new = arq[0] + '.' + arq[1]
+        listaArq.append(arq_new)
+
+    #     atual = open(diretorio + '\\' + arq_new, "r")
+    #     # conteudoArq.append(atual.readlines())
+    #     teste = str(atual.readlines())
+    #     atual.close()
+        
+    # teste = teste.replace("['", "")
+    # teste = teste.replace("']", "")
+    # teste = teste.replace("',", "")
+    # teste = teste.replace("'", "")
+
+
+
+
+
+
+    contador = 1
+    # arquivo_cont = 0
+    for arq in listaArq:
+
+        html += '<div style="height: 300px; background-color: white;"><div style="width: 400px; float: left;"><div class="modelo3d" id="viewport'+ str(contador) +'" style="width:400px; height:300px;"></div></div><div style="background-color: white; width: 70%; float:right;"><b style="font-size: 28px";>Modelo: <span style="color:blue;">'+ str(arq) +'</span> Score: <span style="color:green;" id="score'+ str(contador) +'"> </span></b> <textarea disabled style="width: 100%;" rows="7" cols="50" name="" disabled id="modelo'+ str(contador) +'" data-modelo='+str(arq)+'>Realizando a leitura do Arquivo...\nAguarde um momento...</textarea> <button  class="block btn btn-secondary" onclick="Bloquear();"><i class="fa fa-lock" aria-hidden="true"></i> Bloquear Scroll</button> <button class="btn btn-primary" onclick="Download('+ str(contador) +');" ><i class="fa fa-download"></i> Download Arquivo</button> </div></div>'
+
+        contador += 1
+        # arquivo_cont += 1
+
+    html += '</div>'
+    contador -= 1
+    # qnt = '<input type="text" id="aux_qnt" value='+ str(contador) +' hidden>'
+
+
+
+    #Script dinamico
+    i = 1
+    
+    variaveis = ''
+    script = ''
+    eventoWindow = ''
+    loadFile = ''
+    download = ''
+    ajax = ''
+    btn_voltar = ''
+    script = 'document.addEventListener("DOMContentLoaded", function () {'
+    eventoWindow = 'window.addEventListener("resize", function (event) {'
+    while i <= contador:
+        variaveis += 'var stage' + str(i) + ' = new NGL.Stage("viewport'+str(i)+'");'
+        eventoWindow += 'stage' + str(i) + '.handleResize();'
+        i += 1
+
+    eventoWindow += '}, false);'
+
+    # Ajax para carregar conteudo arquivos
+    ajax = '$.ajax({method: "POST",url: "/pipeline/lerArquivos/'+str(id)+'" , dataType: "json", data: { csrfmiddlewaretoken: "{{csrf_token}}"  },success: function(data){ for(i = 1; i <= data["quantidade"]; i++){ $("#modelo"+i).html(data["modelo"+i]); if(i == 1){ $("#score"+i).html("Template - Sem Score") }else { $("#score"+i).html(data["score"+i]); } } $("#icon").removeClass("fa fa-spinner fa-pulse fa-3x fa-fw"); $("#info_loading").removeClass("alert-warning").addClass("alert-info"); $("#header-info").html("Carregado com Sucesso!"); $("#btn-voltar").css("display", "block"); }  });  '
+
+    # Mudando o diretorio para funcionar dinamicamente
+    
+    diretorio = diretorio.replace("\\", "//")
+
+    contador = 1
+    for arq in listaArq:
+        loadFile += 'stage'+ str(contador) +'.loadFile("/'+str(diretorio)+'/'+str(arq)+'", { defaultRepresentation: true });'
+        contador += 1
+    loadFile += '});'
+
+
+    # Mudando o diretorio para funcionar com Java Script
+    diretorio = diretorio.replace("//", "/")
+
+
+    download = 'function Download(modelo){ var modelo_3d = $("#modelo"+modelo).data("modelo"); var diretorio = "/'+str(diretorio)+'/"+modelo_3d;  window.open(diretorio); }'
+
+    btn_voltar = 'function Botao_voltar(){ window.location.href = "/pipeline/upload";  }'
+
+    # window.open("/'+str(diretorio)+'");
+
+    script +=  variaveis + eventoWindow + loadFile + download + ajax + btn_voltar
+
+    # print(script)
+
+    # print(variaveis)
+    # print(eventoWindow)
+    # print(loadFile)
+
+    html += '<script>'
+
+    html += 'function Bloquear(){var acao = $("#valor_scroll").val();if(acao == 0){$("html").css("overflow", "hidden");$("#valor_scroll").val("1");$(".block").html("Desbloquear Scroll"); }else{$("html").css("overflow", "");$("#valor_scroll").val("0");   $(".block").html("Bloquear Scroll");} }'
+
+    html += script + '</script> {% endblock %}'
+
+    w = open("pipeline\\templates\\pipeline\\teste.html","w")
+    w.write(html)
+    w.close()
+
+    return render(request, 'pipeline/teste.html')
+
+
+def lerArquivos(request, id):
+    if request.method == 'POST':
+
+        d = Banco()
+        diretorio = d.getDiretorioID(id)
+            
+        diretorio = 'media\\'+str(diretorio)
+        array = get_arquivos(diretorio)                
+
+        arquivos = d.getArquivosID(id)
+
+        contador = 1
+        
+        dados = {}
+
+        for arq in arquivos:
+            arq_new = arq[0] + '.' + arq[1]
+
+            conteudo_arquivo = open(diretorio + '\\' + str(arq_new), 'r')
+            linhas_arquivo = conteudo_arquivo.readlines()
+            conteudo_arquivo.close()
+
+            # conteudo do arquivo vira valor do dicionario
+            valor_dicionario = linhas_arquivo
+            valor_score = str(linhas_arquivo[1][45:])
+
+            # chave_valor = "'modelo"+str(contador)+"': "+ str(valor_dicionario)
+
+            dados['modelo'+str(contador)] = valor_dicionario
+            dados['score'+str(contador)] = valor_score
+
+            # lista_dicionario.append(chave_valor)
+            contador += 1
+
+        dados['quantidade'] = str(len(arquivos))
+
+        return JsonResponse(dados)
+        
+

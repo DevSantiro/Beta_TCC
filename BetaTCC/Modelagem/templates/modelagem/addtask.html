@@ -1,0 +1,14 @@
+{% extends "modelagem/base.html" %}
+
+{%block tittle%}  Lista de Tarefas {% endblock%}
+
+{% block body %}
+<div class="offset-1 col-10 list-div">
+    <h1>Adicione a sequencia de DNA:</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" class="btn btn-success" value="Criar DNA">
+    </form>
+</div>
+{% endblock %}
